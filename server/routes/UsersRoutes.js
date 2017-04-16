@@ -13,6 +13,8 @@ module.exports = (app) => {
 
   app.get('/users/:id', User.findUser);
 
+  app.get('/allusers', User.allUsers);
+
 
   app.put('/users/:id', User.update);
 

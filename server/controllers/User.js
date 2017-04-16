@@ -31,9 +31,17 @@ const User = {
           });
     });
   },
-
-  matchingInstances(req, res) {
-    res.json({ message: 'welcome to matching Instances' });
+  allUsers(req, res) {
+    db.Users.findAll({ fields: [
+      'id',
+      'username',
+      'fullName',
+      'email',
+      'RoleId',
+      'createdAt',
+      'updatedAt'
+    ] })
+      .then(usersList => res.status(200).send(usersList));
   },
 
   findUser(req, res) {
@@ -50,9 +58,13 @@ const User = {
       res.status(200).send(user);
     });
   },
-
+  
   update(req, res) {
     res.json({ message: 'welcome to update' });
+  },
+
+  matchingInstances(req, res) {
+    res.json({ message: 'welcome to matching Instances' });
   },
 
   delete(req, res) {
