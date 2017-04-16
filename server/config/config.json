@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "andelaeveloper",
+    "password": null,
+    "database": "dataSystem",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "andelaeveloper",
+    "password": null,
+    "database": "dataSystem",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "andelaeveloper",
+    "password": null,
+    "database": "dataSystem",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
