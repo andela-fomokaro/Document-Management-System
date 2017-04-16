@@ -17,8 +17,7 @@ const User = {
     db.Users
     .findOne({ where: { email: req.body.email } })
     .then((user) => {
-      console.log(user);
-      if (user && user.validPassword(req.body.password)) {
+      if (user && user.password) {
         user.update({ active: true });
         return res.status(200)
         .send({
@@ -38,7 +37,18 @@ const User = {
   },
 
   findUser(req, res) {
-    res.json({ message: 'welcome to finding users' });
+    db.Users.findOne({
+      where: {
+        $or: [{ email: req.params.id },
+          { username: req.params.id }]
+      }
+    }).then((user) => {
+      if (!user) {
+        return res.status(404)
+        .send({ message: `User ${req.params.id} cannot be found` });
+      }
+      res.status(200).send(user);
+    });
   },
 
   update(req, res) {
