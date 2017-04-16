@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define('Users', {
     username: {
       type: DataTypes.STRING,
-      validate: { is: /\w+$/i},
+      validate: { is: /\w+$/i },
       unique: true
     },
     fullNames: {

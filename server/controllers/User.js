@@ -58,21 +58,43 @@ const User = {
       res.status(200).send(user);
     });
   },
-  
+
+  delete(req, res) {
+    db.Users.destroy({
+      where: {
+        username: req.params.id
+      }
+    })
+      .then((user) => {
+        if (!user) {
+          return res.status(404).send({
+            message: 'User Not Found',
+          });
+        }
+
+        if ((user) === 1) {
+          return res.status(403)
+            .send({ message: 'You cannot delete default admin user account!' });
+        }
+        res.status(200)
+          .send({
+            message: 'This account has been successfully deleted'
+          });
+      })
+      .catch(err => res.status(500).send(err.errors));
+  },
+
+  logOut(req, res) {
+    res.status(200)
+      .send({ message: 'Successfully logged out!' });
+  },
+
   update(req, res) {
-    res.json({ message: 'welcome to update' });
+    res.json({ message: 'welcome to matching Instances' });
   },
 
   matchingInstances(req, res) {
     res.json({ message: 'welcome to matching Instances' });
-  },
-
-  delete(req, res) {
-    res.json({ message: 'welcome to delete' });
-  },
-
-  logOut(req, res) {
-    res.json({ message: 'welcome to logout' });
   },
 
   pagination(req, res) {
