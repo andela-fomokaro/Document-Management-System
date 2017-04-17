@@ -14,12 +14,6 @@ const documentRoute = require('./server/routes/DocumentsRoutes')(app);
 const RoleRoutes = require('./server/routes/RolesRoutes')(app);
 
 
-// const routes = (router) => {
-//   RoleRoutes(router);
-// };
-
-// export default routes;
-
 const server = app.listen(3000, () => {
   console.log('Hi I am running at 127.0.0.1:3000');
 });

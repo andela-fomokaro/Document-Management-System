@@ -4,10 +4,7 @@ module.exports = (app) => {
   app.post('/documents', Document.create);
 
 
-  app.get('/documents', Document.matchingInstances);
-
-
-  app.get('/document/:id', Document.findUser);
+  app.get('/document/:id', Document.findDocument);
 
 
   app.put('/documents/:id', Document.update);
@@ -16,5 +13,7 @@ module.exports = (app) => {
   app.delete('/documents/:id', Document.delete);
 
 
-  app.get('/users/:id/documents', Document.findAll);
+  app.get('/documents/', Document.findAllDocument);
+
+  // Work on pagination and search
 };

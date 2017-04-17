@@ -8,12 +8,9 @@ module.exports = (app) => {
   app.post('/users/', User.create);
 
 
-  app.get('/users/', User.matchingInstances);
-
-
   app.get('/users/:id', User.findUser);
 
-  app.get('/allusers', User.allUsers);
+  app.get('/users/', User.allUsers);
 
 
   app.put('/users/:id', User.update);
@@ -25,5 +22,5 @@ module.exports = (app) => {
   app.post('/users/logout', User.logOut);
 
 
-  app.get('/search/users/', User.search);
+  app.get('/search/users/', User.search);// work on this
 };

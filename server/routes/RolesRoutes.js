@@ -18,6 +18,8 @@ module.exports = (app) => {
 
   app.get('/roles', Roles.getRoles);
 
+  app.get('/roles/:id', Roles.getRolesById);
+
   app.delete('/roles/:id', Roles.deleteRole);
 
   app.put('/roles/:id', Roles.updateRole);

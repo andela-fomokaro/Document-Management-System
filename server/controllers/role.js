@@ -3,25 +3,14 @@ import db from '../models';
 const Roles = {
 
   createRoles(req, res) {
-    console.log(req.body.title);// remove later
-    db.Roles.findOne({ where: { title: req.body.title } })
-    .then((role) => {
-      if (role) {
-        return res.status(409)
-          .send({
-            message: `${req.body.title} already exists`
-          });
-      }
-      db.Roles.create(req.body)
+    db.Roles.create(req.body)
       .then((newRole) => {
-        res.status(201)
-        .send(newRole);
+        res.status(201).json({
+          message: 'Role was created successfully',
+          newRole
+        });
       })
-      .catch((err) => { // CHECK THESE LATER
-        res.status(500)
-        .send({ message: 'error occurred' });
-      });
-    });
+      .catch(err => res.json({ err, message: 'error' }));
   },
 
   getRoles(req, res) {
@@ -31,6 +20,21 @@ const Roles = {
       .send(role);
     });
   },
+
+  getRolesById(req, res) {
+    db.Roles.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then((roles) => {
+      if (!roles) {
+        return res.status(404)
+        .send({ message: `Role ${req.params.id} cannot be found` });
+      }
+      res.status(200).send(roles);
+    });
+  },
+
 
   deleteRole(req, res) {
     db.Roles.destroy({
@@ -58,6 +62,24 @@ const Roles = {
   },
 
   updateRole(req, res) {
+    db.Roles
+      .findById(req.params.id)
+      .then((role) => {
+        if (!role) {
+          return res.status(404).send({
+            message: 'User Not Found',
+          });
+        }
+
+        role
+          .update(req.body, {
+            fields: Object.keys(req.body)
+          })
+          .then(updatedrole => res.status(200).send(updatedrole));
+      })
+      .catch(err => res.status(400).send({
+        message: err.errors
+      }));
   },
 
 };

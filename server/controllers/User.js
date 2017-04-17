@@ -37,7 +37,7 @@ const User = {
       'username',
       'fullName',
       'email',
-      'RoleId',
+      'roleId',
       'createdAt',
       'updatedAt'
     ] })
@@ -90,11 +90,24 @@ const User = {
   },
 
   update(req, res) {
-    res.json({ message: 'welcome to matching Instances' });
-  },
+    db.Users
+      .findById(req.params.id)
+      .then((users) => {
+        if (!users) {
+          return res.status(404).send({
+            message: 'User Not Found',
+          });
+        }
 
-  matchingInstances(req, res) {
-    res.json({ message: 'welcome to matching Instances' });
+        users
+          .update(req.body, {
+            fields: Object.keys(req.body)
+          })
+          .then(updatedusers => res.status(200).send(updatedusers));
+      })
+      .catch(err => res.status(400).send({
+        message: err.errors
+      }));
   },
 
   pagination(req, res) {

@@ -2,9 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Roles = sequelize.define('Roles', {
     title: { type: DataTypes.STRING,
-      validate: {
-        unique: true,
-      },
+      unique: true,
       allowNull: false },
     read: { type: DataTypes.BOOLEAN, defaultValue: false },
     write: { type: DataTypes.BOOLEAN, defaultValue: false },

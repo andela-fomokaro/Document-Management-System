@@ -2,38 +2,80 @@ import db from '../models';
 
 const Document = {
   create(req, res) {
-    db.Document
-      .create({
-        title: req.body.title,
-        content: req.body.content,
-        access: req.body.access,
-        ownerId: req.decoded.userId,
-        typeId: req.body.typeId,
+    db.Documents.create(req.body)
+      .then((newDocument) => {
+        res.status(201).json({
+          message: 'Document was created successfully',
+          newDocument
+        });
       })
-      .then(document => res.status(201).send(document))
-      .catch(() => res.status(400).send({
-        message: 'An error occured. Ensure your parameters are valid!'
-      }));
+      .catch(err => res.json({ err, message: 'error' }));
   },
 
-  matchingInstances(req, res) {
-    res.json({ message: 'welcome to matching Instances' });
-  },
-
-  findUser(req, res) {
-    res.json({ message: 'welcome to finding users' });
+  findDocument(req, res) {
+    db.Documents.findOne({
+      where: {
+        title: req.params.id
+      }
+    }).then((document) => {
+      if (!document) {
+        return res.status(404)
+        .send({ message: `Document ${req.params.id} cannot be found` });
+      }
+      res.status(200).send(document);
+    });
   },
 
   update(req, res) {
-    res.json({ message: 'welcome to update' });
+    db.Documents
+      .findById(req.params.id)
+      .then((document) => {
+        if (!document) {
+          return res.status(404).send({
+            message: 'Document Not Found',
+          });
+        }
+        document
+          .update(req.body, {
+            fields: Object.keys(req.body)
+          })
+          .then(updateddocument => res.status(200).send(updateddocument));
+      })
+      .catch(err => res.status(400).send({
+        message: err.errors
+      }));
   },
 
   delete(req, res) {
-    res.json({ message: 'welcome to delete' });
+    db.Documents.destroy({
+      where: {
+        title: req.params.id
+      }
+    })
+      .then((document) => {
+        if (!document) {
+          return res.status(404).send({
+            message: 'Document Not Found',
+          });
+        }
+        res.status(200)
+          .send({
+            message: 'This document has been successfully deleted'
+          });
+      })
+      .catch(err => res.status(500).send(err.errors));
   },
 
-  findAll(req, res) {
-    res.json({ message: 'welcome to fineAll' });
+  findAllDocument(req, res) {
+    db.Documents.findAll({ fields: [
+      'title',
+      'content',
+      'permission',
+      'ownerId',
+      'createdAt',
+      'updatedAt'
+    ] })
+      .then(documentList => res.status(200).send(documentList));
   },
 
   pagination(req, res) {
@@ -42,7 +84,7 @@ const Document = {
 
   search(req, res) {
     res.json({ message: 'welcome to search' });
-  }
+  },
 };
 
 export default Document;

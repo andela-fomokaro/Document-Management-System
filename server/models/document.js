@@ -2,9 +2,8 @@ module.exports = (sequelize, DataTypes) => {
   const Documents = sequelize.define('Documents', {
     title: { type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        unique: true
-      } },
+      unique: true
+    },
     content: DataTypes.TEXT,
     permission: { type: DataTypes.TEXT, defaultValue: 'public' },
     ownerId: DataTypes.INTEGER
