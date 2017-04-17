@@ -1,6 +1,19 @@
+import db from '../models';
+
 const Document = {
   create(req, res) {
-    res.json({ message: 'welcome to create Document' });
+    db.Document
+      .create({
+        title: req.body.title,
+        content: req.body.content,
+        access: req.body.access,
+        ownerId: req.decoded.userId,
+        typeId: req.body.typeId,
+      })
+      .then(document => res.status(201).send(document))
+      .catch(() => res.status(400).send({
+        message: 'An error occured. Ensure your parameters are valid!'
+      }));
   },
 
   matchingInstances(req, res) {
