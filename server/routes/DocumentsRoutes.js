@@ -6,6 +6,8 @@ module.exports = (app) => {
 
   app.get('/document/:id', Document.findDocument);
 
+  app.get('/users/:id/documents', Document.findUsersDocuments);// work on
+
 
   app.put('/documents/:id', Document.update);
 

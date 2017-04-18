@@ -8,7 +8,7 @@ module.exports = (app) => {
   app.post('/users/', User.create);
 
 
-  app.get('/users/:id', User.findUser);
+  app.get('/users/:id', User.findUser); // protect
 
   app.get('/users/', User.allUsers);
 

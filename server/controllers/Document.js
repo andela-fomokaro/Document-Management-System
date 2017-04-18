@@ -15,7 +15,7 @@ const Document = {
   findDocument(req, res) {
     db.Documents.findOne({
       where: {
-        title: req.params.id
+        id: req.params.id
       }
     }).then((document) => {
       if (!document) {
@@ -66,7 +66,7 @@ const Document = {
       .catch(err => res.status(500).send(err.errors));
   },
 
-  findAllDocument(req, res) {
+  findAllDocument(req, res) { // pagination
     db.Documents.findAll({ fields: [
       'title',
       'content',
@@ -76,10 +76,6 @@ const Document = {
       'updatedAt'
     ] })
       .then(documentList => res.status(200).send(documentList));
-  },
-
-  pagination(req, res) {
-    res.json({ message: 'welcome to pagination' });
   },
 
   search(req, res) {
