@@ -70,7 +70,7 @@ const Document = {
     db.Documents.findAll({ fields: [
       'title',
       'content',
-      'permission',
+      'access',
       'ownerId',
       'createdAt',
       'updatedAt'

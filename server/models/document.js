@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true
     },
     content: DataTypes.TEXT,
-    permission: { type: DataTypes.TEXT, defaultValue: 'public' },
+    access: { type: DataTypes.TEXT, defaultValue: 'public' },
     ownerId: DataTypes.INTEGER
   }, {
     classMethods: {

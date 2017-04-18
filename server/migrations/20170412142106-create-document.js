@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false
       },
-      permission: {
+      access: {
         type: Sequelize.TEXT,
         defaultValue: 'public'
       },

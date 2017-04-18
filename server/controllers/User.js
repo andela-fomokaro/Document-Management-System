@@ -1,4 +1,5 @@
 import db from '../models';
+import Helper from '../helpers/controllerHelper';
 
 const User = {
 
@@ -32,7 +33,9 @@ const User = {
     });
   },
   allUsers(req, res) {
-    db.Users.findAll({ fields: [
+    const limit = req.query.limit || 3;
+    const offset = req.query.offset || 0;
+    db.Users.findAndCountAll({ fields: [
       'id',
       'username',
       'fullName',
@@ -40,8 +43,25 @@ const User = {
       'roleId',
       'createdAt',
       'updatedAt'
-    ] })
-      .then(usersList => res.status(200).send(usersList));
+    ],
+      limit,
+      offset })
+      .then((users) => {
+        if (users) {
+          const condition = {
+            count: users.count,
+            limit,
+            offset
+          };
+          const pagination = Helper.pagination(condition);
+          res.status(200)
+            .send({
+              message: 'You have successfully retrieved all users',
+              users,
+              pagination
+            });
+        }
+      });
   },
 
   findUser(req, res) {
@@ -110,9 +130,6 @@ const User = {
       }));
   },
 
-  pagination(req, res) {
-    res.json({ message: 'welcome to logout' });
-  },
 
   search(req, res) {
     res.json({ message: 'welcome to logout' });
