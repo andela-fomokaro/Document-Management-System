@@ -26,6 +26,11 @@ const Document = {
     });
   },
 
+  findUsersDocuments(req, res) {
+    db.Documents.findAll({ where: { ownerId: req.params.id } })
+          .then(documents => res.status(200).send(documents));
+  },
+
   update(req, res) {
     db.Documents
       .findById(req.params.id)
@@ -77,6 +82,8 @@ const Document = {
     ] })
       .then(documentList => res.status(200).send(documentList));
   },
+
+
 
   search(req, res) {
     res.json({ message: 'welcome to search' });

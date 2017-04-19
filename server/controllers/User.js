@@ -78,7 +78,6 @@ const User = {
       res.status(200).send(user);
     });
   },
-
   delete(req, res) {
     db.Users.destroy({
       where: {
