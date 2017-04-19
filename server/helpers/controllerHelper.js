@@ -18,6 +18,16 @@ const Helper = {
     };
   },
 
+  getUserAttribute() {
+    return [
+      'id',
+      'username',
+      'firstname',
+      'lastname',
+      'email',
+      'createdAt',
+    ];
+  },
 
 
 };

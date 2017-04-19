@@ -1,4 +1,5 @@
 import db from '../models';
+import Helper from '../helpers/controllerHelper';
 
 const Document = {
   create(req, res) {
@@ -72,6 +73,8 @@ const Document = {
   },
 
   findAllDocument(req, res) { // pagination
+    const limit = req.query.limit || 1;
+    const offset = req.query.offset || 0;
     db.Documents.findAll({ fields: [
       'title',
       'content',
@@ -79,10 +82,26 @@ const Document = {
       'ownerId',
       'createdAt',
       'updatedAt'
-    ] })
-      .then(documentList => res.status(200).send(documentList));
+    ],
+      limit,
+      offset })
+      .then((document) => {
+        if (document) {
+          const condition = {
+            count: document.count,
+            limit,
+            offset
+          };
+          const pagination = Helper.pagination(condition);
+          res.status(200)
+            .send({
+              message: 'You have successfully users documents',
+              document,
+              pagination
+            });
+        }
+      });
   },
-
 
 
   search(req, res) {

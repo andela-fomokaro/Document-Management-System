@@ -131,7 +131,34 @@ const User = {
 
 
   search(req, res) {
-    res.json({ message: 'welcome to logout' });
+    const limit = req.query.limit || 3;
+    const offset = req.query.offset || 0;
+    let condition = {};
+    let pagination;
+    db.Users.findAndCountAll({ fields: [
+      'username',
+      'fullName',
+      'email',
+      'roleId',
+      'createdAt',
+      'updatedAt'
+    ],
+      limit,
+      offset })
+      .then((users) => {
+        condition = {
+          count: users.count,
+          limit,
+          offset,
+        };
+        pagination = Helper.pagination(condition);
+        res.status(200)
+          .send({
+            message: 'Your search was successful',
+            users,
+            pagination
+          });
+      });
   }
 };
 
