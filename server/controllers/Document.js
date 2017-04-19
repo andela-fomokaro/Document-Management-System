@@ -72,7 +72,7 @@ const Document = {
       .catch(err => res.status(500).send(err.errors));
   },
 
-  findAllDocument(req, res) { // pagination
+  findAllDocument(req, res) {
     const limit = req.query.limit || 1;
     const offset = req.query.offset || 0;
     db.Documents.findAll({ fields: [
@@ -105,8 +105,43 @@ const Document = {
 
 
   search(req, res) {
-    res.json({ message: 'welcome to search' });
-  },
+    const limit = req.query.limit || 3;
+    const offset = req.query.offset || 0;
+    const term = req.query.title;
+    let condition = {};
+    let pagination;
+    const query = { fields: [
+      'title',
+      'content',
+      'access',
+      'ownerId',
+      'createdAt',
+      'updatedAt'
+    ],
+      limit,
+      offset,
+      where: {
+        title: {
+          $iLike: `%${term}%`
+        }
+      }
+    };
+    db.Documents.findAndCountAll(query)
+      .then((document) => {
+        condition = {
+          count: document.count,
+          limit,
+          offset,
+        };
+        pagination = Helper.pagination(condition);
+        res.status(200)
+          .send({
+            message: 'Your search was successful',
+            document,
+            pagination
+          });
+      });
+  }
 };
 
 export default Document;

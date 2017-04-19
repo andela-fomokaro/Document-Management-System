@@ -22,5 +22,5 @@ module.exports = (app) => {
   app.post('/users/logout', User.logOut);
 
 
-  app.get('/search/users/', User.search);// work on this
+  app.get('/search/users', User.search);// work on this
 };

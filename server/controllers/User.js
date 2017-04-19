@@ -133,9 +133,10 @@ const User = {
   search(req, res) {
     const limit = req.query.limit || 3;
     const offset = req.query.offset || 0;
+    const term = req.query.name;
     let condition = {};
     let pagination;
-    db.Users.findAndCountAll({ fields: [
+    const query = { fields: [
       'username',
       'fullName',
       'email',
@@ -144,7 +145,14 @@ const User = {
       'updatedAt'
     ],
       limit,
-      offset })
+      offset,
+      where: {
+        username: {
+          $iLike: `%${term}%`
+        }
+      }
+    };
+    db.Users.findAndCountAll(query)
       .then((users) => {
         condition = {
           count: users.count,

@@ -17,5 +17,8 @@ module.exports = (app) => {
 
   app.get('/documents/', Document.findAllDocument);
 
+
+  app.get('/search/documents', Document.search);
+
   // Work on pagination and search
 };
