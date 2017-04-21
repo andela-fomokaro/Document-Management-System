@@ -1,24 +1,25 @@
 import Document from '../controllers/Document';
+import Auth from '../middlewares/Auth';
 
 module.exports = (app) => {
-  app.post('/documents', Document.create);
+  app.post('/documents', Auth.verifyToken, Document.create);
 
 
-  app.get('/document/:id', Document.findDocument);
+  app.get('/document/:id', Auth.verifyToken, Document.findDocument);
 
-  app.get('/users/:id/documents', Document.findUsersDocuments);// worked on still have issues
-
-
-  app.put('/documents/:id', Document.update);
+  app.get('/users/:id/documents', Auth.verifyToken, Document.findUsersDocuments);// worked on still have issues
 
 
-  app.delete('/documents/:id', Document.delete);
+  app.put('/documents/:id', Auth.verifyToken, Document.update);
 
 
-  app.get('/documents/', Document.findAllDocument);
+  app.delete('/documents/:id', Auth.verifyToken, Document.delete);
 
 
-  app.get('/search/documents', Document.search);
+  app.get('/documents/', Auth.verifyToken, Document.findAllDocument);
+
+
+  app.get('/search/documents', Auth.verifyToken, Document.search);
 
   // Work on pagination and search
 };

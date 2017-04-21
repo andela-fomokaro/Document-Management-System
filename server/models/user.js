@@ -5,7 +5,9 @@ module.exports = (sequelize, DataTypes) => {
     username: {
       type: DataTypes.STRING,
       validate: { is: /\w+$/i },
-      unique: true
+      unique: {
+        msg: 'Username already exist please choose another username'
+      }
     },
     fullNames: {
       allowNull: false,
@@ -15,7 +17,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING,
       validate: { isEmail: true },
-      unique: true
+      unique: {
+        msg: 'Email already exist please sign up with another email'
+      }
     },
     roleId: {
       type: DataTypes.INTEGER,

@@ -8,14 +8,16 @@
           type: Sequelize.INTEGER
         },
         username: {
-          type: Sequelize.STRING
+          type: Sequelize.STRING,
+          unique: true
         },
         fullNames: {
           type: Sequelize.STRING
         },
         email: {
           type: Sequelize.STRING,
-          validate: { isEmail: true }
+          validate: { isEmail: true },
+          unique: true
         },
         password: {
           type: Sequelize.STRING

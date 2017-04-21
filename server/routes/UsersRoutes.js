@@ -1,4 +1,4 @@
-
+import Auth from '../middlewares/Auth';
 import User from '../controllers/User';
 
 module.exports = (app) => {
@@ -8,19 +8,19 @@ module.exports = (app) => {
   app.post('/users/', User.create);
 
 
-  app.get('/users/:id', User.findUser); // protect
+  app.get('/users/:id', Auth.verifyToken, User.findUser); // protect
 
-  app.get('/users/', User.allUsers);
-
-
-  app.put('/users/:id', User.update);
+  app.get('/users/', Auth.verifyToken, User.allUsers);
 
 
-  app.delete('/users/:id', User.delete);
+  app.put('/users/:id', Auth.verifyToken, User.update);
 
 
-  app.post('/users/logout', User.logOut);
+  app.delete('/users/:id', Auth.verifyToken, Auth.verifyAdmin, User.delete);
 
 
-  app.get('/search/users', User.search);// work on this
+  app.post('/users/logout', Auth.verifyToken, User.logOut);
+
+
+  app.get('/search/users', Auth.verifyToken, User.search);// work on this
 };

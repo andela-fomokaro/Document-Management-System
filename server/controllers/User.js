@@ -1,6 +1,8 @@
 import db from '../models';
 import Helper from '../helpers/controllerHelper';
+import Auth from '../middlewares/Auth';
 
+/* "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE2LCJpYXQiOjE0OTI3MDQ2OTQsImV4cCI6MTQ5MzMwOTQ5NH0.1ejXJE4dsjhumgJoLa1jFvIEwtdV6gnL-z7OQAqRLoQ" */
 const User = {
 
   create(req, res) {
@@ -11,7 +13,7 @@ const User = {
           newUser
         });
       })
-      .catch(err => res.json({ err, message: 'error' }));
+      .catch(err => res.json({ err: err.errors, message: 'error' }));
   },
 
   login(req, res) {
@@ -20,10 +22,12 @@ const User = {
     .then((user) => {
       if (user && user.password) {
         user.update({ active: true });
+        const token = Auth.getToken(user);
         return res.status(200)
         .send({
           message: 'You have successfully logged in',
-          user
+          user,
+          token
         });
       }
       res.status(401)
@@ -78,29 +82,26 @@ const User = {
       res.status(200).send(user);
     });
   },
-  delete(req, res) {
-    db.Users.destroy({
-      where: {
-        username: req.params.id
-      }
-    })
-      .then((user) => {
-        if (!user) {
-          return res.status(404).send({
-            message: 'User Not Found',
-          });
-        }
 
-        if ((user) === 1) {
-          return res.status(403)
-            .send({ message: 'You cannot delete default admin user account!' });
-        }
-        res.status(200)
-          .send({
-            message: 'This account has been successfully deleted'
-          });
+  delete(req, res) {
+    if (Number(req.params.id) === 1) {
+      return res.status(403).send({
+        message: 'You cannot delete default admin'
+      });
+    }
+    db.Users.findById(req.params.id)
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({
+          message: 'User Not Found',
+        });
+      }
+      user.destroy()
+      .then(() => {
+        'User has been deleted successfully';
       })
-      .catch(err => res.status(500).send(err.errors));
+       .catch(err => res.status(500).send(err.errors));
+    });
   },
 
   logOut(req, res) {
