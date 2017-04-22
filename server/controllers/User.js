@@ -2,7 +2,6 @@ import db from '../models';
 import Helper from '../helpers/controllerHelper';
 import Auth from '../middlewares/Auth';
 
-/* "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE2LCJpYXQiOjE0OTI3MDQ2OTQsImV4cCI6MTQ5MzMwOTQ5NH0.1ejXJE4dsjhumgJoLa1jFvIEwtdV6gnL-z7OQAqRLoQ" */
 const User = {
 
   create(req, res) {
@@ -13,7 +12,7 @@ const User = {
           newUser
         });
       })
-      .catch(err => res.json({ err: err.errors, message: 'error' }));
+      .catch(err => res.status(400).send({ err: err.errors, message: 'error' }));
   },
 
   login(req, res) {
@@ -71,7 +70,7 @@ const User = {
   findUser(req, res) {
     db.Users.findOne({
       where: {
-        $or: [{ email: req.params.id },
+        $or: [{ id: req.params.id },
           { username: req.params.id }]
       }
     }).then((user) => {

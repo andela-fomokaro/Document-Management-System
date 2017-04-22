@@ -98,6 +98,12 @@ const fakeHelper = {
     email: faker.internet.email(),
     fullNames: `${faker.name.firstName()} ${faker.name.lastName}`
   },
+  invalidUser: {
+    username: null,
+    password: null,
+    email: null,
+    fullNames: null
+  },
   publicDocument: {
     title: faker.company.catchPhrase(),
     content: faker.lorem.paragraph(),

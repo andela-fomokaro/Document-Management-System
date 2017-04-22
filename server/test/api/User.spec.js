@@ -51,34 +51,290 @@ describe('User API', () => {
             });
       });
       uniqueField.forEach((field) => {
-        const uniqueUser = Object.assign({}, fakeHelper.guestUserIII);
+        const uniqueUser = Object.assign({}, fakeHelper.regularUserI);
         uniqueUser[field] = fakeHelper.regularUserI[field];
         it(`should fail when already existing ${field} is supplied`, (done) => {
           request.post('/users')
             .send(uniqueUser)
             .end((err, res) => {
-              console.log(res.body);
-              expect(res.status).to.equal(409);
+              expect(res.status).to.equal(400);
               expect(res.body.message)
-                .to.equal(`${field} already exist please choose another ${field}`);
+                .to.equal('error');
               done();
             });
         });
       });
       emptyValue.forEach((field) => {
-        const invalidUser = Object.assign({}, fakeHelper.regularUserI);
-        invalidUser[field] = '';
-        it(`should fail when ${field} is invalid`, (done) => {
+        const invalidUser = fakeHelper.invalidUser;
+        it(`should fail when ${field} is null `, (done) => {
           request.post('/users')
             .send(invalidUser)
             .end((err, res) => {
               expect(res.status).to.equal(400);
               expect(res.body.message).to
-                .equal(`Enter a valid ${field}`);
+                .equal('error');
               done();
             });
         });
       });
     });
+    describe('Existing users', () => {
+      describe('Login /users/login', () => {
+        it('should allow admin user to login', (done) => {
+          request.post('/users/login')
+          .send(fakeHelper.adminUser)
+          .end((err, res) => {
+            adminToken = res.body.token;
+            expect(res.status).to.equal(200);
+            expect(res.body.token).to.not.equal(null);
+            expect(res.body.message).to
+              .equal('You have successfully logged in');
+            done();
+          });
+        });
+        it('should allow other users to login', (done) => {
+          request.post('/users/login')
+          .send(fakeHelper.regularUserI)
+          .end((err, res) => {
+            regularToken = res.body.token;
+            expect(res.status).to.equal(200);
+            expect(res.body.token).to.not.equal(null);
+            expect(res.body.message).to
+              .equal('You have successfully logged in');
+            done();
+          });
+        });
+        it('should not allow unregistered users to login', (done) => {
+          request.post('/users/login')
+          .send(fakeHelper.regularUserII)
+          .end((err, res) => {
+            expect(res.status).to.equal(401);
+            expect(res.body.message).to
+              .equal('Please enter a valid email or password to log in');
+            done();
+          });
+        });
+        it('should not allow login with invalid password', (done) => {
+          request.post('/users/login')
+          .send({ email: 'noxy@gmail.com', password: 'invalid' })
+          .end((err, res) => {
+            expect(res.status).to.equal(401);
+            expect(res.body.message).to
+              .equal('Please enter a valid email or password to log in');
+            done();
+          });
+        });
+      });
+      describe('Get all users, GET /users ', () => {
+        it('should return verification failed if no token is supply', (done) => {
+          request.get('/users')
+          .set({ })
+          .end((err, res) => {
+            expect(res.status).to.equal(401);
+            expect(res.body.message).to
+              .equal('Unauthorized Access');
+            done();
+          });
+        });
+        it('should return invalid token if token is invalid', (done) => {
+          request.get('/users')
+          .set({ 'x-access-token': 'hello-andela-tia' })
+          .end((err, res) => {
+            expect(res.status).to.equal(401);
+            expect(res.body.message).to
+              .equal('Invalid Token');
+            done();
+          });
+        });
+        it(`should return users own profile, 
+          when the requester is a regular user`, (done) => {
+          request.get('/users')
+          .set({ 'x-access-token': regularToken })
+          .end((err, res) => {
+            expect(res.status).to.equal(200);
+            expect(res.body.message).to
+              .equal('You have successfully retrieved all users');
+            expect(res.body.users.rows[1].username).to
+              .equal(fakeHelper.regularUserI.username);
+            done();
+          });
+        });
+      });
+      describe('Get user by Id GET /users/:id', () => {
+        it('should return verification failed for unregistered user', (done) => {
+          request.get(`/users/${adminUser.id}`)
+          .end((err, res) => {
+            expect(res.status).to.equal(401);
+            expect(res.body.message).to
+              .equal('Unauthorized Access');
+            done();
+          });
+        });
+      //   it('should return user\'s profile when valid user\'s id is supplied',
+      // (done) => {
+      //   request.get(`/users/${regularUserI.id}`)
+      //     .set({ 'x-access-token': regularToken })
+      //     .end((err, res) => {
+      //       expect(res.status).to.equal(200);
+      //       expect(res.body.user).to.not.equal(null);
+      //       expect(res.body.user.id).to.equal(regularUserI.id);
+      //       expect(res.body.user.email).to.equal(regularUserI.email);
+      //       done();
+      //     });
+      // });
+        it('should return not found for invalid user id', (done) => {
+          request.get('/users/9999')
+          .set({ 'x-access-token': adminToken })
+          .end((err, res) => {
+            expect(res.status).to.equal(404);
+            expect(res.body.message).to.equal('User 9999 cannot be found');
+            done();
+          });
+        });
+      });
+      describe('Update user attributes PUT /users/:id', () => {
+      //   it('should update user\'s profile when valid user token is supplied',
+      // (done) => {
+      //   const updateData = {
+      //     fullNames: 'Omokaro Faith',
+      //     password: 'iLoveChocolate'
+      //   };
+      //   request.put(`/users/${regularUserI.id}`)
+      //     .send(updateData)
+      //     .set({ 'x-access-token': regularToken })
+      //     .end((err, res) => {
+      //       expect(res.status).to.equal(200);
+      //       expect(res.body.message).to.equal('Your profile has been updated');
+      //       expect(res.body.updatedUser.fullNames).to.equal('Omokaro Faith');
+      //       expect(res.body.updatedUser.password).to.equal('iLoveChocolate');
+      //       done();
+      //     });
+      // });
+      // it('should return error when passing a null field', (done) => {
+      //   request.put(`/users/${regularUser.id}`)
+      //     .send({ username: '' })
+      //     .set({ 'x-access-token': regularToken })
+      //     .end((err, res) => {
+      //       expect(res.status).to.equal(400);
+      //       expect(res.body.errorArray[0].message).to
+      //         .equal('Input a valid username');
+      //       done();
+      //     });
+      // });
+        it('should return not found for invalid user id', (done) => {
+          const data = { username: 'noxy', lastname: 'blaze' };
+          request.put('/users/99999')
+          .send(data)
+          .set({ 'x-access-token': adminToken })
+          .end((err, res) => {
+            expect(res.status).to.equal(404);
+            expect(res.body.message).to.equal('User Not Found');
+            done();
+          });
+        });
+      //   it(`should return permission denied when regular user want to
+      //   update another user's profile`, (done) => {
+      //   const data = { username: 'wale', lastname: 'ala' };
+      //   request.put(`/users/${newAdminUser.id}`)
+      //     .send(data)
+      //     .set({ 'x-access-token': regularToken })
+      //     .end((err, res) => {
+      //       expect(res.status).to.equal(401);
+      //       expect(res.body.message).to
+      //         .equal('You are not permitted to update this profile');
+      //       done();
+      //     });
+      // });
+      // it('should give admin permission to update any user\'s profile',
+      // (done) => {
+      //   const data = { username: 'wale', lastname: 'ala' };
+      //   request.put(`/users/${adminUser.id}`)
+      //     .send(data)
+      //     .set({ 'x-access-token': adminToken })
+      //     .end((err, res) => {
+      //       expect(res.status).to.equal(200);
+      //       expect(res.body.message).to
+      //         .equal('Your profile has been updated');
+      //       expect(res.body.updatedUser.username).to.equal('wale');
+      //       expect(res.body.updatedUser.lastname).to.equal('ala');
+      //       done();
+      //     });
+      // });
+      });
+      describe('Delete user DELETE /users/:id', () => {
+        let newUser, newUSerToken;
+        before((done) => {
+          request.post('/users')
+          .send(fakeHelper.guestUserII)
+          .end((err, res) => {
+            newUser = res.body.user;
+            newUSerToken = res.body.token;
+            done();
+          });
+        });
+        it('should return not found for invalid user id', (done) => {
+          request.delete('/users/999')
+          .set({ 'x-access-token': adminToken })
+          .end((err, res) => {
+            expect(res.body.message).to.equal('User Not Found');
+            expect(res.status).to.equal(404);
+            done();
+          });
+        });
+        // it('should fail when request is from a regular user', (done) => {
+        //   request.delete(`/users/${regularUserI.id}`)
+        //   .set({ 'x-access-token': regularToken })
+        //   .end((err, res) => {
+        //     expect(res.status).to.equal(403);
+        //     expect(res.body.message).to
+        //       .equal('You are not permitted to perform this action');
+        //     done();
+        //   });
+        // });
+        // it('allow admin to delete a user', (done) => {
+        //   request.delete(`/users/${newUser.id}`)
+        //   .set({ 'x-access-token': adminToken })
+        //   .end((err, res) => {
+        //     expect(res.status).to.equal(200);
+        //     expect(res.body.message).to
+        //       .equal('This account has been successfully deleted');
+        //     done();
+        //   });
+        // });
+        it('should not allow a deleted user to access any restricted route',
+      (done) => {
+        request.get('/users/')
+          .end((err, res) => {
+            expect(res.status).to.equal(401);
+            expect(res.body.message).to
+              .equal('Unauthorized Access');
+            done();
+          });
+      });
+      });
+      describe('Logout', () => {
+        it('should logout successfully', (done) => {
+          request.post('/users/logout')
+        .set({ 'x-access-token': adminToken })
+          .end((err, res) => {
+            expect(res.status).to.equal(200);
+            expect(res.body.message).to
+              .equal('Successfully logged out!');
+            done();
+          });
+        });
+        it('should not allow user to get user after logout', (done) => {
+          request.get('/users')
+          .end((err, res) => {
+            expect(res.status).to.equal(401);
+            expect(res.body.message).to
+              .equal('Unauthorized Access');
+            done();
+          });
+        });
+      });
+    });
   });
 });
+
+
