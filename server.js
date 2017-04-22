@@ -17,3 +17,5 @@ const RoleRoutes = require('./server/routes/RolesRoutes')(app);
 const server = app.listen(3000, () => {
   console.log('Hi I am running at 127.0.0.1:3000');
 });
+
+module.exports = server;

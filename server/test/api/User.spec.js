@@ -50,7 +50,35 @@ describe('User API', () => {
               done();
             });
       });
+      uniqueField.forEach((field) => {
+        const uniqueUser = Object.assign({}, fakeHelper.guestUserIII);
+        uniqueUser[field] = fakeHelper.regularUserI[field];
+        it(`should fail when already existing ${field} is supplied`, (done) => {
+          request.post('/users')
+            .send(uniqueUser)
+            .end((err, res) => {
+              console.log(res.body);
+              expect(res.status).to.equal(409);
+              expect(res.body.message)
+                .to.equal(`${field} already exist please choose another ${field}`);
+              done();
+            });
+        });
+      });
+      emptyValue.forEach((field) => {
+        const invalidUser = Object.assign({}, fakeHelper.regularUserI);
+        invalidUser[field] = '';
+        it(`should fail when ${field} is invalid`, (done) => {
+          request.post('/users')
+            .send(invalidUser)
+            .end((err, res) => {
+              expect(res.status).to.equal(400);
+              expect(res.body.message).to
+                .equal(`Enter a valid ${field}`);
+              done();
+            });
+        });
+      });
     });
   });
 });
-
