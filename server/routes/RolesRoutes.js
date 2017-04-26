@@ -1,4 +1,5 @@
 import Roles from '../controllers/Role';
+import Auth from '../middlewares/Auth';
 
 // // Roles routes, Please take a look at the Roles controller for details
 // const RoleRoutes = (router) => {
@@ -14,13 +15,13 @@ import Roles from '../controllers/Role';
 
 // export default RoleRoutes;
 module.exports = (app) => {
-  app.post('/roles', Roles.createRoles);
+  app.post('/roles', Auth.verifyToken, Roles.createRoles);
 
-  app.get('/roles', Roles.getRoles);
+  app.get('/roles', Auth.verifyToken, Roles.getRoles);
 
-  app.get('/roles/:id', Roles.getRolesById);
+  app.get('/roles/:id', Auth.verifyToken, Roles.getRolesById);
 
-  app.delete('/roles/:id', Roles.deleteRole);
+  app.delete('/roles/:id', Auth.verifyToken, Roles.deleteRole);
 
-  app.put('/roles/:id', Roles.updateRole);
+  app.put('/roles/:id', Auth.verifyToken, Roles.updateRole);
 };

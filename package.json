@@ -5,12 +5,17 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test mocha --compilers js:babel-core/register ./server/test/**/*.js",
+    "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha ./server/test/**/*.js",
     "migrate:test": "NODE_ENV=test sequelize db:migrate",
     "start:dev": "babel-watch server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/andela-fomokaro/Document-Management-System.git"
+  },
+  "nyc": {
+    "sourceMap": false,
+    "instrument": false
   },
   "keywords": [],
   "author": "",
@@ -54,6 +59,7 @@
     "webpack": "^2.3.3"
   },
   "devDependencies": {
+    "babel-plugin-istanbul": "^4.1.1",
     "babel-watch": "^2.0.6",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
@@ -62,6 +68,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
+    "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "morgan": "^1.8.1",
     "nodemon": "^1.11.0"

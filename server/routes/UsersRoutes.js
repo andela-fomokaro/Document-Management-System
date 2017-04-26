@@ -8,7 +8,7 @@ module.exports = (app) => {
   app.post('/users/', User.create);
 
 
-  app.get('/users/:id', Auth.verifyToken, User.findUser); // protect
+  app.get('/users/:id', Auth.verifyToken, User.findUser);
 
   app.get('/users/', Auth.verifyToken, User.allUsers);
 
@@ -22,5 +22,5 @@ module.exports = (app) => {
   app.post('/users/logout', Auth.verifyToken, User.logOut);
 
 
-  app.get('/search/users', Auth.verifyToken, User.search);// work on this
+  app.get('/search/users', Auth.verifyToken, User.search);
 };

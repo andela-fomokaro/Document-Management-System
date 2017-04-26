@@ -11,6 +11,7 @@ const expect = chai.expect;
 let adminUser;
 let adminToken;
 let regularUserI;
+const testUser1 = fakeHelper.testUser1;
 let regularToken;
 
 const emptyValue = ['username', 'fullNames', 'password', 'email'];
@@ -170,18 +171,19 @@ describe('User API', () => {
             done();
           });
         });
-      //   it('should return user\'s profile when valid user\'s id is supplied',
-      // (done) => {
-      //   request.get(`/users/${regularUserI.id}`)
-      //     .set({ 'x-access-token': regularToken })
-      //     .end((err, res) => {
-      //       expect(res.status).to.equal(200);
-      //       expect(res.body.user).to.not.equal(null);
-      //       expect(res.body.user.id).to.equal(regularUserI.id);
-      //       expect(res.body.user.email).to.equal(regularUserI.email);
-      //       done();
-      //     });
-      // });
+        it('should return user\'s profile when valid user\'s id is supplied',
+      (done) => {
+        console.log(fakeHelper);
+        request.get(`/users/${fakeHelper.regularUserI.id}`)
+          .set({ 'x-access-token': regularToken })
+          .end((err, res) => {
+            expect(res.status).to.equal(200);
+            expect(res.body.user).to.not.equal(null);
+            expect(res.body.id).to.equal(fakeHelper.regularUserI.id);
+            expect(res.body.email).to.equal(fakeHelper.regularUserI.email);
+            done();
+          });
+      });
         it('should return not found for invalid user id', (done) => {
           request.get('/users/9999')
           .set({ 'x-access-token': adminToken })
@@ -193,34 +195,22 @@ describe('User API', () => {
         });
       });
       describe('Update user attributes PUT /users/:id', () => {
-      //   it('should update user\'s profile when valid user token is supplied',
-      // (done) => {
-      //   const updateData = {
-      //     fullNames: 'Omokaro Faith',
-      //     password: 'iLoveChocolate'
-      //   };
-      //   request.put(`/users/${regularUserI.id}`)
-      //     .send(updateData)
-      //     .set({ 'x-access-token': regularToken })
-      //     .end((err, res) => {
-      //       expect(res.status).to.equal(200);
-      //       expect(res.body.message).to.equal('Your profile has been updated');
-      //       expect(res.body.updatedUser.fullNames).to.equal('Omokaro Faith');
-      //       expect(res.body.updatedUser.password).to.equal('iLoveChocolate');
-      //       done();
-      //     });
-      // });
-      // it('should return error when passing a null field', (done) => {
-      //   request.put(`/users/${regularUser.id}`)
-      //     .send({ username: '' })
-      //     .set({ 'x-access-token': regularToken })
-      //     .end((err, res) => {
-      //       expect(res.status).to.equal(400);
-      //       expect(res.body.errorArray[0].message).to
-      //         .equal('Input a valid username');
-      //       done();
-      //     });
-      // });
+        it('should update user\'s profile when valid user token is supplied',
+      (done) => {
+        const updateData = {
+          fullNames: 'Omokaro Faith',
+          username: 'Toby47'
+        };
+        request.put(`/users/${fakeHelper.regularUserI.id}`)
+          .send(updateData)
+          .set({ 'x-access-token': regularToken })
+          .end((err, res) => {
+            expect(res.status).to.equal(200);
+            expect(res.body.updatedUsers.fullNames).to.equal('Omokaro Faith');
+            expect(res.body.updatedUsers.username).to.equal('Toby47');
+            done();
+          });
+      });
         it('should return not found for invalid user id', (done) => {
           const data = { username: 'noxy', lastname: 'blaze' };
           request.put('/users/99999')
@@ -336,5 +326,4 @@ describe('User API', () => {
     });
   });
 });
-
 

@@ -122,7 +122,7 @@ const User = {
           .update(req.body, {
             fields: Object.keys(req.body)
           })
-          .then(updatedusers => res.status(200).send(updatedusers));
+          .then(updatedUsers => res.status(200).send({ updatedUsers }));
       })
       .catch(err => res.status(400).send({
         message: err.errors

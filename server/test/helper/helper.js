@@ -25,6 +25,20 @@ const fakeHelper = {
     id: 6,
     title: 'guestIV'
   },
+  testUser1: {
+    fullNames: 'Paul Solomon',
+    email: 'solomonpaul@gmail.com',
+    password: 'IamPaul',
+    roleId: 1,
+    username: 'paulo'
+  },
+  testUser2: {
+    fullNames: 'Solomon Blessing',
+    email: 'solomonblessing@gmail.com',
+    password: 'IambLESSING',
+    roleId: 1,
+    username: 'bleco'
+  },
   adminUser: {
     username: faker.internet.userName(),
     password: faker.internet.password(),
@@ -41,7 +55,8 @@ const fakeHelper = {
     username: faker.internet.userName(),
     password: faker.internet.password(),
     email: faker.internet.email(),
-    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`
+    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`,
+    id: 3
   },
   regularUserII: {
     username: faker.internet.userName(),
