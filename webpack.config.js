@@ -1,4 +1,7 @@
+const debug = process.env.NODE_ENV !== 'production';
 const path = require('path');
+const webpack = require('webpack');
+
 module.exports = {
   devtool: 'source-map',
   entry: path.join(__dirname, '/client/index.js'),
@@ -10,6 +13,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
+        exclude: /(node_modules|bower_components)/,
         use: 'babel-loader'
       },
       { test: /(\.css)$/, loaders: ['style-loader', 'css-loader'] },
@@ -17,11 +21,15 @@ module.exports = {
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader' },
       {
         test: /\.(jpg|png|svg)$/,
-        loader: 'url-loader',
+        loader: 'babel-loader',
         options: {
           limit: 25000,
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
+  ]
 };
