@@ -1,9 +1,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { browserHistory } from 'react-router';
 // import classnames from 'classnames';
 import TextFieldGroup from '../common/TextFieldGroup';
 
- 
+
 class SignupForm extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +25,12 @@ class SignupForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    this.props.userSignupRequest(this.state);
+    this.props.userSignupRequest(this.state).then(
+      () => {
+        // browserHistory.push('/');
+        this.context.router.push('/');
+      }
+    );
   }
 
   render() {
@@ -45,7 +51,7 @@ class SignupForm extends React.Component {
             label="Full Names"
             onChange={this.onChange}
             value={this.state.fullNames}
-            field="fullnames"
+            field="fullNames"
             required
           />
 
@@ -57,21 +63,29 @@ class SignupForm extends React.Component {
             required
           />
 
-          <TextFieldGroup
-            label="Password"
-            onChange={this.onChange}
-            value={this.state.password}
-            field="password"
-            required
-          />
+          <div className="row">
+            <input
+              onChange={this.onChange}
+              value={this.state.password}
+              name="password"
+              type="password"
+              placeholder="Password Confirmation"
+              className="validate"
+              required
+            />
+          </div>
 
-          <TextFieldGroup
-            label="Password Confirmation"
-            onChange={this.onChange}
-            value={this.state.passwordConfirmation}
-            field="passwordConfirmation"
-            required
-          />
+          <div className="row">
+            <input
+              onChange={this.onChange}
+              value={this.state.passwordConfirmation}
+              name="passwordConfirmation"
+              type="password"
+              className="validate"
+              placeholder="Password Confirmation"
+              required
+            />
+          </div>
           <button className="btn  blue darken-4">Sign Up</button>
         </form>
       </div>
@@ -83,5 +97,8 @@ SignupForm.propTypes = {
   userSignupRequest: propTypes.func.isRequired
 };
 
+SignupForm.contextTypes = {
+  router: propTypes.object.isRequired
+};
 
 export default SignupForm;
