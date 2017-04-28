@@ -7,7 +7,8 @@
     "test": "NODE_ENV=test mocha --compilers js:babel-core/register ./server/test/**/*.js",
     "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha ./server/test/**/*.js",
     "migrate:test": "NODE_ENV=test sequelize db:migrate",
-    "start": "nodemon --watch server --exec  babel-node -- server.js"
+    "start": "nodemon --watch server --exec  babel-node -- server.js",
+    "start:dev": "babel-watch ../server/config/app.js"
   },
   "repository": {
     "type": "git",
@@ -45,14 +46,18 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.1",
     "chai": "^3.5.0",
+    "classnames": "^2.2.5",
     "config": "^1.25.1",
     "cors": "^2.8.3",
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
     "faker": "^4.1.0",
     "http": "0.0.0",
+    "jquery": "^3.2.1",
     "jsonwebtoken": "^7.3.0",
     "lodash": "^4.17.4",
+    "materialize-css": "^0.98.2",
+    "materialize-loader": "^1.1.2",
     "mocha": "^3.2.0",
     "morgan": "^1.8.1",
     "path": "^0.12.7",
@@ -68,8 +73,10 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "request": "^2.81.0",
+    "sass-loader": "^6.0.3",
     "sequelize": "^3.30.4",
     "supertest": "^3.0.0",
+    "validator": "^7.0.0",
     "webpack": "^2.1.0-beta.22",
     "webpack-dev-middleware": "^1.10.1",
     "webpack-dev-server": "^2.1.0-beta.2",
@@ -85,10 +92,12 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
+    "file-loader": "^0.11.1",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "morgan": "^1.8.1",
     "nodemon": "^1.11.0",
+    "url-loader": "^0.5.8",
     "webpack-hot-middleware": "^2.18.0"
   }
 }

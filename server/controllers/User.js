@@ -1,18 +1,21 @@
 import db from '../models';
 import Helper from '../helpers/controllerHelper';
 import Auth from '../middlewares/Auth';
+import validateInput from '../../shared/validate/signUp';
 
 const User = {
 
   create(req, res) {
+    const validate = validateInput(req.body);
     db.Users.create(req.body)
       .then((newUser) => {
+        console.log(newUser);
         res.status(201).json({
           message: 'User was created successfully',
           newUser
         });
       })
-      .catch(err => res.status(400).send({ err: err.errors, message: 'error' }));
+      .catch(err => res.status(400).send({ err: validate, message: 'error' }));
   },
 
   login(req, res) {

@@ -2,25 +2,25 @@ import Auth from '../middlewares/Auth';
 import User from '../controllers/User';
 
 module.exports = (app) => {
-  app.post('/users/login', User.login);
+  app.post('/api/users/login', User.login);
 
 
-  app.post('/users/', User.create);
+  app.post('/api/users/', User.create);
 
 
-  app.get('/users/:id', Auth.verifyToken, User.findUser);
+  app.get('/api/users/:id', Auth.verifyToken, User.findUser);
 
-  app.get('/users/', Auth.verifyToken, User.allUsers);
-
-
-  app.put('/users/:id', Auth.verifyToken, User.update);
+  app.get('/api/users/', Auth.verifyToken, User.allUsers);
 
 
-  app.delete('/users/:id', Auth.verifyToken, Auth.verifyAdmin, User.delete);
+  app.put('/api/users/:id', Auth.verifyToken, User.update);
 
 
-  app.post('/users/logout', Auth.verifyToken, User.logOut);
+  app.delete('/api/users/:id', Auth.verifyToken, Auth.verifyAdmin, User.delete);
 
 
-  app.get('/search/users', Auth.verifyToken, User.search);
+  app.post('/api/users/logout', Auth.verifyToken, User.logOut);
+
+
+  app.get('/api/search/users', Auth.verifyToken, User.search);
 };
