@@ -1,7 +1,5 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { browserHistory } from 'react-router';
-// import classnames from 'classnames';
 import TextFieldGroup from '../common/TextFieldGroup';
 
 
@@ -27,7 +25,11 @@ class SignupForm extends React.Component {
     e.preventDefault();
     this.props.userSignupRequest(this.state).then(
       () => {
-        // browserHistory.push('/');
+        this.props.addFlashMessage({
+          type: 'Success',
+          text: 'You have signed up successfully. Welcome!'
+
+        });
         this.context.router.push('/');
       }
     );
@@ -69,7 +71,7 @@ class SignupForm extends React.Component {
               value={this.state.password}
               name="password"
               type="password"
-              placeholder="Password Confirmation"
+              placeholder="Password"
               className="validate"
               required
             />
@@ -94,7 +96,8 @@ class SignupForm extends React.Component {
 }
 
 SignupForm.propTypes = {
-  userSignupRequest: propTypes.func.isRequired
+  userSignupRequest: propTypes.func.isRequired,
+  addFlashMessage: propTypes.func.isRequired,
 };
 
 SignupForm.contextTypes = {
