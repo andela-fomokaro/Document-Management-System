@@ -7,6 +7,10 @@ module.exports = (app) => {
 
   app.post('/api/users/', User.create);
 
+  // app.get('/api/:identifier', User.identifier);
+
+
+
 
   app.get('/api/users/:id', Auth.verifyToken, User.findUser);
 

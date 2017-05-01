@@ -5,6 +5,19 @@ import validateInput from '../../shared/validate/signUp';
 
 const User = {
 
+
+  // identifier(req, res) {
+  //   Users.query({
+  //     select: ['username', 'email'],
+  //     where: {
+  //       $or: [{ email: req.params.identifier },
+  //         { username: req.params.identifier }]
+  //     }
+  //   }).fetch().then((user) => {
+  //     res.json({ user });
+  //   });
+  // },
+
   create(req, res) {
     const validate = validateInput(req.body);
     db.Users.create(req.body)

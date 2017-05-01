@@ -2,12 +2,13 @@ import React from 'react';
 // import classnames from 'classnames';
 import propTypes from 'prop-types';
 
-const TextFieldGroup = ({ field, label, value, type, onChange }) => (
+const TextFieldGroup = ({ field, label, value, type, onChange, checkUserExists }) => (
   <div className="row">
     <div className="active validate">
       <input
         value={value}
         onChange={onChange}
+        onBlur={checkUserExists}
         name={field}
         type={type}
         className="active validate"
@@ -23,6 +24,7 @@ TextFieldGroup.propTypes = {
   value: propTypes.string.isRequired,
   onChange: propTypes.func.isRequired,
   type: propTypes.string.isRequired,
+  checkUserExists: propTypes.func
 };
 
 TextFieldGroup.defaultProps = {

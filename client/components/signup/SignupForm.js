@@ -1,6 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
+import validateInput from '../../../shared/validate/signUp';
 
 
 class SignupForm extends React.Component {
@@ -23,16 +24,17 @@ class SignupForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    this.props.userSignupRequest(this.state).then(
-      () => {
-        this.props.addFlashMessage({
-          type: 'Success',
-          text: 'You have signed up successfully. Welcome!'
-
-        });
-        this.context.router.push('/');
-      }
+    const { errors, isValid } = validateInput(this.state);
+    if (isValid.i) {
+      this.props.userSignupRequest(this.state).then(
+        (user) => {
+          console.log(user.data);
+        },
+        (err) => {
+          console.log(err);
+        }
     );
+    }
   }
 
   render() {
@@ -44,6 +46,7 @@ class SignupForm extends React.Component {
           <TextFieldGroup
             label="Username"
             onChange={this.onChange}
+            checkUserExists={this.checkUserExists}
             value={this.state.username}
             field="username"
             required
@@ -52,6 +55,7 @@ class SignupForm extends React.Component {
           <TextFieldGroup
             label="Full Names"
             onChange={this.onChange}
+            checkUserExists={this.checkUserExists}
             value={this.state.fullNames}
             field="fullNames"
             required
@@ -60,6 +64,7 @@ class SignupForm extends React.Component {
           <TextFieldGroup
             label="Email"
             onChange={this.onChange}
+            checkUserExists={this.checkUserExists}
             value={this.state.email}
             field="email"
             required
@@ -97,7 +102,6 @@ class SignupForm extends React.Component {
 
 SignupForm.propTypes = {
   userSignupRequest: propTypes.func.isRequired,
-  addFlashMessage: propTypes.func.isRequired,
 };
 
 SignupForm.contextTypes = {
