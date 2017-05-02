@@ -10,8 +10,6 @@ module.exports = (app) => {
   // app.get('/api/:identifier', User.identifier);
 
 
-
-
   app.get('/api/users/:id', Auth.verifyToken, User.findUser);
 
   app.get('/api/users/', Auth.verifyToken, User.allUsers);

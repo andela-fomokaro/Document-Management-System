@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { login } from '../../actions/login';
+import { login } from '../../actions/loginActions';
 import TextFieldGroup from '../common/TextFieldGroup';
 import validateInput from '../../../shared/validate/login';
 
@@ -12,6 +12,7 @@ class LoginForm extends React.Component {
     this.state = {
       identifier: '',
       password: '',
+      errors: []
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -21,18 +22,22 @@ class LoginForm extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     const { errors, isValid } = validateInput(this.state);
+    console.log(errors, isValid);
     if (isValid) {
-      this.props.login(this.state).then(
+      const email = this.state.identifier;
+      const { password } = this.state;
+      this.props.login({ email, password }).then(
         (user) => {
-          console.log(user.data);
+          console.log(this.state);
+          console.log(user);
+          this.context.router.push('/');
         },
         (err) => {
           console.log(err);
-        },
-        (res) => {
-          this.context.router.push('/');
         }
     );
+    } else {
+      this.setState({ errors });
     }
   }
 
@@ -40,14 +45,16 @@ class LoginForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
   render() {
-    const { password, identifier } = this.state;
+    const { password, identifier, errors } = this.state;
+
     return (
       <form onSubmit={this.onSubmit}>
         <h3>Login</h3>
+        <p>{ errors}</p>
 
         <TextFieldGroup
           field="identifier"
-          label="Username or  Email"
+          label="Email"
           value={identifier}
           onChange={this.onChange}
           required

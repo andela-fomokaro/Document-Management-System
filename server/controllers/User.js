@@ -5,28 +5,17 @@ import validateInput from '../../shared/validate/signUp';
 
 const User = {
 
-
-  // identifier(req, res) {
-  //   Users.query({
-  //     select: ['username', 'email'],
-  //     where: {
-  //       $or: [{ email: req.params.identifier },
-  //         { username: req.params.identifier }]
-  //     }
-  //   }).fetch().then((user) => {
-  //     res.json({ user });
-  //   });
-  // },
-
   create(req, res) {
     const validate = validateInput(req.body);
     db.Users.create(req.body)
       .then((newUser) => {
-        console.log(newUser);
+        const token = Auth.getToken(newUser);
         res.status(201).json({
           message: 'User was created successfully',
+          token,
           newUser
         });
+        console.log(res.message, newUser);
       })
       .catch(err => res.status(400).send({ err: validate, message: 'error' }));
   },
@@ -35,7 +24,7 @@ const User = {
     db.Users
     .findOne({ where: { email: req.body.email } })
     .then((user) => {
-      if (user && user.password) {
+      if (user && user.validPassword(req.body.password)) {
         user.update({ active: true });
         const token = Auth.getToken(user);
         return res.status(200)

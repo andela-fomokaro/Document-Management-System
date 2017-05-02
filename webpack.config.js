@@ -28,6 +28,10 @@ export default {
         options: {
           limit: 25000,
         }
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       }
     ]
   },
@@ -38,4 +42,8 @@ export default {
   resolve: {
     extensions: ['.js', '.jsx']
   },
+  node: {
+    net: 'empty',
+    dns: 'empty'
+  }
 };

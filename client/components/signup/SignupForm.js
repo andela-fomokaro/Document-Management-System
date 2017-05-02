@@ -25,10 +25,11 @@ class SignupForm extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     const { errors, isValid } = validateInput(this.state);
-    if (isValid.i) {
+    if (isValid) {
       this.props.userSignupRequest(this.state).then(
         (user) => {
           console.log(user.data);
+          window.location = '/';
         },
         (err) => {
           console.log(err);
