@@ -11,11 +11,13 @@ class NavigationBar extends React.Component {
     this.props.logout();
   }
   render() {
+    const header = {
+      margin: '20px',
+      color: '#f50057'
+    };
     const { isAuthenticated } = this.props.auth;
     const userLinks = (
-      <ul id="nav-mobile" className="right hide-on-med-and-down">
-        <li><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>
-      </ul>
+      <a className="right" onClick={this.logout.bind(this)} href="#">Logout</a>
     );
 
     const guestLinks = (
@@ -27,12 +29,12 @@ class NavigationBar extends React.Component {
 
     return (
       <nav>
-        <div className="nav-wrapper  blue darken-4">
-          <Link to="/" className="brand-logo">DMs</Link>
-        </div>
-
-        <div className="nav-wrapper blue darken-4">
-          {isAuthenticated ? userLinks : guestLinks}
+        <div className="nav-wrapper  blue-grey darken-4">
+          <Link to="/" className="brand-logo">docStar Document Mangement System</Link>
+          <div className="nav-wrapper  blue-grey darken-4">
+            <h1 className="brand-logo" style={header}>docStar Document Mangement System</h1>
+            {isAuthenticated ? userLinks : guestLinks}
+          </div>
         </div>
       </nav>
     );

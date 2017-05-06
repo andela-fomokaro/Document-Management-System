@@ -16,6 +16,7 @@ export function logout() {
     window.localStorage.removeItem('jwtToken');
     setAuthorizationToken(false);
     dispatch(setCurrentUser({}));
+    window.location = '/';
   };
 }
 

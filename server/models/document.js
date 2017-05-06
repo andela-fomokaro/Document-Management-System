@@ -4,8 +4,16 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     content: DataTypes.TEXT,
-    access: { type: DataTypes.TEXT, defaultValue: 'public' },
-    ownerId: DataTypes.INTEGER
+    access: { type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'public',
+      validate: {
+        isIn: [['private', 'public', 'role']]
+      } },
+    ownerId: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    }
   }, {
     classMethods: {
       associate(models) {

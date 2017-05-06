@@ -15,13 +15,13 @@ import Auth from '../middlewares/Auth';
 
 // export default RoleRoutes;
 module.exports = (app) => {
-  app.post('/roles', Auth.verifyToken, Roles.createRoles);
+  app.post('/api/roles', Auth.verifyToken, Roles.createRoles);
 
-  app.get('/roles', Auth.verifyToken, Roles.getRoles);
+  app.get('/api/roles', Auth.verifyToken, Roles.getRoles);
 
-  app.get('/roles/:id', Auth.verifyToken, Roles.getRolesById);
+  app.get('/api/roles/:id', Auth.verifyToken, Roles.getRolesById);
 
-  app.delete('/roles/:id', Auth.verifyToken, Roles.deleteRole);
+  app.delete('/api/roles/:id', Auth.verifyToken, Roles.deleteRole);
 
-  app.put('/roles/:id', Auth.verifyToken, Roles.updateRole);
+  app.put('/api/roles/:id', Auth.verifyToken, Roles.updateRole);
 };

@@ -5,9 +5,11 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import jwt from 'jsonwebtoken';
 import { createStore, applyMiddleware, compose } from 'redux';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import rootReducer from './rootReducer';
 import setAuthorizationToken from './utils/setAuthorizationToken';
 import { setCurrentUser } from './actions/loginActions';
+import './styles.scss';
 
 
 import routes from './routes';
@@ -24,7 +26,7 @@ if (window.localStorage.jwtToken) {
   setAuthorizationToken(window.localStorage.jwtToken);
   store.dispatch(setCurrentUser(jwt.decode(window.localStorage.jwtToken)));
 }
-
+injectTapEventPlugin();
 render(
   <Provider store={store}>
     <Router history={browserHistory} routes={routes} />

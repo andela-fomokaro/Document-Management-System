@@ -1,6 +1,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Paper from 'material-ui/Paper';
+import { grey500, white } from 'material-ui/styles/colors';
+import ThemeDefault from '../../theme-default';
 import { login } from '../../actions/loginActions';
 import TextFieldGroup from '../common/TextFieldGroup';
 import validateInput from '../../../shared/validate/login';
@@ -47,34 +51,99 @@ class LoginForm extends React.Component {
   render() {
     const { password, identifier, errors } = this.state;
 
+    const styles = {
+      loginContainer: {
+        minWidth: 320,
+        maxWidth: 400,
+        height: 'auto',
+        position: 'absolute',
+        top: '20%',
+        left: 0,
+        right: '0',
+        margin: 'auto'
+      },
+      paper: {
+        padding: 20,
+        overflow: 'auto'
+      },
+      buttonsDiv: {
+        textAlign: 'center',
+        padding: 10
+      },
+      flatButton: {
+        color: grey500
+      },
+      checkRemember: {
+        style: {
+          float: 'left',
+          maxWidth: 180,
+          paddingTop: 5
+        },
+        labelStyle: {
+          color: grey500
+        },
+        iconStyle: {
+          color: grey500,
+          borderColor: grey500,
+          fill: grey500
+        }
+      },
+      loginBtn: {
+        float: 'right'
+      },
+      btn: {
+        background: '#4f81e9',
+        color: white,
+        padding: 7,
+        borderRadius: 2,
+        margin: 2,
+        fontSize: 13
+      },
+      btnFacebook: {
+        background: '#4f81e9'
+      },
+      btnGoogle: {
+        background: '#e14441'
+      },
+      btnSpan: {
+        marginLeft: 5
+      },
+    };
+
     return (
-      <form onSubmit={this.onSubmit}>
-        <h3>Login</h3>
-        <p>{ errors}</p>
+      <MuiThemeProvider muiTheme={ThemeDefault}>
+        <div>
+          <div style={styles.loginContainer}>
 
-        <TextFieldGroup
-          field="identifier"
-          label="Email"
-          value={identifier}
-          onChange={this.onChange}
-          required
-        />
+            <Paper style={styles.paper}>
+              <form onSubmit={this.onSubmit}>
 
-        <div className="row">
-            <input
-              onChange={this.onChange}
-              value={this.state.password}
-              name="password"
-              type="password"
-              placeholder="Password"
-              className="validate"
-              required
-            />
+                <TextFieldGroup
+                  field="identifier"
+                  label="Email"
+                  value={identifier}
+                  onChange={this.onChange}
+                  required
+                />
+
+                <div className="row">
+                  <input
+                    onChange={this.onChange}
+                    value={this.state.password}
+                    name="password"
+                    type="password"
+                    placeholder="Password"
+                    className="validate"
+                    required
+                  />
+                </div>
+                <button className="btn  pink darken-3">Login</button>
+              </form>
+            </Paper>
+          </div>
         </div>
+      </MuiThemeProvider>
 
-        <button className="btn  blue darken-4">Login</button>
-
-      </form>
     );
   }
 }

@@ -1,10 +1,17 @@
 import db from '../models';
 import Helper from '../helpers/controllerHelper';
+const User = db.User;
 
 const Document = {
   create(req, res) {
-    db.Documents.create(req.body)
+    db.Documents.create({
+      title: req.body.title,
+      content: req.body.content,
+      access: req.body.access,
+      ownerId: req.decoded.userId,
+    })
       .then((newDocument) => {
+        console.log(req.decoded);
         res.status(201).json({
           message: 'Document was created successfully',
           newDocument
@@ -55,7 +62,7 @@ const Document = {
   delete(req, res) {
     db.Documents.destroy({
       where: {
-        title: req.params.id
+        id: req.params.id
       }
     })
       .then((document) => {
@@ -73,7 +80,7 @@ const Document = {
   },
 
   findAllDocument(req, res) {
-    const limit = req.query.limit || 1;
+    const limit = req.query.limit || 10;
     const offset = req.query.offset || 0;
     db.Documents.findAll({ fields: [
       'title',

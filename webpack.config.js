@@ -2,7 +2,10 @@ import path from 'path';
 import webpack from 'webpack';
 
 export default {
+  debug: true,
   devtool: 'source-map',
+  noInfo: false,
+  target: 'web',
   entry: [
     'webpack-hot-middleware/client',
     path.join(__dirname, './client/index.js')],
@@ -32,7 +35,7 @@ export default {
       {
         test: /\.json$/,
         loader: 'json-loader'
-      }
+      },
     ]
   },
   plugins: [
