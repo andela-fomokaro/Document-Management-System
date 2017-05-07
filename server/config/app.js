@@ -36,8 +36,7 @@ function validateInput(data) {
 // app.use(morgan('dev'));
 
 // app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
-
+// app.use(bodyParser.json())
 
 // const userRoute = require('../routes/UsersRoutes')(app);
 // const documentRoute = require('../routes/DocumentsRoutes')(app);

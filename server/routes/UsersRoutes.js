@@ -10,16 +10,16 @@ module.exports = (app) => {
 
   app.get('/api/users/:id', Auth.verifyToken, User.findUser);
 
-  app.get('/api/users/', Auth.verifyToken, User.allUsers);
+  app.get('/api/users/', Auth.verifyToken, Auth.verifyAdmin, User.allUsers);
 
 
-  app.put('/api/users/:id', Auth.verifyToken, User.update);
+  app.put('/api/users/:id', Auth.verifyToken, Auth.verifyAdmin, User.update);
 
 
   app.delete('/api/users/:id', Auth.verifyToken, Auth.verifyAdmin, User.delete);
 
 
-  app.get('/users/:id/documents', Auth.verifyToken, Auth.verifyAdmin, User.retrieveUserDocuments);
+  app.get('/api/users/:id/documents', Auth.verifyToken, Auth.verifyAdmin, User.retrieveUserDocuments);
 
 
   app.post('/api/users/logout', Auth.verifyToken, User.logOut);
@@ -27,3 +27,4 @@ module.exports = (app) => {
 
   app.get('/api/search/users', Auth.verifyToken, User.search);
 };
+

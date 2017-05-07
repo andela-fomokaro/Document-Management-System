@@ -18,10 +18,7 @@ const Roles = {
       db.Roles.create({
         title: req.body.title
       })
-      .then(role => res.status(201).send(role))
-      .catch(() => res.status(400).send({
-        message: 'An error occured. Invalid parameters, try again!'
-      }));
+      .then(role => res.status(201).send(role));
     });
   },
 /**
@@ -32,9 +29,9 @@ const Roles = {
    */
   getRoles(req, res) {
     db.Roles.findAll()
-    .then((role) => {
+    .then((roles) => {
       res.status(201)
-      .send(role);
+      .send(roles);
     });
   },
 

@@ -102,6 +102,7 @@ const User = {
    * @return {Object} Response object
    */
   findUser(req, res) {
+    console.log(req.decoded);
     db.Roles
     .findById(req.decoded.roleId)
     .then((role) => {
@@ -120,7 +121,7 @@ const User = {
           req.decoded.user = user;
           res.status(200).send(req.decoded.user);
         })
-        .catch(() => res.status(400).send({
+        .catch(() => res.status(401).send({
           message: 'An error occured. Invalid parameters, try again!'
         }));
     });
