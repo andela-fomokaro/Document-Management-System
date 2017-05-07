@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
         });
         Users.hasMany(models.Documents, {
           foreignKey: 'ownerId',
-          as: 'documents',
+          as: 'Documents',
           onDelete: 'CASCADE'
         });
       }

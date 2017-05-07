@@ -7,8 +7,6 @@ module.exports = (app) => {
 
   app.post('/api/users/', User.create);
 
-  // app.get('/api/:identifier', User.identifier);
-
 
   app.get('/api/users/:id', Auth.verifyToken, User.findUser);
 
@@ -19,6 +17,9 @@ module.exports = (app) => {
 
 
   app.delete('/api/users/:id', Auth.verifyToken, Auth.verifyAdmin, User.delete);
+
+
+  app.get('/users/:id/documents', Auth.verifyToken, Auth.verifyAdmin, User.retrieveUserDocuments);
 
 
   app.post('/api/users/logout', Auth.verifyToken, User.logOut);

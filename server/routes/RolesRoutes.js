@@ -15,7 +15,7 @@ import Auth from '../middlewares/Auth';
 
 // export default RoleRoutes;
 module.exports = (app) => {
-  app.post('/api/roles', Auth.verifyToken, Roles.createRoles);
+  app.post('/api/roles', Auth.verifyToken, Roles.createRole);
 
   app.get('/api/roles', Auth.verifyToken, Roles.getRoles);
 
