@@ -22,9 +22,8 @@ module.exports = {
       ownerId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Documents',
-          key: 'id',
-          as: 'OwnerId'
+          model: 'Users',
+          key: 'id'
         },
         onUpdate: 'cascade',
         onDelete: 'cascade'

@@ -42,6 +42,7 @@ const User = {
     db.Users
     .findOne({ where: { email: req.body.email } })
     .then((user) => {
+      console.log(user.roleId === 2);
       if (user && user.validPassword(req.body.password)) {
         user.update({ active: true });
         const token = Auth.getToken(user);

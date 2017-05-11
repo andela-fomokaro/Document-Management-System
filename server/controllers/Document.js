@@ -23,7 +23,9 @@ const Document = {
           newDocument
         });
       })
-      .catch(() => res.json({ message: 'An error occured. Invalid parameters, try again!' }));
+      .catch(() => res.status(400).send({
+        message: 'An error occured. Invalid parameters, try again!'
+      }));
   },
 
 /**
@@ -173,7 +175,7 @@ const Document = {
         } else {
           query = {
             where: {
-              $or: { 
+              $or: {
                 $or: {
                   access: { $eq: 'public' },
                   $and: {
@@ -262,7 +264,7 @@ const Document = {
                 },
                 $and: {
                   access: { $eq: 'role' },
-                  '$db.Users.roleId$': { $eq: req.decoded.roleId }
+                  '$User.roleId$': { $eq: req.decoded.roleId }
                 }
               },
               ownerId: { $eq: req.decoded.userId }
@@ -307,7 +309,7 @@ const Document = {
               updatedAt: document.updatedAt
             }));
             const pagination = Helper.pagination(
-              query.limit, query.offset, documents.count
+              { limit: query.limit, offset: query.offset, count: documents.count }
             );
             if (documents.rows.length === 0) {
               return res.status(404).send({

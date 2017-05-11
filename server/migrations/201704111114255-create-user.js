@@ -27,7 +27,6 @@
          references: {
            model: 'Roles',
            key: 'id',
-           as: 'roleId'
          },
          onUpdate: 'CASCADE',
          onDelete: 'CASCADE'
@@ -43,6 +42,6 @@
      });
    },
    down(queryInterface, Sequelize) {
-     return queryInterface.dropTable('users');
+     return queryInterface.dropTable('Users');
    }
  };

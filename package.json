@@ -4,8 +4,10 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha --compilers js:babel-core/register ./server/test/**/*.js",
-    "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha ./server/test/**/*.js",
+    "test": "npm run 'migrate:test:undo' && npm run 'migrate:test' && NODE_ENV=test mocha --compilers js:babel-core/register ./server/test/**/*.js",
+    "cover": "NODE_ENV=test node_modules/babel-cli/bin/babel-node.js node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- server/test/**/*.js",
+    "coveralls": "npm run 'migrate:test:undo' && npm run 'migrate:test' && npm run cover && cat ./coverage/lcov.info | coveralls ",
+    "migrate:test:undo": "NODE_ENV=test sequelize db:migrate:undo:all",
     "migrate:test": "NODE_ENV=test sequelize db:migrate",
     "start": "nodemon --watch server --exec  babel-node -- server.js",
     "start:dev": "babel-watch ../server/config/app.js"
@@ -51,6 +53,7 @@
     "classnames": "^2.2.5",
     "config": "^1.25.1",
     "cors": "^2.8.3",
+    "coveralls": "^2.13.1",
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
     "faker": "^4.1.0",
