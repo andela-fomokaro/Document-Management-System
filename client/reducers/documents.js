@@ -1,4 +1,3 @@
-import isEmpty from 'lodash/isEmpty';
 import { browserHistory } from 'react-router';
 
 const initialState = {

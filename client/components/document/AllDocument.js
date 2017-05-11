@@ -1,17 +1,23 @@
 import React from 'react';
 import { Modal } from 'react-materialize';
 import propTypes from 'prop-types';
+import DocumentList from './DocumentListRow';
 
 
 class SingleDocument extends React.Component {
-
   deleteDocument() {
     this.props.deleteDocument(this.props.document.id);
   }
 
+  updateDocumentState(event) {
+    const field = event.target.name;
+    let document = this.state.document;
+    document[field] = field === 'typeId'? Number(event.target.value): event.target.value;
+    return this.setState({document});
+  }
+
   render() {
     const { document } = this.props;
-    console.log(this.props);
     const card = {
       width: '700px',
     };
@@ -28,6 +34,7 @@ class SingleDocument extends React.Component {
               onClick={this.deleteDocument.bind(this)}
               className="btn-floating btn grey lighten-5 right"
             ><i className="material-icons red-text">delete</i></a>
+            
               <Modal
                 header="edit document"
                 className="teal-text"
@@ -42,8 +49,9 @@ class SingleDocument extends React.Component {
                           <textarea
                             className="materialize-textarea"
                             name="content"
+                            value={document.title}
+                            onChange={this.updateDocumentState.bind(this)}
                           />
-                          <label htmlFor="icon_prefix2">{document.title}</label>
                         </div>
                       </form>
                 </div>
@@ -53,11 +61,13 @@ class SingleDocument extends React.Component {
                           <textarea
                             className="materialize-textarea"
                             name="content"
+                            value={document.content}
+                            onChange={this.updateDocumentState.bind(this)}
                           />
-                          <label htmlFor="icon_prefix2">{document.content}</label>
                         </div>
                       </form>
-                </div></Modal></li>
+                </div>
+                 <button>Update and Save</button></Modal></li>
           </ul>
         </div>
       </div>

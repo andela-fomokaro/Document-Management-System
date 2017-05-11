@@ -3,7 +3,6 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper';
-import { grey500, white } from 'material-ui/styles/colors';
 import ThemeDefault from '../../theme-default';
 import { login } from '../../actions/loginActions';
 import TextFieldGroup from '../common/TextFieldGroup';
@@ -26,18 +25,16 @@ class LoginForm extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     const { errors, isValid } = validateInput(this.state);
-    console.log(errors, isValid);
     if (isValid) {
       const email = this.state.identifier;
       const { password } = this.state;
       this.props.login({ email, password }).then(
-        (user) => {
-          console.log(this.state);
-          console.log(user);
+        () => {
+          Materialize.toast('You have successfully signed in', 4000, 'pink darken-3 rounded');
           this.context.router.push('/');
         },
         (err) => {
-          console.log(err);
+           Materialize.toast(err.data.message, 1000, 'pink darken-3 rounded');
         }
     );
     } else {
@@ -49,7 +46,7 @@ class LoginForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
   render() {
-    const { password, identifier, errors } = this.state;
+    const { identifier } = this.state;
 
     const styles = {
       loginContainer: {
@@ -69,44 +66,6 @@ class LoginForm extends React.Component {
       buttonsDiv: {
         textAlign: 'center',
         padding: 10
-      },
-      flatButton: {
-        color: grey500
-      },
-      checkRemember: {
-        style: {
-          float: 'left',
-          maxWidth: 180,
-          paddingTop: 5
-        },
-        labelStyle: {
-          color: grey500
-        },
-        iconStyle: {
-          color: grey500,
-          borderColor: grey500,
-          fill: grey500
-        }
-      },
-      loginBtn: {
-        float: 'right'
-      },
-      btn: {
-        background: '#4f81e9',
-        color: white,
-        padding: 7,
-        borderRadius: 2,
-        margin: 2,
-        fontSize: 13
-      },
-      btnFacebook: {
-        background: '#4f81e9'
-      },
-      btnGoogle: {
-        background: '#e14441'
-      },
-      btnSpan: {
-        marginLeft: 5
       },
     };
 

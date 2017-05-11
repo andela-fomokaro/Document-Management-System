@@ -10,7 +10,7 @@ const Document = {
    * @param {Object} res - Response object
    * @return {Object} Response object
    */
-  create(req, res) { //
+  create(req, res) {
     db.Documents.create({
       title: req.body.title,
       content: req.body.content,
@@ -173,21 +173,21 @@ const Document = {
         } else {
           query = {
             where: {
-              $or: {
+              $or: { 
                 $or: {
                   access: { $eq: 'public' },
                   $and: {
                     access: { $eq: 'role' },
-                    ownerId: { $eq: req.decoded.userId }
+                    OwnerId: { $eq: req.decoded.userId }
                   },
                   $and: {
                     access: { $eq: 'role' },
-                    '$db.Users.roleId$': { $eq: req.decoded.roleId }
+                    '$User.roleId$': { $eq: req.decoded.roleId }
                   }
                 },
                 ownerId: { $eq: req.decoded.userId }
               }
-            },
+            }, 
             include: [
               {
                 model: db.Users
@@ -208,7 +208,7 @@ const Document = {
                 updatedAt: document.updatedAt
               }));
               const pagination = Helper.pagination(
-                query.limit, query.offset, documents.count
+                { limit: query.limit, offset: query.offset, count: documents.count }
               );
               res.status(200).send({
                 pagination, documents: filteredDocuments

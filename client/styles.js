@@ -73,5 +73,44 @@ export default StyleSheet.create({
     'bottom': [{ 'unit': 'px', 'value': 0 }],
     'position': 'relative',
     'width': [{ 'unit': '%H', 'value': 1 }]
+  },
+  'input[type=text]': {
+    'width': [{ 'unit': 'px', 'value': 130 }],
+    'boxSizing': 'border-box',
+    'border': [{ 'unit': 'px', 'value': 2 }, { 'unit': 'string', 'value': 'solid' }, { 'unit': 'string', 'value': '#ccc' }],
+    'borderRadius': '15px',
+    'fontSize': [{ 'unit': 'px', 'value': 16 }],
+    'backgroundColor': 'white',
+    'backgroundPosition': '10px 10px',
+    'backgroundRepeat': 'no-repeat',
+    'padding': [{ 'unit': 'px', 'value': 12 }, { 'unit': 'px', 'value': 20 }, { 'unit': 'px', 'value': 12 }, { 'unit': 'px', 'value': 40 }],
+    'WebkitTransition': 'width 0.4s ease-in-out',
+    'transition': 'width 0.4s ease-in-out'
+  },
+  'input[type=text]:focus': {
+    'width': [{ 'unit': '%H', 'value': 0.5 }]
+  },
+  'icons': {
+    'color': '#880e4f'
+  },
+  'document': {
+    'fontSize': [{ 'unit': 'px', 'value': 90 }],
+    'color': '#880e4f'
+  },
+  'tableStyle': {
+    'width': [{ 'unit': '%H', 'value': 0.8 }],
+    'marginLeft': [{ 'unit': 'px', 'value': 50 }],
+    'marginTop': [{ 'unit': 'px', 'value': 40 }]
+  },
+  'header': {
+    'textAlign': 'center',
+    'fontSize': [{ 'unit': 'px', 'value': 30 }],
+    'marginTop': [{ 'unit': 'px', 'value': 40 }]
+  },
+  'brand': {
+    'fontFamily': 'cursive !important'
+  },
+  'tableHead': {
+    'color': '#f50057'
   }
 });

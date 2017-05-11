@@ -19,7 +19,7 @@ module.exports = (app) => {
   app.delete('/api/users/:id', Auth.verifyToken, Auth.verifyAdmin, User.delete);
 
 
-  app.get('/api/users/:id/documents', Auth.verifyToken, Auth.verifyAdmin, User.retrieveUserDocuments);
+  // app.get('/api/users/:id/documents', Auth.verifyToken, Auth.verifyAdmin, User.retrieveUserDocuments);
 
 
   app.post('/api/users/logout', Auth.verifyToken, User.logOut);

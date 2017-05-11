@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import DashBoardPage from './DashBoardPage';
-import Picture from './picture/box.jpg';
+import Picture from './picture/as.png';
 
 class Greetings extends React.Component {
   constructor(props) {
@@ -16,25 +16,24 @@ class Greetings extends React.Component {
     this.setState({ imageStatus: 'failed to load' });
   }
   render() {
+    const authenticated = this.props.login.isAuthenticated;
     return (
       <div>
-        {this.props.login.isAuthenticated ? <DashBoardPage /> :
-        <div className="card">
-          <div className="card-image">
-            <img
-              className="materialboxed"
-              src={Picture} height="600"
-              onLoad={this.handleImageLoaded.bind(this)}
-              onError={this.handleImageErrored.bind(this)}
-            />
-            <h1 className="card-title purple-text bold">Managing And Organizing Of Documents Just Got Better</h1>
+        {authenticated ? <DashBoardPage /> :
+        <div className="col horizontal">
+          <div className="card  horizontal">
+            <div className="card-image">
+              <img
+                src={Picture} height="600"
+                onLoad={this.handleImageLoaded.bind(this)}
+                onError={this.handleImageErrored.bind(this)}
+              />
+            </div>
+            <div className="card-content">
+              <h1 className="card-title black-text">Managing And Organizing Of Documents Just Got Better</h1>
+            </div>
+            {this.state.imageStatus}
           </div>
-          <div className="card-content">
-            <p className="black-text"> I carefully evaluated every single document I disclosed to ensure that each was legitimately in the public interest.
-               There are all sorts of documents that would have made a big impact that I didnt turn over,
-                because harming people isnt my goal. Transparency is.</p>
-          </div>
-          {this.state.imageStatus}
         </div>}
       </div>
     );

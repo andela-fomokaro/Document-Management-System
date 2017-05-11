@@ -25,10 +25,11 @@ export function loadDocuments() {
 }
 
 
-export function getDocument(id) {//
+export function getDocument(id) {
   return (dispatch) => {
     axios.get(`/api/documents/${id}`)
       .then((res) => {
+         console.log(res.data);
         dispatch({
           type: 'GET_SINGLE_DOCUMENT',
           payload: res.data
@@ -41,7 +42,8 @@ export function getDocument(id) {//
 export function deleteDocument(id) {
   return (dispatch) => {
     axios.delete(`/api/documents/${id}`)
-      .then((res) => {
+      .then((req, res) => {
+        console.log(req.decoded, 'tifannnyjjjjjj we are here');
         dispatch({
           type: 'DELETE_DOCUMENT',
           id

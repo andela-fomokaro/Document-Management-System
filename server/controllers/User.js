@@ -102,7 +102,6 @@ const User = {
    * @return {Object} Response object
    */
   findUser(req, res) {
-    console.log(req.decoded);
     db.Roles
     .findById(req.decoded.roleId)
     .then((role) => {
@@ -280,82 +279,82 @@ const User = {
       });
   },
 
-  /**
-   * Retrieve all documents belonging to a user
-   * @param {Object} req - Request object
-   * @param {Object} res - Response object
-   * @return {Object} Response object
-   */
-  retrieveUserDocuments(req, res) {
-    db.Roles
-      .findById(req.decoded.roleId)
-      .then((role) => {
-        let query = {};
-        if (role.title === 'admin') {
-          query = {
-            where: {
-              ownerId: { $eq: req.params.id }
-            }
-          };
-        } else {
-          query = {
-            where: {
-              $and: {
-                ownerId: { $eq: req.params.id },
-                $or: {
-                  access: { $eq: 'public' },
-                  $and: {
-                    access: { $eq: 'private' },
-                    ownerId: { $eq: req.decoded.userId }
-                  },
-                  $or: {
-                    $and: {
-                      access: { $eq: 'role' },
-                      '$db.Users.roleId$': { $eq: req.decoded.roleId }
-                    }
-                  }
-                }
-              }
-            },
-            include: [
-              {
-                model: db.Users
-              }
-            ]
-          };
-        }
+  // /**
+  //  * Retrieve all documents belonging to a user
+  //  * @param {Object} req - Request object
+  //  * @param {Object} res - Response object
+  //  * @return {Object} Response object
+  //  */
+  // retrieveUserDocuments(req, res) {
+  //   db.Roles
+  //     .findById(req.decoded.roleId)
+  //     .then((role) => {
+  //       let query = {};
+  //       if (role.title === 'admin') {
+  //         query = {
+  //           where: {
+  //             ownerId: { $eq: req.params.id }
+  //           }
+  //         };
+  //       } else {
+  //         query = {
+  //           where: {
+  //             $and: {
+  //               ownerId: { $eq: req.params.id },
+  //               $or: {
+  //                 access: { $eq: 'public' },
+  //                 $and: {
+  //                   access: { $eq: 'private' },
+  //                   ownerId: { $eq: req.decoded.userId }
+  //                 },
+  //                 $or: {
+  //                   $and: {
+  //                     access: { $eq: 'role' },
+  //                     '$db.Users.roleId$': { $eq: req.decoded.roleId }
+  //                   }
+  //                 }
+  //               }
+  //             }
+  //           },
+  //           include: [
+  //             {
+  //               model: db.Users
+  //             }
+  //           ]
+  //         };
+  //       }
 
-        query.limit = (req.query.limit > 0) ? req.query.limit : 10;
-        query.offset = (req.query.offset > 0) ? req.query.offset : 0;
-        db.Documents
-          .findAndCountAll(query)
-          .then((documents) => {
-            const filteredDocuments = documents.rows.map(document => Object.assign({}, {
-              title: document.title,
-              content: document.content,
-              access: document.access,
-              type: document.type,
-              ownerId: document.ownerId,
-              createdAt: document.createdAt,
-              updatedAt: document.updatedAt
-            }));
-            const pagination = Helper.pagination(
-              query.limit, query.offset, documents.count
-            );
-            if (documents.rows.length === 0) {
-              return res.status(404).send({
-                message: 'No document match the request.'
-              });
-            }
-            res.status(200).send({
-              pagination, documents: filteredDocuments
-            });
-          })
-          .catch(() => res.status(400).send({
-            message: 'An error occured. Invalid parameters, try again!'
-          }));
-      });
-  }
+  //       query.limit = (req.query.limit > 0) ? req.query.limit : 10;
+  //       query.offset = (req.query.offset > 0) ? req.query.offset : 0;
+  //       db.Documents
+  //         .findAndCountAll(query)
+  //         .then((documents) => {
+  //           const filteredDocuments = documents.rows.map(document => Object.assign({}, {
+  //             title: document.title,
+  //             content: document.content,
+  //             access: document.access,
+  //             type: document.type,
+  //             ownerId: document.ownerId,
+  //             createdAt: document.createdAt,
+  //             updatedAt: document.updatedAt
+  //           }));
+  //           const pagination = Helper.pagination(
+  //             query.limit, query.offset, documents.count
+  //           );
+  //           if (documents.rows.length === 0) {
+  //             return res.status(404).send({
+  //               message: 'No document match the request.'
+  //             });
+  //           }
+  //           res.status(200).send({
+  //             pagination, documents: filteredDocuments
+  //           });
+  //         })
+  //         .catch(() => res.status(400).send({
+  //           message: 'An error occured. Invalid parameters, try again!'
+  //         }));
+  //     });
+  // }
 
 };
 

@@ -30,9 +30,9 @@ class NavigationBar extends React.Component {
     return (
       <nav>
         <div className="nav-wrapper  blue-grey darken-4">
-          <Link to="/" className="brand-logo">docStar Document Mangement System</Link>
+          <Link to="/" className="brand-logo brand">docStar Document Mangement System</Link>
           <div className="nav-wrapper  blue-grey darken-4">
-            <h1 className="brand-logo" style={header}>docStar Document Mangement System</h1>
+            <h1 className="brand-logo brand" style={header}>docStar Document Mangement System</h1>
             {isAuthenticated ? userLinks : guestLinks}
           </div>
         </div>

@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import propTypes from 'prop-types';
-import SingleDocument from './document/SingleDocument';
+import AllDocument from './document/AllDocument';
 import { loadDocuments, getDocument, deleteDocument, updateDocument } from '../actions/documentActions';
 import Footer from './Footer';
+import DocumentListRow from './document/DocumentListRow';
 
 class DashBoard extends React.Component {
 
@@ -14,17 +15,18 @@ class DashBoard extends React.Component {
   }
 
   render() {
-    console.log(this.props);
-    const { document } = this.props.doc;
+    const documents = this.props;
     return (
       <div>
         <div className="container">
-           <Link to="/dashboardpage">Return to Home Page</Link>
+          <Link to="/dashboardpage">Return to Home Page</Link>
+          <DocumentListRow />
+          <i className="material-icons prefix document">library_books</i>
           <div className="row">
-            { document.map(doc => <SingleDocument
-              key={doc.id}
+            { documents.doc.documents.map(doc => <AllDocument
+              key={doc.document}
               document={doc}
-              deleteDocument={this.props.deleteDocument}
+              deleteDocument={documents.deleteDocument}
             />)}
           </div>
         </div>

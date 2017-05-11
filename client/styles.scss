@@ -38,3 +38,42 @@ a:hover {
   position: relative;
   width: 100%
 }
+.input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+input[type=text]:focus {
+    width: 50%;
+}
+.icons{
+  color: #880e4f ;
+}
+.document{
+  font-size:90px;
+  color:  #880e4f ;
+}
+.tableStyle{
+  width: 80%;
+  margin-left: 50px;
+  margin-top: 40px;
+}
+.header{
+  text-align: center;
+  font-size: 30px;
+  margin-top: 40px;
+}
+.brand{
+  font-family: cursive !important;
+}
+.tableHead{
+ color: #f50057;
+}

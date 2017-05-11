@@ -13,9 +13,10 @@ class SideNavLink extends React.Component {
             options={{ closeOnClick: true }}
           >
             <SideNavItem href="#!icon">About DocStar</SideNavItem>
-            <SideNavItem><Link to="/loadDocuments">View All Document</Link></SideNavItem>
-            <SideNavItem href="#!second">Find Document</SideNavItem>
-            <SideNavItem href="#!second">Create Role</SideNavItem>
+            <SideNavItem><Link to="/loadDocuments">Documents</Link></SideNavItem>
+            <SideNavItem href="#!second">Document Types</SideNavItem>
+            <SideNavItem href="#!second">My Profile</SideNavItem>
+             <SideNavItem href="#!second">Admininistrator</SideNavItem>
             <SideNavItem divider />
             <SideNavItem subheader>Log Out</SideNavItem>
           </SideNav>
