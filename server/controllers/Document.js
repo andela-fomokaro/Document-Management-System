@@ -1,6 +1,5 @@
 import db from '../models';
 import Helper from '../helpers/controllerHelper';
-import auth from '../middlewares/Auth';
 /**
  * DocumentsController class to create and manage documents
  */
@@ -80,7 +79,7 @@ const Document = {
    * @param {Object} res - Response object
    * @returns {Object} Response object
    */
-  update(req, res) {
+  updateDoc(req, res) {
     db.Roles.findById(req.decoded.roleId)
       .then((role) => {
         db.Documents
@@ -91,7 +90,7 @@ const Document = {
                 message: 'Document Does Not Exist',
               });
             }
-            if ((role.title !== 'admin') && (document.ownerId !== req.decoded.userId)) {
+            if (role.title !== 'admin' && document.ownerId !== req.decoded.userId) {
               return res.status(403)
                 .send({ message: 'You are not authorized to update this document' });
             }
@@ -101,11 +100,16 @@ const Document = {
               });
             }
             document
-              .update(req.body, { fields: Object.keys(req.body) })
-              .then(updatedDocument => res.status(200).send({
-                message: 'Update successful!',
-                updatedDocument
-              }));
+              .update(req.body)
+              .then((updatedDocument) => {
+                res.status(200).send({
+                  message: 'Update successful!',
+                  updatedDocument,
+                  document,
+                  body: req.body
+                });
+              });
+            console.log(req.body);
           })
         .catch(() => res.status(400).send({
           message: 'An error occured. Invalid parameters, try again!'

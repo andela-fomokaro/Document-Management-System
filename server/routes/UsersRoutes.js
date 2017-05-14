@@ -13,7 +13,7 @@ module.exports = (app) => {
   app.get('/api/users/', Auth.verifyToken, Auth.verifyAdmin, User.allUsers);
 
 
-  app.put('/api/users/:id', Auth.verifyToken, Auth.verifyAdmin, User.update);
+  app.put('/api/users/:id', Auth.verifyToken, Auth.verifyAdmin, User.updateUsers);
 
 
   app.delete('/api/users/:id', Auth.verifyToken, Auth.verifyAdmin, User.delete);

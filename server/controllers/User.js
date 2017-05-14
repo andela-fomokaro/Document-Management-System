@@ -180,7 +180,7 @@ const User = {
    * @param {Object} res - Response object
    * @return {Object} Response object
    */
-  update(req, res) {
+  updateUsers(req, res) {
     db.Roles.findById(req.decoded.roleId)
       .then((role) => {
         db.Users

@@ -10,7 +10,7 @@ module.exports = (app) => {
   app.get('/api/users/:id/documents', Auth.verifyToken, Document.findUsersDocuments);// worked on still have issues
 
 
-  app.put('/api/documents/:id', Auth.verifyToken, Document.update);
+  app.put('/api/documents/:id', Auth.verifyToken, Document.updateDoc);
 
 
   app.delete('/api/documents/:id', Auth.verifyToken, Document.delete);
