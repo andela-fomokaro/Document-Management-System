@@ -1,5 +1,6 @@
 import db from '../models';
 import Helper from '../helpers/controllerHelper';
+import auth from '../middlewares/Auth';
 /**
  * DocumentsController class to create and manage documents
  */
@@ -23,9 +24,7 @@ const Document = {
           newDocument
         });
       })
-      .catch(() => res.status(400).send({
-        message: 'An error occured. Invalid parameters, try again!'
-      }));
+      .catch(() => res.json({ message: 'An error occured. Invalid parameters, try again!' }));
   },
 
 /**
@@ -120,18 +119,17 @@ const Document = {
    * @return {Object} Response object
    */
   delete(req, res) {
-    db.Roles
-      .findById(req.decoded.roleId)
-      .then((role) => {
-        db.Documents
+    // const docId = req.params.id;
+    db.Documents
           .findById(req.params.id)
           .then((document) => {
             if (!document) {
+              // console.log('Document does not exists');
               return res.status(404).send({
                 message: 'Document Does Not Exist',
               });
             }
-            if ((role.title !== 'admin') && (document.ownerId !== req.decoded.userId)) {
+            if ((req.decoded.roleId !== 1) && (document.ownerId !== req.decoded.userId)) {
               return res.status(403).send({
                 message: 'You are not authorized to delete this document',
               });
@@ -145,7 +143,6 @@ const Document = {
       .catch(() => res.status(400).send({
         message: 'An error occured. Invalid parameters, try again!'
       }));
-      });
   },
 /**
    * Find all Documents
@@ -160,14 +157,12 @@ const Document = {
         query.limit = (req.query.limit > 0) ? req.query.limit : 10;
         query.offset = (req.query.offset > 0) ? req.query.offset : 0;
         query.attributes = { exclude: ['ownerId'] };
-
         if (role.title === 'admin') {
           db.Documents
             .findAndCountAll(query)
             .then((documents) => {
-              const pagination = Helper.pagination(
-                query.limit, query.offset, documents.count
-              );
+              query.count = documents.count;
+              const pagination = Helper.pagination(query);
               return res.status(200).send({
                 pagination, documents: documents.rows
               });
@@ -180,7 +175,7 @@ const Document = {
                   access: { $eq: 'public' },
                   $and: {
                     access: { $eq: 'role' },
-                    OwnerId: { $eq: req.decoded.userId }
+                    ownerId: { $eq: req.decoded.userId }
                   },
                   $and: {
                     access: { $eq: 'role' },
@@ -189,17 +184,20 @@ const Document = {
                 },
                 ownerId: { $eq: req.decoded.userId }
               }
-            }, 
+            },
             include: [
               {
                 model: db.Users
               }
             ]
           };
-
           db.Documents
             .findAndCountAll(query)
             .then((documents) => {
+              query.count = documents.count;
+              query.limit = (req.query.limit > 0) ? req.query.limit : 10;
+              query.offset = (req.query.offset > 0) ? req.query.offset : 0;
+              query.attributes = { exclude: ['ownerId'] };
               const filteredDocuments = documents.rows.map(document => Object.assign({}, {
                 title: document.title,
                 content: document.content,
@@ -209,9 +207,7 @@ const Document = {
                 createdAt: document.createdAt,
                 updatedAt: document.updatedAt
               }));
-              const pagination = Helper.pagination(
-                { limit: query.limit, offset: query.offset, count: documents.count }
-              );
+              const pagination = Helper.pagination(query);
               res.status(200).send({
                 pagination, documents: filteredDocuments
               });
@@ -308,9 +304,8 @@ const Document = {
               createdAt: document.createdAt,
               updatedAt: document.updatedAt
             }));
-            const pagination = Helper.pagination(
-              { limit: query.limit, offset: query.offset, count: documents.count }
-            );
+            query.count = documents.count;
+            const pagination = Helper.pagination(query);
             if (documents.rows.length === 0) {
               return res.status(404).send({
                 message: 'Search Does Not Match Any Document!'

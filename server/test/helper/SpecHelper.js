@@ -26,6 +26,7 @@ const SpecHelper = {
     username: 'faith',
     email: 'faith.omokaro@andela.com',
     password: 'faith',
+    roleId: 1
   },
 
   specUser2: {
@@ -33,13 +34,14 @@ const SpecHelper = {
     username: 'paul',
     email: 'paul.solomon@gmail.com',
     password: 'paul',
+    roleId: 2
   },
 
   invalidUser: {
-    fullnames: `${faker.name.firstName()} ${faker.name.lastName()}`,
+    fullNames: 'Invalid user',
     username: 'faker',
     Eemail: faker.internet.email(),
-    password: faker.internet.password()
+    password: faker.internet.password(),
   },
 
   invalidUser2: {
@@ -61,7 +63,7 @@ const SpecHelper = {
   },
 
   specUser4: {
-    fullnames: 'Oseni mercy',
+    fullNames: 'Oseni mercy',
     email: 'mercy.oseni@andela.com',
     password: 'mercy',
     roleId: 3,
@@ -69,7 +71,7 @@ const SpecHelper = {
   },
 
   specUser5: {
-    fullnames: 'Omotola Mercy',
+    fullNames: 'Omotola Mercy',
     email: 'omotola.mercy@test.com',
     password: 'omotola',
     roleId: 4,
@@ -77,7 +79,7 @@ const SpecHelper = {
   },
 
   specUser6: {
-    fullnames: 'Adeshola Barbie',
+    fullNames: 'Adeshola Barbie',
     email: 'adeshola@test.com',
     password: 'adeshola',
     roleId: 3,
@@ -85,7 +87,7 @@ const SpecHelper = {
   },
 
   specUser7: {
-    fullnames: 'Cindy Barbie',
+    fullNames: 'Cindy Barbie',
     email: 'cindy@test.com',
     password: 'cindy',
     roleId: 3,
@@ -93,7 +95,7 @@ const SpecHelper = {
   },
 
   specUser8: {
-    fullnames: 'Sophiat Ayomide',
+    fullNames: 'Sophiat Ayomide',
     email: 'sophiat@test.com',
     password: 'sophiat',
     roleId: 3,
@@ -101,7 +103,7 @@ const SpecHelper = {
   },
 
   specUser9: {
-    fullnames: 'Oyin Marie',
+    fullNames: 'Oyin Marie',
     email: 'oyin@test.com',
     password: 'oyin',
     roleId: 3,
@@ -113,6 +115,7 @@ const SpecHelper = {
     content: 'Andela is a place to be',
     access: 'public',
     ownerId: 1,
+    id: 1
 
   },
 
@@ -141,7 +144,6 @@ const SpecHelper = {
     + 'programming language source code.',
     access: 'role',
     ownerId: 3,
-    id: 5
 
   },
 
@@ -191,7 +193,6 @@ const SpecHelper = {
     + ' school grades, boys, all that.',
     access: 'private',
     ownerId: 2,
-    id: 4
 
   },
 

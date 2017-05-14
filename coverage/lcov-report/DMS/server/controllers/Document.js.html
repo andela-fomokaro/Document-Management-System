@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">94.52% </span>
+        <span class="strong">94.94% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>69/73</span>
+        <span class='fraction'>75/79</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">81.82% </span>
+        <span class="strong">79.17% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>36/44</span>
+        <span class='fraction'>38/48</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">93.1% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>27/29</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">94.37% </span>
+        <span class="strong">94.81% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>67/71</span>
+        <span class='fraction'>73/77</span>
       </div>
     </div>
   </div>
@@ -368,9 +368,7 @@
 323
 324
 325
-326
-327
-328</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+326</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -532,14 +530,12 @@
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -568,10 +564,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -582,8 +581,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -681,8 +678,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
 <span class="cline-any cline-yes">4×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -859,14 +855,12 @@ const Document = {
         query.limit = (</span>req.query.limit &gt; 0) ? <span class="branch-0 cbranch-no" title="branch not covered" >req.query.limit : 10;
         query.offset = (</span>req.query.offset &gt; 0) ? <span class="branch-0 cbranch-no" title="branch not covered" >req.query.offset : 0;
         query.attributes = { exclude: ['ownerId'] };
-&nbsp;
         if (role.title === 'admin') {
           db.Documents
             .findAndCountAll(query)
             .then((documents) =&gt; {
-              const pagination = Helper.pagination(
-                query.limit, query.offset, documents.count
-              );
+              query.count = documents.count;
+              const pagination = Helper.pagination(query);
               return res.status(200).send({
                 pagination, documents: documents.rows
               });
@@ -879,7 +873,7 @@ const Document = {
                   access: { $eq: 'public' },
                   $and: {
                     access: { $eq: 'role' },
-                    OwnerId: { $eq: req.decoded.userId }
+                    ownerId: { $eq: req.decoded.userId }
                   },
                   $and: {
                     access: { $eq: 'role' },
@@ -888,17 +882,20 @@ const Document = {
                 },
                 ownerId: { $eq: req.decoded.userId }
               }
-            }, 
+            },
             include: [
               {
                 model: db.Users
               }
             ]
           };
-&nbsp;
           db.Documents
             .findAndCountAll(query)
             .then((documents) =&gt; {
+              query.count = documents.count;
+              query.limit = (</span>req.query.limit &gt; 0) ? <span class="branch-0 cbranch-no" title="branch not covered" >req.query.limit : 10;
+              query.offset = (</span>req.query.offset &gt; 0) ? <span class="branch-0 cbranch-no" title="branch not covered" >req.query.offset : 0;
+              query.attributes = { exclude: ['ownerId'] };
               const filteredDocuments = documents.rows.map(document =&gt; Object.assign({}, {
                 title: document.title,
                 content: document.content,
@@ -908,9 +905,7 @@ const Document = {
                 createdAt: document.createdAt,
                 updatedAt: document.updatedAt
               }));
-              const pagination = Helper.pagination(
-                { limit: query.limit, offset: query.offset, count: documents.count }
-              );
+              const pagination = Helper.pagination(query);
               res.status(200).send({
                 pagination, documents: filteredDocuments
               });
@@ -1007,9 +1002,8 @@ const Document = {
               createdAt: document.createdAt,
               updatedAt: document.updatedAt
             }));
-            const pagination = Helper.pagination(
-              { limit: query.limit, offset: query.offset, count: documents.count }
-            );
+            query.count = documents.count;
+            const pagination = Helper.pagination(query);
             if (documents.rows.length === 0) {
               return res.status(404).send({
                 message: 'Search Does Not Match Any Document!'
@@ -1030,7 +1024,7 @@ export default Document;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu May 11 2017 18:58:50 GMT+0100 (WAT)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat May 13 2017 08:28:29 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

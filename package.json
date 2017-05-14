@@ -4,7 +4,7 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "npm run 'migrate:test:undo' && npm run 'migrate:test' && NODE_ENV=test mocha --compilers js:babel-core/register ./server/test/**/*.js",
+    "test": "npm run 'migrate:test' && NODE_ENV=test mocha --compilers js:babel-core/register ./server/test/**/*.js",
     "cover": "NODE_ENV=test node_modules/babel-cli/bin/babel-node.js node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- server/test/**/*.js",
     "coveralls": "npm run 'migrate:test:undo' && npm run 'migrate:test' && npm run cover && cat ./coverage/lcov.info | coveralls ",
     "migrate:test:undo": "NODE_ENV=test sequelize db:migrate:undo:all",
@@ -57,6 +57,7 @@
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
     "faker": "^4.1.0",
+    "fm-log": "^4.4.3",
     "http": "0.0.0",
     "jquery": "^3.2.1",
     "jsonwebtoken": "^7.3.0",

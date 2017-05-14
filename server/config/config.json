@@ -2,14 +2,14 @@
   "development": {
     "username": "andelaeveloper",
     "password": null,
-    "database": "dataSystem",
+    "database": "dataSystem2",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "andelaeveloper",
     "password": null,
-    "database": "test",
+    "database": "testSystem",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "logging": false

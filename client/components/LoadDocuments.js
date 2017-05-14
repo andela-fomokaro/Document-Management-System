@@ -10,12 +10,13 @@ import DocumentListRow from './document/DocumentListRow';
 
 class DashBoard extends React.Component {
 
-  componentWillMount() {
-    this.props.loadDocuments();
+  componentDidMount() {
+     this.props.loadDocuments();
   }
 
   render() {
-    const documents = this.props;
+    const documents = this.props.docs;
+    console.log(documents);
     return (
       <div>
         <div className="container">
@@ -23,10 +24,10 @@ class DashBoard extends React.Component {
           <DocumentListRow />
           <i className="material-icons prefix document">library_books</i>
           <div className="row">
-            { documents.doc.documents.map(doc => <AllDocument
+            { documents.documents.map(doc => <AllDocument
               key={doc.document}
               document={doc}
-              deleteDocument={documents.deleteDocument}
+              deleteDocument={this.props.deleteDocument}
             />)}
           </div>
         </div>
@@ -37,7 +38,7 @@ class DashBoard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  doc: state.documents
+  docs: state.documents
 });
 
 const mapDispatchToProps = dispatch => ({

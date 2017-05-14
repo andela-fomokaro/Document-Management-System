@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DocumentBody from './DocumentBody';
+// import DocumentBody from './DocumentBody';
 
 let serial;
 
@@ -16,9 +16,7 @@ const DocumentList = ({ documents }) => {
           <th> Last Updated </th>
         </tr>
       </thead>
-      <tbody>
-        <DocumentBody />
-      </tbody>
+
     </table>
   );
 };

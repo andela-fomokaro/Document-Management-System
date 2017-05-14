@@ -1,7 +1,7 @@
 import { browserHistory } from 'react-router';
 
 const initialState = {
-  document: [],
+  documents: [],
   message: '',
   pagination: {}
 };

@@ -5,6 +5,11 @@ import DocumentList from './DocumentListRow';
 
 
 class SingleDocument extends React.Component {
+  constructor(props) {
+    super(props);
+    this.deleteDocument = this.deleteDocument.bind(this)
+  }
+
   deleteDocument() {
     this.props.deleteDocument(this.props.document.id);
   }
@@ -18,12 +23,12 @@ class SingleDocument extends React.Component {
 
   render() {
     const { document } = this.props;
+    console.log(this.props);
     const card = {
       width: '700px',
     };
     return (
-      <div className="container">
-      <div className="card grey lighten-3 col s3" style={card}>
+      <div className="card grey lighten-3 col s3" style={card} key={document.id}>
         <div className="card-content">
           <h2 className="card-title">{document.title}</h2>
           <p>{document.content}</p>
@@ -70,7 +75,6 @@ class SingleDocument extends React.Component {
                  <button>Update and Save</button></Modal></li>
           </ul>
         </div>
-      </div>
       </div>
     );
   }

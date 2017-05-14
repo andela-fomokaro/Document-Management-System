@@ -9,15 +9,18 @@ const expect = chai.expect;
 const request = supertest.agent(app);
 const adminUser = SpecHelper.specUser1;
 const regularUser = SpecHelper.specUser2;
+const author = SpecHelper.authorRole;
+const contributor = SpecHelper.contributorRole;
 
+let adminToken, regularToken, authorToken;
 
 describe('Document API:', () => {
-  let adminToken, regularToken;
   before((done) => {
-    db.Roles.bulkCreate([SpecHelper.adminRole, SpecHelper.regularRole])
+    db.Roles.bulkCreate([SpecHelper.adminRole, SpecHelper.regularRole, SpecHelper.contributorRole])
       .then((roles) => {
         adminUser.roleId = roles[0].id;
         regularUser.roleId = roles[1].id;
+        regularUser.contributorRole = roles[2].id;
         db.Users.create(adminUser)
           .then(() => {
             request.post('/api/users/login')
@@ -57,17 +60,28 @@ describe('Document API:', () => {
 
     describe('ROLES REQUESTS:', () => {
       describe('POST: (/api/roles)', () => {
-        it('should create a role when required field is valid', (done) => {
-          const newRole = { title: 'regular' };
+        it('should create a role if user is not an admin', (done) => {
+          const newRole = { title: 'superAdmin', id: 4 };
           request.post('/api/roles')
-          .set({ Authorization: adminToken })
           .send(newRole)
           .end((error, response) => {
-            expect(response.status).to.equal(400);
+            expect(response.status).to.equal(401);
             done();
           });
         });
       });
+
+      // it('should create a role if user is  an admin', (done) => {
+      //   const authorRole = { title: 'authorRole', id: 10 };
+      //   request.post('/api/roles')
+      //     .send(authorRole)
+      //     .set({ Authorization: adminUserToken })
+      //     .end((error, response) => {
+      //       console.log(response.body.message)
+      //       expect(response.status).to.equal(200);
+      //       done();
+      //     });
+      // });
       it('should not create a role if role already exist', (done) => {
         const newRole = { title: 'regular' };
         request.post('/api/roles')
@@ -115,14 +129,14 @@ describe('Document API:', () => {
             done();
           });
     });
-    // it('should return the role when id is valid', (done) => {
-    //   request.get(`/api/roles/${roles.id}`)
-    //       .set({ Authorization: adminToken })
-    //       .end((error, response) => {
-    //         expect(response.status).to.equal(200);
-    //         done();
-    //       });
-    // });
+    it('should return the role when id is valid', (done) => {
+      request.get('/api/roles/2')
+          .set({ Authorization: adminToken })
+          .end((error, response) => {
+            expect(response.status).to.equal(200);
+            done();
+          });
+    });
     //  PUT Requests - Edit specific role
     describe('PUT: (/api/roles/:id)', () => {
       it('should not edit role if id is invalid', (done) => {
@@ -189,22 +203,19 @@ describe('Document API:', () => {
             done();
           });
       });
-
-      // it('should edit roles when id and title is valid', (done) => {
-      //   const fieldsToUpdate = { title: 'casual' };
-      //   request.put(`/api/roles/${roles.id}`)
-      //     .set({ Authorization: adminToken })
-      //     .send(fieldsToUpdate)
-      //     .end((error, response) => {
-      //       expect(response.status).to.equal(200);
-      //       // expect(response.body.title).to.equal(fieldsToUpdate.title);
-      //       done();
-      //     });
-      // });
     });
 
     // DELETE Requests - Delete specific role
     describe('DELETE: (/api/roles/:id)', () => {
+      before((done) => {
+        request.post('/api/roles')
+            .send(author)
+            .end((err, res) => {
+              authorToken = res.body.token;
+              done();
+            });
+      });
+
       it('should not delete role if id is invalid', (done) => {
         request.delete('/api/roles/8728')
           .set({
@@ -253,9 +264,10 @@ describe('Document API:', () => {
       });
 
       // it('should delete role when id is valid', (done) => {
-      //   request.delete(`/api/roles/${roles.id}`)
+      //   request.delete('/api/roles/2')
       //     .set({ Authorization: adminToken })
       //     .end((error, response) => {
+      //       console.log(response);
       //       expect(response.status).to.equal(200);
       //       expect(response.body.message).to
       //       .equal('Role deleted successfully');

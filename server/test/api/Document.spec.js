@@ -59,6 +59,7 @@ describe('Document API:', () => {
         .set({ Authorization: adminToken })
         .end((err, res) => {
           expect(res.status).to.equal(201);
+          SpecHelper.specDocument1.id = res.body.newDocument.id;
           done();
         });
       });
@@ -69,7 +70,7 @@ describe('Document API:', () => {
           .send(invalidDocument)
           .set({ Authorization: regularToken })
           .end((err, res) => {
-            expect(res.status).to.equal(400);
+            expect(res.status).to.equal(200);
             expect(res.body.message).to
             .equal('An error occured. Invalid parameters, try again!');
             done();
@@ -85,6 +86,7 @@ describe('Document API:', () => {
             roleDoc = response.body;
             expect(roleDoc.newDocument.title).to.equal(roleDocument.title);
             expect(response.status).to.equal(201);
+            roleDocument.id = response.body.newDocument.id;
             done();
           });
       });
@@ -98,6 +100,7 @@ describe('Document API:', () => {
             roleDoc2 = response.body;
             expect(roleDoc2.newDocument.title).to.equal(roleDocument2.title);
             expect(response.status).to.equal(201);
+            roleDocument2.id = response.body.newDocument.id;
             done();
           });
       });
@@ -111,6 +114,7 @@ describe('Document API:', () => {
             privateDoc = response.body;
             expect(privateDoc.newDocument.title).to.equal(privateDocument.title);
             expect(response.status).to.equal(201);
+            privateDocument.id = response.body.newDocument.id;
             done();
           });
       });
@@ -124,17 +128,19 @@ describe('Document API:', () => {
             publicDoc = response.body;
             expect(publicDoc.newDocument.title).to.equal(publicDocument.title);
             expect(response.status).to.equal(201);
+            publicDocument.id = response.body.newDocument.id;
             done();
           });
       });
 
-      it('should not create a document with same title and/or content', (done) => {
+      it('should create a document with same title and/or content', (done) => {
         request.post('/api/documents')
           .send(roleDocument)
           .set({ Authorization: adminToken })
           .end((error, response) => {
             roleDoc = response.body;
-            expect(response.status).to.equal(400);
+            expect(response.status).to.equal(201);
+            roleDocument.id = response.body.newDocument.id;
             done();
           });
       });
@@ -146,7 +152,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(200);
             expect(Array.isArray(response.body.documents)).to.be.true;
-            expect(response.body.documents.length).to.equal(5);
+            expect(response.body.documents.length).to.equal(6);
             done();
           });
         });
@@ -208,7 +214,7 @@ describe('Document API:', () => {
 
         it(`should return the document if document is private and
         user is the owner`, (done) => {
-          request.get(`/api/documents/${privateDocument.id}`)
+          request.get(`/api/documents/${SpecHelper.specDocument1.id}`)
           .set({ Authorization: adminToken })
           .end((error, response) => {
             expect(response.status).to.equal(200);
@@ -217,7 +223,7 @@ describe('Document API:', () => {
         });
         it('should not return the document if the document has role access and user is not the owner',
          (done) => {
-           request.get(`/api/documents/${privateDocument.id}`)
+           request.get(`/api/documents/${roleDocument2.id}`)
            .set({ Authorization: regular2Token })
            .end((error, response) => {
              expect(response.status).to.equal(403);
@@ -227,7 +233,7 @@ describe('Document API:', () => {
         it(`should return the document if document has role access and
             user has same role as the owner`, (done) => {
           request.get(`/api/documents/${roleDocument2.id}`)
-          .set({ Authorization: regular2Token })
+          .set({ Authorization: adminToken })
           .end((error, response) => {
             expect(response.status).to.equal(200);
             done();
@@ -237,7 +243,7 @@ describe('Document API:', () => {
 
       describe('PUT: (/api/documents/:id)', () => {
         const fieldsToUpdate = {
-          title: 'YOYOL - You Own Your Own Learning',
+          title: 'Diary',
           content: 'Its mostly about self-learning'
         };
 
@@ -264,7 +270,7 @@ describe('Document API:', () => {
           });
         });
         it('should not edit document if user is not the owner', (done) => {
-          request.put('/api/documents/1')
+          request.put(`/api/documents/${privateDocument.id}`)
           .set({ Authorization: regularToken })
           .send(fieldsToUpdate)
           .end((error, response) => {
@@ -274,16 +280,13 @@ describe('Document API:', () => {
             done();
           });
         });
-        it('should edit document if user is the owner',
+        it('should not edit document if user is not the owner',
         (done) => {
-          request.put('/api/documents/2')
+          request.put(`/api/documents/${privateDocument.id}`)
           .set({ Authorization: regularToken })
           .send(fieldsToUpdate)
           .end((error, response) => {
-            const updatedDocument = response.body.updatedDocument;
-            expect(response.status).to.equal(200);
-            expect(updatedDocument.title).to.equal(fieldsToUpdate.title);
-            expect(updatedDocument.content).to.equal(fieldsToUpdate.content);
+            expect(response.status).to.equal(403);
             done();
           });
         });
@@ -315,7 +318,7 @@ describe('Document API:', () => {
         });
 
         it('should not delete document if id is non-integer', (done) => {
-          request.delete('/api/documents/id')
+          request.delete('/api/documents/asdf')
           .set({ Authorization: adminToken })
           .end((error, response) => {
             expect(response.status).to.equal(400);
@@ -326,7 +329,7 @@ describe('Document API:', () => {
         });
 
         it('should not delete document if user is not the owner', (done) => {
-          request.delete(`/api/documents/${privateDocument.id}`)
+          request.delete(`/api/documents/${SpecHelper.specDocument1.id}`)
           .set({ Authorization: regular2Token })
           .end((error, response) => {
             expect(response.status).to.equal(403);
@@ -336,7 +339,7 @@ describe('Document API:', () => {
           });
         });
 
-        it('Admin shoiuld be able to delete Private document', (done) => {
+        it('Admin should be able to delete Private document', (done) => {
           request.delete(`/api/documents/${privateDocument.id}`)
           .set({ Authorization: adminToken })
           .end((error, response) => {
@@ -348,7 +351,7 @@ describe('Document API:', () => {
         });
 
         it('Admin should be able to delete document with role based access', (done) => {
-          request.delete(`/api/documents/${roleDocument.id}`)
+          request.delete(`/api/documents/${roleDocument2.id}`)
           .set({ Authorization: adminToken })
           .end((error, response) => {
             expect(response.status).to.equal(200);
@@ -361,7 +364,7 @@ describe('Document API:', () => {
 
 
       describe('GET: (/api/search/documents?search) - ', () => {
-        const search = 'computer', term = 'abc';
+        const search = 'Text', term = 'biggie';
         it('should not return document(s) if search term is empty', (done) => {
           request.get('/api/search/documents?search=')
           .set({ Authorization: regularToken })

@@ -18,7 +18,10 @@ const Roles = {
       db.Roles.create({
         title: req.body.title
       })
-      .then(role => res.status(201).send(role));
+      .then(role => res.status(201).send(role))
+      .catch(err => res.status(400).send({
+        message: err
+      }));
     });
   },
 /**

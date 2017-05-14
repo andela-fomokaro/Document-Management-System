@@ -28,8 +28,6 @@ const Helper = {
       'createdAt',
     ];
   },
-
-
 };
 
 export default Helper;

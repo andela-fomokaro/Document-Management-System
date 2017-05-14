@@ -1,4 +1,5 @@
-import axios from 'axios';
+// import axios from 'axios';
+import axios from '../utils/index';
 
 export function createDocument(event) {
   return (dispatch) => {
@@ -16,6 +17,7 @@ export function loadDocuments() {
   return (dispatch) => {
     axios.get('/api/documents')
       .then((res) => {
+        console.log(res)
         dispatch({
           type: 'LOAD_DOCUMENTS',
           payload: res.data
@@ -42,7 +44,7 @@ export function getDocument(id) {
 export function deleteDocument(id) {
   return (dispatch) => {
     axios.delete(`/api/documents/${id}`)
-      .then((req, res) => {
+      .then((req) => {
         console.log(req.decoded, 'tifannnyjjjjjj we are here');
         dispatch({
           type: 'DELETE_DOCUMENT',
