@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for DMS/server/routes/UsersRoutes.js</title>
+    <title>Code coverage report for DMS/server/models/documents.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -16,13 +16,13 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../../index.html">all files</a> / <a href="index.html">DMS/server/routes/</a> UsersRoutes.js
+      <a href="../../../index.html">all files</a> / <a href="index.html">DMS/server/models/</a> documents.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>12/12</span>
+        <span class='fraction'>4/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -32,12 +32,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>1/1</span>
+        <span class='fraction'>2/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>12/12</span>
+        <span class='fraction'>4/4</span>
       </div>
     </div>
   </div>
@@ -71,68 +71,62 @@
 26
 27
 28
-29
-30
-31</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
+29</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Auth from '../middlewares/Auth';
-import User from '../controllers/User';
-&nbsp;
-module.exports = (app) =&gt; {
-  app.post('/api/users/login', User.login);
-&nbsp;
-&nbsp;
-  app.post('/api/users/', User.create);
-&nbsp;
-&nbsp;
-  app.get('/api/users/:id', Auth.verifyToken, User.findUser);
-&nbsp;
-  app.get('/api/users/', Auth.verifyToken, Auth.verifyAdmin, User.allUsers);
-&nbsp;
-&nbsp;
-  app.put('/api/users/:id', Auth.verifyToken, Auth.verifyAdmin, User.update);
-&nbsp;
-&nbsp;
-  app.delete('/api/users/:id', Auth.verifyToken, Auth.verifyAdmin, User.delete);
-&nbsp;
-&nbsp;
-  app.get('/api/users/:id/documents', Auth.verifyToken, Auth.verifyAdmin, User.retrieveUserDocuments);
-&nbsp;
-&nbsp;
-  app.post('/api/users/logout', Auth.verifyToken, User.logOut);
-&nbsp;
-&nbsp;
-  app.get('/api/search/users', Auth.verifyToken, User.search);
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">module.exports = (sequelize, DataTypes) =&gt; {
+  const Documents = sequelize.define('Documents', {
+    title: { type: DataTypes.STRING,
+      allowNull: false,
+    },
+    content: DataTypes.TEXT,
+    access: { type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'public',
+      validate: {
+        isIn: [['private', 'public', 'role']]
+      } },
+    ownerId: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    }
+  }, {
+    classMethods: {
+      associate(models) {
+        Documents.belongsTo(models.Users, {
+          onDelete: 'CASCADE',
+          foreignKey: 'ownerId'
+        });
+      }
+    }
+  });
+  return Documents;
 };
-&nbsp;
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->

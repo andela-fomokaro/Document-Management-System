@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run 'migrate:test' && NODE_ENV=test mocha --compilers js:babel-core/register ./server/test/**/*.js",
     "cover": "NODE_ENV=test node_modules/babel-cli/bin/babel-node.js node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- server/test/**/*.js",
-    "coveralls": "npm run 'migrate:test:undo' && npm run 'migrate:test' && npm run cover && cat ./coverage/lcov.info | coveralls ",
+    "coveralls": "npm run 'migrate:test' && npm run cover && cat ./coverage/lcov.info | coveralls ",
     "migrate:test:undo": "NODE_ENV=test sequelize db:migrate:undo:all",
     "migrate:test": "NODE_ENV=test sequelize db:migrate",
     "start": "nodemon --watch server --exec  babel-node -- server.js",
