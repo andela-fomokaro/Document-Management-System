@@ -11,6 +11,7 @@ services:
   - postgresql
 
 script:
+  - npm install -g sequelize -y
   - npm test
 
 after_success:
