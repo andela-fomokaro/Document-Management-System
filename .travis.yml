@@ -13,6 +13,7 @@ services:
 script:
   - npm install -g sequelize -y
   - npm test
+  - npm install sequelize@$(echo $SEQUELIZE)
 
 after_success:
   - npm run coveralls
