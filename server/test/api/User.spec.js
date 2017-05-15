@@ -11,9 +11,6 @@ const expect = chai.expect;
 const adminUser = SpecHelper.specUser1;
 const regularUser = SpecHelper.specUser2;
 const regularUser2 = SpecHelper.specUser3;
-const regularUser4 = SpecHelper.specUser5;
-const regularUser5 = SpecHelper.specUser6;
-const regularUser6 = SpecHelper.specUser7;
 const regularUser3 = SpecHelper.specUser4;
 const invalidUser = SpecHelper.invalidUser;
 
