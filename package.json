@@ -51,6 +51,7 @@
     "body-parser": "^1.17.1",
     "chai": "^3.5.0",
     "classnames": "^2.2.5",
+    "cli": "^1.0.1",
     "config": "^1.25.1",
     "cors": "^2.8.3",
     "coveralls": "^2.13.1",
