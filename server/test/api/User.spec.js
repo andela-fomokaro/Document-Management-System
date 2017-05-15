@@ -237,7 +237,7 @@ describe('Document API:', () => {
       //         username: 'baby',
       //         email: 'baby@test.com'
       //       };
-      //     request.put('/api/users/7')
+      //     request.put('/api/users/2')
       //     .set({ Authorization: adminToken })
       //     .send(fieldsToUpdate)
       //     .end((error, response) => {
@@ -247,7 +247,7 @@ describe('Document API:', () => {
       //       expect(updatedFields.email).to.equal(fieldsToUpdate.email);
       //       done();
       //     });
-      //   });
+        // });
       // it('should edit the user property if user is the current user', (done) => {
       //   const fieldsToUpdate =
       //   { name: 'Mercy Ade',

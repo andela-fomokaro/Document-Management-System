@@ -106,10 +106,8 @@ const Document = {
                   message: 'Update successful!',
                   updatedDocument,
                   document,
-                  body: req.body
                 });
               });
-            console.log(req.body);
           })
         .catch(() => res.status(400).send({
           message: 'An error occured. Invalid parameters, try again!'

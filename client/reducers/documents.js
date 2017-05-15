@@ -13,6 +13,7 @@ export default (state = initialState, action = {}) => {
       browserHistory.push('/loadDocuments');
       return Object.assign({}, state, { document: [...state.document, action.payload] });
     case 'UPDATE_DOCUMENT':
+    console.log(this.state);
       return Object.assign({}, state, { document: [...state.document, action.payload] });
     case 'GET_SINGLE_DOCUMENT':
       return action.payload;

@@ -1,3 +1,4 @@
 node_modules
 client/materialize/
 .DS_Store
+.env

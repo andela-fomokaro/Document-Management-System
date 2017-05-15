@@ -1,13 +1,24 @@
 import React from 'react';
 import { Modal } from 'react-materialize';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import propTypes from 'prop-types';
 import DocumentList from './DocumentListRow';
+import { updateDocument, deleteDocument } from '../../actions/documentActions';
 
 
 class SingleDocument extends React.Component {
   constructor(props) {
+
     super(props);
     this.deleteDocument = this.deleteDocument.bind(this)
+    this.state = {
+      document: {
+        content: props.document.content || '',
+        title: props.document.title || '',
+        id: props.document.id
+      },
+    };
   }
 
   deleteDocument() {
@@ -21,8 +32,14 @@ class SingleDocument extends React.Component {
     return this.setState({document});
   }
 
+  updateDocument() {
+    this.props.updateDocument(this.state.document);
+  }
+
   render() {
     const { document } = this.props;
+
+    const { title, content } = this.state.document;
     console.log(this.props);
     const card = {
       width: '700px',
@@ -53,9 +70,9 @@ class SingleDocument extends React.Component {
                         <div className="input-field col s6">
                           <textarea
                             className="materialize-textarea"
-                            name="content"
-                            value={document.title}
-                            onChange={this.updateDocumentState.bind(this)}
+                            name="title"
+                            value={title}
+                            onChange={(e) => this.updateDocumentState(e)}
                           />
                         </div>
                       </form>
@@ -66,13 +83,13 @@ class SingleDocument extends React.Component {
                           <textarea
                             className="materialize-textarea"
                             name="content"
-                            value={document.content}
-                            onChange={this.updateDocumentState.bind(this)}
+                            value={content}
+                            onChange={(e) => this.updateDocumentState(e)}
                           />
                         </div>
                       </form>
                 </div>
-                 <button>Update and Save</button></Modal></li>
+                 <button onClick={() => this.updateDocument()}>Update and Save</button></Modal></li>
           </ul>
         </div>
       </div>
@@ -84,4 +101,9 @@ SingleDocument.propTypes = {
   deleteDocument: propTypes.func.isRequired,
 };
 
-export default SingleDocument;
+const mapDispatchToProps = dispatch => ({
+  deleteDocument: bindActionCreators(deleteDocument, dispatch),
+  updateDocument: bindActionCreators(updateDocument, dispatch)
+});
+
+export default connect(null, mapDispatchToProps)(SingleDocument);

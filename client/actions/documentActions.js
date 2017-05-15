@@ -13,11 +13,10 @@ export function createDocument(event) {
   };
 }
 
-export function loadDocuments() {
+export function loadDocuments(offset = 0) {
   return (dispatch) => {
-    axios.get('/api/documents')
+    axios.get(`/api/documents?offset=${offset}`)
       .then((res) => {
-        console.log(res)
         dispatch({
           type: 'LOAD_DOCUMENTS',
           payload: res.data
@@ -54,15 +53,16 @@ export function deleteDocument(id) {
   };
 }
 
-export function updateDocument(id) {
+export function updateDocument(document) {
+  console.log(document);
   return (dispatch) => {
-    axios.put(`/api/documents/${id}`)
+    axios.put(`/api/documents/${document.id}`, document)
     .then((res) => {
       console.log(res);
       dispatch({
         type: 'UPDATE_DOCUMENT',
         payload: res.data.newDocument,
-        id
+        id: document.id
       });
     });
   };

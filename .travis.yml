@@ -1,23 +1,17 @@
+sudo: required
+dist: trusty
 language: node_js
-node_js:
-- "stable"
 
-before_install:
-  - export CHROME_BIN=/usr/bin/google-chrome
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+node_js:
+  - 6
 
 services:
   - postgresql
 
+before_script:
+  - psql -c 'create database testSystem;' -U postgres
+
 script:
-  - npm install -g sequelize -y
-  - npm test
-  - npm install sequelize@$(echo $SEQUELIZE)
+  - npm run test
 
-after_success:
-  - npm run coveralls
-
-addons:
-  postgresql: "9.3"
-  
+after_script: npm run coveralls

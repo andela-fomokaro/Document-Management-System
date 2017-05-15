@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
+// import React from 'react';
+// import PropTypes from 'prop-types';
+// import { Link } from 'react-router';
+// import { connect } from 'react-redux';
 
 /* const DocumentBody = ({ document, serial }) => {
   return (
@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
     </tr>
   );
 };*/
-class DocumentBody extends React.Component {
+/*class DocumentBody extends React.Component {
   renderTable(doc) {
     return (
         <tr key={doc.content}>
@@ -41,4 +41,4 @@ DocumentBody.propTypes = {
   doc: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps)(DocumentBody);
+export default connect(mapStateToProps)(DocumentBody);*/

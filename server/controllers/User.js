@@ -207,7 +207,7 @@ const User = {
               });
             }
             user
-              .update(req.body, { fields: Object.keys(req.body) })
+              .update(req.body)
               .then(user => res.status(200).send({
                 message: 'Update Successful!',
                 user: {

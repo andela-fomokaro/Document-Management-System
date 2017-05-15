@@ -247,6 +247,11 @@ describe('Document API:', () => {
           content: 'Its mostly about self-learning'
         };
 
+        const adminUpdate = {
+          title: 'Admin Diary',
+          content: 'Its mostly about self-learning'
+        };
+
         it('should not edit document if id is invalid', (done) => {
           request.put('/api/documents/76589')
           .set({ Authorization: adminToken })
@@ -300,6 +305,32 @@ describe('Document API:', () => {
             expect(response.status).to.equal(403);
             expect(response.body.message).to
             .equal('You are not authorized to update this document');
+            done();
+          });
+      });
+        it('should edit document if user is the owner',
+      (done) => {
+        request.put('/api/documents/2')
+          .set({ Authorization: regularToken })
+          .send(fieldsToUpdate)
+          .end((error, response) => {
+            const updatedDocument = response.body.updatedDocument;
+            expect(response.status).to.equal(200);
+            expect(updatedDocument.title).to.equal(fieldsToUpdate.title);
+            expect(updatedDocument.content).to.equal(fieldsToUpdate.content);
+            done();
+          });
+      });
+        it('should edit document if user is an admin',
+      (done) => {
+        request.put('/api/documents/2')
+          .set({ Authorization: adminToken })
+          .send(adminUpdate)
+          .end((error, response) => {
+            const updatedDocument = response.body.updatedDocument;
+            expect(response.status).to.equal(200);
+            expect(updatedDocument.title).to.equal(adminUpdate.title);
+            expect(updatedDocument.content).to.equal(adminUpdate.content);
             done();
           });
       });
