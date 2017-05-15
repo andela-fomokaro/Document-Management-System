@@ -10,6 +10,7 @@ services:
 
 before_script:
   - psql -c 'create database testSystem;' -U postgres
+  - npm install
   - NODE_ENV=test sequelize db:migrate
 
 script:
