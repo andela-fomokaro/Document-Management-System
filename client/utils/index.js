@@ -14,10 +14,7 @@ const api = (AUTH_TOKEN = '', BASE_URL) => {
   }, error => Promise.reject(error));
 
 // Add a response interceptor
-  axios.interceptors.response.use((response) => {
-    console.log(response);
-    return response;
-  });
+  axios.interceptors.response.use(response => response);
 
   return instance;
 };

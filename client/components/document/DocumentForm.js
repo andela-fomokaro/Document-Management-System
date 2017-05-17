@@ -1,8 +1,7 @@
 import React from 'react';
-import { Modal, Input, Row } from 'react-materialize';
+import { Modal, Input } from 'react-materialize';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
-import Link from 'react-router';
 import { createDocument } from '../../actions/documentActions';
 
 class DocumentForm extends React.Component {
@@ -32,8 +31,7 @@ class DocumentForm extends React.Component {
     return (
       <Modal
         fixedFooter
-        trigger={
-          <a className="btn-floating btn-large waves-effect waves-white pink darken-3 right"><i className="material-icons">note_add</i></a>
+        trigger={<a className="btn-floating btn-large waves-effect waves-white pink darken-3 right"><i className="material-icons">note_add</i></a>
   }
       >
         <form className="col s12" onSubmit={this.onSubmit}>
@@ -52,7 +50,7 @@ class DocumentForm extends React.Component {
             <div className="col s6">
               <i className="material-icons prefix icons">vpn_key</i>
               <Input
-                s={6} type="select" label="Select Access" name="access" value={access} onChange={this.onChange}
+                s={6} type="select" name="access" value={access} onChange={this.onChange}
                 defaultValue={document.access}
               >
                 <option value="public">Public</option>

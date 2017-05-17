@@ -13,12 +13,18 @@ export default (state = initialState, action = {}) => {
       browserHistory.push('/loadDocuments');
       return Object.assign({}, state, { document: [...state.document, action.payload] });
     case 'UPDATE_DOCUMENT':
-    console.log(this.state);
-      return Object.assign({}, state, { document: [...state.document, action.payload] });
-    case 'GET_SINGLE_DOCUMENT':
+      const u = [];
+      state.documents.forEach((document) => {
+        if (document.id === action.payload.id) {
+          document = action.payload;
+        }
+        u.push(document);
+      });
+      return Object.assign({}, state, { documents: u });
+    case 'SET_SINGLE_DOCUMENT':
       return action.payload;
     case 'DELETE_DOCUMENT':
-      return Object.assign({}, state, { document: state.document.filter(document => document.id !== action.id) });
+      return Object.assign({}, state, { documents: state.documents.filter(document => document.id !== action.id) });
     default: return state;
   }
 };

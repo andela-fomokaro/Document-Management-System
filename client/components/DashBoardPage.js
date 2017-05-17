@@ -5,18 +5,17 @@ import propTypes from 'prop-types';
 import SideNavLink from './SideNav';
 import DocumentForm from './document/DocumentForm';
 import { loadDocuments, getDocument, deleteDocument, updateDocument } from '../actions/documentActions';
-import Footer from './Footer';
 
 class DashBoard extends React.Component {
   render() {
-    console.log(this.props);
-    const { document } = this.props.doc;
     return (
       <div>
-        <input className="input" type="text" name="search" placeholder="Search........." />
+        <form className="form-wrapper2 cf">
+          <input type="search" placeholder="Search for users here..." required />
+          <button type="submit">Search</button>
+        </form>
         <SideNavLink />
         <DocumentForm />
-        <Footer />
       </div>
     );
   }

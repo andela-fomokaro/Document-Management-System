@@ -156,7 +156,7 @@ const Document = {
     db.Roles.findById(req.decoded.roleId)
       .then((role) => {
         let query = {};
-        query.limit = (req.query.limit > 0) ? req.query.limit : 10;
+        query.limit = (req.query.limit > 0) ? req.query.limit : 6;
         query.offset = (req.query.offset > 0) ? req.query.offset : 0;
         query.attributes = { exclude: ['ownerId'] };
         if (role.title === 'admin') {
@@ -197,7 +197,7 @@ const Document = {
             .findAndCountAll(query)
             .then((documents) => {
               query.count = documents.count;
-              query.limit = (req.query.limit > 0) ? req.query.limit : 10;
+              query.limit = (req.query.limit > 0) ? req.query.limit : 6;
               query.offset = (req.query.offset > 0) ? req.query.offset : 0;
               query.attributes = { exclude: ['ownerId'] };
               const filteredDocuments = documents.rows.map(document => Object.assign({}, {

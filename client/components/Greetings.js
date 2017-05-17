@@ -44,7 +44,7 @@ const mapStateToProps = state => ({
 });
 
 Greetings.propTypes = {
-  login: propTypes.func.isRequired,
+  login: propTypes.any.isRequired,
 };
 
 

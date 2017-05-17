@@ -6,6 +6,10 @@ import { logout } from '../actions/loginActions';
 
 
 class NavigationBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.logout = this.logout.bind(this);
+  }
   logout(e) {
     e.preventDefault();
     this.props.logout();
@@ -13,7 +17,7 @@ class NavigationBar extends React.Component {
   render() {
     const header = {
       margin: '20px',
-      color: '#f50057'
+      color: '#fff'
     };
     const { isAuthenticated } = this.props.auth;
     const userLinks = (
@@ -30,9 +34,9 @@ class NavigationBar extends React.Component {
     return (
       <nav>
         <div className="nav-wrapper  blue-grey darken-4">
-          <Link to="/" className="brand-logo brand">docStar Document Mangement System</Link>
+          <Link to="/" className="brand-logo brand">docStar</Link>
           <div className="nav-wrapper  blue-grey darken-4">
-            <h1 className="brand-logo brand" style={header}>docStar Document Mangement System</h1>
+            <h1 className="brand-logo brand" style={header}><Link to="/" className="brand-logo brand">DocStar</Link></h1>
             {isAuthenticated ? userLinks : guestLinks}
           </div>
         </div>

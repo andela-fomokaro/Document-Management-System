@@ -1,4 +1,3 @@
-// import jwt from 'jsonnwebtoken'
 
 export const summarize = (str, wordCount = 17) => str
     .trim()
