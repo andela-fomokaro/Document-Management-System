@@ -2,11 +2,12 @@ import React from 'react';
 import { Modal } from 'react-materialize';
 import propTypes from 'prop-types';
 
-class CreateRole extends React.Component {
+class UpdateRole extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: ''
+      title: this.props.role.title || '',
+      id: this.props.role.id
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -15,19 +16,26 @@ class CreateRole extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    this.props.createRole(this.state);
+    this.props.updateRole(this.state);
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+
+  updateRoleState(event) {
+    const field = event.target.name;
+    const newTitle = field === 'typeId' ? Number(event.target.value) : event.target.value;
+
+    return this.setState({ title: newTitle, id: this.state.id });
+  }
+
   render() {
-    const { title } = this.state;
+
     return (
       <Modal
         fixedFooter
         trigger={
-          <a className="pulse btn-floating btn-large waves-effect waves-white pink darken-3 right up btnUp">
-            <i className="material-icons">C</i></a>
+          <a className="updateBtn">Click to update role</a>
   }
       >
         <form className="col s12" onSubmit={this.onSubmit}>
@@ -36,19 +44,19 @@ class CreateRole extends React.Component {
               type="text"
               className="validate"
               name="title"
-              value={title}
-              onChange={this.onChange}
+              value={this.state.title}
+              onChange={e => this.updateRoleState(e)}
             />
-            <label htmlFor="icon_prefix">Add Title To Create New Role.....</label>
           </div>
-          <button className=" btn pink darken-4">Send</button>
+          <button className=" btn pink darken-4">Update</button>
         </form>
       </Modal>
     );
   }
 }
 
-CreateRole.propTypes = {
-  createRole: propTypes.func.isRequired
+UpdateRole.propTypes = {
+  updateRole: propTypes.func.isRequired
 };
-export default CreateRole;
+
+export default UpdateRole;

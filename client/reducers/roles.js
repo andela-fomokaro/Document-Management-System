@@ -14,8 +14,17 @@ export default (state = [], action = {}) => {
     case DELETE_ROLES: {
       return [...state.filter(role => role.id !== action.id)];
     }
-    // case UPDATE_ROLES:
-    //   return action.data;
-    default: return state;
+    case UPDATE_ROLES: {
+      const updatedRole = action.payload.updatedRole;
+      const stateCopy = [...state];
+      stateCopy.forEach((role) => {
+        if (role.id === updatedRole.id) {
+          role.title = updatedRole.title;
+        }
+      });
+      return stateCopy;
+    }
+    default:
+      return state;
   }
 };

@@ -292,5 +292,13 @@ export default StyleSheet.create({
   'btnUp': {
     'position': 'relative',
     'top': [{ 'unit': 'px', 'value': -20 }]
+  },
+  'cursor': {
+    'cursor': 'pointer'
+  },
+  'updateBtn': {
+    'color': '#880e4f',
+    'fontSize': [{ 'unit': 'px', 'value': 14 }],
+    'cursor': 'pointer'
   }
 });

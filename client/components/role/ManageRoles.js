@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import CreateRole from './CreateRole';
-import { createRole, getRoles, deleteRole } from '../../actions/roleActions';
+import UpdateRole from './UpdateRole';
+import { createRole, getRoles, deleteRole, updateRole } from '../../actions/roleActions';
 
 class ManageRole extends React.Component {
   constructor(props) {
@@ -19,15 +19,20 @@ class ManageRole extends React.Component {
     this.props.deleteRole(roleId);
   }
 
+  updateRole() {
+    this.props.updateRole();
+  }
   render() {
     const allRoles = this.props.role.map(role => (
       <tr key={role.id}>
         <td>{role.title}</td>
         <td>{role.createdAt}</td>
         <td>{role.updatedAt}</td>
-        <td><a onClick={() => this.deleteRole(role.id)}>Delete</a></td>
+        <td className="cursor"><a onClick={() => this.deleteRole(role.id)}>Delete</a></td>
+        <td><UpdateRole updateRole={this.props.updateRole} role={role} /></td>
       </tr>
       ));
+
     return (
       <div className="container">
         <table className="z-depth-5 tabs">
@@ -35,8 +40,9 @@ class ManageRole extends React.Component {
             <tr>
               <th>Title</th>
               <th>Created At</th>
-              <th>Update</th>
-              <th>Delete Role</th>
+              <th>Last updated</th>
+              <th>Delete role</th>
+              <th>Update role</th>
             </tr>
           </thead>
           <tbody>
@@ -53,7 +59,8 @@ ManageRole.propTypes = {
   createRole: PropTypes.func.isRequired,
   getRoles: PropTypes.func.isRequired,
   role: PropTypes.arrayOf(PropTypes.object).isRequired,
-  deleteRole: PropTypes.func.isRequired
+  deleteRole: PropTypes.func.isRequired,
+  updateRole: PropTypes.func.isRequired,
 
 };
 
@@ -61,10 +68,8 @@ const mapStateToProps = state => ({
   role: state.roles
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   creatRole: bindActionCreators(creatRole, dispatch),
-//   getRoles: bindActionCreators(getRoles, dispatch),
-// });
 
-
-export default connect(mapStateToProps, { createRole, getRoles, deleteRole })(ManageRole);
+export default connect(mapStateToProps, { createRole,
+  getRoles,
+  deleteRole,
+  updateRole })(ManageRole);

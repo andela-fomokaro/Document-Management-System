@@ -10,6 +10,7 @@ import DashBoardPage from './components/DashBoardPage';
 import LoadDocument from './components/LoadDocuments';
 import singleDocument from './components/document/singleDocument';
 import manageRole from './components/role/ManageRoles';
+import manageUsers from './components/users/ManageUsers';
 
 export default (
   <Route path="/" component={App}>
@@ -20,5 +21,6 @@ export default (
     <Route path="loadDocuments" component={LoadDocument} />
     <Route path="document/:id" component={singleDocument} />
     <Route path="managerole" component={manageRole} />
+    <Route path="manageusers" component={manageUsers} />
   </Route>
 );
