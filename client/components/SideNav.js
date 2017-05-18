@@ -14,7 +14,7 @@ class SideNavLink extends React.Component {
         <SideNavItem>My Profile</SideNavItem>
         <SideNavItem><Link to="/loadDocuments">Manage Document</Link></SideNavItem>
         <SideNavItem><Link to="/managerole">Create And Manage Roles</Link></SideNavItem>
-        <SideNavItem>Create And Manage Users</SideNavItem>
+        <SideNavItem><Link to="manageusers">Create And Manage Users</Link></SideNavItem>
         <SideNavItem divider />
         <SideNavItem>Log Out</SideNavItem>
         <SideNavItem>About DocStar</SideNavItem>

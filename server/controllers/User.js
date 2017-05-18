@@ -132,7 +132,6 @@ const User = {
    * @return {Object} Response object
    */
   delete(req, res) {
-    console.log(req.decoded, 'Hi am decoded');
     db.Roles
       .findById(req.decoded.roleId)
       .then((role) => {
