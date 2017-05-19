@@ -9,6 +9,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import rootReducer from './rootReducer';
 import setAuthorizationToken from './utils/setAuthorizationToken';
 import { setCurrentUser } from './actions/loginActions';
+import { getRoles } from './actions/roleActions';
 import './styles.scss';
 
 
@@ -26,6 +27,7 @@ if (window.localStorage.jwtToken) {
   setAuthorizationToken(window.localStorage.jwtToken);
   store.dispatch(setCurrentUser(jwt.decode(window.localStorage.jwtToken)));
 }
+store.dispatch(getRoles());
 injectTapEventPlugin();
 render(
   <Provider store={store}>

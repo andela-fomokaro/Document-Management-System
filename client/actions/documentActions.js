@@ -30,7 +30,6 @@ export function getDocument(id) {
   return (dispatch) => {
     axios.get(`/api/documents/${id}`)
       .then((res) => {
-         console.log(res.data);
         dispatch({
           type: 'GET_SINGLE_DOCUMENT',
           payload: res.data
@@ -53,11 +52,9 @@ export function deleteDocument(id) {
 }
 
 export function updateDocument(document) {
-  console.log(document);
   return (dispatch) => {
     axios.put(`/api/documents/${document.id}`, document)
     .then((res) => {
-      console.log(res.data);
       dispatch({
         type: 'UPDATE_DOCUMENT',
         payload: res.data.updatedDocument,

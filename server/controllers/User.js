@@ -190,11 +190,6 @@ const User = {
                 message: 'User Does Not Exist',
               });
             }
-            if (req.body.id) {
-              return res.status(403).send({
-                message: 'Unauthorised access. You cannot update userId property'
-              });
-            }
             if ((role.title !== 'admin') && req.body.roleId) {
               return res.status(403).send({
                 message: 'Unauthorised access. You cannot update roleId property'
@@ -211,7 +206,7 @@ const User = {
                 message: 'Update Successful!',
                 user: {
                   id: user.id,
-                  name: user.name,
+                  name: user.fullNames,
                   email: user.email
                 }
               }));

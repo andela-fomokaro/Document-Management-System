@@ -25,12 +25,10 @@ class UpdateRole extends React.Component {
   updateRoleState(event) {
     const field = event.target.name;
     const newTitle = field === 'typeId' ? Number(event.target.value) : event.target.value;
-
     return this.setState({ title: newTitle, id: this.state.id });
   }
 
   render() {
-
     return (
       <Modal
         fixedFooter

@@ -21,4 +21,7 @@ export const GET_ROLES = 'GET_ROLES';
 export const DELETE_ROLES = 'DELETE_ROLES';
 export const UPDATE_ROLES = 'UPDATE_ROLES';
 export const DELETE_DOCUMENT_MESSAGE = 'DELETE_DOCUMENT_MESSAGE';
-
+export const GET_USERS = 'GET_USERS';
+export const CREATE_USERS = 'CREATE_USERS';
+export const DELETE_USER = 'DELETE_USER';
+export const UPDATE_USER = 'UPDATE_USER';
