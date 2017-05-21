@@ -33,28 +33,22 @@ class DashboardOnboarding extends React.Component {
   render() {
     const { fullNames } = this.props.userInfo;
     return (
-      <div className="container">
         <div className="z-depth-5 card onboardingCard">
           <div className="card-content cardContent">
-            <span className="card-title header">Welcome {fullNames}</span>
             <p className="card-title cardTitle">Quick Tips On How To Onboard Quickly</p>
             <ol>
-              <li className="onboardingList listPadding left">Click On The Black
+              <li className="listPadding">Click On The Black
                 Round Button On The Left To View Navigation Links</li>
-              <li className="onboardingList listPadding left">To View Your Profile,
+              <li className="listPadding">To View Your Profile,
                 Click On  My Profile Link Located On The Navigation Pane</li>
-              <li className="onboardingList listPadding left">To Create And Manage Your Document,
-                Click On  Manage Document Link Located
-                On The Navigation Pane To Manage Documents</li>
-              <li className="onboardingList listPadding left">To Get Information
+              <li className="listPadding">To Get Information
                 About DocStar, Click On About DocStar
                 Link Located On The Navigation Pane To Get Information</li>
-              <li className="onboardingList listPadding left">T
+              <li className="listPadding">T
                 o Log Out Click The Logout Link On The Navigation Link</li>
             </ol>
           </div>
         </div>
-      </div>
     );
   }
 }
@@ -72,7 +66,7 @@ const mapDispatchToProps = dispatch => ({
  * 
  * 
  * @param {any} state 
- * @returns 
+ * @returns
  */
 function mapStateToProps(state) {
   return {

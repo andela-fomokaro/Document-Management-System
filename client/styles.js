@@ -323,7 +323,8 @@ export default StyleSheet.create({
     'paddingBottom': [{ 'unit': 'px', 'value': 10 }]
   },
   'listPadding': {
-    'paddingBottom': [{ 'unit': 'px', 'value': 30 }]
+    'paddingBottom': [{ 'unit': 'px', 'value': 30 }],
+    'textAlign': 'left'
   },
   'header': {
     'textAlign': 'center',
@@ -332,15 +333,10 @@ export default StyleSheet.create({
     'fontWeight': '4em'
   },
   'onboardingCard': {
-    'width': [{ 'unit': '%H', 'value': 0.7 }],
+    'width': [{ 'unit': '%H', 'value': 0.4 }],
     'border': [{ 'unit': 'px', 'value': 2 }, { 'unit': 'string', 'value': 'solid' }],
     'opacity': '0.7',
-    'position': 'relative',
-    'right': [{ 'unit': 'px', 'value': 180 }],
-    'marginTop': [{ 'unit': 'px', 'value': 50 }],
-    'marginBottom': [{ 'unit': 'px', 'value': 30 }],
-    'minHeight': [{ 'unit': '%V', 'value': 0.7 }],
-    'height': [{ 'unit': 'px', 'value': 550 }]
+    'height': [{ 'unit': 'px', 'value': 640 }]
   },
   'selectWidth': {
     'position': 'relative',

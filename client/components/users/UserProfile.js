@@ -57,7 +57,6 @@ class UserProfile extends React.Component {
     this.setState({ email, username, fullNames });
   }
 
-
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
