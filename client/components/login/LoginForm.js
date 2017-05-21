@@ -9,7 +9,20 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import validateInput from '../../../shared/validate/login';
 
 
+/**
+ *
+ *
+ * @class LoginForm
+ * @extends {React.Component}
+ */
 class LoginForm extends React.Component {
+
+  /**
+   * Creates an instance of LoginForm.
+   * @param {any} props
+   *
+   * @memberOf LoginForm
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -22,6 +35,13 @@ class LoginForm extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
+  /**
+   *
+   *
+   * @param {any} e
+   *
+   * @memberOf LoginForm
+   */
   onSubmit(e) {
     e.preventDefault();
     const { errors, isValid } = validateInput(this.state);
@@ -30,21 +50,37 @@ class LoginForm extends React.Component {
       const { password } = this.state;
       this.props.login({ email, password }).then(
         () => {
-          Materialize.toast('You have successfully signed in', 4000, 'pink darken-3 rounded');
-          this.context.router.push('/');
+          Materialize.toast('Login successfull', 4000);
+          return this.context.router.push('/');
         },
         (err) => {
-           Materialize.toast(err.data.message, 1000, 'pink darken-3 rounded');
+          Materialize.toast(err.data.message, 1000);
         }
     );
     } else {
+      Materialize.toast(errors.identifier, 1000);
       this.setState({ errors });
     }
   }
 
+  /**
+   *
+   *
+   * @param {any} e
+   *
+   * @memberOf LoginForm
+   */
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+
+  /**
+   *
+   *
+   * @returns
+   *
+   * @memberOf LoginForm
+   */
   render() {
     const { identifier } = this.state;
 

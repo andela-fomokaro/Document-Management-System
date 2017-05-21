@@ -1,5 +1,12 @@
 import axios from '../utils/index';
 
+/**
+ * 
+ * 
+ * @export
+ * @param {any} event 
+ * @returns 
+ */
 export function createRole(event) {
   return (dispatch) => {
     axios.post('/api/roles', event)
@@ -12,6 +19,12 @@ export function createRole(event) {
   };
 }
 
+/**
+ * 
+ * 
+ * @export
+ * @returns 
+ */
 export function getRoles() {
   return (dispatch) => {
     axios.get('/api/roles')
@@ -23,6 +36,14 @@ export function getRoles() {
       });
   };
 }
+
+/**
+ * 
+ * 
+ * @export
+ * @param {any} role 
+ * @returns 
+ */
 export function updateRole(role) {
   return (dispatch) => {
     axios.put(`/api/roles/${role.id}`, role)
@@ -35,6 +56,13 @@ export function updateRole(role) {
   };
 }
 
+/**
+ * 
+ * 
+ * @export
+ * @param {any} id 
+ * @returns 
+ */
 export function deleteRole(id) {
   return (dispatch) => {
     axios.delete(`/api/roles/${id}`)

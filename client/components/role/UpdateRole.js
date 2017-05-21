@@ -2,7 +2,20 @@ import React from 'react';
 import { Modal } from 'react-materialize';
 import propTypes from 'prop-types';
 
+/**
+ * 
+ * 
+ * @class UpdateRole
+ * @extends {React.Component}
+ */
 class UpdateRole extends React.Component {
+
+  /**
+   * Creates an instance of UpdateRole.
+   * @param {any} props 
+   * 
+   * @memberOf UpdateRole
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -14,24 +27,53 @@ class UpdateRole extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
+  /**
+   * 
+   * 
+   * @param {any} e 
+   * 
+   * @memberOf UpdateRole
+   */
   onSubmit(e) {
     e.preventDefault();
     this.props.updateRole(this.state);
   }
+
+  /**
+   * 
+   * 
+   * @param {any} e 
+   * 
+   * @memberOf UpdateRole
+   */
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  /**
+   * 
+   * 
+   * @param {any} event 
+   * @returns 
+   * 
+   * @memberOf UpdateRole
+   */
   updateRoleState(event) {
     const field = event.target.name;
     const newTitle = field === 'typeId' ? Number(event.target.value) : event.target.value;
     return this.setState({ title: newTitle, id: this.state.id });
   }
 
+  /**
+   * 
+   * 
+   * @returns 
+   * 
+   * @memberOf UpdateRole
+   */
   render() {
     return (
       <Modal
-        fixedFooter
         trigger={
           <a className="updateBtn">Click to update role</a>
   }

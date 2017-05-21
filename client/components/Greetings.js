@@ -4,17 +4,52 @@ import propTypes from 'prop-types';
 import DashBoardPage from './DashBoardPage';
 import Picture from './picture/as.png';
 
+/**
+ * 
+ * 
+ * @class Greetings
+ * @extends {React.Component}
+ */
 class Greetings extends React.Component {
+  
+  /**
+   * Creates an instance of Greetings.
+   * @param {any} props 
+   * 
+   * @memberOf Greetings
+   */
   constructor(props) {
     super(props);
     this.state = { imageStatus: 'loading' };
   }
+
+  /**
+   * 
+   * 
+   * 
+   * @memberOf Greetings
+   */
   handleImageLoaded() {
     this.setState({ imageStatus: '' });
   }
+
+  /**
+   * 
+   * 
+   * 
+   * @memberOf Greetings
+   */
   handleImageErrored() {
     this.setState({ imageStatus: 'failed to load' });
   }
+
+  /**
+   * 
+   * 
+   * @returns 
+   * 
+   * @memberOf Greetings
+   */
   render() {
     const authenticated = this.props.login.isAuthenticated;
     return (

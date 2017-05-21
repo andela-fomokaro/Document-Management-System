@@ -50,7 +50,6 @@ const Auth = {
   verifyAdmin(req, res, next) {
     db.Roles.findById(req.decoded.roleId)
        .then((role) => {
-         console.log(req.decoded);
          if (role.title === 'admin') {
            next();
          } else {

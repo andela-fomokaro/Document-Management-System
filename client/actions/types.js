@@ -25,3 +25,6 @@ export const GET_USERS = 'GET_USERS';
 export const CREATE_USERS = 'CREATE_USERS';
 export const DELETE_USER = 'DELETE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
+export const SET_SINGLE_USER = 'SET_SINGLE_USER';
+export const UPDATE_USERS = 'UPDATE_USERS';
+export const LOGOUT_USER = 'LOGOUT_USER';

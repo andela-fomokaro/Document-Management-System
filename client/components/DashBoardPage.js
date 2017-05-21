@@ -3,10 +3,24 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import propTypes from 'prop-types';
 import SideNavLink from './SideNav';
-import DocumentForm from './document/DocumentForm';
-import { loadDocuments, getDocument, deleteDocument, updateDocument } from '../actions/documentActions';
+import { loadDocuments, getDocument, deleteDocument } from '../actions/documentActions';
+import DashBoardOnboarding from '../components/document/DashboardOnboarding';
 
+/**
+ * 
+ * 
+ * @class DashBoard
+ * @extends {React.Component}
+ */
 class DashBoard extends React.Component {
+
+  /**
+   * 
+   * 
+   * @returns 
+   * 
+   * @memberOf DashBoard
+   */
   render() {
     return (
       <div>
@@ -15,7 +29,7 @@ class DashBoard extends React.Component {
           <button type="submit">Search</button>
         </form>
         <SideNavLink />
-        <DocumentForm />
+        <DashBoardOnboarding />
       </div>
     );
   }

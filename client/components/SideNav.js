@@ -1,22 +1,41 @@
 import React from 'react';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { SideNav, SideNavItem, Button } from 'react-materialize';
+import { hasAdmin } from '../utils/helpers';
 
 
+/**
+ * 
+ * 
+ * @class SideNavLink
+ * @extends {React.Component}
+ */
 class SideNavLink extends React.Component {
+
+  /**
+   * 
+   * 
+   * @returns 
+   * 
+   * @memberOf SideNavLink
+   */
   render() {
     return (
       <SideNav
-        trigger={<Button floating large className="pulse blue-grey darken-4 right" waves="light" icon="menu" />}
+        trigger={<Button
+          floating large
+          className="pulse blue-grey darken-4 right" waves="light" icon="menu"
+        />}
         options={{ closeOnClick: true }}
       >
-        <SideNavItem>My Profile</SideNavItem>
-        <SideNavItem><Link to="/loadDocuments">Manage Document</Link></SideNavItem>
-        <SideNavItem><Link to="/managerole">Create And Manage Roles</Link></SideNavItem>
-        <SideNavItem><Link to="manageusers">Create And Manage Users</Link></SideNavItem>
+        <SideNavItem href="myprofile">My Profile</SideNavItem>
+        <SideNavItem href="/loadDocuments" className="linkColor">Create
+        And Manage Document</SideNavItem>
+        {hasAdmin() ? <SideNavItem href="/managerole" className="linkColor">Create And Manage Roles</SideNavItem> : ''}
+        {hasAdmin() ? <SideNavItem href="manageusers" className="linkColor">Create And Manage Users</SideNavItem> : ''}
         <SideNavItem divider />
         <SideNavItem>Log Out</SideNavItem>
+        <SideNavItem>Delete Account</SideNavItem>
         <SideNavItem>About DocStar</SideNavItem>
       </SideNav>
     );

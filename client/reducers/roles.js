@@ -7,6 +7,7 @@ export default (state = [], action = {}) => {
       const newRole = action.payload;
       const stateCopy = [...state];
       stateCopy.push(newRole);
+       Materialize.toast('Role Created Successfully', 4000);
       return stateCopy;
     }
     case GET_ROLES:
@@ -22,6 +23,7 @@ export default (state = [], action = {}) => {
           role.title = updatedRole.title;
         }
       });
+      Materialize.toast('Role Updated Successfully', 4000);
       return stateCopy;
     }
     default:

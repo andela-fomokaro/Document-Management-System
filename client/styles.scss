@@ -94,7 +94,7 @@ input[type=text]:focus {
  width: 30%;
  border: 2px solid;
  opacity: 0.7;
- max-height: 450px;
+ max-height: 308px;
  margin-top: 40px;
 }
 .tabs{
@@ -109,7 +109,7 @@ input[type=text]:focus {
 }
 .cardContent{
   text-align: center;
-  height: 250px;
+//   max-height: 250px;
 }
 .roleContent{
   height: 250px;
@@ -120,7 +120,7 @@ input[type=text]:focus {
   font-weight: bold !important;
 }
 .documentDate{
-  font-size: 11px;
+  font-size: 10px;
 }
 .cf:before, .cf:after{
     content:"";
@@ -258,7 +258,7 @@ input[type=text]:focus {
         border-right-color: #c42f2f;
 }      
 
-.form-wrapper2 button::-moz-focus-inner { /* remove extra button spacing for Mozilla Firefox */
+.form-wrapper2 button::-moz-focus-inner {
     border: 0;
     padding: 0;
 }
@@ -266,6 +266,7 @@ input[type=text]:focus {
     position: relative;
     top: -20px;
 }
+
 .cursor{
     cursor: pointer;
 }
@@ -273,4 +274,69 @@ input[type=text]:focus {
     color: #880e4f ;
     font-size: 14px;
     cursor: pointer;
+}
+.profileButton {
+    position: relative;
+    top: -70px;
+    margin-left: 190px;
+    background-color: #880e4f;
+}
+.profileIcon{
+    color:  #880e4f;
+    font-weight: 4px;
+}
+.cardWidth{
+ width: 60%;
+ border: 2px solid;
+ opacity: 0.7;
+ margin-top: 50px;
+ margin-left: 190px
+}
+.profileTitle {
+  color: #333;
+  font-size: 20px !important;
+  font-weight: bold !important;
+  padding-bottom: 10px; 
+}
+.listPadding{
+    padding-bottom: 30px;
+}
+.header{
+    text-align: center;
+    color: #880e4f;
+    font-family: "Lucida Console";
+    font-weight: 4em;
+}
+.onboardingCard{
+ width: 70%;
+ border: 2px solid;
+ opacity: 0.7;
+ position: relative;
+ right: 180px;
+ margin-top: 50px;
+ margin-bottom: 30px;
+ min-height: 70%;
+ height: 550px;
+}
+.selectWidth{
+    position: relative;
+    right: 10px;
+    
+}
+.iconText{
+    color: #880e4f;
+}
+.view{
+    margin-left: 20px;
+}
+.tableHead{
+    background-color:  #880e4f;
+    color: white;
+}
+.manageUser{
+    width: 90%;
+    margin-left: 80px;
+}
+.styleRow{
+    padding: 0px 10px 0px 30px;
 }

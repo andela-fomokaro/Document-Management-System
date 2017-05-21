@@ -1,6 +1,12 @@
-// import axios from 'axios';
 import axios from '../utils/index';
 
+/**
+ * 
+ * 
+ * @export
+ * @param {any} event 
+ * @returns 
+ */
 export function createDocument(event) {
   return (dispatch) => {
     axios.post('/api/documents', event)
@@ -13,6 +19,13 @@ export function createDocument(event) {
   };
 }
 
+/**
+ * 
+ * 
+ * @export
+ * @param {number} [offset=0] 
+ * @returns 
+ */
 export function loadDocuments(offset = 0) {
   return (dispatch) => {
     axios.get(`/api/documents?offset=${offset}`)
@@ -26,6 +39,13 @@ export function loadDocuments(offset = 0) {
 }
 
 
+/**
+ * 
+ * 
+ * @export
+ * @param {any} id 
+ * @returns 
+ */
 export function getDocument(id) {
   return (dispatch) => {
     axios.get(`/api/documents/${id}`)
@@ -39,6 +59,13 @@ export function getDocument(id) {
 }
 
 
+/**
+ * 
+ * 
+ * @export
+ * @param {any} id 
+ * @returns 
+ */
 export function deleteDocument(id) {
   return (dispatch) => {
     axios.delete(`/api/documents/${id}`)
@@ -51,6 +78,13 @@ export function deleteDocument(id) {
   };
 }
 
+/**
+ * 
+ * 
+ * @export
+ * @param {any} document 
+ * @returns 
+ */
 export function updateDocument(document) {
   return (dispatch) => {
     axios.put(`/api/documents/${document.id}`, document)
@@ -64,6 +98,13 @@ export function updateDocument(document) {
   };
 }
 
+/**
+ * 
+ * 
+ * @export
+ * @param {any} id 
+ * @returns 
+ */
 export function getSingleDocument(id) {
   return (dispatch) => {
     axios.get(`api/documents/${id}`)

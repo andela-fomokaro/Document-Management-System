@@ -1,4 +1,4 @@
-import { GET_USERS, CREATE_USERS, DELETE_USER, UPDATE_USER } from '../actions/types';
+import { GET_USERS, CREATE_USERS, DELETE_USER, UPDATE_USER, SET_SINGLE_USER, UPDATE_USERS } from '../actions/types';
 
 export default (state = [], action = {}) => {
   switch (action.type) {
@@ -16,6 +16,11 @@ export default (state = [], action = {}) => {
     case UPDATE_USER: {
       return state;
     }
+    case UPDATE_USERS: {
+      return state;
+    }
+    case SET_SINGLE_USER:
+      return action.payload;
     default:
       return state;
   }

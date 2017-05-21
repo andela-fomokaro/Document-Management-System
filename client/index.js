@@ -27,7 +27,7 @@ if (window.localStorage.jwtToken) {
   setAuthorizationToken(window.localStorage.jwtToken);
   store.dispatch(setCurrentUser(jwt.decode(window.localStorage.jwtToken)));
 }
-store.dispatch(getRoles());
+// store.dispatch(getRoles());
 injectTapEventPlugin();
 render(
   <Provider store={store}>

@@ -129,7 +129,7 @@ export default StyleSheet.create({
     'width': [{ 'unit': '%H', 'value': 0.3 }],
     'border': [{ 'unit': 'px', 'value': 2 }, { 'unit': 'string', 'value': 'solid' }],
     'opacity': '0.7',
-    'maxHeight': [{ 'unit': 'px', 'value': 450 }],
+    'maxHeight': [{ 'unit': 'px', 'value': 308 }],
     'marginTop': [{ 'unit': 'px', 'value': 40 }]
   },
   'tabs': {
@@ -143,8 +143,7 @@ export default StyleSheet.create({
     'marginBottom': [{ 'unit': 'px', 'value': 30 }]
   },
   'cardContent': {
-    'textAlign': 'center',
-    'height': [{ 'unit': 'px', 'value': 250 }]
+    'textAlign': 'center'
   },
   'roleContent': {
     'height': [{ 'unit': 'px', 'value': 250 }]
@@ -155,7 +154,7 @@ export default StyleSheet.create({
     'fontWeight': 'bold !important'
   },
   'documentDate': {
-    'fontSize': [{ 'unit': 'px', 'value': 11 }]
+    'fontSize': [{ 'unit': 'px', 'value': 10 }]
   },
   'cf:before': {
     'content': '""',
@@ -285,7 +284,6 @@ export default StyleSheet.create({
     'borderRightColor': '#c42f2f'
   },
   'form-wrapper2 button::-moz-focus-inner': {
-    // remove extra button spacing for Mozilla Firefox
     'border': [{ 'unit': 'px', 'value': 0 }],
     'padding': [{ 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 0 }]
   },
@@ -300,5 +298,69 @@ export default StyleSheet.create({
     'color': '#880e4f',
     'fontSize': [{ 'unit': 'px', 'value': 14 }],
     'cursor': 'pointer'
+  },
+  'profileButton': {
+    'position': 'relative',
+    'top': [{ 'unit': 'px', 'value': -70 }],
+    'marginLeft': [{ 'unit': 'px', 'value': 190 }],
+    'backgroundColor': '#880e4f'
+  },
+  'profileIcon': {
+    'color': '#880e4f',
+    'fontWeight': '4px'
+  },
+  'cardWidth': {
+    'width': [{ 'unit': '%H', 'value': 0.6 }],
+    'border': [{ 'unit': 'px', 'value': 2 }, { 'unit': 'string', 'value': 'solid' }],
+    'opacity': '0.7',
+    'marginTop': [{ 'unit': 'px', 'value': 50 }],
+    'marginLeft': [{ 'unit': 'px', 'value': 190 }]
+  },
+  'profileTitle': {
+    'color': '#333',
+    'fontSize': [{ 'unit': 'px', 'value': 20 }, { 'unit': 'string', 'value': '!important' }],
+    'fontWeight': 'bold !important',
+    'paddingBottom': [{ 'unit': 'px', 'value': 10 }]
+  },
+  'listPadding': {
+    'paddingBottom': [{ 'unit': 'px', 'value': 30 }]
+  },
+  'header': {
+    'textAlign': 'center',
+    'color': '#880e4f',
+    'fontFamily': '"Lucida Console"',
+    'fontWeight': '4em'
+  },
+  'onboardingCard': {
+    'width': [{ 'unit': '%H', 'value': 0.7 }],
+    'border': [{ 'unit': 'px', 'value': 2 }, { 'unit': 'string', 'value': 'solid' }],
+    'opacity': '0.7',
+    'position': 'relative',
+    'right': [{ 'unit': 'px', 'value': 180 }],
+    'marginTop': [{ 'unit': 'px', 'value': 50 }],
+    'marginBottom': [{ 'unit': 'px', 'value': 30 }],
+    'minHeight': [{ 'unit': '%V', 'value': 0.7 }],
+    'height': [{ 'unit': 'px', 'value': 550 }]
+  },
+  'selectWidth': {
+    'position': 'relative',
+    'right': [{ 'unit': 'px', 'value': 10 }]
+  },
+  'iconText': {
+    'color': '#880e4f'
+  },
+  'view': {
+    'marginLeft': [{ 'unit': 'px', 'value': 20 }]
+  },
+  'tableHead': {
+    'backgroundColor': '#880e4f',
+    'color': 'white'
+  },
+  'manageUser': {
+    'width': [{ 'unit': '%H', 'value': 0.9 }],
+    'marginLeft': [{ 'unit': 'px', 'value': 80 }]
+  },
+  'styleRow': {
+    'padding': [{ 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 30 }]
   }
 });

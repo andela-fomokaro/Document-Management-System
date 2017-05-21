@@ -170,13 +170,12 @@ const Document = {
               });
             });
         } else {
-          query = {
-            where: {
+          query.where = {
               $or: {
                 $or: {
                   access: { $eq: 'public' },
                   $and: {
-                    access: { $eq: 'role' },
+                    access: { $eq: 'private' },
                     ownerId: { $eq: req.decoded.userId }
                   },
                   $and: {
@@ -186,13 +185,13 @@ const Document = {
                 },
                 ownerId: { $eq: req.decoded.userId }
               }
-            },
-            include: [
+            };
+            query.include = [
               {
                 model: db.Users
               }
             ]
-          };
+          // };
           db.Documents
             .findAndCountAll(query)
             .then((documents) => {
@@ -207,7 +206,8 @@ const Document = {
                 type: document.type,
                 ownerId: document.ownerId,
                 createdAt: document.createdAt,
-                updatedAt: document.updatedAt
+                updatedAt: document.updatedAt,
+                id: document.id
               }));
               const pagination = Helper.pagination(query);
               res.status(200).send({

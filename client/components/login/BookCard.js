@@ -2,7 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 
+/**
+ * 
+ * 
+ * @class BookCard
+ * @extends {React.Component}
+ */
 class BookCard extends React.Component {
+
+  /**
+   * 
+   * 
+   * @returns 
+   * 
+   * @memberOf BookCard
+   */
   render() {
     return (
       <div className="row">
@@ -14,9 +28,6 @@ class BookCard extends React.Component {
             </div>
             <div className="card-content">
               <p> We help you manage your documents, set your documents free!</p>
-            </div>
-            <div className="card-action">
-              <a href="#">This is a link</a>
             </div>
           </div>
         </div>

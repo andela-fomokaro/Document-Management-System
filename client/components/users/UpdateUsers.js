@@ -2,7 +2,20 @@ import React from 'react';
 import { Modal } from 'react-materialize';
 import PropTypes from 'prop-types';
 
+/**
+ * 
+ * 
+ * @class UpdateUsers
+ * @extends {React.Component}
+ */
 class UpdateUsers extends React.Component {
+
+  /**
+   * Creates an instance of UpdateUsers.
+   * @param {any} props 
+   * 
+   * @memberOf UpdateUsers
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -18,14 +31,37 @@ class UpdateUsers extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
+  /**
+   * 
+   * 
+   * @param {any} e 
+   * 
+   * @memberOf UpdateUsers
+   */
   onSubmit(e) {
     e.preventDefault();
-    this.props.updateUser(this.state);
+    this.props.updateUsers(this.state.users);
   }
+
+  /**
+   * 
+   * 
+   * @param {any} e 
+   * 
+   * @memberOf UpdateUsers
+   */
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  /**
+   * 
+   * 
+   * @param {any} event 
+   * @returns 
+   * 
+   * @memberOf UpdateUsers
+   */
   updateUserState(event) {
     const field = event.target.name;
     const userField = this.state.users;
@@ -33,12 +69,20 @@ class UpdateUsers extends React.Component {
     return this.setState({ userField });
   }
 
-  updateUser() {
-    this.props.updateUser(this.state.users);
-  }
+  // updateUser() {
+  //   this.props.updateUser(this.state.users);
+  //   // Materialize.toast('User Updated Successfully', 4000);
+  // }
 
+
+  /**
+   * 
+   * 
+   * @returns 
+   * 
+   * @memberOf UpdateUsers
+   */
   render() {
-    console.log(this.props, 'user`id');
     const { fullNames, username, role, email } = this.state.users;
     return (
       <Modal
@@ -88,7 +132,7 @@ class UpdateUsers extends React.Component {
               placeholder="Full Name"
             />
           </div>
-          <button className=" btn pink darken-4" onClick={() => this.updateUser()}>Update</button>
+          <button className=" btn pink darken-4">Update</button>
         </form>
 
       </Modal>
@@ -97,7 +141,7 @@ class UpdateUsers extends React.Component {
 }
 
 UpdateUsers.propTypes = {
-  updateUser: PropTypes.func.isRequired,
+  updateUsers: PropTypes.func.isRequired,
   users: PropTypes.any.isRequired,
 };
 

@@ -3,17 +3,47 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import { logout } from '../actions/loginActions';
+import { hasAdmin } from '../utils/helpers';
 
 
+/**
+ * 
+ * 
+ * @class NavigationBar
+ * @extends {React.Component}
+ */
 class NavigationBar extends React.Component {
+
+  /**
+   * Creates an instance of NavigationBar.
+   * @param {any} props 
+   * 
+   * @memberOf NavigationBar
+   */
   constructor(props) {
     super(props);
     this.logout = this.logout.bind(this);
   }
+
+  /**
+   * 
+   * 
+   * @param {any} e 
+   * 
+   * @memberOf NavigationBar
+   */
   logout(e) {
     e.preventDefault();
     this.props.logout();
   }
+
+  /**
+   * 
+   * 
+   * @returns 
+   * 
+   * @memberOf NavigationBar
+   */
   render() {
     const header = {
       margin: '20px',
@@ -21,7 +51,13 @@ class NavigationBar extends React.Component {
     };
     const { isAuthenticated } = this.props.auth;
     const userLinks = (
-      <a className="right" onClick={this.logout.bind(this)} href="#">Logout</a>
+      <div>
+        <a className="right view" onClick={this.logout.bind(this)}>Logout</a>
+        <a className="right view" href="/loadDocuments">View All Documents</a>
+        <a className="right view" href="/myprofile">View Profile</a>
+        {hasAdmin() ? <a className="right view" href="/managerole">Manage Roles</a> : ''}
+        {hasAdmin() ? <a className="right view" href="/manageusers">Manage Users</a> : ''}
+      </div>
     );
 
     const guestLinks = (
@@ -50,6 +86,12 @@ NavigationBar.propTypes = {
   logout: propTypes.func.isRequired
 };
 
+/**
+ * 
+ * 
+ * @param {any} state 
+ * @returns 
+ */
 function mapStateToProps(state) {
   return {
     auth: state.login

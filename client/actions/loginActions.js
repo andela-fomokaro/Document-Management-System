@@ -1,9 +1,17 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import { SET_CURRENT_USER } from '../actions/types';
+import { browserHistory } from 'react-router';
+import { SET_CURRENT_USER, LOGOUT_USER } from '../actions/types';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 
 
+/**
+ *
+ *
+ * @export
+ * @param {any} user
+ * @returns
+ */
 export function setCurrentUser(user) {
   return {
     type: SET_CURRENT_USER,
@@ -11,15 +19,33 @@ export function setCurrentUser(user) {
   };
 }
 
+/**
+ *
+ *
+ * @export
+ * @returns
+ */
 export function logout() {
-  return dispatch => {
-    window.localStorage.removeItem('jwtToken');
+  // window.location = '/';
+  return (dispatch) => {
+    localStorage.removeItem('jwtToken');
     setAuthorizationToken(false);
-    dispatch(setCurrentUser({}));
-    window.location = '/';
+    axios.post('/api/users/logout')
+      .then(() => {
+        browserHistory.push('/');
+      });
+    dispatch({
+      type: LOGOUT_USER
+    });
   };
 }
-
+/**
+ *
+ *
+ * @export
+ * @param {any} data
+ * @returns
+ */
 export function login(data) {
   return dispatch => axios.post('/api/users/login', data).then((res) => {
     const token = res.data.token;

@@ -2,8 +2,22 @@ import React from 'react';
 import { Modal } from 'react-materialize';
 import propTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
+import validateInput from '../../../shared/validate/signUp';
 
+/**
+ * 
+ * 
+ * @class CreateUsers
+ * @extends {React.Component}
+ */
 class CreateUsers extends React.Component {
+
+  /**
+   * Creates an instance of CreateUsers.
+   * @param {any} props 
+   * 
+   * @memberOf CreateUsers
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -18,21 +32,50 @@ class CreateUsers extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
+  /**
+   * 
+   * 
+   * @param {any} e 
+   * 
+   * @memberOf CreateUsers
+   */
   onSubmit(e) {
     e.preventDefault();
-    this.props.createUsers(this.state);
+    const { errors, isValid } = validateInput(this.state);
+    if (!isValid) {
+     Materialize.toast('Wrong password or email entered', 2000);
+    } else {
+      this.props.createUsers(this.state);
+      Materialize.toast('User Created Successfully', 2000);
+    }
   }
+
+    
+  /**
+   * 
+   * 
+   * @param {any} e 
+   * 
+   * @memberOf CreateUsers
+   */
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+
+  /**
+   * 
+   * 
+   * @returns 
+   * 
+   * @memberOf CreateUsers
+   */
   render() {
     const { username, email, password, passwordConfirmation, fullNames } = this.state;
     return (
       <Modal
         fixedFooter
         trigger={
-          <a className="pulse btn-floating btn-large waves-effect waves-white pink darken-3 right up btnUp">
-            <i className="material-icons">C</i></a>
+          <a className="btn pink darken-4 white-text right pink darken-3 right up btnUp">Create User</a>
   }
       >
 

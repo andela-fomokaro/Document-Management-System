@@ -1,5 +1,4 @@
 import React from 'react';
-// import classnames from 'classnames';
 import propTypes from 'prop-types';
 
 const TextFieldGroup = ({ field, label, value, type, onChange, checkUserExists }) => (

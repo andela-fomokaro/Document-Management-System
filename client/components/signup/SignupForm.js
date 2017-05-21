@@ -9,7 +9,20 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import validateInput from '../../../shared/validate/signUp';
 
 
+/**
+ * 
+ * 
+ * @class SignupForm
+ * @extends {React.Component}
+ */
 class SignupForm extends React.Component {
+
+  /**
+   * Creates an instance of SignupForm.
+   * @param {any} props 
+   * 
+   * @memberOf SignupForm
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -23,25 +36,46 @@ class SignupForm extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  /**
+   * 
+   * 
+   * @param {any} e 
+   * 
+   * @memberOf SignupForm
+   */
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  /**
+   * 
+   * 
+   * @param {any} e 
+   * 
+   * @memberOf SignupForm
+   */
   onSubmit(e) {
     e.preventDefault();
     const { errors, isValid } = validateInput(this.state);
     if (isValid) {
       this.props.userSignupRequest(this.state).then(
         (user) => {
-          Materialize.toast('Signed up successfully, log in to access your page', 4000, 'pink darken-4 rounded');
-          this.context.router.push('/');
+          Materialize.toast('Signed up successfully', 4000);
+          this.context.router.push('dashboardpage');
         }
     );
     } else if (errors.passwordConfirmation || errors.email) {
-      Materialize.toast('Wrong password or email entered', 2000, 'pink darken-3 rounded');
+      Materialize.toast('Wrong password or email entered', 2000);
     }
   }
 
+  /**
+   * 
+   * 
+   * @returns 
+   * 
+   * @memberOf SignupForm
+   */
   render() {
     const grey500 = '#ddd';
     const white = '#fff';

@@ -2,7 +2,20 @@ import React from 'react';
 import { Modal } from 'react-materialize';
 import propTypes from 'prop-types';
 
+/**
+ * 
+ * 
+ * @class CreateRole
+ * @extends {React.Component}
+ */
 class CreateRole extends React.Component {
+
+  /**
+   * Creates an instance of CreateRole.
+   * @param {any} props 
+   * 
+   * @memberOf CreateRole
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -13,21 +26,42 @@ class CreateRole extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
+  /**
+   * 
+   * 
+   * @param {any} e 
+   * 
+   * @memberOf CreateRole
+   */
   onSubmit(e) {
     e.preventDefault();
     this.props.createRole(this.state);
   }
+
+  /**
+   * 
+   * 
+   * @param {any} e 
+   * 
+   * @memberOf CreateRole
+   */
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+
+  /**
+   * 
+   * 
+   * @returns 
+   * 
+   * @memberOf CreateRole
+   */
   render() {
     const { title } = this.state;
     return (
       <Modal
-        fixedFooter
         trigger={
-          <a className="pulse btn-floating btn-large waves-effect waves-white pink darken-3 right up btnUp">
-            <i className="material-icons">C</i></a>
+          <a className="btn pink darken-4 white-text right right up btnUp">Create Role</a>
   }
       >
         <form className="col s12" onSubmit={this.onSubmit}>

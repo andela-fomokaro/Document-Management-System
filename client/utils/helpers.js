@@ -1,3 +1,4 @@
+import jwtDecode from 'jwt-decode';
 
 export const summarize = (str, wordCount = 17) => str
     .trim()
@@ -10,7 +11,13 @@ export const summarize = (str, wordCount = 17) => str
 
 let cachedToken = null;
 
-export const setToken = function (token, payload) {
+export /**
+ * 
+ * 
+ * @param {any} token 
+ * @param {any} payload 
+ */
+const setToken = function (token, payload) {
   cachedToken = token;
   localStorage.setItem('jwtToken', token);
   localStorage.setItem('payload', JSON.stringify(payload));
@@ -32,7 +39,22 @@ export const removeToken = () => {
 };
 
 export const getPayload = () => {
-  if (isAuthenticated()) {
-    return JSON.parse(localStorage.getItem('payload'));
+  const authStatus = isAuthenticated();
+  if (authStatus) {
+    return jwtDecode(localStorage.getItem('jwtToken'));
+  } else {
+    return {
+      roleId: 0,
+      userId: 0,
+    };
   }
 };
+export const hasAdmin = () =>
+  getPayload().roleId === 1;
+
+export const hasDocumentPermission = (ownerId) => {
+  return hasAdmin() ? true : getPayload().userId === ownerId;
+};
+
+
+window.getPayload = getPayload;
