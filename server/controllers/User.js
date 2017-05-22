@@ -24,12 +24,12 @@ const User = {
       .then((newUser) => {
         const token = Auth.getToken(newUser);
         res.status(201).json({
-          message: 'User was created successfully',
+          message: 'Successfull',
           token,
           newUser
         });
       })
-      .catch(() => res.status(400).send({ message: 'An error occured. Invalid parameters, try again!' }));
+      .catch(() => res.status(400).send({ message: 'An error occured' }));
   },
 
 /**
@@ -47,7 +47,7 @@ const User = {
         const token = Auth.getToken(user);
         return res.status(200)
         .send({
-          message: 'You have successfully logged in',
+          message: 'Successfull',
           user,
           token
         });
@@ -88,7 +88,7 @@ const User = {
           const pagination = Helper.pagination(condition);
           res.status(200)
             .send({
-              message: 'You have successfully retrieved all users',
+              message: 'Successfull',
               users,
               pagination
             });
@@ -115,13 +115,13 @@ const User = {
           }
           if ((role.title !== 'admin') && (req.decoded.userId !== user.id)) {
             return res.status(403)
-            .send({ message: 'You are not authorized to access this user' });
+            .send({ message: 'Authorized' });
           }
           req.decoded.user = user;
           res.status(200).send(req.decoded.user);
         })
         .catch(() => res.status(401).send({
-          message: 'An error occured. Invalid parameters, try again!'
+          message: 'An error occured. Invalid parameters'
         }));
     });
   },
@@ -145,21 +145,21 @@ const User = {
             }
             if ((role.title !== 'admin') && (req.decoded.userId !== user.id)) {
               return res.status(403).send({
-                message: 'You are not authorized to delete this user',
+                message: 'You are not authorized',
               });
             }
             if ((role.title === 'admin') && (Number(req.params.id) === 1)) {
               return res.status(403)
-              .send({ message: 'You cannot delete default admin user account' });
+              .send({ message: 'You are not authorized' });
             }
             user
             .destroy()
             .then(() => res.status(200).send({
-              message: 'User deleted successfully.',
+              message: 'Deleted successfully.',
             }));
           })
       .catch(() => res.status(400).send({
-        message: 'An error occured. Invalid parameters, try again!'
+        message: 'An error occured'
       }));
       });
   },
@@ -171,7 +171,7 @@ const User = {
    */
   logOut(req, res) {
     res.status(200)
-      .send({ message: 'Successfully logged out!' });
+      .send({ message: 'Successfull' });
   },
 /**
    * Update a user
@@ -187,17 +187,17 @@ const User = {
           .then((user) => {
             if (!user) {
               return res.status(404).send({
-                message: 'User Does Not Exist',
+                message: 'Does Not Exist',
               });
             }
             if ((role.title !== 'admin') && req.body.roleId) {
               return res.status(403).send({
-                message: 'Unauthorised access. You cannot update roleId property'
+                message: 'You are not authorized'
               });
             }
             if ((role.title !== 'admin') && (req.decoded.userId !== user.id)) {
               return res.status(403).send({
-                message: 'Unauthorised access. You cannot update this user\'s property'
+                message: 'You are not authorized'
               });
             }
             user
@@ -212,7 +212,7 @@ const User = {
               }));
           })
         .catch(() => res.status(400).send({
-          message: 'An error occured. Invalid parameters, try again!'
+          message: 'An error occured'
         }));
       });
   },
@@ -224,14 +224,14 @@ const User = {
    * @return {Object} - Returns response object
    */
   search(req, res) {
-    const search = req.query.search;
+    const userSearch = req.query.search;
 
-    if (search === '') {
+    if (userSearch === '') {
       return res.status(400).send({
-        message: 'Invalid Search Parameter!'
+        message: 'Search Does Not Match'
       });
     }
-    const limit = req.query.limit || 3;
+    const limit = req.query.limit || 6;
     const offset = req.query.offset || 0;
     const term = req.query.name;
     let condition = {};
@@ -240,9 +240,6 @@ const User = {
       'username',
       'fullName',
       'email',
-      'roleId',
-      'createdAt',
-      'updatedAt'
     ],
       limit,
       offset,
@@ -253,22 +250,22 @@ const User = {
       }
     };
     db.Users.findAndCountAll(query)
-      .then((users) => {
+      .then((user) => {
         condition = {
-          count: users.count,
+          count: user.count,
           limit,
           offset,
         };
         pagination = Helper.pagination(condition);
-        if (users.rows.length === 0) {
+        if (user.rows.length === 0) {
           return res.status(404).send({
-            message: 'Search Does Not Match Any User!'
+            message: 'Does Not exist'
           });
         }
         res.status(200)
           .send({
             message: 'Your search was successful',
-            users,
+            user,
             pagination
           });
       });
@@ -338,7 +335,7 @@ const User = {
             );
             if (documents.rows.length === 0) {
               return res.status(404).send({
-                message: 'No document match the request.'
+                message: 'An error occured'
               });
             }
             res.status(200).send({
@@ -346,7 +343,7 @@ const User = {
             });
           })
           .catch(() => res.status(400).send({
-            message: 'An error occured. Invalid parameters, try again!'
+            message: 'An error occured'
           }));
       });
   }

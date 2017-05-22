@@ -19,11 +19,11 @@ const Document = {
     })
       .then((newDocument) => {
         res.status(201).json({
-          message: 'Document was created successfully',
+          message: 'Successfully',
           newDocument
         });
       })
-      .catch(() => res.json({ message: 'An error occured. Invalid parameters, try again!' }));
+      .catch(() => res.json({ message: 'An error occured' }));
   },
 
 /**
@@ -48,14 +48,14 @@ const Document = {
             if ((role.title !== 'admin') && (document.access === 'private') &&
             (document.ownerId !== req.decoded.userId)) {
               return res.status(403)
-                .send({ message: 'You are not authorized to view this document' });
+                .send({ message: 'Unauthorized' });
             }
 
             db.Users.findById(document.ownerId).then((user) => {
               if ((role.title !== 'admin') && (document.access === 'role') &&
               (user.roleId !== req.decoded.roleId)) {
                 return res.status(403)
-                .send({ message: 'You are not authorized to view this document' });
+                .send({ message: 'Unauthorized' });
               }
 
               res.status(200).send({
@@ -64,7 +64,7 @@ const Document = {
             });
           })
           .catch(() => res.status(400).send({
-            message: 'An error occured. Invalid parameters, try again!'
+            message: 'An error occured'
           }));
       });
   },
@@ -92,11 +92,11 @@ const Document = {
             }
             if (role.title !== 'admin' && document.ownerId !== req.decoded.userId) {
               return res.status(403)
-                .send({ message: 'You are not authorized to update this document' });
+                .send({ message: 'You are not authorized' });
             }
             if (req.body.ownerId && !(role.title === 'admin')) {
               return res.status(403).send({
-                message: 'You cannot edit document ownerId property'
+                message: 'You cannot edit document'
               });
             }
             document
@@ -110,7 +110,7 @@ const Document = {
               });
           })
         .catch(() => res.status(400).send({
-          message: 'An error occured. Invalid parameters, try again!'
+          message: 'An error occured'
         }));
       });
   },
@@ -133,17 +133,17 @@ const Document = {
             }
             if ((req.decoded.roleId !== 1) && (document.ownerId !== req.decoded.userId)) {
               return res.status(403).send({
-                message: 'You are not authorized to delete this document',
+                message: 'You are not authorized',
               });
             }
             document
             .destroy()
             .then(() => res.status(200).send({
-              message: 'Document deleted successfully',
+              message: 'Document deleted',
             }));
           })
       .catch(() => res.status(400).send({
-        message: 'An error occured. Invalid parameters, try again!'
+        message: 'An error occured'
       }));
   },
 /**
@@ -170,12 +170,13 @@ const Document = {
               });
             });
         } else {
-          query.where = {
+          query = {
+            where: {
               $or: {
                 $or: {
                   access: { $eq: 'public' },
                   $and: {
-                    access: { $eq: 'private' },
+                    access: { $eq: 'role' },
                     ownerId: { $eq: req.decoded.userId }
                   },
                   $and: {
@@ -185,13 +186,13 @@ const Document = {
                 },
                 ownerId: { $eq: req.decoded.userId }
               }
-            };
-            query.include = [
+            },
+            include: [
               {
                 model: db.Users
               }
             ]
-          // };
+          };
           db.Documents
             .findAndCountAll(query)
             .then((documents) => {
@@ -206,8 +207,7 @@ const Document = {
                 type: document.type,
                 ownerId: document.ownerId,
                 createdAt: document.createdAt,
-                updatedAt: document.updatedAt,
-                id: document.id
+                updatedAt: document.updatedAt
               }));
               const pagination = Helper.pagination(query);
               res.status(200).send({
@@ -290,7 +290,7 @@ const Document = {
           };
         }
 
-        query.limit = (req.query.limit > 0) ? req.query.limit : 10;
+        query.limit = (req.query.limit > 0) ? req.query.limit : 6;
         query.offset = (req.query.offset > 0) ? req.query.offset : 0;
         query.order = '"createdAt" DESC';
         query.attributes = { exclude: ['id'] };
@@ -310,7 +310,7 @@ const Document = {
             const pagination = Helper.pagination(query);
             if (documents.rows.length === 0) {
               return res.status(404).send({
-                message: 'Search Does Not Match Any Document!'
+                message: 'Search Does Not Match'
               });
             }
             res.status(200).send({

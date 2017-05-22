@@ -7,8 +7,10 @@ export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'LOAD_DOCUMENTS':
       return action.payload;
+
     case 'CREATE_DOCUMENT':
       return Object.assign({}, state, { document: [...state.documents, action.payload] });
+
     case 'UPDATE_DOCUMENT':
       {
         const u = [];
@@ -20,11 +22,17 @@ export default (state = initialState, action = {}) => {
         });
         return Object.assign({}, state, { documents: u });
       }
+
     case 'SET_SINGLE_DOCUMENT':
       return action.payload;
+
     case 'DELETE_DOCUMENT':
       return Object.assign({}, state,
       { documents: state.documents.filter(document => document.id !== action.id) });
+
+    case 'SEARCH_DOCUMENT':
+      return action.payload;
+
     default: return state;
   }
 };

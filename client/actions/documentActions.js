@@ -118,3 +118,17 @@ export function getSingleDocument(id) {
     });
   };
 }
+
+export function searchDocument(term, offset = 0) {
+  return (dispatch) => {
+    axios.get(`/api/search/documents?search=${term}&offset=${offset}`)
+      .then((res) => {
+        dispatch({
+          type: 'SEARCH_DOCUMENT',
+          payload: res.data
+        });
+      }).catch((error) => {
+        Materialize.toast(error.data.message, 1000);
+      });
+  };
+}

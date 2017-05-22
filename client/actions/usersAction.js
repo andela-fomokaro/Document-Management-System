@@ -77,13 +77,12 @@ export function deleteUser(id) {
  * @returns 
  */
 export function updateUser(data, id = usersid) {
-  console.log(id, 'sdzfxgchvjbknlm;,.');
   return (dispatch) => {
     axios.put(`/api/users/${id}`, data)
     .then((res) => {
       dispatch({
         type: 'UPDATE_USER',
-        payload: res.data,
+        payload: res.data.user,
       });
     });
   };
@@ -112,7 +111,7 @@ export function updateUsers(user) {
  * 
  * 
  * @export
- * @param {any} [id=usersid] 
+ * @param {any} [id=usersid]
  * @returns 
  */
 export function getSingleUser(id = usersid) {
@@ -129,3 +128,14 @@ export function getSingleUser(id = usersid) {
   };
 }
 
+export function searchUsers(term) {
+  return (dispatch) => {
+    axios.get(`api/search/users?search=${term}`)
+      .then((res) => {
+        dispatch({
+          type: 'SEARCH_USERS',
+          payload: res.data.users.rows
+        });
+      });
+  };
+}

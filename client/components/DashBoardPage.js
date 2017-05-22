@@ -24,10 +24,6 @@ class DashBoard extends React.Component {
   render() {
     return (
       <div>
-        <form className="form-wrapper2 cf">
-          <input type="search" placeholder="Search for users here..." required />
-          <button type="submit">Search</button>
-        </form>
         <SideNavLink />
         <DashBoardOnboarding />
       </div>

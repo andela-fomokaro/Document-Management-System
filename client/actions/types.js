@@ -28,3 +28,5 @@ export const UPDATE_USER = 'UPDATE_USER';
 export const SET_SINGLE_USER = 'SET_SINGLE_USER';
 export const UPDATE_USERS = 'UPDATE_USERS';
 export const LOGOUT_USER = 'LOGOUT_USER';
+export const SEARCH_DOCUMENT = 'SEARCH_DOCUMENT';
+export const SEARCH_USERS = 'SEARCH_USERS';

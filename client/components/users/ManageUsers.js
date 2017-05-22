@@ -3,23 +3,26 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Modal } from 'react-materialize';
-import { getUsers, createUsers, deleteUser, updateUsers, getRoles } from '../../actions/usersAction';
+import { getUsers, createUsers, deleteUser, updateUsers, getRoles, searchUsers } from '../../actions/usersAction';
 import CreateUsers from './CreateUsers';
 import UpdateUsers from './UpdateUsers';
 
 
 /**
- * 
- * 
+ *
+ *
  * @class ManageUsers
  * @extends {React.Component}
  */
 class ManageUsers extends React.Component {
-
+  constructor(props) {
+    super(props);
+    this.onChange = this.onChange.bind(this);
+  }
   /**
-   * 
-   * 
-   * 
+   *
+   *
+   *
    * @memberOf ManageUsers
    */
   componentDidMount() {
@@ -28,10 +31,10 @@ class ManageUsers extends React.Component {
 
 
   /**
-   * 
-   * 
-   * @param {any} userId 
-   * 
+   *
+   *
+   * @param {any} userId
+   *
    * @memberOf ManageUsers
    */
   deleteUser(userId) {
@@ -40,20 +43,26 @@ class ManageUsers extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * 
+   *
+   *
+   *
    * @memberOf ManageUsers
    */
   updateUser() {
     this.props.updateUsers();
   }
 
+  onChange(e) {
+    console.log(e, 'fggvhjkl');
+    const searchTerm = e.target.value;
+    this.props.searchUsers(searchTerm);
+  }
+
   /**
-   * 
-   * 
-   * @returns 
-   * 
+   *
+   *
+   * @returns
+   *
    * @memberOf ManageUsers
    */
   render() {
@@ -63,6 +72,15 @@ class ManageUsers extends React.Component {
     const updatedAt = moment(usersInfo.updatedAt).format('MMMM Do YYYY, h:mm:ss a');
     return (
       <div className="manageUser">
+        <form className="form-wrapper2 cf" onSubmit={this.onSubmit}>
+          <input
+            type="search"
+            placeholder="Search for users here..."
+            required
+            onChange={this.onChange} name="search"
+          />
+          <button type="submit">Search</button>
+        </form>
         <table className="z-depth-5 striped tabs">
           <thead className="tableHead">
             <tr>
@@ -117,13 +135,14 @@ ManageUsers.propTypes = {
   updateUsers: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
   users: PropTypes.any.isRequired,
+  searchUsers: PropTypes.func.isRequired,
 };
 
 /**
- * 
- * 
- * @param {any} state 
- * @returns 
+ *
+ *
+ * @param {any} state
+ * @returns
  */
 function mapStateToProps(state) {
   return {
@@ -133,4 +152,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,
-{ getUsers, createUsers, deleteUser, updateUsers, getRoles })(ManageUsers);
+{ getUsers, createUsers, deleteUser, updateUsers, getRoles, searchUsers })(ManageUsers);

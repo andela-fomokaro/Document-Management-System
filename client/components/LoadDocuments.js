@@ -5,7 +5,7 @@ import { Pagination } from 'react-materialize';
 import propTypes from 'prop-types';
 import DocumentForm from './document/DocumentForm';
 import AllDocument from './document/AllDocument';
-import { loadDocuments, getDocument, deleteDocument, updateDocument } from '../actions/documentActions';
+import { loadDocuments, getDocument, deleteDocument, updateDocument, searchDocument } from '../actions/documentActions';
 
 
 /**
@@ -15,7 +15,11 @@ import { loadDocuments, getDocument, deleteDocument, updateDocument } from '../a
  * @extends {React.Component}
  */
 class DashBoard extends React.Component {
-
+  constructor(props) {
+    super(props);
+    this.onChange = this.onChange.bind(this);
+    this.onSelect = this.onSelect.bind(this);
+  }
   /**
    *
    *
@@ -38,6 +42,10 @@ class DashBoard extends React.Component {
     this.props.loadDocuments(offset);
   }
 
+  onChange(e) {
+    const searchTerm = e.target.value;
+    this.props.searchDocument(searchTerm);
+  }
   /**
    *
    *
@@ -46,13 +54,16 @@ class DashBoard extends React.Component {
    * @memberOf DashBoard
    */
   render() {
-    console.log(this.props);
     const documents = this.props.docs;
     const { pagination } = this.props.docs;
     return (
       <div className="container">
-        <form className="form-wrapper cf">
-          <input type="search" placeholder="Search for document here..." required />
+        <form className="form-wrapper cf" onSubmit={this.onSubmit}>
+          <input
+            type="search" placeholder="Search for document here..."
+            onChange={this.onChange} name="search"
+            required
+          />
           <button type="submit">Search</button>
         </form>
         <DocumentForm />
@@ -69,12 +80,11 @@ class DashBoard extends React.Component {
   }
 }
 
-
 /**
- * 
- * 
- * @param {any} state 
- * @returns 
+ *
+ *
+ * @param {any} state
+ * @returns
  */
 function mapStateToProps(state) {
   return {
@@ -86,7 +96,8 @@ const mapDispatchToProps = dispatch => ({
   loadDocuments: bindActionCreators(loadDocuments, dispatch),
   getDocument: bindActionCreators(getDocument, dispatch),
   deleteDocument: bindActionCreators(deleteDocument, dispatch),
-  updateDocument: bindActionCreators(updateDocument, dispatch)
+  updateDocument: bindActionCreators(updateDocument, dispatch),
+  searchDocument: bindActionCreators(searchDocument, dispatch),
 });
 
 DashBoard.propTypes = {

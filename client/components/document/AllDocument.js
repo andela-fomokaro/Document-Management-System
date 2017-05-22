@@ -90,7 +90,7 @@ class AllDocument extends React.Component {
       <div>
         <div className="card docCard col s4" key={document.id}>
           <div className="card-content cardContent">
-            <div className="card-title cardTitle">{document.title}</div>
+            <div className="card-title cardTitle">{document.title.substring(0, 20)}</div>
             <p>{document.content.substring(0, 20)}...</p>
             <Link to={singleDocUrl}>Read more</Link>
           </div>

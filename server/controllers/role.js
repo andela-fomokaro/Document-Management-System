@@ -9,10 +9,10 @@ const Roles = {
    */
   createRole(req, res) {
     db.Roles.findOne({ where: { title: req.body.title } })
-    .then((existingRole) => {
-      if (existingRole) {
+    .then((roleExist) => {
+      if (roleExist) {
         return res.status(400).send({
-          message: 'Validation error. Please enter unique parameters only!'
+          message: 'Enter unique parameters'
         });
       }
       db.Roles.create({
@@ -56,7 +56,7 @@ const Roles = {
         res.status(200).send(role);
       })
       .catch(() => res.status(400).send({
-        message: 'An error occured. Invalid parameters, try again!'
+        message: 'An error occured'
       }));
   },
 
@@ -77,17 +77,17 @@ const Roles = {
         }
         if (role.title === 'regular' || role.title === 'admin') {
           return res.status(400).send({
-            message: 'An error occured. You cannot delete default roles'
+            message: 'An error occured'
           });
         }
         role
           .destroy()
           .then(() => res.status(200).send({
-            message: 'Role deleted successfully'
+            message: 'Role deleted'
           }));
       })
       .catch(() => res.status(400).send({
-        message: 'An error occured. Invalid parameters, try again!'
+        message: 'An error occured'
       }));
   },
 
@@ -99,10 +99,10 @@ const Roles = {
    */
   updateRole(req, res) {
     db.Roles.findOne({ where: { title: req.body.title } })
-    .then((existingRole) => {
-      if (existingRole) {
+    .then((roleExist) => {
+      if (roleExist) {
         return res.status(400).send({
-          message: 'Validation error. Please enter unique parameters only!'
+          message: 'Validation error'
         });
       }
       db.Roles.findById(req.params.id)
@@ -114,7 +114,7 @@ const Roles = {
         }
         if (role.title === 'regular' || role.title === 'admin') {
           return res.status(400).send({
-            message: 'An error occured. You cannot update default roles'
+            message: 'An error occured'
           });
         }
         role
@@ -126,7 +126,7 @@ const Roles = {
           }));
       })
       .catch(() => res.status(400).send({
-        message: 'An error occured. Invalid parameters, try again!'
+        message: 'An error occured'
       }));
     });
   },
