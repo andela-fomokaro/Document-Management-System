@@ -7,6 +7,16 @@ module.exports = (sequelize, DataTypes) => {
     read: { type: DataTypes.BOOLEAN, defaultValue: false },
     write: { type: DataTypes.BOOLEAN, defaultValue: false },
     delete: { type: DataTypes.BOOLEAN, defaultValue: false }
+  }, {
+    classMethods: {
+      associate: (models) => {
+        Roles.hasMany(models.Users, {
+          foreignKey: 'roleId',
+          as: 'users',
+        });
+      },
+    },
+
   });
   return Roles;
 };
