@@ -1,9 +1,7 @@
-import jwtDecode from 'jwt-decode';
 import axios from '../utils/index';
 import { getPayload } from '../utils/helpers';
 
 const usersid = getPayload().userId;
-console.log(usersid, ' uid');
 
 // if (getPayload()) {
 //   const userId = getPayload().userId;
@@ -13,10 +11,10 @@ console.log(usersid, ' uid');
 // }
 
 /**
- * 
- * 
- * @export
- * @returns 
+ *
+ *
+ * @export getUsers
+ * @returns {Function} returns dispatch
  */
 export function getUsers() {
   return (dispatch) => {
@@ -24,22 +22,22 @@ export function getUsers() {
       .then((res) => {
         dispatch({
           type: 'GET_USERS',
-          payload: res.data.users.rows
+          payload: res.data.users.rows,
         });
       });
   };
 }
 
 /**
- * 
- * 
- * @export
- * @param {any} event 
- * @returns 
+ *
+ *
+ * @export createUsers
+ * @param {object} data
+ * @returns {Function} returns dispatch
  */
-export function createUsers(event) {
+export function createUsers(data) {
   return (dispatch) => {
-    axios.post('/api/users/', event)
+    axios.post('/api/users/', data)
       .then((res) => {
         dispatch({
           type: 'CREATE_USERS',
@@ -50,11 +48,11 @@ export function createUsers(event) {
 }
 
 /**
- * 
- * 
+ *
+ *
  * @export
- * @param {any} id 
- * @returns 
+ * @param {number} id
+ * @returns {Function} returns dispatch
  */
 export function deleteUser(id) {
   return (dispatch) => {
@@ -69,12 +67,12 @@ export function deleteUser(id) {
 }
 
 /**
- * 
- * 
+ *
+ *
  * @export
- * @param {any} [id=usersid] 
- * @param {any} data 
- * @returns 
+ * @param {number} [id=usersid]
+ * @param {object} data
+ * @returns {Function} returns dispatch
  */
 export function updateUser(data, id = usersid) {
   return (dispatch) => {
@@ -89,11 +87,11 @@ export function updateUser(data, id = usersid) {
 }
 
 /**
- * 
- * 
- * @export
- * @param {any} user 
- * @returns 
+ *
+ *
+ * @export updateUsers
+ * @param {object} user
+ * @returns {Function} returns dispatch
  */
 export function updateUsers(user) {
   return (dispatch) => {
@@ -108,11 +106,11 @@ export function updateUsers(user) {
 }
 
 /**
- * 
- * 
- * @export
- * @param {any} [id=usersid]
- * @returns 
+ *
+ *
+ * @export  getSingleUser
+ * @param {number} [id=usersid]
+ * @returns {Function} returns dispatch
  */
 export function getSingleUser(id = usersid) {
   return (dispatch) => {
@@ -128,14 +126,39 @@ export function getSingleUser(id = usersid) {
   };
 }
 
+/**
+ *
+ *
+ * @export searchUsers
+ * @param {string} term
+ * @returns {Function} returns dispatch
+ */
 export function searchUsers(term) {
   return (dispatch) => {
     axios.get(`api/search/users?search=${term}`)
       .then((res) => {
         dispatch({
           type: 'SEARCH_USERS',
-          payload: res.data.users.rows
+          payload: res.data.user.rows
         });
       });
   };
 }
+
+// /**
+//  * 
+//  * 
+//  * @export
+//  * @returns 
+//  */
+// export function userPagination() {
+//   return (dispatch) => {
+//     axios.get('/api/users/')
+//       .then((res) => {
+//         dispatch({
+//           type: 'PAGINATION',
+//           payload: res.data,
+//         });
+//       });
+//   };
+// }

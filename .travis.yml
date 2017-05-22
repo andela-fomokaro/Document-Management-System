@@ -9,14 +9,9 @@ services:
   - postgresql
 
 before_script:
-  - psql -c 'drop database if exists cp3_test;' -U postgres
-  - psql -c 'create database testSystem;' -U postgres
-  - npm run migrate:test
+  - psql -c 'create database travis' -U postgres
 
 script:
   - npm run test
 
 after_script: npm run coveralls
-
-addons:
-  postgresql :"9.3"

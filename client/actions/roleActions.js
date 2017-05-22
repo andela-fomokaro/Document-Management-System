@@ -1,15 +1,15 @@
 import axios from '../utils/index';
 
 /**
- * 
- * 
- * @export
- * @param {any} event 
- * @returns 
+ *
+ *
+ * @export createRole
+ * @param {object} data role information
+ * @returns {Function} returns dispatch
  */
-export function createRole(event) {
+export function createRole(data) {
   return (dispatch) => {
-    axios.post('/api/roles', event)
+    axios.post('/api/roles', data)
       .then((res) => {
         dispatch({
           type: 'CREATE_ROLE',
@@ -20,10 +20,10 @@ export function createRole(event) {
 }
 
 /**
- * 
- * 
- * @export
- * @returns 
+ *
+ *
+ * @export getRoles
+ * @returns {Function} returns dispatch
  */
 export function getRoles() {
   return (dispatch) => {
@@ -38,11 +38,11 @@ export function getRoles() {
 }
 
 /**
- * 
- * 
- * @export
- * @param {any} role 
- * @returns 
+ *
+ *
+ * @export updateRole
+ * @param {object} role
+ * @returns {Function} returns dispatch
  */
 export function updateRole(role) {
   return (dispatch) => {
@@ -57,11 +57,11 @@ export function updateRole(role) {
 }
 
 /**
- * 
- * 
- * @export
- * @param {any} id 
- * @returns 
+ *
+ *
+ * @export deleteRole
+ * @param {number} id
+ * @returns {Function} returns dispatch
  */
 export function deleteRole(id) {
   return (dispatch) => {

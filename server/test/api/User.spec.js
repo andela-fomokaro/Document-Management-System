@@ -45,7 +45,7 @@ describe('Document API:', () => {
         .send(regularUser)
         .end((err, res) => {
           expect(res.status).to.equal(201);
-          expect(res.body.message).to.equal('User was created successfully');
+          expect(res.body.message).to.equal('Successfull');
           done();
         });
       });
@@ -54,7 +54,7 @@ describe('Document API:', () => {
         .send(regularUser2)
         .end((err, res) => {
           expect(res.status).to.equal(201);
-          expect(res.body.message).to.equal('User was created successfully');
+          expect(res.body.message).to.equal('Successfull');
           done();
         });
       });
@@ -64,7 +64,7 @@ describe('Document API:', () => {
       .send(invalidUser)
       .end((err, res) => {
         expect(res.status).to.equal(400);
-        expect(res.body.message).to.equal('An error occured. Invalid parameters, try again!');
+        expect(res.body.message).to.equal('An error occured');
         done();
       });
     });
@@ -78,7 +78,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(401);
             expect(response.body.message).to
-            .equal('Please enter a valid email or password to log in');
+            .equal('Enter a valid email or password to log in');
             done();
           });
     });
@@ -89,7 +89,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(401);
             expect(response.body.message).to
-            .equal('Please enter a valid email or password to log in');
+            .equal('Enter a valid email or password to log in');
             done();
           });
     });
@@ -117,7 +117,7 @@ describe('Document API:', () => {
           .set({ Authorization: regularToken })
           .end((error, response) => {
             expect(response.status).to.equal(200);
-            expect(response.body.message).to.equal('Successfully logged out!');
+            expect(response.body.message).to.equal('Successfull');
             done();
           });
     });
@@ -154,7 +154,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(401);
             expect(response.body.message).to
-            .equal('An error occured. Invalid parameters, try again!');
+            .equal('An error occured');
             done();
           });
       });
@@ -173,7 +173,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(401);
             expect(response.body.message).to
-            .equal('An error occured. Invalid parameters, try again!');
+            .equal('An error occured');
             done();
           });
       });
@@ -198,8 +198,8 @@ describe('Document API:', () => {
           .set({ Authorization: regularToken })
           .send(fieldsToUpdate)
           .end((error, response) => {
-            expect(response.status).to.equal(403);
-            expect(response.body.message).to.equal('Admin access is required!');
+            expect(response.status).to.equal(404);
+            expect(response.body.message).to.equal('Does Not Exist');
             done();
           });
         });
@@ -210,9 +210,9 @@ describe('Document API:', () => {
           .set({ Authorization: regularToken })
           .send(fieldsToUpdate)
           .end((error, response) => {
-            expect(response.status).to.equal(403);
+            expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('Admin access is required!');
+            .equal('An error occured');
             done();
           });
         });
@@ -222,48 +222,10 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('An error occured. Invalid parameters, try again!');
+            .equal('An error occured');
             done();
           });
         });
-
-      //   it(`should edit the user's property if user is admin
-      // and id is valid`, (done) => {
-      //     const fieldsToUpdate =
-      //       {
-      //         username: 'baby',
-      //         email: 'baby@test.com'
-      //       };
-      //     request.put('/api/users/2')
-      //     .set({ Authorization: adminToken })
-      //     .send(fieldsToUpdate)
-      //     .end((error, response) => {
-      //       const updatedFields = regularUser;
-      //       console.log(updatedFields);
-      //       expect(response.status).to.equal(200);
-      //       expect(updatedFields.email).to.equal(fieldsToUpdate.email);
-      //       done();
-      //     });
-        // });
-      // it('should edit the user property if user is the current user', (done) => {
-      //   const fieldsToUpdate =
-      //   { name: 'Mercy Ade',
-      //   email: 'mercy.oseni@test.com'
-      // };
-      //   request.put('/api/users/1')
-      //     .set({ Authorization: adminToken })
-      //     .send(fieldsToUpdate)
-      //     .end((error, response) => {
-      //       const updatedUser = response.body.adminUser;
-      //       expect(response.status).to.equal(200);
-      //       expect(updatedUser.name).to.equal(fieldsToUpdate.name);
-      //       expect(updatedUser.email).to.equal(fieldsToUpdate.email);
-      //       done();
-      //     });
-
-      // });
-
-      // DELETE requests - Delete specific user
         describe('DELETE: (/api/users/:id) - ', () => {
           it('should not delete user if id is non-integer', (done) => {
             request.delete('/api/users/2ab')
@@ -271,7 +233,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('An error occured. Invalid parameters, try again!');
+            .equal('An error occured');
             done();
           });
           });
@@ -315,7 +277,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(200);
             expect(response.body.message).to
-              .equal('User deleted successfully.');
+              .equal('Deleted successfully.');
             done();
           });
           });
@@ -380,7 +342,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('Invalid Search Parameter!');
+            .equal('Search Does Not Match');
             done();
           });
           });
@@ -391,7 +353,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(404);
             expect(response.body.message).to
-            .equal('Search Does Not Match Any User!');
+            .equal('Does Not exist');
             done();
           });
           });

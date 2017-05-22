@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { Modal } from 'react-materialize';
-import { getUsers, createUsers, deleteUser, updateUsers, getRoles, searchUsers } from '../../actions/usersAction';
+import { Modal, Pagination } from 'react-materialize';
+import { getUsers, createUsers, deleteUser, updateUsers, getRoles, searchUsers, userPagination } from '../../actions/usersAction';
 import CreateUsers from './CreateUsers';
 import UpdateUsers from './UpdateUsers';
 
@@ -15,6 +15,13 @@ import UpdateUsers from './UpdateUsers';
  * @extends {React.Component}
  */
 class ManageUsers extends React.Component {
+
+  /**
+   * Creates an instance of ManageUsers.
+   * @param {any} props
+   *
+   * @memberOf ManageUsers
+   */
   constructor(props) {
     super(props);
     this.onChange = this.onChange.bind(this);
@@ -53,9 +60,24 @@ class ManageUsers extends React.Component {
   }
 
   onChange(e) {
-    console.log(e, 'fggvhjkl');
     const searchTerm = e.target.value;
-    this.props.searchUsers(searchTerm);
+    if (searchTerm.length < 1) {
+      this.props.getUsers();
+    } else {
+      this.props.searchUsers(searchTerm);
+    }
+  }
+
+  /**
+   *
+   *
+   * @param {any} pageNo
+   *
+   * @memberOf ManageUsers
+   */
+  onSelect(pageNo) {
+    const offset = (pageNo - 1) * 6;
+    this.props.getUsers(offset);
   }
 
   /**
@@ -70,6 +92,8 @@ class ManageUsers extends React.Component {
     const usersInfo = this.props.users;
     const createdAt = moment(usersInfo.createdAt).format('MMMM Do YYYY, h:mm:ss a');
     const updatedAt = moment(usersInfo.updatedAt).format('MMMM Do YYYY, h:mm:ss a');
+    // const { pagination } = this.props.users;
+    console.log(this.props, 'xdfcghvbjknl;');
     return (
       <div className="manageUser">
         <form className="form-wrapper2 cf" onSubmit={this.onSubmit}>
@@ -124,6 +148,7 @@ class ManageUsers extends React.Component {
           </tbody>
         </table>
         <CreateUsers createUsers={this.props.createUsers} users={this.props.users} />
+        {/*<Pagination items={20} activePage={1} maxButtons={10} onSelect={e => this.onSelect(e)} />*/}
       </div>
     );
   }
@@ -152,4 +177,10 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,
-{ getUsers, createUsers, deleteUser, updateUsers, getRoles, searchUsers })(ManageUsers);
+  { getUsers,
+    createUsers,
+    deleteUser,
+    updateUsers,
+    getRoles,
+    searchUsers,
+    userPagination })(ManageUsers);

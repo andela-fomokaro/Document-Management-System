@@ -10,11 +10,11 @@ const request = supertest.agent(app);
 const adminUser = SpecHelper.specUser1;
 const regularUser = SpecHelper.specUser2;
 const author = SpecHelper.authorRole;
-const contributor = SpecHelper.contributorRole;
+
 
 let adminToken, regularToken, authorToken;
 
-describe('Document API:', () => {
+describe('ROLE API:', () => {
   before((done) => {
     db.Roles.bulkCreate([SpecHelper.adminRole, SpecHelper.regularRole, SpecHelper.contributorRole])
       .then((roles) => {
@@ -71,17 +71,6 @@ describe('Document API:', () => {
         });
       });
 
-      // it('should create a role if user is  an admin', (done) => {
-      //   const authorRole = { title: 'authorRole', id: 10 };
-      //   request.post('/api/roles')
-      //     .send(authorRole)
-      //     .set({ Authorization: adminUserToken })
-      //     .end((error, response) => {
-      //       console.log(response.body.message)
-      //       expect(response.status).to.equal(200);
-      //       done();
-      //     });
-      // });
       it('should not create a role if role already exist', (done) => {
         const newRole = { title: 'regular' };
         request.post('/api/roles')
@@ -90,7 +79,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('Validation error. Please enter unique parameters only!');
+            .equal('Enter unique parameters');
             done();
           });
       });
@@ -125,7 +114,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('An error occured. Invalid parameters, try again!');
+            .equal('An error occured');
             done();
           });
     });
@@ -137,7 +126,7 @@ describe('Document API:', () => {
             done();
           });
     });
-    //  PUT Requests - Edit specific role
+
     describe('PUT: (/api/roles/:id)', () => {
       it('should not edit role if id is invalid', (done) => {
         const fieldsToUpdate = { title: 'intermediate' };
@@ -159,12 +148,11 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('An error occured. Invalid parameters, try again!');
+            .equal('An error occured');
             done();
           });
       });
 
-      // it should not edit default roles
       it('should not edit default admin role', (done) => {
         const fieldsToUpdate = { title: 'admin' };
         request.put('/api/roles/1')
@@ -173,7 +161,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('Validation error. Please enter unique parameters only!');
+            .equal('Validation error');
             done();
           });
       });
@@ -186,7 +174,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('An error occured. You cannot update default roles');
+            .equal('An error occured');
             done();
           });
       });
@@ -199,13 +187,12 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('An error occured. Invalid parameters, try again!');
+            .equal('An error occured');
             done();
           });
       });
     });
 
-    // DELETE Requests - Delete specific role
     describe('DELETE: (/api/roles/:id)', () => {
       before((done) => {
         request.post('/api/roles')
@@ -236,7 +223,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('An error occured. Invalid parameters, try again!');
+            .equal('An error occured');
             done();
           });
       });
@@ -247,7 +234,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('An error occured. You cannot delete default roles');
+            .equal('An error occured');
             done();
           });
       });
@@ -258,22 +245,10 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('An error occured. You cannot delete default roles');
+            .equal('An error occured');
             done();
           });
       });
-
-      // it('should delete role when id is valid', (done) => {
-      //   request.delete('/api/roles/2')
-      //     .set({ Authorization: adminToken })
-      //     .end((error, response) => {
-      //       console.log(response);
-      //       expect(response.status).to.equal(200);
-      //       expect(response.body.message).to
-      //       .equal('Role deleted successfully');
-      //       done();
-      //     });
-      // });
     });
   });
 });

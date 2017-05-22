@@ -10,8 +10,8 @@ import { hasDocumentPermission } from '../../utils/helpers';
 
 
 /**
- * 
- * 
+ *
+ *
  * @class AllDocument
  * @extends {React.Component}
  */
@@ -19,8 +19,8 @@ class AllDocument extends React.Component {
 
   /**
    * Creates an instance of AllDocument.
-   * @param {any} props 
-   * 
+   * @param {any} props
+   *
    * @memberOf AllDocument
    */
   constructor(props) {
@@ -36,7 +36,7 @@ class AllDocument extends React.Component {
   }
 
   /**
-   * 
+   *
    * 
    * 
    * @memberOf AllDocument
@@ -50,14 +50,14 @@ class AllDocument extends React.Component {
    * 
    * 
    * @param {any} event 
-   * @returns 
+   * @returns
    * 
    * @memberOf AllDocument
    */
   updateDocumentState(event) {
     const field = event.target.name;
     const document = this.state.document;
-    document[field] = field === 'typeId' ? Number(event.target.value) : event.target.value;
+    document[field] = event.target.value;
     return this.setState({ document });
   }
 
@@ -81,7 +81,7 @@ class AllDocument extends React.Component {
    */
   render() {
     const { document } = this.props;
-    const { title, content, id } = this.state.document;
+    const { title, content } = this.state.document;
     const singleDocUrl = `document/${document.id}`;
     const userInfo = this.props.document;
     const dateCreated = moment(userInfo.createdAt).format('MMMM Do YYYY, h:mm:ss a');
@@ -159,7 +159,7 @@ class AllDocument extends React.Component {
 AllDocument.propTypes = {
   deleteDocument: propTypes.func.isRequired,
   updateDocument: propTypes.func.isRequired,
-  document: propTypes.any.isRequired
+  document: propTypes.arrayOf(propTypes.object).isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

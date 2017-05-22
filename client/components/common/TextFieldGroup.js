@@ -23,7 +23,8 @@ TextFieldGroup.propTypes = {
   value: propTypes.string.isRequired,
   onChange: propTypes.func.isRequired,
   type: propTypes.string.isRequired,
-  checkUserExists: propTypes.func
+  checkUserExists: propTypes.func,
+  label: propTypes.string.isRequired
 };
 
 TextFieldGroup.defaultProps = {

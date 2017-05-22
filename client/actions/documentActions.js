@@ -1,15 +1,15 @@
 import axios from '../utils/index';
 
 /**
- * 
- * 
- * @export
- * @param {any} event 
- * @returns 
+ *
+ *
+ * @export createDocument
+ * @param {object} data document content
+ * @returns {Function} returns dispatch
  */
-export function createDocument(event) {
+export function createDocument(data) {
   return (dispatch) => {
-    axios.post('/api/documents', event)
+    axios.post('/api/documents', data)
       .then((res) => {
         dispatch({
           type: 'CREATE_DOCUMENT',
@@ -20,11 +20,11 @@ export function createDocument(event) {
 }
 
 /**
- * 
- * 
- * @export
- * @param {number} [offset=0] 
- * @returns 
+ *
+ *
+ * @export loadDocuments
+ * @param {number} [offset=0] document page difference
+ * @returns {Function} returns dispatch
  */
 export function loadDocuments(offset = 0) {
   return (dispatch) => {
@@ -40,11 +40,11 @@ export function loadDocuments(offset = 0) {
 
 
 /**
- * 
- * 
- * @export
- * @param {any} id 
- * @returns 
+ *
+ *
+ * @export getDocument
+ * @param {number} id document id
+ * @returns {Function} returns dispatch
  */
 export function getDocument(id) {
   return (dispatch) => {
@@ -60,16 +60,16 @@ export function getDocument(id) {
 
 
 /**
- * 
- * 
- * @export
- * @param {any} id 
- * @returns 
+ *
+ *
+ * @export deleteDocumen
+ * @param {number} id document id
+ * @returns {Function} returns dispatch
  */
 export function deleteDocument(id) {
   return (dispatch) => {
     axios.delete(`/api/documents/${id}`)
-      .then((req) => {
+      .then(() => {
         dispatch({
           type: 'DELETE_DOCUMENT',
           id
@@ -79,11 +79,11 @@ export function deleteDocument(id) {
 }
 
 /**
- * 
- * 
- * @export
- * @param {any} document 
- * @returns 
+ *
+ *
+ * @export  updateDocument
+ * @param {object} document document content
+ * @returns {Function} returns dispatch
  */
 export function updateDocument(document) {
   return (dispatch) => {
@@ -99,11 +99,11 @@ export function updateDocument(document) {
 }
 
 /**
- * 
- * 
- * @export
- * @param {any} id 
- * @returns 
+ *
+ *
+ * @export getSingleDocument
+ * @param {number} id document id
+ * @returns {Function} returns dispatch
  */
 export function getSingleDocument(id) {
   return (dispatch) => {
@@ -119,6 +119,14 @@ export function getSingleDocument(id) {
   };
 }
 
+/**
+ *
+ *
+ * @export searchDocument
+ * @param {string} term search term
+ * @param {number} [offset=0] document page difference
+ * @returns {Function} returns dispatch
+ */
 export function searchDocument(term, offset = 0) {
   return (dispatch) => {
     axios.get(`/api/search/documents?search=${term}&offset=${offset}`)

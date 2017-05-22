@@ -54,7 +54,7 @@ const User = {
       }
       res.status(401)
           .send({
-            message: 'Please enter a valid email or password to log in'
+            message: 'Enter a valid email or password to log in'
           });
     });
   },
@@ -65,7 +65,7 @@ const User = {
    * @return {Object} Response object
    */
   allUsers(req, res) {
-    const limit = req.query.limit || 10;
+    const limit = req.query.limit || 6;
     const offset = req.query.offset || 0;
     db.Users.findAndCountAll({ fields: [
       'id',
@@ -121,7 +121,7 @@ const User = {
           res.status(200).send(req.decoded.user);
         })
         .catch(() => res.status(401).send({
-          message: 'An error occured. Invalid parameters'
+          message: 'An error occured'
         }));
     });
   },
@@ -233,20 +233,19 @@ const User = {
     }
     const limit = req.query.limit || 6;
     const offset = req.query.offset || 0;
-    const term = req.query.name;
     let condition = {};
     let pagination;
-    const query = { fields: [
-      'username',
-      'fullName',
-      'email',
-    ],
-      limit,
-      offset,
-      where: {
-        username: {
-          $iLike: `%${term}%`
-        }
+    const query = {
+      where: { $or: [
+        {
+          username: { $iLike: `%${userSearch}%` }
+        }, {
+          fullNames: { $iLike: `%${userSearch}%` }
+        },
+        {
+          email: { $iLike: `%${userSearch}%` }
+        },
+      ]
       }
     };
     db.Users.findAndCountAll(query)

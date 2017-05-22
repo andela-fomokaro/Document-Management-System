@@ -72,7 +72,7 @@ describe('Document API:', () => {
           .end((err, res) => {
             expect(res.status).to.equal(200);
             expect(res.body.message).to
-            .equal('An error occured. Invalid parameters, try again!');
+            .equal('An error occured');
             done();
           });
       });
@@ -195,7 +195,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('An error occured. Invalid parameters, try again!');
+            .equal('An error occured');
             done();
           });
         });
@@ -207,7 +207,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(403);
             expect(response.body.message).to
-            .equal('You are not authorized to view this document');
+            .equal('Unauthorized');
             done();
           });
         });
@@ -270,7 +270,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('An error occured. Invalid parameters, try again!');
+            .equal('An error occured');
             done();
           });
         });
@@ -281,7 +281,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(403);
             expect(response.body.message).to
-              .equal('You are not authorized to update this document');
+              .equal('You are not authorized');
             done();
           });
         });
@@ -304,7 +304,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(403);
             expect(response.body.message).to
-            .equal('You are not authorized to update this document');
+            .equal('You are not authorized');
             done();
           });
       });
@@ -354,7 +354,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('An error occured. Invalid parameters, try again!');
+            .equal('An error occured');
             done();
           });
         });
@@ -365,7 +365,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(403);
             expect(response.body.message).to
-              .equal('You are not authorized to delete this document');
+              .equal('You are not authorized');
             done();
           });
         });
@@ -376,7 +376,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(200);
             expect(response.body.message).to
-              .equal('Document deleted successfully');
+              .equal('Document deleted');
             done();
           });
         });
@@ -387,7 +387,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(200);
             expect(response.body.message).to
-              .equal('Document deleted successfully');
+              .equal('Document deleted');
             done();
           });
         });
@@ -414,7 +414,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(404);
             expect(response.body.message).to
-            .equal('Search Does Not Match Any Document!');
+            .equal('Search Does Not Match');
             done();
           });
       });

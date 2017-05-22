@@ -8,9 +8,9 @@ import setAuthorizationToken from '../utils/setAuthorizationToken';
 /**
  *
  *
- * @export
- * @param {any} user
- * @returns
+ * @export setCurrentUser
+ * @param {object} user information
+ * @returns {object} return user request
  */
 export function setCurrentUser(user) {
   return {
@@ -22,11 +22,10 @@ export function setCurrentUser(user) {
 /**
  *
  *
- * @export
- * @returns
+ * @export logout
+ * @returns {Function} returns dispatch
  */
 export function logout() {
-  // window.location = '/';
   return (dispatch) => {
     localStorage.removeItem('jwtToken');
     setAuthorizationToken(false);
@@ -42,9 +41,9 @@ export function logout() {
 /**
  *
  *
- * @export
- * @param {any} data
- * @returns
+ * @export login
+ * @param {object} data user data
+ * @returns {Function} returns dispatch
  */
 export function login(data) {
   return dispatch => axios.post('/api/users/login', data).then((res) => {

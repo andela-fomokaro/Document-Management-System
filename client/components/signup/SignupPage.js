@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import SignupForm from './SignupForm';
 import { userSignupRequest } from '../../actions/signupActions';
-import { addFlashMessage } from '../../actions/flashMessages';
 
 
 /**
@@ -26,7 +25,7 @@ class SignupPage extends React.Component {
     return (
       <div className="row">
         <div className="col-md-4">
-          <SignupForm userSignupRequest={userSignupRequest} addFlashMessage={addFlashMessage} />
+          <SignupForm userSignupRequest={userSignupRequest} />
         </div>
       </div>
     );
@@ -39,4 +38,4 @@ SignupPage.propTypes = {
 };
 
 
-export default connect(null, { userSignupRequest, addFlashMessage })(SignupPage);
+export default connect(null, { userSignupRequest })(SignupPage);

@@ -349,8 +349,7 @@ export default StyleSheet.create({
     'marginLeft': [{ 'unit': 'px', 'value': 20 }]
   },
   'tableHead': {
-    'backgroundColor': '#880e4f',
-    'color': 'white'
+    'color': '#880e4f'
   },
   'manageUser': {
     'width': [{ 'unit': '%H', 'value': 0.9 }],

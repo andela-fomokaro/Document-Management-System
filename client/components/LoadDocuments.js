@@ -42,9 +42,20 @@ class DashBoard extends React.Component {
     this.props.loadDocuments(offset);
   }
 
+  /**
+   * 
+   * 
+   * @param {any} e 
+   * 
+   * @memberOf DashBoard
+   */
   onChange(e) {
     const searchTerm = e.target.value;
-    this.props.searchDocument(searchTerm);
+    if (searchTerm.length < 1) {
+      this.props.loadDocuments();
+    } else {
+      this.props.searchDocument(searchTerm);
+    }
   }
   /**
    *

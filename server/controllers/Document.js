@@ -126,7 +126,6 @@ const Document = {
           .findById(req.params.id)
           .then((document) => {
             if (!document) {
-              // console.log('Document does not exists');
               return res.status(404).send({
                 message: 'Document Does Not Exist',
               });
@@ -155,7 +154,7 @@ const Document = {
   findAllDocument(req, res) {
     db.Roles.findById(req.decoded.roleId)
       .then((role) => {
-        let query = {};
+        const query = {};
         query.limit = (req.query.limit > 0) ? req.query.limit : 6;
         query.offset = (req.query.offset > 0) ? req.query.offset : 0;
         query.attributes = { exclude: ['ownerId'] };
@@ -170,29 +169,28 @@ const Document = {
               });
             });
         } else {
-          query = {
-            where: {
+          query.where = {
+            $or: {
               $or: {
-                $or: {
-                  access: { $eq: 'public' },
-                  $and: {
-                    access: { $eq: 'role' },
-                    ownerId: { $eq: req.decoded.userId }
-                  },
-                  $and: {
-                    access: { $eq: 'role' },
-                    '$User.roleId$': { $eq: req.decoded.roleId }
-                  }
+                access: { $eq: 'public' },
+                $and: {
+                  access: { $eq: 'private' },
+                  ownerId: { $eq: req.decoded.userId }
                 },
-                ownerId: { $eq: req.decoded.userId }
-              }
-            },
-            include: [
-              {
-                model: db.Users
-              }
-            ]
+                $and: {
+                  access: { $eq: 'role' },
+                  '$User.roleId$': { $eq: req.decoded.roleId }
+                }
+              },
+              ownerId: { $eq: req.decoded.userId }
+            }
           };
+          query.include = [
+            {
+              model: db.Users
+            }
+          ];
+          // };
           db.Documents
             .findAndCountAll(query)
             .then((documents) => {
@@ -207,7 +205,8 @@ const Document = {
                 type: document.type,
                 ownerId: document.ownerId,
                 createdAt: document.createdAt,
-                updatedAt: document.updatedAt
+                updatedAt: document.updatedAt,
+                id: document.id
               }));
               const pagination = Helper.pagination(query);
               res.status(200).send({
@@ -217,6 +216,7 @@ const Document = {
         }
       });
   },
+
 
 /**
    * Gets all public documents relevant to search term

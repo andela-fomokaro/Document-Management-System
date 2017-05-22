@@ -32,7 +32,6 @@ export default (state = initialState, action = {}) => {
 
     case 'SEARCH_DOCUMENT':
       return action.payload;
-
     default: return state;
   }
 };
