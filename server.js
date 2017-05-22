@@ -9,6 +9,7 @@ import webpackConfig from './webpack.config';
 
 
 const app = express();
+require('dotenv').config();
 
 const compiler = webpack(webpackConfig);
 app.use(webpackMiddleware(compiler)
@@ -28,9 +29,11 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './client/index.html'));
 });
 
+const port = process.env.PORT;
+console.log(port);
 
-const server = app.listen(8009, () => {
-  console.log('Hi I am running at 127.0.0.1:8009');
+const server = app.listen(8000, () => {
+  console.log('Hi I am running at 127.0.0.1:8000');
 });
 
 module.exports = server;
