@@ -2,10 +2,16 @@ import bcrypt from 'bcrypt-nodejs';
 
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define('Users', {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
     username: {
+      allowNull: false,
       type: DataTypes.STRING,
       validate: { is: /\w+$/i },
-      unique: true
     },
     fullNames: {
       allowNull: false,
@@ -15,9 +21,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING,
       validate: { isEmail: true },
-      unique: true
+      unique: {
+        args: true
+      }
     },
     roleId: {
+      allowNull: false,
       type: DataTypes.INTEGER,
       defaultValue: 2
     },
@@ -34,11 +43,15 @@ module.exports = (sequelize, DataTypes) => {
         });
         Users.hasMany(models.Documents, {
           foreignKey: 'ownerId',
+          as: 'Documents',
           onDelete: 'CASCADE'
         });
       }
     },
     instanceMethods: {
+      validPassword(password) {
+        return bcrypt.compareSync(password, this.password);
+      },
       hashPassword() {
         this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10));
       }
