@@ -1,0 +1,18 @@
+sudo: required
+dist: trusty
+language: node_js
+
+node_js:
+  - 6
+
+services:
+  - postgresql
+
+before_script:
+  - psql -c 'create database testSystem;' -U postgres
+  - NODE_ENV=test sequelize db:migrate
+
+script:
+  - npm run test
+
+after_script: npm run coveralls
