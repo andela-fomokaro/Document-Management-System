@@ -3,13 +3,6 @@ import { getPayload } from '../utils/helpers';
 
 const usersid = getPayload().userId;
 
-// if (getPayload()) {
-//   const userId = getPayload().userId;
-// }
-// else {
-//  return userId = getPayload().userId;
-// }
-
 /**
  *
  *
@@ -144,21 +137,3 @@ export function searchUsers(term) {
       });
   };
 }
-
-// /**
-//  * 
-//  * 
-//  * @export
-//  * @returns 
-//  */
-// export function userPagination() {
-//   return (dispatch) => {
-//     axios.get('/api/users/')
-//       .then((res) => {
-//         dispatch({
-//           type: 'PAGINATION',
-//           payload: res.data,
-//         });
-//       });
-//   };
-// }

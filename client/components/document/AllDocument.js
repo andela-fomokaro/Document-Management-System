@@ -37,8 +37,8 @@ class AllDocument extends React.Component {
 
   /**
    *
-   * 
-   * 
+   *
+   *
    * @memberOf AllDocument
    */
   deleteDocument() {
@@ -47,11 +47,11 @@ class AllDocument extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @param {any} event 
+   *
+   *
+   * @param {any} event
    * @returns
-   * 
+   *
    * @memberOf AllDocument
    */
   updateDocumentState(event) {
@@ -62,9 +62,9 @@ class AllDocument extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * 
+   *
+   *
+   *
    * @memberOf AllDocument
    */
   updateDocument() {
@@ -73,10 +73,10 @@ class AllDocument extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @returns 
-   * 
+   *
+   *
+   * @returns
+   *
    * @memberOf AllDocument
    */
   render() {
@@ -145,7 +145,10 @@ class AllDocument extends React.Component {
                       </div>
                     </form>
                   </div>
-                  <button onClick={() => this.updateDocument()} className="btn pink darken-4 white-text">Update</button>
+                  <button
+                    onClick={() => this.updateDocument()}
+                    className="btn pink darken-4 white-text"
+                  >Update</button>
                 </Modal>
               </li>
             </ul> : ''}

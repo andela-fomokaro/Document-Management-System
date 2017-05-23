@@ -32,12 +32,10 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './client/index.html'));
 });
 
-let server = null;
-
 db.sequelize.sync().done(() => {
-  server = app.listen(port, () => {
+  app.listen(port, () => {
     console.log('Hi I am running at 127.0.0.1:8009');
   });
 });
 
-module.exports = server;
+module.exports = app;
