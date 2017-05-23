@@ -1,9 +1,9 @@
+.env
 .git
 npm-debug.log
 node_modules
 .coveralls.yml
 coverage
-.env
 .vscode
 .nyc_output
 dist
