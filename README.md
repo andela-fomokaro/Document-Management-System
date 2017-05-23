@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/andela-fomokaro/Document-Management-System.svg)](https://travis-ci.org/andela-fomokaro/Document-Management-System)
+[![Coverage Status](https://coveralls.io/repos/github/andela-fomokaro/Document-Management-System/badge.svg?branch=feature%2F143770291%2Fset-up-client-environment)](https://coveralls.io/github/andela-fomokaro/Document-Management-System?branch=feature%2F143770291%2Fset-up-client-environment)
+[![Code Climate](https://codeclimate.com/github/andela-fomokaro/Document-Management-System/badges/gpa.svg)](https://codeclimate.com/github/andela-fomokaro/Document-Management-System)
 
 # Document Management System
 The Document management system provides REST API enpoints for a document management system. It allows create, retrieve, update and delete actions to be carried out.
@@ -63,10 +66,10 @@ Request type | Endpoint | Action
 POST | [/users](#create-user) | Create a new user
 GET | [/users](#get-all-users) | Get all users
 GET | [/users/:id](#get-user) | Get details of a specific user
-PUT | [/users/:id](#edit-user) | Edit user details
+PUT | [/users/:id](#edit-user) | Update user details
 DELETE | [/users/:id](#delete-user) | Remove a user from storage
 GET | [/users/login](#login) | To log a user in
-GET | [/users/logout](#logout) | To log a user out
+POST | [/users/logout](#logout) | To log a user out
 GET | [/users/search](#search-user) | To search for a user
 GET | [/users/:id/documents](#user-documents) | Retrieve all documents created by a user
 
@@ -107,7 +110,7 @@ Endpoint for Roles resource.
 - Body `(application/json)`
 ```json
 {
-  "message": "You have successfully retrived all roles",
+  "message": "You have successfully retrieved all roles",
   "roles": [
     {
       "id": 1,
@@ -142,7 +145,7 @@ Endpoint for Roles resource.
 - Body `(application/json)`
 ```json
 {
-  "message": "Role has been created",
+  "message": "Created Successfully",
   "role": {
     "id": 3,
     "title": "fellow",
@@ -169,7 +172,7 @@ Endpoint for Roles resource.
 - Body `(application/json)`
 ```json
 {
-  "message": "This role has been updated",
+  "message": "Updated Successfully",
   "updatedRole": {
     "id": 3,
     "title": "fellow-d0",
@@ -189,7 +192,7 @@ Endpoint for Roles resource.
 - Body `(application/json)`
 ```json
 {
-  "message": "This role has been retrieved successfully",
+  "message": "Successfull",
   "role": {
     "id": 3,
     "title": "fellow-d0",
@@ -210,7 +213,7 @@ Endpoint for Roles resource.
 - Body `(application/json)`
 ```json
 {
-  "message": "This role has been deleted"
+  "message": "Delete Successfull"
 }
 ```
 ## Users
@@ -227,23 +230,21 @@ Endpoint for Users resource.
 - Body `(application/json)`
 ```json
 {
-  "message": "You have successfully retrived all users",
+  "message": " Successfull",
   "users": {
     "rows": [
       {
         "id": 2,
         "username": "pleroonigeria",
-        "firstname": "pleroo",
-        "lastname": "nigeria",
+        "firstNames": "pleroo nigeria",
         "email": "pleroonigeria@gmail.com",
         "createdAt": "2017-03-06T21:35:06.038Z"
       },
       {
         "id": 1,
-        "username": "olawalequest",
-        "firstname": "Olawale",
-        "lastname": "Aladeusi",
-        "email": "olawalequest@gmail.com",
+        "username": "Omokaro",
+        "firstNames": "Omokaro Faith",
+        "email": "omokarofaith@gmail.com",
         "createdAt": "2017-03-06T21:35:05.971Z"
       }
     ]
@@ -265,8 +266,7 @@ Endpoint for Users resource.
 ```json
 {
   "username": "fecit",
-  "firstname": "fecit",
-  "lastname": "fecit",
+  "firstNames": "fecit fecit",
   "email": "fecit@mail.com",
   "password": "password",
 }
@@ -276,13 +276,12 @@ Endpoint for Users resource.
 - Body `(application/json)`
 ```json
 {
-  "message": "Your account has been created successfully",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTQ4ODkwNTg3OCwiZXhwIjoxNDg5NTEwNjc4fQ.3cJlim3wV60kA2LjskSXm5633EcK56A3AayCLceEuLo",
+  "message": "Successful",
+  "token": "TOKEN",
   "user": {
     "id": 4,
     "username": "fecit",
-    "firstname": "fecit",
-    "lastname": "fecit",
+    "firstNames": "fecit fecit",
     "email": "fecit@mail.com",
     "roleId": 2,
     "createAt": "2017-03-07T16:57:58.444Z",
@@ -297,7 +296,7 @@ Endpoint for Users resource.
 - Body `(application/json)`
 ```json
 {
-  "email": "olawalequest@gmail.com",
+  "email": "omokarofaith@gmail.com",
   "password": "password",
 }
 ```
@@ -307,13 +306,12 @@ Endpoint for Users resource.
 - Body `(application/json)`
 ```json
 {
-  "message": "You have successfully logged in",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTQ4ODkwOTA0OCwiZXhwIjoxNDg5NTEzODQ4fQ.YKsL2EfuLDmhHDySTQjWHA5qbkN77m76-DpLtFKFF-8",
+  "message": "Login Successfull",
+  "token": "TOKEN",
   "user": {
     "id": 1,
     "username": "olawalequest",
-    "firstname": "Olawale",
-    "lastname": "Aladeusi",
+    "firstNames": "Olawale Aladeusi",
     "email": "olawalequest@gmail.com"
   }
 }
@@ -330,7 +328,7 @@ Endpoint for Users resource.
 - Body `(application/json)`
 ```json
 {
-  "message": "You have successfully logged out"
+  "message": "Successfull"
 }
 ```
 
@@ -346,7 +344,7 @@ Endpoint for Users resource.
 - Body `(application/json)`
 ```json
 {
-  "message": "You have successfully retrived this user",
+  "message": "You have successfully retrie§ved this user",
   "user": {
     "id": 4,
     "username": "fecit",
@@ -366,7 +364,6 @@ Endpoint for Users resource.
 ```json
 {
   "firstname": "fecitandela",
-  "lastname": "fecitandela"
 }
 ```
 ### Delete User
@@ -380,14 +377,14 @@ Endpoint for Users resource.
 - Body `(application/json)`
 ```json
 {
-  "message": "This account has been successfully deleted"
+  "message": "Delete Successfull"
 }
 ```
 
 ### Search User
 
 #### Request
-- Endpoint: GET: `/users/search?query=olaw`
+- Endpoint: GET: `/users/search?query=faith`
 - Requires: Authentication
 
 #### Response
@@ -401,8 +398,7 @@ Endpoint for Users resource.
       {
         "id": 3,
         "username": "pleroooo",
-        "firstname": "Olawale",
-        "lastname": "Aladeusi",
+        "firstNames": "Omokaro Faith",
         "email": "plerooggggg@gmail.com",
         "createdAt": "2017-03-07T14:25:19.942Z"
       },
@@ -434,8 +430,8 @@ Endpoint for document resource.
 - Endpoint: GET: `/documents`
 - Requires: Authentication
 - Optional parameters for limiting and pagination:
-  - `limit=5` Number of items to return.
-  - `offset=5` Number of items to skip.
+  - `limit=6` Number of items to return.
+  - `offset=6` Number of items to skip.
 
 #### Response
 - Status: `200: OK`
@@ -533,10 +529,9 @@ Endpoint for document resource.
   "userDocuments": {
     "user": {
       "id": 1,
-      "username": "olawalequest",
-      "firstname": "Olawale",
-      "lastname": "Aladeusi",
-      "email": "olawalequest@gmail.com"
+      "username": "omokaro",
+      "firstname": "Omokaro Faith",
+      "email": "omokarofaith@gmail.com"
     },
     "documents": {
       "count": 1,
@@ -579,7 +574,7 @@ Endpoint for document resource.
 - Body `(application/json)`
 ```json
 {
-  "message": "Your document has been successfully created",
+  "message": "Successfully created",
   "document": {
     "id": 3,
     "title": "Andela",
@@ -603,7 +598,7 @@ Endpoint for document resource.
 - Body `(application/json)`
 ```json
 {
-  "message": "You have successfully retrived this document",
+  "message": "Successful",
   "document": {
     "id": 3,
     "title": "Andela",
@@ -633,7 +628,7 @@ Endpoint for document resource.
 - Body `(application/json)`
 ```json
 {
-  "message": "This document has been updated successfully",
+  "message": "Updated successfull",
   "updatedDocument": {
     "id": 3,
     "ownerId": 1,
@@ -658,7 +653,7 @@ Endpoint for document resource.
 - Body `(application/json)`
 ```json
 {
-  "message": "This document has been deleted successfully"
+  "message": "Delete Successfull"
 }
 ```
 
@@ -672,10 +667,9 @@ Document Management System API is built with the following technologies;
 
 ## Installation
   - Install [NodeJs](https://nodejs.org/en/) and [Postgres](https://www.postgresql.org/) on your machine
-  - Clone the repository `$ git clone https://github.com/andela-oaladeusi/dms.git`
+  - Clone the repository `$ git clone https://github.com/andela-fomokaro/Document=Management-System.git`
   - Change into the directory `$ cd /dms`
   - Install all required dependencies with `$ npm install`
-  - Create a `.env` file in your root directory as described in `.env.sample` file
   - Start the app with `npm start`
   - Run Test `npm test`
 
@@ -689,9 +683,8 @@ Document Management System API is built with the following technologies;
 
 ## Limitations
 The limitations of the API are:
-- Users cannot delete themselves using the API
 - Documents are not unique (A user can create a document with the same title)
 - User cannot login on two different platform
 
 ## LICENSE
- © [Olawalequest](https://github.com/andela-oaladeusi)
+ © [OmokaroFaith](https://github.com/andela-fomokaro)
