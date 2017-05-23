@@ -159,7 +159,7 @@ class AllDocument extends React.Component {
 AllDocument.propTypes = {
   deleteDocument: propTypes.func.isRequired,
   updateDocument: propTypes.func.isRequired,
-  document: propTypes.arrayOf(propTypes.object).isRequired,
+  document: propTypes.object.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
