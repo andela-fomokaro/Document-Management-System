@@ -1,4 +1,9 @@
+.git
+npm-debug.log
 node_modules
-client/materialize/
-.DS_Store
+.coveralls.yml
+coverage
 .env
+.vscode
+.nyc_output
+dist
