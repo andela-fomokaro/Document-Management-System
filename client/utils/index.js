@@ -3,7 +3,7 @@ import { getToken } from './helpers';
 
 const api = (AUTH_TOKEN = '', BASE_URL) => {
   const instance = axios.create({
-    baseURL: BASE_URL || 'http://localhost:8009',
+    baseURL: BASE_URL || '',
   });
 
   // Adds interceptors to every request
