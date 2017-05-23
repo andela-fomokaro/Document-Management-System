@@ -1,11 +1,8 @@
 {
-  "presets": [
-    "es2015",
-    "stage-2"
-    ],
-  "plugins": [
-    "transform-es2015-arrow-functions",
-    "check-es2015-constants",
-    "transform-es2015-block-scoping"
-  ]
+  "presets": ["es2015", "stage-2","stage-0", "react"],
+  "env": {
+    "development": {
+      "presets": ["react-hmre"]
+    }
+  }
 }

@@ -1,21 +1,57 @@
 /* eslint-disable global-require */
 import express from 'express';
-import bodyParser from 'body-parser';
-import morgan from 'morgan';
-import Routes from '../routes/index';
-import usersRoutes from '../routes/UsersRoutes';
+import validator from 'validator';
+// import bodyParser from 'body-parser';
+// import morgan from 'morgan';
 
-const app = express();
+// const app = express();
+const router = express.Router();
 
-app.use(morgan('dev'));
+function validateInput(data) {
+  const errors = {};
+  if (validator.isEmpty(data.username)) {
+    errors.username = 'This field is required';
+  }
+  if (validator.isEmpty(data.fullNames)) {
+    errors.firstname = 'This field is required';
+  }
+  if (validator.isEmpty(data.email)) {
+    errors.email = 'This field is required';
+  }
+  if (!validator.isEmail(data.email)) {
+    errors.email = 'Email is invalid';
+  }
+  if (validator.isEmpty(data.password)) {
+    errors.password = 'This field is required';
+  }
+  if (validator.isEmpty(data.passwordConfirmation)) {
+    errors.passwordConfirmation = 'This field is required';
+  }
+  if (!validator.equals(data.password, data.passwordConfirmation)) {
+    errors.passwordConfirmation = 'Password must match';
+  }
+  const isValid = Object.keys(errors).length === 0;
+  return { errors, isValid };
+}
+// app.use(morgan('dev'));
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json())
 
-app.use('/api', usersRoutes);
+// const userRoute = require('../routes/UsersRoutes')(app);
+// const documentRoute = require('../routes/DocumentsRoutes')(app);
+// const RoleRoutes = require('../routes/RolesRoutes')(app);
 
-app.get('/', (req, res) => {
-  res.send('Welcome to Document Management System');
+
+router.post('/', (req, res) => {
+  const validate = validateInput(req.body);
+  return res.status(200).json(validate);
 });
 
-export default app;
+
+// const server = app.listen(4000, () => {
+//   console.log('Listening on port 4000');
+// });
+
+// module.exports = server;
+export default router;
