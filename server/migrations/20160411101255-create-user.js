@@ -43,7 +43,7 @@ module.exports = {
     });
   },
   down(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Roles', {
+    return queryInterface.dropTable('Users', {
       force: true,
       cascade: false
     });
