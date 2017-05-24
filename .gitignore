@@ -8,6 +8,7 @@ coverage
 .vscode
 .nyc_output
 dist
+reports/*.xml
 # Coverage directory used by tools like istanbul
 coverage
 
