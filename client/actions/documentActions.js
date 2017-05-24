@@ -107,7 +107,7 @@ export function updateDocument(document) {
  */
 export function getSingleDocument(id) {
   return (dispatch) => {
-    axios.get(`api/documents/${id}`)
+    axios.get(`/api/documents/${id}`)
     .then((res) => {
       dispatch(
         {

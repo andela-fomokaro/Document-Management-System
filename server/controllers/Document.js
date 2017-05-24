@@ -44,20 +44,17 @@ const Document = {
                 message: 'Document Does Not Exist',
               });
             }
-
             if ((role.title !== 'admin') && (document.access === 'private') &&
             (document.ownerId !== req.decoded.userId)) {
               return res.status(403)
                 .send({ message: 'Unauthorized' });
             }
-
             db.Users.findById(document.ownerId).then((user) => {
               if ((role.title !== 'admin') && (document.access === 'role') &&
               (user.roleId !== req.decoded.roleId)) {
                 return res.status(403)
                 .send({ message: 'Unauthorized' });
               }
-
               res.status(200).send({
                 document
               });
@@ -69,6 +66,13 @@ const Document = {
       });
   },
 
+  /**
+   * Find users documents by ownerId
+   *
+   * @param {Object} req - Request Object
+   * @param {Object} res - Response Object
+   * @returns {Object} Response object
+   */
   findUsersDocuments(req, res) {
     db.Documents.findAll({ where: { ownerId: req.params.id } })
           .then(documents => res.status(200).send(documents));
@@ -121,7 +125,6 @@ const Document = {
    * @return {Object} Response object
    */
   delete(req, res) {
-    // const docId = req.params.id;
     db.Documents
           .findById(req.params.id)
           .then((document) => {
@@ -190,7 +193,6 @@ const Document = {
               model: db.Users
             }
           ];
-          // };
           db.Documents
             .findAndCountAll(query)
             .then((documents) => {

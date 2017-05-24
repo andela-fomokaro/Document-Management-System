@@ -1,3 +1,4 @@
+/* eslint-disable no-undef*/
 import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -11,7 +12,7 @@ import validateInput from '../../../shared/validate/login';
 
 /**
  *
- *
+ * React component for
  * @class LoginForm
  * @extends {React.Component}
  */
@@ -19,7 +20,8 @@ class LoginForm extends React.Component {
 
   /**
    * Creates an instance of LoginForm.
-   * @param {any} props
+   * Constructor
+   * @param {object} props - props of the component
    *
    * @memberOf LoginForm
    */
@@ -38,7 +40,9 @@ class LoginForm extends React.Component {
   /**
    *
    *
+   * onSubmit
    * @param {any} e
+   * @returns {void}
    *
    * @memberOf LoginForm
    */
@@ -50,12 +54,12 @@ class LoginForm extends React.Component {
       const { password } = this.state;
       this.props.login({ email, password }).then(
         () => {
-          Materialize.toast('Login successfull', 4000);
+          Materialize.toast('Login successful', 3000);
           return this.context.router.push('/');
         },
-        (err) => {
-          Materialize.toast(err.data.message, 1000);
-        }
+    ).catch((err) => {
+      Materialize.toast(err.data.message, 2000);
+    }
     );
     } else {
       Materialize.toast(errors.identifier, 1000);
@@ -65,8 +69,11 @@ class LoginForm extends React.Component {
 
   /**
    *
+   * onChange
    *
    * @param {any} e
+   *
+   * @return {void}
    *
    * @memberOf LoginForm
    */
@@ -77,7 +84,7 @@ class LoginForm extends React.Component {
   /**
    *
    *
-   * @returns
+   * @returns {object} react component to render
    *
    * @memberOf LoginForm
    */

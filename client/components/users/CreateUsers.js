@@ -1,3 +1,5 @@
+/* eslint-disable no-undef*/
+/* eslint-disable no-unused-vars*/
 import React from 'react';
 import { Modal } from 'react-materialize';
 import propTypes from 'prop-types';
@@ -5,8 +7,8 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import validateInput from '../../../shared/validate/signUp';
 
 /**
- * 
- * 
+ *
+ * React component for
  * @class CreateUsers
  * @extends {React.Component}
  */
@@ -14,8 +16,9 @@ class CreateUsers extends React.Component {
 
   /**
    * Creates an instance of CreateUsers.
-   * @param {any} props 
-   * 
+   * Constructor
+   * @param {any} props - props of the component
+   *
    * @memberOf CreateUsers
    */
   constructor(props) {
@@ -33,29 +36,31 @@ class CreateUsers extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @param {any} e 
-   * 
+   *
+   * onSubmit
+   * @param {any} e
+   * @returns {void}
    * @memberOf CreateUsers
    */
   onSubmit(e) {
     e.preventDefault();
     const { errors, isValid } = validateInput(this.state);
-    if (!isValid) {
-     Materialize.toast('Wrong password or email entered', 2000);
+    if (errors.passwordConfirmation || errors.email) {
+      Materialize.toast('Wrong password or email entered', 2000);
+    } else if (errors) {
+      Materialize.toast('Username and email must be unique', 2000);
     } else {
       this.props.createUsers(this.state);
       Materialize.toast('User Created Successfully', 2000);
     }
   }
 
-    
+
   /**
-   * 
-   * 
-   * @param {any} e 
-   * 
+   *
+   * onChange
+   * @param {any} e - event handler belonging to onChange
+   * @returns {void}
    * @memberOf CreateUsers
    */
   onChange(e) {
@@ -63,19 +68,21 @@ class CreateUsers extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @returns 
-   * 
+   *
+   *
+   * @returns {object} react componenents to render
+   *
    * @memberOf CreateUsers
    */
   render() {
-    const { username, email, password, passwordConfirmation, fullNames } = this.state;
     return (
       <Modal
         fixedFooter
         trigger={
-          <a className="btn pink darken-4 white-text right pink darken-3 right up btnUp">Create User</a>
+          <a
+            className="btn pink darken-4 white-text
+          right pink darken-3 right up btnUp"
+          >Create User</a>
   }
       >
 
@@ -84,7 +91,7 @@ class CreateUsers extends React.Component {
             label="Username"
             onChange={this.onChange}
             checkUserExists={this.checkUserExists}
-            value={username}
+            value={this.state.username}
             field="username"
             required
           />
@@ -93,7 +100,7 @@ class CreateUsers extends React.Component {
             label="Full Names"
             onChange={this.onChange}
             checkUserExists={this.checkUserExists}
-            value={fullNames}
+            value={this.state.value}
             field="fullNames"
             required
           />
@@ -102,7 +109,7 @@ class CreateUsers extends React.Component {
             label="Email"
             onChange={this.onChange}
             checkUserExists={this.checkUserExists}
-            value={email}
+            value={this.state.email}
             field="email"
             required
           />
@@ -110,7 +117,7 @@ class CreateUsers extends React.Component {
           <div className="row">
             <input
               onChange={this.onChange}
-              value={password}
+              value={this.state.password}
               name="password"
               type="password"
               placeholder="Password"
@@ -122,7 +129,7 @@ class CreateUsers extends React.Component {
           <div className="row">
             <input
               onChange={this.onChange}
-              value={passwordConfirmation}
+              value={this.state.passwordConfirmation}
               name="passwordConfirmation"
               type="password"
               className="validate"

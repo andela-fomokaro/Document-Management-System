@@ -1,27 +1,29 @@
+/* eslint-disable no-shadow*/
+/* eslint-disable react/prefer-stateless-function*/
 import React from 'react';
 import { connect } from 'react-redux';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import SignupForm from './SignupForm';
 import { userSignupRequest } from '../../actions/signupActions';
 
 
 /**
- * 
- * 
+ *
+ * React component for
  * @class SignupPage
  * @extends {React.Component}
  */
 class SignupPage extends React.Component {
 
   /**
-   * 
-   * 
-   * @returns 
-   * 
+   *
+   *
+   * @returns {object} react components to render
+   *
    * @memberOf SignupPage
    */
   render() {
-    const { userSignupRequest, addFlashMessage } = this.props;
+    const { userSignupRequest } = this.props;
     return (
       <div className="row">
         <div className="col-md-4">
@@ -33,8 +35,7 @@ class SignupPage extends React.Component {
 }
 
 SignupPage.propTypes = {
-  userSignupRequest: propTypes.func.isRequired,
-  addFlashMessage: propTypes.func.isRequired
+  userSignupRequest: PropTypes.func.isRequired,
 };
 
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef*/
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -8,8 +9,8 @@ import { getSingleUser, updateUser } from '../../actions/usersAction';
 
 
 /**
- * 
- * 
+ *
+ * React component for
  * @class UserProfile
  * @extends {React.Component}
  */
@@ -17,8 +18,9 @@ class UserProfile extends React.Component {
 
   /**
    * Creates an instance of UserProfile.
-   * @param {any} props 
-   * 
+   * Constructor
+   * @param {any} props - props of the component
+   *
    * @memberOf UserProfile
    */
   constructor(props) {
@@ -36,9 +38,9 @@ class UserProfile extends React.Component {
 
 
   /**
-   * 
-   * 
-   * 
+   *
+   * componentDidMount
+   * @returns {void}
    * @memberOf UserProfile
    */
   componentDidMount() {
@@ -46,10 +48,10 @@ class UserProfile extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @param {any} nextProps 
-   * 
+   *
+   * componentWillReceiveProps
+   * @param {object} nextProps
+   * @returns {void}
    * @memberOf UserProfile
    */
   componentWillReceiveProps(nextProps) {
@@ -57,28 +59,35 @@ class UserProfile extends React.Component {
     this.setState({ email, username, fullNames });
   }
 
+
+   /**
+   *
+   onChange
+   * @param {any} e - event handler belonging to Onchange
+   * @returns {void}
+   * @memberOf UserProfile
+   */
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
 
   /**
-   * 
-   * 
-   * 
+   * updateUser
+   * @returns {void}
    * @memberOf UserProfile
    */
   updateUser() {
     this.props.updateUser(this.state);
-    // console.log(this.state.id, this.state, 'dfxcghvbjknlm;,.');
-    // // Materialize.toast('User Updated Successfully', 4000);
+    Materialize.toast('Update Successfull', 1000);
   }
 
   /**
-   * 
-   * 
-   * @returns 
-   * 
+   *
+   *
+   @returns {object} react componenents to render
+   *
+   *
    * @memberOf UserProfile
    */
   render() {
@@ -149,6 +158,7 @@ class UserProfile extends React.Component {
 UserProfile.propTypes = {
   userInfo: PropTypes.any.isRequired,
   updateUser: PropTypes.func.isRequired,
+  getSingleUser: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -156,16 +166,9 @@ const mapDispatchToProps = dispatch => ({
   updateUser: bindActionCreators(updateUser, dispatch)
 });
 
-/**
- * 
- * 
- * @param {any} state 
- * @returns 
- */
-function mapStateToProps(state) {
-  return {
-    userInfo: state.users
-  };
-}
+
+const mapStateToProps = state => ({
+  userInfo: state.users
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);

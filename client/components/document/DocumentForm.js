@@ -1,13 +1,15 @@
+/* eslint-disable no-undef*/
+
 import React from 'react';
 import { Modal, Input } from 'react-materialize';
 import { connect } from 'react-redux';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { createDocument } from '../../actions/documentActions';
 
 
 /**
  *
- *
+ * React component for
  * @class DocumentForm
  * @extends {React.Component}
  */
@@ -15,7 +17,8 @@ class DocumentForm extends React.Component {
 
   /**
    * Creates an instance of DocumentForm.
-   * @param {any} props
+   * Constructor
+   * @param {object} props - props of the component
    *
    * @memberOf DocumentForm
    */
@@ -32,10 +35,10 @@ class DocumentForm extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @param {any} e 
-   * 
+   *
+   * onChange
+   * @param {any} e - event handler belonging to Onchange
+   * @returns {void}
    * @memberOf DocumentForm
    */
   onChange(e) {
@@ -44,9 +47,9 @@ class DocumentForm extends React.Component {
 
   /**
    *
-   *
-   * @param {any} e
-   *
+   * onSubmit
+   * @param {any} e - event handler belonging to onSubmit
+   * @returns {void}
    * @memberOf DocumentForm
    */
   onSubmit(e) {
@@ -54,22 +57,22 @@ class DocumentForm extends React.Component {
     this.props.createDocument(this.state);
     Materialize.toast('Document Created', 4000);
   }
-  
+
   /**
    *
-   *
-   * @param {any} e
-   * 
+   * onClick
+   * @param {any} e - event handler belonging to onClick
+   * @returns {void}
    * @memberOf DocumentForm
    */
   onClick(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
   /**
-   * 
-   * 
-   * @returns 
-   * 
+   *
+   *
+   * @returns {object} react componenents to render
+   *
    * @memberOf DocumentForm
    */
   render() {
@@ -128,21 +131,13 @@ class DocumentForm extends React.Component {
 }
 
 DocumentForm.propTypes = {
-  createDocument: propTypes.func.isRequired
+  createDocument: PropTypes.func.isRequired
 };
 
 
-/**
- *
- * 
- * @param {any} state 
- * @returns 
- */
-function mapStateToProps(state) {
-  return {
-    userInfo: state.users
-  };
-}
+const mapStateToProps = state => ({
+  userInfo: state.users
+});
 
 
 export default connect(mapStateToProps, { createDocument })(DocumentForm);

@@ -1,12 +1,14 @@
+/* eslint-disable no-undef*/
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import { getSingleDocument } from '../../actions/documentActions';
 
 
 /**
  *
- *
+ * React component for
  * @class singleDocument
  * @extends {React.Component}
  */
@@ -14,8 +16,8 @@ class singleDocument extends React.Component {
 
   /**
    *
-   *
-   *
+   * componentDidMount
+   * @return {void}
    * @memberOf singleDocument
    */
   componentDidMount() {
@@ -26,7 +28,7 @@ class singleDocument extends React.Component {
   /**
    *
    *
-   * @returns
+   * @returns {object} react components to render
    *
    * @memberOf singleDocument
    */
@@ -45,6 +47,12 @@ class singleDocument extends React.Component {
     );
   }
 }
+
+singleDocument.propTypes = {
+  getSingleDocument: PropTypes.func.isRequired,
+  doc: PropTypes.object.isRequired,
+  params: PropTypes.object.isRequired,
+};
 const mapDispatchToProps = dispatch => ({
   getSingleDocument: bindActionCreators(getSingleDocument, dispatch)
 });

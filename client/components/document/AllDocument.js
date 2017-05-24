@@ -1,3 +1,4 @@
+/* eslint-disable no-undef*/
 import React from 'react';
 import { Modal } from 'react-materialize';
 import { connect } from 'react-redux';
@@ -11,7 +12,7 @@ import { hasDocumentPermission } from '../../utils/helpers';
 
 /**
  *
- *
+ * React component for
  * @class AllDocument
  * @extends {React.Component}
  */
@@ -19,7 +20,8 @@ class AllDocument extends React.Component {
 
   /**
    * Creates an instance of AllDocument.
-   * @param {any} props
+   * Constructor
+   * @param {object} props - props of the component
    *
    * @memberOf AllDocument
    */
@@ -37,9 +39,11 @@ class AllDocument extends React.Component {
 
   /**
    *
-   *
+   * deleteDocument
    *
    * @memberOf AllDocument
+   *
+   * @return {void}
    */
   deleteDocument() {
     Materialize.toast('Document Deleted', 4000);
@@ -49,8 +53,9 @@ class AllDocument extends React.Component {
   /**
    *
    *
-   * @param {any} event
-   * @returns
+   * @param {object} event - event properties belonging to updated document state
+   *
+   * @returns {object} document - updated document state
    *
    * @memberOf AllDocument
    */
@@ -63,7 +68,7 @@ class AllDocument extends React.Component {
 
   /**
    *
-   *
+   * @returns {void}
    *
    * @memberOf AllDocument
    */
@@ -75,7 +80,7 @@ class AllDocument extends React.Component {
   /**
    *
    *
-   * @returns
+   * @returns {object} react componenents to render
    *
    * @memberOf AllDocument
    */
@@ -170,4 +175,4 @@ const mapDispatchToProps = dispatch => ({
   updateDocument: bindActionCreators(updateDocument, dispatch)
 });
 
-export default connect(null, mapDispatchToProps)(AllDocument);
+export default connect(mapDispatchToProps)(AllDocument);

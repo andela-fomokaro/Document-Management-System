@@ -1,3 +1,4 @@
+/* eslint-disable no-undef*/
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -10,7 +11,7 @@ import UpdateUsers from './UpdateUsers';
 
 /**
  *
- *
+ * React component for
  * @class ManageUsers
  * @extends {React.Component}
  */
@@ -18,7 +19,8 @@ class ManageUsers extends React.Component {
 
   /**
    * Creates an instance of ManageUsers.
-   * @param {any} props
+   * Constructor
+   * @param {object} props - props of the component
    *
    * @memberOf ManageUsers
    */
@@ -27,8 +29,8 @@ class ManageUsers extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
   /**
-   *
-   *
+   * componentDidMount
+   * @returns {void}
    *
    * @memberOf ManageUsers
    */
@@ -36,12 +38,49 @@ class ManageUsers extends React.Component {
     this.props.getUsers();
   }
 
+  /**
+   *
+   * onChange
+   * @param {any} e - event handler for search onChange
+   * @returns {string} search term
+   * @memberOf ManageUsers
+   */
+  onChange(e) {
+    const searchTerm = e.target.value;
+    if (searchTerm.length < 1 || undefined) {
+      this.props.getUsers();
+      Materialize.toast('Search does not match', 1000);
+    } else {
+      this.props.searchUsers(searchTerm);
+    }
+  }
 
   /**
    *
+   * onSelect
+   * @param {number} pageNo
+   * @return {void}
+   * @memberOf ManageUsers
+   */
+  onSelect(pageNo) {
+    const offset = (pageNo - 1) * 6;
+    this.props.getUsers(offset);
+  }
+    /**
    *
-   * @param {any} userId
+   * updateUser
+   * @returns {void}
+   * @memberOf ManageUsers
+   */
+  updateUser() {
+    this.props.updateUsers();
+  }
+
+  /**
    *
+   * deleteUser
+   * @param {number} userId - user id
+   * @returns {void}
    * @memberOf ManageUsers
    */
   deleteUser(userId) {
@@ -52,38 +91,7 @@ class ManageUsers extends React.Component {
   /**
    *
    *
-   *
-   * @memberOf ManageUsers
-   */
-  updateUser() {
-    this.props.updateUsers();
-  }
-
-  onChange(e) {
-    const searchTerm = e.target.value;
-    if (searchTerm.length < 1) {
-      this.props.getUsers();
-    } else {
-      this.props.searchUsers(searchTerm);
-    }
-  }
-
-  /**
-   *
-   *
-   * @param {any} pageNo
-   *
-   * @memberOf ManageUsers
-   */
-  onSelect(pageNo) {
-    const offset = (pageNo - 1) * 6;
-    this.props.getUsers(offset);
-  }
-
-  /**
-   *
-   *
-   * @returns
+   * @returns {void}
    *
    * @memberOf ManageUsers
    */
@@ -92,18 +100,16 @@ class ManageUsers extends React.Component {
     const usersInfo = this.props.users;
     const createdAt = moment(usersInfo.createdAt).format('MMMM Do YYYY, h:mm:ss a');
     const updatedAt = moment(usersInfo.updatedAt).format('MMMM Do YYYY, h:mm:ss a');
-    // const { pagination } = this.props.users;
-    console.log(this.props, 'xdfcghvbjknl;');
     return (
       <div className="manageUser">
         <form className="form-wrapper2 cf" onSubmit={this.onSubmit}>
           <input
+            className="black-text"
             type="search"
             placeholder="Search for users here..."
             required
             onChange={this.onChange} name="search"
           />
-          <button type="submit">Search</button>
         </form>
         <table className="z-depth-5 striped tabs">
           <thead className="tableHead">
@@ -119,8 +125,8 @@ class ManageUsers extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
-              <tr key={index} className="styleRow">
+            {users.map(user => (
+              <tr className="styleRow">
                 <td className="styleRow">{user.roleId}</td>
                 <td>{createdAt}</td>
                 <td>{updatedAt}</td>
@@ -148,7 +154,7 @@ class ManageUsers extends React.Component {
           </tbody>
         </table>
         <CreateUsers createUsers={this.props.createUsers} users={this.props.users} />
-        {/*<Pagination items={20} activePage={1} maxButtons={10} onSelect={e => this.onSelect(e)} />*/}
+        {/* <Pagination items={20} activePage={1} maxButtons={10} onSelect={e => this.onSelect(e)} />*/}
       </div>
     );
   }
@@ -163,18 +169,10 @@ ManageUsers.propTypes = {
   searchUsers: PropTypes.func.isRequired,
 };
 
-/**
- *
- *
- * @param {any} state
- * @returns
- */
-function mapStateToProps(state) {
-  return {
-    users: state.users,
-    roles: state.roles
-  };
-}
+const mapStateToProps = state => ({
+  users: state.users,
+  roles: state.roles
+});
 
 export default connect(mapStateToProps,
   { getUsers,

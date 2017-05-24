@@ -1,3 +1,4 @@
+/* eslint-disable no-undef*/
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -9,8 +10,8 @@ import UpdateRole from './UpdateRole';
 import { createRole, getRoles, deleteRole, updateRole } from '../../actions/roleActions';
 
 /**
- * 
- * 
+ *
+ * React component for
  * @class ManageRole
  * @extends {React.Component}
  */
@@ -18,8 +19,9 @@ class ManageRole extends React.Component {
 
   /**
    * Creates an instance of ManageRole.
-   * @param {any} props 
-   * 
+   * Constructor
+   * @param {object} props - props of the component
+   *
    * @memberOf ManageRole
    */
   constructor(props) {
@@ -28,9 +30,9 @@ class ManageRole extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * 
+   *
+   * componentDidMount
+   * @return {void}
    * @memberOf ManageRole
    */
   componentDidMount() {
@@ -38,10 +40,10 @@ class ManageRole extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @param {any} roleId 
-   * 
+   *
+   * deleteRole
+   * @param {number} roleId - role id belonging to role
+   * @return {void}
    * @memberOf ManageRole
    */
   deleteRole(roleId) {
@@ -50,9 +52,9 @@ class ManageRole extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * 
+   *
+   * updateRole
+   * @return {void}
    * @memberOf ManageRole
    */
   updateRole() {
@@ -60,10 +62,10 @@ class ManageRole extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @returns 
-   * 
+   *
+   *
+   * @returns {object} reacty components to render
+   *
    * @memberOf ManageRole
    */
   render() {

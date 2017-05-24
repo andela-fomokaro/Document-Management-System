@@ -10,11 +10,19 @@ import { loadDocuments, getDocument, deleteDocument, updateDocument, searchDocum
 
 /**
  *
- *
+ * React component for
  * @class DashBoard
  * @extends {React.Component}
  */
 class DashBoard extends React.Component {
+
+  /**
+   * Creates an instance of DashBoard.
+   * Constructor
+   * @param {object} props - props of the component
+   *
+   * @memberOf DashBoard
+   */
   constructor(props) {
     super(props);
     this.onChange = this.onChange.bind(this);
@@ -22,7 +30,8 @@ class DashBoard extends React.Component {
   }
   /**
    *
-   *
+   * componentDidMount
+   * @returns {void}
    *
    * @memberOf DashBoard
    */
@@ -32,8 +41,10 @@ class DashBoard extends React.Component {
 
   /**
    *
+   * onSelect
+   * @param {number} pageNo
    *
-   * @param {any} pageNo
+   * @returns {void}
    *
    * @memberOf DashBoard
    */
@@ -43,10 +54,10 @@ class DashBoard extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @param {any} e 
-   * 
+   *
+   * onChange
+   * @param {any} e - event handler belonging to Onchange
+   * @returns {string} search term
    * @memberOf DashBoard
    */
   onChange(e) {
@@ -60,7 +71,7 @@ class DashBoard extends React.Component {
   /**
    *
    *
-   * @returns
+   * @returns {object} react componenents to render
    *
    * @memberOf DashBoard
    */
@@ -91,17 +102,11 @@ class DashBoard extends React.Component {
   }
 }
 
-/**
- *
- *
- * @param {any} state
- * @returns
- */
-function mapStateToProps(state) {
-  return {
-    docs: state.documents
-  };
-}
+
+const mapStateToProps = state => ({
+  docs: state.documents
+});
+
 
 const mapDispatchToProps = dispatch => ({
   loadDocuments: bindActionCreators(loadDocuments, dispatch),
@@ -114,6 +119,7 @@ const mapDispatchToProps = dispatch => ({
 DashBoard.propTypes = {
   deleteDocument: propTypes.func.isRequired,
   loadDocuments: propTypes.func.isRequired,
+  searchDocument: propTypes.func.isRequired,
   docs: propTypes.any.isRequired,
 };
 

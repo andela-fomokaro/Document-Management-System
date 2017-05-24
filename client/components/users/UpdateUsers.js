@@ -1,10 +1,11 @@
+/* eslint-disable no-undef*/
 import React from 'react';
 import { Modal } from 'react-materialize';
 import PropTypes from 'prop-types';
 
 /**
- * 
- * 
+ *
+ * React component for
  * @class UpdateUsers
  * @extends {React.Component}
  */
@@ -12,8 +13,9 @@ class UpdateUsers extends React.Component {
 
   /**
    * Creates an instance of UpdateUsers.
-   * @param {any} props 
-   * 
+   * React component for
+   * @param {object} props - props of the component
+   *
    * @memberOf UpdateUsers
    */
   constructor(props) {
@@ -32,10 +34,10 @@ class UpdateUsers extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @param {any} e 
-   * 
+   *
+   * onSubmit
+   * @param {any} e - event handler for onSubmit
+   * @returns {void}
    * @memberOf UpdateUsers
    */
   onSubmit(e) {
@@ -44,10 +46,10 @@ class UpdateUsers extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @param {any} e 
-   * 
+   *
+   * onChange
+   * @param {any} e - event handler for onSubmi
+   * @returns {void}
    * @memberOf UpdateUsers
    */
   onChange(e) {
@@ -55,31 +57,24 @@ class UpdateUsers extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @param {any} event 
-   * @returns 
-   * 
+   *
+   * updateUserState
+   * @param {any} event - event handler for onSubmi
+   * @returns {object} - updated state of users
+   *
    * @memberOf UpdateUsers
    */
   updateUserState(event) {
     const field = event.target.name;
     const userField = this.state.users;
-    userField[field] = field === 'typeId' ? Number(event.target.value) : event.target.value;
+    userField[field] = event.target.value;
     return this.setState({ userField });
   }
-
-  // updateUser() {
-  //   this.props.updateUser(this.state.users);
-  //   // Materialize.toast('User Updated Successfully', 4000);
-  // }
-
-
   /**
-   * 
-   * 
-   * @returns 
-   * 
+   *
+   *
+   * @returns {object} react componenents to render
+   *
    * @memberOf UpdateUsers
    */
   render() {

@@ -1,3 +1,5 @@
+/* eslint-disable no-undef*/
+/* eslint-disable no-unused-vars*/
 import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -10,8 +12,8 @@ import validateInput from '../../../shared/validate/signUp';
 
 
 /**
- * 
- * 
+ *
+ * React component for
  * @class SignupForm
  * @extends {React.Component}
  */
@@ -19,8 +21,9 @@ class SignupForm extends React.Component {
 
   /**
    * Creates an instance of SignupForm.
-   * @param {any} props 
-   * 
+   * Constructor
+   * @param {object} props
+   *
    * @memberOf SignupForm
    */
   constructor(props) {
@@ -37,10 +40,11 @@ class SignupForm extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @param {any} e 
-   * 
+   *
+   * onChange
+   * @param {any} e - event handler for onChange
+   * @returns {void}
+   *
    * @memberOf SignupForm
    */
   onChange(e) {
@@ -48,10 +52,11 @@ class SignupForm extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @param {any} e 
-   * 
+   *
+   * onSubmit
+   * @param {any} e - event handler for onSubmit
+   * @returns {void}
+   *
    * @memberOf SignupForm
    */
   onSubmit(e) {
@@ -60,20 +65,26 @@ class SignupForm extends React.Component {
     if (isValid) {
       this.props.userSignupRequest(this.state).then(
         (user) => {
-          Materialize.toast('Signed up successfully', 4000);
-          this.context.router.push('dashboardpage');
+          Materialize.toast('Sign up successfull', 3000);
+          return this.context.router.push('/');
         }
+    )
+    .catch((err) => {
+      Materialize.toast(err.data.message, 2000);
+    }
     );
     } else if (errors.passwordConfirmation || errors.email) {
       Materialize.toast('Wrong password or email entered', 2000);
+    } else {
+      Materialize.toast('Username and email mut be unique', 2000);
     }
   }
 
   /**
-   * 
-   * 
-   * @returns 
-   * 
+   *
+   *
+   * @returns {object} react components to render
+   *
    * @memberOf SignupForm
    */
   render() {
@@ -93,48 +104,6 @@ class SignupForm extends React.Component {
       paper: {
         padding: 20,
         overflow: 'auto'
-      },
-      buttonsDiv: {
-        textAlign: 'center',
-        padding: 10
-      },
-      flatButton: {
-        color: grey500
-      },
-      checkRemember: {
-        style: {
-          float: 'left',
-          maxWidth: 180,
-          paddingTop: 5
-        },
-        labelStyle: {
-          color: grey500
-        },
-        iconStyle: {
-          color: grey500,
-          borderColor: grey500,
-          fill: grey500
-        }
-      },
-      loginBtn: {
-        float: 'right'
-      },
-      btn: {
-        background: '#4f81e9',
-        color: white,
-        padding: 7,
-        borderRadius: 2,
-        margin: 2,
-        fontSize: 13
-      },
-      btnFacebook: {
-        background: '#4f81e9'
-      },
-      btnGoogle: {
-        background: '#e14441'
-      },
-      btnSpan: {
-        marginLeft: 5
       },
     };
 

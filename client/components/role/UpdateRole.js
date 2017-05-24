@@ -1,10 +1,10 @@
 import React from 'react';
 import { Modal } from 'react-materialize';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 /**
- * 
- * 
+ *
+ * React component for
  * @class UpdateRole
  * @extends {React.Component}
  */
@@ -12,8 +12,9 @@ class UpdateRole extends React.Component {
 
   /**
    * Creates an instance of UpdateRole.
-   * @param {any} props 
-   * 
+   * Constructor
+   * @param {object} props
+   *
    * @memberOf UpdateRole
    */
   constructor(props) {
@@ -28,10 +29,11 @@ class UpdateRole extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @param {any} e 
-   * 
+   *
+   * onSubmit
+   * @param {any} e - event handler for onSubmit
+   * @returns {void}
+   *
    * @memberOf UpdateRole
    */
   onSubmit(e) {
@@ -40,10 +42,10 @@ class UpdateRole extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @param {any} e 
-   * 
+   *
+   * onChange
+   * @param {any} e - event handler for onChange
+   * @returns {void}
    * @memberOf UpdateRole
    */
   onChange(e) {
@@ -51,24 +53,27 @@ class UpdateRole extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @param {any} event 
-   * @returns 
-   * 
+   *
+   *
+   * @param {any} event - event handler for update role state
+   * @returns {object}  role - update role state
+   *
    * @memberOf UpdateRole
    */
   updateRoleState(event) {
     const field = event.target.name;
-    const newTitle = field === 'typeId' ? Number(event.target.value) : event.target.value;
+    let newTitle = field;
+    if (newTitle) {
+      newTitle = event.target.value;
+    }
     return this.setState({ title: newTitle, id: this.state.id });
   }
 
   /**
-   * 
-   * 
-   * @returns 
-   * 
+   *
+   *
+   * @returns {object} react components to render
+   *
    * @memberOf UpdateRole
    */
   render() {
@@ -96,7 +101,8 @@ class UpdateRole extends React.Component {
 }
 
 UpdateRole.propTypes = {
-  updateRole: propTypes.func.isRequired
+  updateRole: PropTypes.func.isRequired,
+  role: PropTypes.object.isRequired
 };
 
 export default UpdateRole;

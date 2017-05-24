@@ -5,28 +5,33 @@ import DashBoardPage from './DashBoardPage';
 import Picture from './picture/as.png';
 
 /**
- * 
- * 
+ *
+ * React component for
  * @class Greetings
  * @extends {React.Component}
  */
 class Greetings extends React.Component {
-  
+
   /**
    * Creates an instance of Greetings.
-   * @param {any} props 
-   * 
+   * Constructor
+   * @param {object} props - props of the component
+   *
    * @memberOf Greetings
    */
   constructor(props) {
     super(props);
     this.state = { imageStatus: 'loading' };
+    this.handleImageLoaded = this.handleImageLoaded.bind(this);
+    this.handleImageErrored = this.handleImageErrored.bind(this);
   }
 
   /**
-   * 
-   * 
-   * 
+   *
+   * handleImageLoaded
+   *
+   *  @returns {void}
+   *
    * @memberOf Greetings
    */
   handleImageLoaded() {
@@ -34,9 +39,9 @@ class Greetings extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * 
+   * handleImageErrored
+   * @returns {void}
+   *
    * @memberOf Greetings
    */
   handleImageErrored() {
@@ -44,10 +49,10 @@ class Greetings extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @returns 
-   * 
+   *
+   *
+   * @returns {object} react components to render
+   *
    * @memberOf Greetings
    */
   render() {
@@ -60,8 +65,9 @@ class Greetings extends React.Component {
             <div className="card-image">
               <img
                 src={Picture} height="600"
-                onLoad={this.handleImageLoaded.bind(this)}
-                onError={this.handleImageErrored.bind(this)}
+                alt="dashboard pciture"
+                onLoad={this.handleImageLoaded}
+                onError={this.handleImageErrored}
               />
             </div>
             <div className="card-content">

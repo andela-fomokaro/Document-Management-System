@@ -3,8 +3,8 @@ import { Modal } from 'react-materialize';
 import propTypes from 'prop-types';
 
 /**
- * 
- * 
+ * React component for
+ *
  * @class CreateRole
  * @extends {React.Component}
  */
@@ -12,8 +12,8 @@ class CreateRole extends React.Component {
 
   /**
    * Creates an instance of CreateRole.
-   * @param {any} props 
-   * 
+   * @param {object} props
+   *
    * @memberOf CreateRole
    */
   constructor(props) {
@@ -27,10 +27,10 @@ class CreateRole extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @param {any} e 
-   * 
+   *
+   * onSubmit
+   * @param {any} e - event hhandler belonging to onSubmit
+   * @returns {void}
    * @memberOf CreateRole
    */
   onSubmit(e) {
@@ -39,10 +39,10 @@ class CreateRole extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @param {any} e 
-   * 
+   *
+   * onChange
+   * @param {any} e - event handler belonging to change
+   * @returns {void}
    * @memberOf CreateRole
    */
   onChange(e) {
@@ -50,10 +50,10 @@ class CreateRole extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @returns 
-   * 
+   *
+   *
+   * @returns {object} react component to render
+   *
    * @memberOf CreateRole
    */
   render() {

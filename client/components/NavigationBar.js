@@ -7,8 +7,8 @@ import { hasAdmin } from '../utils/helpers';
 
 
 /**
- * 
- * 
+ *
+ * React component for
  * @class NavigationBar
  * @extends {React.Component}
  */
@@ -16,8 +16,9 @@ class NavigationBar extends React.Component {
 
   /**
    * Creates an instance of NavigationBar.
-   * @param {any} props 
-   * 
+   * Constructor
+   * @param {object} props - props of the component
+   *
    * @memberOf NavigationBar
    */
   constructor(props) {
@@ -26,10 +27,10 @@ class NavigationBar extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @param {any} e 
-   * 
+   *
+   * logout
+   * @param {any} e - event handler belonging to logout
+   * @returns {void}
    * @memberOf NavigationBar
    */
   logout(e) {
@@ -38,10 +39,10 @@ class NavigationBar extends React.Component {
   }
 
   /**
-   * 
-   * 
-   * @returns 
-   * 
+   *
+   *
+   * @returns {object} react componenents to render
+   *
    * @memberOf NavigationBar
    */
   render() {
@@ -52,7 +53,7 @@ class NavigationBar extends React.Component {
     const { isAuthenticated } = this.props.auth;
     const userLinks = (
       <div>
-        <a className="right view" onClick={this.logout.bind(this)}>Logout</a>
+        <a className="right view" onClick={this.logout}>Logout</a>
         <a className="right view" href="/loadDocuments">View All Documents</a>
         <a className="right view" href="/myprofile">View Profile</a>
         {hasAdmin() ? <a className="right view" href="/managerole">Manage Roles</a> : ''}
@@ -86,16 +87,8 @@ NavigationBar.propTypes = {
   logout: propTypes.func.isRequired
 };
 
-/**
- * 
- * 
- * @param {any} state 
- * @returns 
- */
-function mapStateToProps(state) {
-  return {
-    auth: state.login
-  };
-}
+const mapStateToProps = state => ({
+  auth: state.login
+});
 
 export default connect(mapStateToProps, { logout })(NavigationBar);
