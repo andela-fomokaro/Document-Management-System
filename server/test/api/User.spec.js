@@ -78,7 +78,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(401);
             expect(response.body.message).to
-            .equal('Enter a valid email or password to log in');
+            .equal('Invalid Login Parameters');
             done();
           });
     });
@@ -89,7 +89,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(401);
             expect(response.body.message).to
-            .equal('Enter a valid email or password to log in');
+            .equal('Invalid Login Parameters');
             done();
           });
     });
