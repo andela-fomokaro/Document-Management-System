@@ -54,7 +54,7 @@ const User = {
       }
       res.status(401)
           .send({
-            message: 'Enter a valid email or password to log in'
+            message: 'Invalid Login Parameters'
           });
     });
   },
