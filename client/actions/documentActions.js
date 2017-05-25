@@ -1,5 +1,7 @@
 import axios from '../utils/index';
+import { getPayload } from '../utils/helpers';
 
+const usersid = getPayload().userId;
 /**
  *
  *
@@ -42,6 +44,25 @@ export function loadDocuments(offset = 0) {
 /**
  *
  *
+ * @export usersDocument
+ * @param {Number} id - document id
+ * @returns {Function} returns dispatch
+ */
+export function usersDocument(offset = 0, id = usersid) {
+  return (dispatch) => {
+    axios.get(`/api/users/${id}/documents?offset=${offset}`)
+      .then((res) => {
+        dispatch({
+          type: 'USER_DOCUMENT',
+          payload: res.data,
+        });
+      });
+  };
+}
+
+/**
+ *
+ *
  * @export getDocument
  * @param {number} id document id
  * @returns {Function} returns dispatch
@@ -77,6 +98,7 @@ export function deleteDocument(id) {
       });
   };
 }
+
 
 /**
  *

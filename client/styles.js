@@ -323,5 +323,12 @@ export default StyleSheet.create({
   },
   'styleRow': {
     'padding': [{ 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 30 }]
+  },
+  'myDocument': {
+    'textAlign': 'center',
+    'fontSize': [{ 'unit': 'px', 'value': 30 }],
+    'marginTop': [{ 'unit': 'px', 'value': 20 }],
+    'marginBottom': [{ 'unit': 'px', 'value': 30 }],
+    'color': '#333'
   }
 });

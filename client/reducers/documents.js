@@ -8,6 +8,9 @@ export default (state = initialState, action = {}) => {
   case 'LOAD_DOCUMENTS':
     return action.payload;
 
+  case 'USER_DOCUMENT':
+    return action.payload;
+
   case 'CREATE_DOCUMENT':
     return Object.assign({}, state,
     { document: [...state.documents, action.payload] });
@@ -15,6 +18,7 @@ export default (state = initialState, action = {}) => {
   case 'UPDATE_DOCUMENT':
     {
       const u = [];
+      console.log(state.documents, 'faith')
       state.documents.forEach((document) => {
         if (document.id === action.payload.id) {
           document = action.payload;

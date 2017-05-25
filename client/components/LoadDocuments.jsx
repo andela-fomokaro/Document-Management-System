@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'; // read about bindActionCreators REMEMBER
 import { Pagination } from 'react-materialize';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import DocumentForm from './document/DocumentForm.jsx';
 import AllDocument from './document/AllDocument.jsx';
 import
@@ -96,12 +96,13 @@ class DashBoard extends React.Component {
             deleteDocument={this.props.deleteDocument}
           />)}
         </div>
-        <Pagination
-        items={pagination.page_count}
-        activePage={pagination.page}
-        maxButtons={pagination.page_count}
-        onSelect={e => this.onSelect(e)} />
-      </div>
+          <Pagination
+            items={pagination.page_count}
+            activePage={pagination.page}
+            maxButtons={pagination.page_count}
+            onSelect={e => this.onSelect(e)}
+          />
+       </div>
     );
   }
 }
@@ -121,10 +122,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 DashBoard.propTypes = {
-  deleteDocument: propTypes.func.isRequired,
-  loadDocuments: propTypes.func.isRequired,
-  searchDocument: propTypes.func.isRequired,
-  docs: propTypes.any.isRequired,
+  deleteDocument: PropTypes.func.isRequired,
+  loadDocuments: PropTypes.func.isRequired,
+  searchDocument: PropTypes.func.isRequired,
+  docs: PropTypes.any.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashBoard);

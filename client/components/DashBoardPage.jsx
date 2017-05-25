@@ -3,10 +3,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import propTypes from 'prop-types';
+import { Pagination } from 'react-materialize';
 import SideNavLink from './SideNav.jsx';
-import { loadDocuments, getDocument, deleteDocument }
+import DocumentForm from './document/DocumentForm.jsx';
+import AllDocument from './document/AllDocument.jsx';
+import
+{ getDocument, deleteDocument, updateDocument, searchDocument, usersDocument }
 from '../actions/documentActions';
-import DashBoardOnboarding from '../components/document/DashboardOnboarding.jsx';
+// import DashBoardOnboarding from '../components/document/DashboardOnboarding.jsx';
 
 /**
  *
@@ -16,6 +20,52 @@ import DashBoardOnboarding from '../components/document/DashboardOnboarding.jsx'
  */
 class DashBoardPage extends React.Component {
   /**
+   * Creates an instance of DashBoard.
+   * Constructor
+   * @param {object} props - props of the component
+   *
+   * @memberOf DashBoard
+   */
+  constructor(props) {
+    super(props);
+    this.onChange = this.onChange.bind(this);
+    this.onSelect = this.onSelect.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.usersDocument();
+  }
+
+    /**
+   *
+   * onSelect
+   * @param {number} pageNo
+   *
+   * @returns {void}
+   *
+   * @memberOf DashBoard
+   */
+  onSelect(pageNo) {
+    const offset = (pageNo - 1) * 6;
+    this.props.usersDocument(offset);
+  }
+ 
+   /**
+   *
+   * onChange
+   * @param {any} e - event handler belonging to Onchange
+   * @memberOf DashBoard
+   */
+  onChange(e) {
+    const searchTerm = e.target.value;
+    if (searchTerm.length < 1) {
+      this.props.usersDocument();
+    } else {
+      this.props.searchDocument(searchTerm);
+    }
+  }
+
+  /**
    *
    *
    * @returns {object} react componenents to render
@@ -23,24 +73,50 @@ class DashBoardPage extends React.Component {
    * @memberOf DashBoardPage
    */
   render() {
-    return (
+    const { documents, pagination } = this.props.docs;
+    let allDocuments;
+      return (
       <div>
+         <h1 className="myDocument">My Documents</h1>
         <SideNavLink />
-        <DashBoardOnboarding />
+         <div className="container">
+        <form className="form-wrapper2 cf">
+          <input
+            type="search" placeholder="Search for document here..."
+            onChange={this.onChange} name="search"
+            required
+          />
+        </form>
+        <DocumentForm />
+        <div className="row">
+          { documents.map((doc, index) => <AllDocument
+            key={index}
+            document={doc}
+            deleteDocument={this.props.deleteDocument}
+          />)}
+        </div>
       </div>
+          <Pagination
+            items={pagination.page_count}
+            activePage={pagination.page}
+            maxButtons={pagination.page_count}
+            onSelect={e => this.onSelect(e)}
+          />
+       </div>
     );
+    }
   }
-}
 
 const mapStateToProps = state => ({
-  doc: state.documents
+  docs: state.documents
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadDocuments: bindActionCreators(loadDocuments, dispatch),
+  usersDocument: bindActionCreators(usersDocument, dispatch),
   getDocument: bindActionCreators(getDocument, dispatch),
   deleteDocument: bindActionCreators(deleteDocument, dispatch),
-  updateDocument: bindActionCreators(deleteDocument, dispatch)
+  updateDocument: bindActionCreators(updateDocument, dispatch),
+  searchDocument: bindActionCreators(searchDocument, dispatch),
 });
 
 DashBoardPage.propTypes = {

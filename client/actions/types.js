@@ -31,3 +31,4 @@ export const LOGOUT_USER = 'LOGOUT_USER';
 export const SEARCH_DOCUMENT = 'SEARCH_DOCUMENT';
 export const SEARCH_USERS = 'SEARCH_USERS';
 export const PAGINATION = 'PAGINATION';
+export const USER_DOCUMENT = 'USER_DOCUMENT';

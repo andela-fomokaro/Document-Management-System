@@ -8,7 +8,7 @@ const Document = {
    * Create a new Document
    * @param {Object} req - Request object
    * @param {Object} res - Response object
-   * @return {Object} Response object
+   * @return {void} Response object
    */
   create(req, res) {
     db.Documents.create({
@@ -30,7 +30,7 @@ const Document = {
    * Retrieve a specific document based on the id
    * @param {Object} req - Request object
    * @param {Object} res - Response object
-   * @return {Object} Response object
+   * @return {void} Response object
    */
 
   findDocument(req, res) {
@@ -71,17 +71,36 @@ const Document = {
    *
    * @param {Object} req - Request Object
    * @param {Object} res - Response Object
-   * @returns {Object} Response object
+   * @returns {void} Response object
    */
   findUsersDocuments(req, res) {
-    db.Documents.findAll({ where: { ownerId: req.params.id } })
-          .then(documents => res.status(200).send(documents));
+    const query = {};
+    query.limit = (req.query.limit > 0) ? req.query.limit : 6;
+    query.offset = (req.query.offset > 0) ? req.query.offset : 0;
+    query.attributes = { exclude: ['ownerId'] };
+    query.where = { ownerId: req.params.id };
+    db.Documents.findAndCountAll(query)
+    .then((documents) => {
+      query.count = documents.count;
+      const pagination = Helper.pagination(query);
+      const filteredDocuments = documents.rows.map(document => Object.assign({}, {
+        title: document.title,
+        content: document.content,
+        access: document.access,
+        type: document.type,
+        ownerId: document.ownerId,
+        createdAt: document.createdAt,
+        updatedAt: document.updatedAt,
+        id: document.id
+      }));
+      res.status(200).send({ pagination, documents: filteredDocuments });
+    });
   },
 /**
    * Update a document based on the id
    * @param {Object} req - Request object
    * @param {Object} res - Response object
-   * @returns {Object} Response object
+   * @returns {void} Response object
    */
   updateDoc(req, res) {
     db.Roles.findById(req.decoded.roleId)
@@ -122,7 +141,7 @@ const Document = {
    * Delete a particular Document
    * @param {Object} req - Request object
    * @param {Object} res - Response object
-   * @return {Object} Response object
+   * @return {void} Response object
    */
   delete(req, res) {
     db.Documents
@@ -152,7 +171,7 @@ const Document = {
    * Find all Documents
    * @param {Object} req - Request object
    * @param {Object} res - Response object
-   * @return {Object} Response object
+   * @return {void} Response object
    */
   findAllDocument(req, res) {
     db.Roles.findById(req.decoded.roleId)

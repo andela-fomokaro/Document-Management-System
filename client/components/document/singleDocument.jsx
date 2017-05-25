@@ -38,9 +38,10 @@ class singleDocument extends React.Component {
       <div className="container">
         <div className="z-depth-5 card docCard1">
           <div className="card-content cardContent">
+            <a href="/"> Click To View Your Document</a>
             <span className="card-title cardTitle">{doc.title}</span>
             <p>{doc.content}</p>
-            <a href="/loaddocuments">Go Back To Document Page</a>
+            <a href="/loaddocuments">Click To View All Document </a>
           </div>
         </div>
       </div>
