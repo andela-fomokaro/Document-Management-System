@@ -7,7 +7,7 @@ module.exports = (app) => {
 
   app.get('/api/documents/:id', Auth.verifyToken, Document.findDocument);
 
-  app.get('/api/users/:id/documents', Auth.verifyToken, Auth.verifyAdmin,
+  app.get('/api/users/:id/documents', Auth.verifyToken,
    Document.findUsersDocuments);// worked on still have issues
 
 

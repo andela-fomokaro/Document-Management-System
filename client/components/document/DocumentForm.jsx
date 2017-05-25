@@ -27,7 +27,7 @@ class DocumentForm extends React.Component {
     this.state = {
       title: '',
       content: '',
-      access: '',
+      access: 'public',
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);

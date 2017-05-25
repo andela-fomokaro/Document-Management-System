@@ -53,6 +53,7 @@ export const hasAdmin = () =>
   getPayload().roleId === 1;
 
 export const hasDocumentPermission = (ownerId) => {
+  console.log('faith', ownerId, getPayload().userId);
   return hasAdmin() ? true : getPayload().userId === ownerId;
 };
 

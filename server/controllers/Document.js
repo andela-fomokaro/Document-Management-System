@@ -77,7 +77,6 @@ const Document = {
     const query = {};
     query.limit = (req.query.limit > 0) ? req.query.limit : 6;
     query.offset = (req.query.offset > 0) ? req.query.offset : 0;
-    query.attributes = { exclude: ['ownerId'] };
     query.where = { ownerId: req.params.id };
     db.Documents.findAndCountAll(query)
     .then((documents) => {

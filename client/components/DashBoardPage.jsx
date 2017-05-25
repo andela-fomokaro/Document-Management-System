@@ -90,28 +90,27 @@ class DashBoardPage extends React.Component {
         <DocumentForm />
         { documents.length > 0
         ?
-           <div className="row">
-          { documents.map((doc, index) => <AllDocument
-            key={index}
-            document={doc}
-            deleteDocument={this.props.deleteDocument}
-          />)}
+        <div>
+          <div className="row">
+            { documents.map((doc, index) => <AllDocument
+              key={index}
+              document={doc}
+              deleteDocument={this.props.deleteDocument}
+            />)}
         </div>
-      </div>
-          <Pagination
-            items={pagination.page_count}
-            activePage={pagination.page}
-            maxButtons={pagination.page_count}
-            onSelect={e => this.onSelect(e)}
-          />
-       </div>
+            <Pagination
+              items={pagination.page_count}
+              activePage={pagination.page}
+              maxButtons={pagination.page_count}
+              onSelect={e => this.onSelect(e)}
+            />
+        </div>
        : ''
-        }
-       
+        } </div>
+        </div>
     );
     }
   }
-
 const mapStateToProps = state => ({
   docs: state.documents
 });

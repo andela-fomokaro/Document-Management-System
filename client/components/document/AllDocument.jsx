@@ -107,6 +107,7 @@ class AllDocument extends React.Component {
             <p className="documentDate">Access Type: {document.access}</p>
             <p className="documentDate">Created On: {dateCreated}</p>
             <p className="documentDate">Last Updated: {lastUpdated}</p>
+
             {hasDocumentPermission(document.ownerId) ? <ul>
               <li>
                 <Modal
