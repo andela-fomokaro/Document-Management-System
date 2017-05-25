@@ -27,12 +27,12 @@ export function setCurrentUser(user) {
  */
 export function logout() {
   return (dispatch) => {
-    localStorage.removeItem('jwtToken');
-    setAuthorizationToken(false);
     axios.post('/api/users/logout')
       .then(() => {
         browserHistory.push('/');
       });
+    localStorage.removeItem('jwtToken');
+    setAuthorizationToken(false);
     dispatch({
       type: LOGOUT_USER
     });

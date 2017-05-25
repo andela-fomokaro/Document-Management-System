@@ -309,7 +309,7 @@ describe('Document API:', () => {
       });
 
           it('should not return document that is not present in the database', (done) => {
-            request.get('/api/users/6/documents')
+            request.get('/api/users/100/documents')
           .set({
             Authorization: adminToken
           })
