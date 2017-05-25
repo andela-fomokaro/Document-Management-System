@@ -45,6 +45,7 @@ export function loadDocuments(offset = 0) {
  *
  *
  * @export usersDocument
+ * @param {number} [offset=0] document page difference
  * @param {Number} id - document id
  * @returns {Function} returns dispatch
  */

@@ -271,8 +271,9 @@ describe('Document API:', () => {
           });
           });
 
-          it('should delete user when id is valid and user is admin', (done) => {
-            request.delete('/api/users/6')
+          it('should delete user when id is valid and user is admin',
+           (done) => {
+             request.delete('/api/users/6')
           .set({ Authorization: adminToken })
           .end((error, response) => {
             expect(response.status).to.equal(200);
@@ -280,7 +281,7 @@ describe('Document API:', () => {
               .equal('Deleted successfully.');
             done();
           });
-          });
+           });
         });
 
         describe('GET: (/api/users/:id/documents) - ', () => {
@@ -308,7 +309,8 @@ describe('Document API:', () => {
           });
       });
 
-          it('should not return user\'s documents if user is not owner', (done) => {
+          it('should not return user\'s documents if user is not owner',
+          (done) => {
             request.get('/api/users/3/documents')
           .set({
             Authorization: regularToken
@@ -323,7 +325,7 @@ describe('Document API:', () => {
         });
 
         describe('GET: (/api/search/users?search) - ', () => {
-          const search = 'faith', term = 'abc';
+          const term = 'abc';
           it('should not return user(s) if search term is empty', (done) => {
             request.get('/api/search/users?search=')
           .set({ Authorization: adminToken })
@@ -335,8 +337,9 @@ describe('Document API:', () => {
           });
           });
 
-          it('should not return user(s) if search term doesn\'t match', (done) => {
-            request.get(`/api/search/users?search=${term}`)
+          it('should not return user(s) if search term doesn\'t match',
+           (done) => {
+             request.get(`/api/search/users?search=${term}`)
           .set({ Authorization: regularToken })
           .end((error, response) => {
             expect(response.status).to.equal(404);
@@ -344,7 +347,7 @@ describe('Document API:', () => {
             .equal('Does Not exist');
             done();
           });
-          });
+           });
         });
       });
     });

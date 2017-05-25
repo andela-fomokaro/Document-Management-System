@@ -1,27 +1,12 @@
 import jwtDecode from 'jwt-decode';
 
-export const summarize = (str, wordCount = 17) => str
-    .trim()
-    .replace(/\s+/, ' ')
-    .split(' ')
-    .splice(0, wordCount)
-    .join(' ')
-    .concat(' .....');
-
-
 let cachedToken = null;
 
-export /**
- * 
- * 
- * @param {any} token 
- * @param {any} payload 
- */
-const setToken = function (token, payload) {
-  cachedToken = token;
-  localStorage.setItem('jwtToken', token);
-  localStorage.setItem('payload', JSON.stringify(payload));
-};
+// const setToken = function (token, payload) {
+//   cachedToken = token;
+//   localStorage.setItem('jwtToken', token);
+//   localStorage.setItem('payload', JSON.stringify(payload));
+// };
 
 export const getToken = () => {
   if (!cachedToken) {
@@ -53,7 +38,6 @@ export const hasAdmin = () =>
   getPayload().roleId === 1;
 
 export const hasDocumentPermission = (ownerId) => {
-  console.log('faith', ownerId, getPayload().userId);
   return hasAdmin() ? true : getPayload().userId === ownerId;
 };
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys*/
 import db from '../models';
 import Helper from '../helpers/controllerHelper';
 /**
@@ -85,7 +86,8 @@ const Document = {
       }
       query.count = documents.count;
       const pagination = Helper.pagination(query);
-      const filteredDocuments = documents.rows.map(document => Object.assign({}, {
+      const filteredDocuments
+      = documents.rows.map(document => Object.assign({}, {
         title: document.title,
         content: document.content,
         access: document.access,
@@ -115,7 +117,8 @@ const Document = {
                 message: 'Document Does Not Exist',
               });
             }
-            if (role.title !== 'admin' && document.ownerId !== req.decoded.userId) {
+            if (role.title
+            !== 'admin' && document.ownerId !== req.decoded.userId) {
               return res.status(403)
                 .send({ message: 'You are not authorized' });
             }
@@ -154,7 +157,8 @@ const Document = {
                 message: 'Document Does Not Exist',
               });
             }
-            if ((req.decoded.roleId !== 1) && (document.ownerId !== req.decoded.userId)) {
+            if ((req.decoded.roleId !== 1)
+            && (document.ownerId !== req.decoded.userId)) {
               return res.status(403).send({
                 message: 'You are not authorized',
               });
@@ -221,7 +225,8 @@ const Document = {
               query.limit = (req.query.limit > 0) ? req.query.limit : 6;
               query.offset = (req.query.offset > 0) ? req.query.offset : 0;
               query.attributes = { exclude: ['ownerId'] };
-              const filteredDocuments = documents.rows.map(document => Object.assign({}, {
+              const filteredDocuments
+              = documents.rows.map(document => Object.assign({}, {
                 title: document.title,
                 content: document.content,
                 access: document.access,
@@ -320,15 +325,16 @@ const Document = {
         db.Documents
           .findAndCountAll(query)
           .then((documents) => {
-            const filteredDocuments = documents.rows.map(document => Object.assign({}, {
-              title: document.title,
-              content: document.content,
-              access: document.access,
-              type: document.type,
-              ownerId: document.ownerId,
-              createdAt: document.createdAt,
-              updatedAt: document.updatedAt
-            }));
+            const filteredDocuments
+             = documents.rows.map(document => Object.assign({}, {
+               title: document.title,
+               content: document.content,
+               access: document.access,
+               type: document.type,
+               ownerId: document.ownerId,
+               createdAt: document.createdAt,
+               updatedAt: document.updatedAt
+             }));
             query.count = documents.count;
             const pagination = Helper.pagination(query);
             if (documents.rows.length === 0) {

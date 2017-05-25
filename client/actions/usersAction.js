@@ -63,8 +63,8 @@ export function deleteUser(id) {
  *
  *
  * @export
- * @param {number} [id=usersid]
  * @param {object} data
+ *  @param {number} [id=usersid]
  * @returns {Function} returns dispatch
  */
 export function updateUser(data, id = usersid) {
