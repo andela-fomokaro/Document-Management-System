@@ -155,8 +155,7 @@ class ManageUsers extends React.Component {
             ))}
           </tbody>
         </table>
-        <CreateUsers createUsers={this.props.createUsers} users={this.props.users} />
-        {/* <Pagination items={20} activePage={1} maxButtons={10} onSelect={e => this.onSelect(e)} />*/}
+        <CreateUsers createUsers={this.props.createUsers} users={this.props.users} />x
       </div>
     );
   }

@@ -69,11 +69,6 @@ export default StyleSheet.create({
   'm-b-15': {
     'marginBottom': [{ 'unit': 'px', 'value': 15 }]
   },
-  'footer': {
-    'bottom': [{ 'unit': 'px', 'value': 0 }],
-    'top': [{ 'unit': '%V', 'value': 1 }, { 'unit': 'string', 'value': '!important' }],
-    'zIndex': '99999 !important'
-  },
   'input[type=text]': {
     'width': [{ 'unit': 'px', 'value': 130 }],
     'boxSizing': 'border-box',

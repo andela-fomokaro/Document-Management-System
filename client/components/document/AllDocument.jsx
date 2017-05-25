@@ -112,8 +112,7 @@ class AllDocument extends React.Component {
                 <Modal
                   className="teal-text"
                   trigger={
-                    <a className="btn-floating waves-effect waves-white grey lighten-5 right tooltipped"
-          data-position="top" data-delay="10" data-tooltip="Delete document">
+                    <a className="btn-floating grey lighten-5 right">
                       <i className="material-icons red-text">delete</i></a>
                        }
                 >
@@ -127,8 +126,7 @@ class AllDocument extends React.Component {
                   className="teal-text"
                   fixedFooter
                   trigger={
-                    <a className="btn-floating waves-effect waves-white pink darken-4 right tooltipped"
-                     data-position="top" data-delay="50" data-tooltip="Edit document">
+                    <a className="btn-floating pink darken-4 right">
                       <i className="material-icons">mode_edit</i></a>
   }
                 >
@@ -181,4 +179,4 @@ const mapDispatchToProps = dispatch => ({
   updateDocument: bindActionCreators(updateDocument, dispatch)
 });
 
-export default connect(mapDispatchToProps)(AllDocument);
+export default connect(null, mapDispatchToProps)(AllDocument);
