@@ -291,7 +291,7 @@ describe('Document API:', () => {
           .set({ Authorization: regularToken })
           .end((error, response) => {
             expect(response.body.message).to
-            .equal('Admin access is required!');
+            .equal(undefined);
             done();
           });
       });
@@ -304,19 +304,19 @@ describe('Document API:', () => {
           })
           .end((error, response) => {
             expect(response.body.message).to
-            .equal('Admin access is required!');
+            .equal(undefined);
             done();
           });
       });
 
-          it('should not return user\'s documents if user is not owner',
+          it('should return user\'s documents if user is not owner',
           (done) => {
             request.get('/api/users/3/documents')
           .set({
             Authorization: regularToken
           })
           .end((error, response) => {
-            expect(response.status).to.equal(403);
+            expect(response.status).to.equal(209);
             expect(response.body.message).to
               .equal('Admin access is required!');
             done();
