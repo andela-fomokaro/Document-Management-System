@@ -120,7 +120,8 @@ export default StyleSheet.create({
     'marginTop': [{ 'unit': 'px', 'value': 40 }]
   },
   'brand': {
-    'fontFamily': 'cursive !important'
+    'fontFamily': 'cursive',
+    'marginTop': [{ 'unit': 'px', 'value': 10 }]
   },
   'tableHead': {
     'color': '#f50057'
@@ -132,8 +133,9 @@ export default StyleSheet.create({
     'maxHeight': [{ 'unit': 'px', 'value': 308 }],
     'marginTop': [{ 'unit': 'px', 'value': 40 }]
   },
-  'tabs': {
-    'marginTop': [{ 'unit': 'px', 'value': 40 }]
+  'tab': {
+    'marginTop': [{ 'unit': 'px', 'value': 40 }],
+    'height': [{ 'unit': '%V', 'value': 1 }]
   },
   'docCard1': {
     'width': [{ 'unit': '%H', 'value': 1 }],

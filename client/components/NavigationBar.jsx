@@ -62,7 +62,7 @@ class NavigationBar extends React.Component {
     );
 
     const guestLinks = (
-      <ul id="nav-mobile" className="right hide-on-med-and-down">
+      <ul id="nav-mobile" className="right view">
         <li><Link id="signup"to="/signup">Sign up</Link></li>
         <li><Link id="login"to="/login">Login</Link></li>
       </ul>
@@ -73,9 +73,8 @@ class NavigationBar extends React.Component {
         <div className="nav-wrapper  blue-grey darken-4">
           <Link to="/" className="brand-logo brand">docStar</Link>
           <div className="nav-wrapper  blue-grey darken-4">
-            <h1 className="brand-logo brand"
-            style={header}>
-            <Link to="/" className="brand-logo brand">DocStar</Link></h1>
+            <h1>
+            <Link to="/" className="brand-logo brand hide-on-med-and-down">DocStar</Link></h1>
             {isAuthenticated ? userLinks : guestLinks}
           </div>
         </div>

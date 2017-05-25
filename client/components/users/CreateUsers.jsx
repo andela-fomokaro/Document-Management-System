@@ -81,7 +81,8 @@ class CreateUsers extends React.Component {
         trigger={
           <a
             className=
-            "btn pink darken-4 white-textright pink darken-3 right up btnUp"
+            "btn pink darken-4 white-textright pink darken-3 right up btnUp tooltipped"
+            data-position="left" data-delay="10" data-tooltip="Click to create new user"
             id="adminCreateModal"
           >Create User</a>
   }

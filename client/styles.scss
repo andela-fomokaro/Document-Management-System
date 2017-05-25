@@ -85,7 +85,8 @@ input[type=text]:focus {
   margin-top: 40px;
 }
 .brand{
-  font-family: cursive !important;
+  font-family: cursive;
+  margin-top: 10px;
 }
 .tableHead{
  color: #f50057;
@@ -97,8 +98,9 @@ input[type=text]:focus {
  max-height: 308px;
  margin-top: 40px;
 }
-.tabs{
+.tab{
     margin-top: 40px;
+    height: 100%;
 }
 .docCard1{
  width: 100%;

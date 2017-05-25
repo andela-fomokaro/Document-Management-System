@@ -83,7 +83,7 @@ class UpdateUsers extends React.Component {
       <Modal
         fixedFooter
         trigger={
-          <a id="updateUser"className="updateBtn">Click to update user</a>
+          <a id="updateUser"className="updateBtn">Update user</a>
   }
       >
         <form className="col s12" onSubmit={this.onSubmit}>

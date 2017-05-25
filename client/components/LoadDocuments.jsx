@@ -81,13 +81,12 @@ class DashBoard extends React.Component {
     const { pagination } = this.props.docs;
     return (
       <div className="container">
-        <form className="form-wrapper cf" onSubmit={this.onSubmit}>
+        <form className="form-wrapper2 cf" onSubmit={this.onSubmit}>
           <input
             type="search" placeholder="Search for document here..."
             onChange={this.onChange} name="search"
             required
           />
-          <button type="submit">Search</button>
         </form>
         <DocumentForm />
         <div className="row">

@@ -63,7 +63,8 @@ class CreateRole extends React.Component {
         trigger={
           <a
           id="adminCreateRole"
-          className="btn pink darken-4 white-text right right up btnUp">
+          className="btn pink darken-4 white-text right right up btnUp tooltipped"
+          data-position="left" data-delay="10" data-tooltip="Click to create new role">
           Create Role</a>
   }
       >

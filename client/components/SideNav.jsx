@@ -9,7 +9,9 @@ const SideNavLink = () =>
        <SideNav
          trigger={<Button
            floating large
-           className="pulse blue-grey darken-4 right" waves="light" icon="menu"
+           className="blue-grey darken-4 right tooltipped"
+           data-position="left" data-delay="10" data-tooltip="Contains navigation links"
+            waves="light" icon="menu"
          />}
          options={{ closeOnClick: true }}
        >

@@ -112,7 +112,8 @@ class AllDocument extends React.Component {
                 <Modal
                   className="teal-text"
                   trigger={
-                    <a className="btn-floating btn grey lighten-5  right">
+                    <a className="btn-floating waves-effect waves-white grey lighten-5 right tooltipped"
+          data-position="top" data-delay="10" data-tooltip="Delete document">
                       <i className="material-icons red-text">delete</i></a>
                        }
                 >
@@ -126,7 +127,8 @@ class AllDocument extends React.Component {
                   className="teal-text"
                   fixedFooter
                   trigger={
-                    <a className="btn-floating btn pink darken-4 right">
+                    <a className="btn-floating waves-effect waves-white pink darken-4 right tooltipped"
+                     data-position="top" data-delay="50" data-tooltip="Edit document">
                       <i className="material-icons">mode_edit</i></a>
   }
                 >

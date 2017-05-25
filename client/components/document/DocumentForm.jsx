@@ -81,7 +81,8 @@ class DocumentForm extends React.Component {
       <Modal
         trigger={<a
           className=
-          "btn-floating btn-large waves-effect waves-white pink darken-3"
+          "btn-floating btn-large waves-effect waves-white pink darken-3  tooltipped"
+          data-position="bottom" data-delay="50" data-tooltip="Create New document"
         >
           <i className="material-icons">note_add</i></a>
   }

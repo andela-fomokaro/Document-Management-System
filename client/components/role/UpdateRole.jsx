@@ -82,7 +82,8 @@ class UpdateRole extends React.Component {
         trigger={
           <a
           id="updateRole"
-          className="updateBtn">
+          className="updateBtn tootipped"
+          data-position="left" data-delay="10" data-tooltip="Click to update role">
             Click to update role</a>
   }
       >

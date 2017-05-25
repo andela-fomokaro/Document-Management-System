@@ -112,7 +112,7 @@ class ManageUsers extends React.Component {
             onChange={this.onChange} name="search"
           />
         </form>
-        <table className="z-depth-5 striped tabs">
+        <table className="z-depth-5 striped tab">
           <thead className="tableHead">
             <tr>
               <th id="roleid">Role Id</th>

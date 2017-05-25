@@ -112,7 +112,9 @@ class UserProfile extends React.Component {
         </div>
         <Modal
           trigger={
-            <button className="btn  profileButton pink darken-4">Update profile</button>
+            <button className="btn  profileButton pink darken-4 tooltipped"
+            data-position="top" data-delay="10" data-tooltip="Click to update your profile"
+            >Update profile</button>
   }
         >
           <div className="col s12">

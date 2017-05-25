@@ -5,7 +5,7 @@ import NavigationBar from './NavigationBar.jsx';
 import Footer from '../../client/components/Footer.jsx';
 
 const appStyle = {
-  width: '100%',
+  width: '1400px',
 };
 
 /**

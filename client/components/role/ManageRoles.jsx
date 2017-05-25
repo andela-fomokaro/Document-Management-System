@@ -101,7 +101,7 @@ class ManageRole extends React.Component {
 
     return (
       <div className="container">
-        <table className="z-depth-5 striped tabs">
+        <table className="z-depth-5 striped tab">
           <thead className="tableHead">
             <tr>
               <th id="roleTitle">Title</th>
