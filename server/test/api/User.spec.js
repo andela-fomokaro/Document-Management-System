@@ -308,18 +308,6 @@ describe('Document API:', () => {
           });
       });
 
-          it('should not return document that is not present in the database', (done) => {
-            request.get('/api/users/100/documents')
-          .set({
-            Authorization: adminToken
-          })
-          .end((error, response) => {
-            expect(response.status).to.equal(404);
-            expect(Array.isArray(response.body.documents)).to.be.false;
-            done();
-          });
-          });
-
           it('should not return user\'s documents if user is not owner', (done) => {
             request.get('/api/users/3/documents')
           .set({

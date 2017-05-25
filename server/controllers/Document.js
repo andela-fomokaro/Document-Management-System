@@ -81,6 +81,9 @@ const Document = {
     query.where = { ownerId: req.params.id };
     db.Documents.findAndCountAll(query)
     .then((documents) => {
+      if (!documents) {
+        return res.status(404).send('Document does not exist');
+      }
       query.count = documents.count;
       const pagination = Helper.pagination(query);
       const filteredDocuments = documents.rows.map(document => Object.assign({}, {

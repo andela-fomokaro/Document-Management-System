@@ -88,7 +88,9 @@ class DashBoardPage extends React.Component {
           />
         </form>
         <DocumentForm />
-        <div className="row">
+        { documents.length > 0
+        ?
+           <div className="row">
           { documents.map((doc, index) => <AllDocument
             key={index}
             document={doc}
@@ -103,6 +105,9 @@ class DashBoardPage extends React.Component {
             onSelect={e => this.onSelect(e)}
           />
        </div>
+       : ''
+        }
+       
     );
     }
   }
