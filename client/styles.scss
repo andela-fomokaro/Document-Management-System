@@ -81,7 +81,8 @@ input[type=text]:focus {
 }
 .brand{
   font-family: cursive;
-  margin-top: 10px;
+  margin-top: 20px;
+  margin-left: 40px;
 }
 .tableHead{
  color: #f50057;
@@ -304,4 +305,11 @@ input[type=text]:focus {
     margin-top: 20px;
     margin-bottom: 30px;
     color: #333;
+}
+.access{
+    font-size: 3em;
+    color:#880e4f;
+    text-align: center;
+    font-family: elephant;
+    margin-top: 30px; 
 }

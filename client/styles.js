@@ -116,7 +116,8 @@ export default StyleSheet.create({
   },
   'brand': {
     'fontFamily': 'cursive',
-    'marginTop': [{ 'unit': 'px', 'value': 10 }]
+    'marginTop': [{ 'unit': 'px', 'value': 20 }],
+    'marginLeft': [{ 'unit': 'px', 'value': 40 }]
   },
   'tableHead': {
     'color': '#f50057'
@@ -330,5 +331,12 @@ export default StyleSheet.create({
     'marginTop': [{ 'unit': 'px', 'value': 20 }],
     'marginBottom': [{ 'unit': 'px', 'value': 30 }],
     'color': '#333'
+  },
+  'access': {
+    'fontSize': [{ 'unit': 'em', 'value': 3 }],
+    'color': '#880e4f',
+    'textAlign': 'center',
+    'fontFamily': 'elephant',
+    'marginTop': [{ 'unit': 'px', 'value': 30 }]
   }
 });

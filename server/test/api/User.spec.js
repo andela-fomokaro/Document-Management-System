@@ -309,20 +309,6 @@ describe('Document API:', () => {
           });
       });
 
-          it('should return user\'s documents if user is not owner',
-          (done) => {
-            request.get('/api/users/3/documents')
-          .set({
-            Authorization: regularToken
-          })
-          .end((error, response) => {
-            expect(response.status).to.equal(209);
-            expect(response.body.message).to
-              .equal('Admin access is required!');
-            done();
-          });
-          });
-        });
 
         describe('GET: (/api/search/users?search) - ', () => {
           const term = 'abc';

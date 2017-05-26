@@ -77,9 +77,6 @@ class DashBoardPage extends React.Component {
     let allDocuments;
       return (
       <div>
-         <h1 className="myDocument">My Documents</h1>
-        <SideNavLink />
-         <div className="container">
         <form className="form-wrapper2 cf">
           <input
             type="search" placeholder="Search for document here..."
@@ -107,7 +104,6 @@ class DashBoardPage extends React.Component {
         </div>
        : ''
         } </div>
-        </div>
     );
     }
   }
