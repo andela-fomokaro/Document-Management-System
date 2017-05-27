@@ -310,10 +310,10 @@ describe('Document API:', () => {
       });
 
 
-        describe('GET: (/api/search/users?search) - ', () => {
-          const term = 'abc';
-          it('should not return user(s) if search term is empty', (done) => {
-            request.get('/api/search/users?search=')
+          describe('GET: (/api/search/users?search) - ', () => {
+            const term = 'abc';
+            it('should not return user(s) if search term is empty', (done) => {
+              request.get('/api/search/users?search=')
           .set({ Authorization: adminToken })
           .end((error, response) => {
             expect(response.status).to.equal(400);
@@ -321,9 +321,9 @@ describe('Document API:', () => {
             .equal('Search Does Not Match');
             done();
           });
-          });
+            });
 
-          it('should not return user(s) if search term doesn\'t match',
+            it('should not return user(s) if search term doesn\'t match',
            (done) => {
              request.get(`/api/search/users?search=${term}`)
           .set({ Authorization: regularToken })
@@ -334,6 +334,7 @@ describe('Document API:', () => {
             done();
           });
            });
+          });
         });
       });
     });

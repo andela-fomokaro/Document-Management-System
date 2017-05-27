@@ -1,24 +1,14 @@
-{
-    "extends": ["airbnb", "plugin:react/recommended"],
-    "plugins": [
-        "react",
-        "jsx-a11y",
-        "import"
-    ],
-    "env": {
-      "mocha": true,
-      "node": true,
-      "es6": true
-    },
-    "globals": {
-    "localStorage": false,
-    "document": false,
-    "$": false,
-    "Materialize": false
-    },
-    "rules": {
-    "max-len": ["error", 80, 4],
-    "react/forbid-prop-types": 0,
+module.exports = {
+  "root": true,
+  "extends": "airbnb",
+  "env": {
+    "node": true,
+    "es6": true,
+    "mocha": true,
+    "browser": true,
+    "jasmine": true
+  },
+  "rules": {
     "one-var": 0,
     "one-var-declaration-per-line": 0,
     "new-cap": 0,
@@ -27,7 +17,6 @@
     "comma-dangle": 0,
     "curly": ["error", "multi-line"],
     "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
-    "import/no-unresolved": [2, { "commonjs": true }],
     "valid-jsdoc": ["error", {
       "requireReturn": true,
       "requireReturnType": true,

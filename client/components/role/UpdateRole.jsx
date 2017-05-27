@@ -20,7 +20,7 @@ class UpdateRole extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: this.props.role.title || '',
+      title: this.props.role.title,
       id: this.props.role.id
     };
 
@@ -38,6 +38,7 @@ class UpdateRole extends React.Component {
    */
   onSubmit(e) {
     e.preventDefault();
+    console.log('john', this.props.role.id);
     this.props.updateRole(this.state);
   }
 
@@ -62,10 +63,7 @@ class UpdateRole extends React.Component {
    */
   updateRoleState(event) {
     const field = event.target.name;
-    let newTitle = field;
-    if (newTitle) {
-      newTitle = event.target.value;
-    }
+    const newTitle = field === 'typeId' ? Number(event.target.value) : event.target.value;
     return this.setState({ title: newTitle, id: this.state.id });
   }
 
@@ -77,16 +75,19 @@ class UpdateRole extends React.Component {
    * @memberOf UpdateRole
    */
   render() {
+    console.log('taiwo', this.props)
     return (
       <Modal
+        header='Update Role'
+        id="modUpdate"
         trigger={
           <a
           id="updateRole"
           className="updateBtn tootipped"
           data-position="left" data-delay="10" data-tooltip="Click to update role">
             Click to update role</a>
-  }
-      >
+         }
+       >
         <form className="col s12" onSubmit={this.onSubmit}>
           <div className="input-field col s12">
             <input
@@ -97,9 +98,14 @@ class UpdateRole extends React.Component {
               onChange={e => this.updateRoleState(e)}
             />
           </div>
+          <div>
           <button
           id="updateRoleButton"className="
-          btn pink darken-4">Update</button>
+          btn btn2 pink darken-4 modal-action modal-close">Update</button>
+           <button
+              className="btn btn2 pink darken-4 white-text modal-action modal-close"
+              >Close</button>
+          </div>
         </form>
       </Modal>
     );

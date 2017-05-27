@@ -80,7 +80,7 @@ class DashBoard extends React.Component {
     const documents = this.props.docs;
     const { pagination } = this.props.docs;
     return (
-      <div className="container">
+      <div>
         <form className="form-wrapper2 cf" onSubmit={this.onSubmit}>
           <input
             type="search" placeholder="Search for document here..."
@@ -89,12 +89,14 @@ class DashBoard extends React.Component {
           />
         </form>
         <DocumentForm />
+        <div className="container">
         <div className="row">
           { documents.documents.map((doc, index) => <AllDocument
             key={index}
             document={doc}
             deleteDocument={this.props.deleteDocument}
           />)}
+        </div>
         </div>
           <Pagination
             items={pagination.page_count}

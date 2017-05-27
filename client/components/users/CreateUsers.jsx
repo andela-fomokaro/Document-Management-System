@@ -80,11 +80,9 @@ class CreateUsers extends React.Component {
         fixedFooter
         trigger={
           <a
-            className=
-            "btn pink darken-4 white-textright pink darken-3 right up btnUp tooltipped"
-            data-position="left" data-delay="10" data-tooltip="Click to create new user"
-            id="adminCreateModal"
-          >Create User</a>
+           className="btn-floating btn-large docButton pink darken-3 tooltipped"
+          data-position="right" data-delay="50" data-tooltip="Create New User"
+          > <i className="material-icons">note_add</i></a>
   }
       >
 
@@ -146,7 +144,10 @@ class CreateUsers extends React.Component {
             />
           </div>
           <button
-          id="adminCreateUser"className="btn  pink darken-4">Send</button>
+          id="adminCreateUser"className="btn btn2 pink darken-4 modal-action modal-close">Send</button>
+           <button
+              className="btn btn2 pink darken-4 white-text modal-action modal-close"
+              >Close</button>
         </form>
       </Modal>
     );

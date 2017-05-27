@@ -1,5 +1,3 @@
-/* eslint-disable no-undef*/
-
 import React from 'react';
 import { Modal, Input } from 'react-materialize';
 import { connect } from 'react-redux';
@@ -27,7 +25,7 @@ class DocumentForm extends React.Component {
     this.state = {
       title: '',
       content: '',
-      access: 'public',
+      access: 'access',
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -55,7 +53,7 @@ class DocumentForm extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     this.props.createDocument(this.state);
-    Materialize.toast('Document Created', 4000);
+    Materialize.toast('Document Created', 1000);
   }
 
   /**
@@ -79,18 +77,32 @@ class DocumentForm extends React.Component {
     const { title, content, access } = this.state;
     return (
       <Modal
+        header='Create Document'
         trigger={<a
           className=
-          "btn-floating btn-large waves-effect waves-white pink darken-3  tooltipped"
-          data-position="bottom" data-delay="50" data-tooltip="Create New document"
+          "btn-floating btn-large docButton pink darken-3 tooltipped"
+          data-position="right" data-delay="50" data-tooltip="Create New document"
         >
           <i className="material-icons">note_add</i></a>
   }
       >
         <form className="col s12" onSubmit={this.onSubmit}>
           <div className="row">
+            <Input
+                s={6}
+                className="selectBox"
+                type="select"
+                name="access"
+                value={access} onChange={this.onChange}
+                defaultValue={document.access}
+              >
+               <option value="access" disabled>CHOOSE ACCESS </option>
+                <option value="public">Public</option>
+                <option value="private">Private</option>
+                <option value="role">Role</option>
+              </Input>
             <div className="input-field col s12">
-              <i className="material-icons prefix icons">mode_edit</i>
+             <label><b>INPUT TITLE </b></label>
               <input
                 type="text"
                 className="validate"
@@ -98,37 +110,21 @@ class DocumentForm extends React.Component {
                 value={title}
                 onChange={this.onChange}
               />
-              <label htmlFor="icon_prefix">Title</label>
-            </div>
-          </div>
-          <div className="row">
-            <div className="selectWidth col s6">
-              <Input
-                s={6}
-                type="select"
-                name="access"
-                value={access} onChange={this.onChange}
-                defaultValue={document.access}
-              >
-                <option value="public">Public</option>
-                <option value="private">Private</option>
-                <option value="role">Role</option>
-              </Input>
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
-              <i className="material-icons prefix icons">comment</i>
               <textarea
-                className="materialize-textarea"
+                id="mytextarea"
                 name="content"
                 value={content}
+                // onChange={this.onTinyMCEChange}
+                // tinymceConfig={this.props.tinymceConfig}
                 onChange={this.onChange}
               />
-              <label htmlFor="icon_prefix2">Content</label>
             </div>
           </div>
-          <button className=" btn pink darken-4">Send</button>
+          <button className=" btn pink darken-4 modal-action modal-close">Send</button>
         </form>
       </Modal>
     );

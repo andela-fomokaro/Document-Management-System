@@ -37,7 +37,6 @@ const Roles = {
       .send(roles);
     });
   },
-
 /**
    * Retrive a Role based on id with all users on that role
    * @param {Object} req - Request object

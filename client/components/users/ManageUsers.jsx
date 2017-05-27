@@ -97,11 +97,12 @@ class ManageUsers extends React.Component {
    */
   render() {
     const { users } = this.props;
+    console.log(users);
     const usersInfo = this.props.users;
     const createdAt = moment(usersInfo.createdAt).format('MMMM Do YYYY, h:mm:ss a');
     const updatedAt = moment(usersInfo.updatedAt).format('MMMM Do YYYY, h:mm:ss a');
     return (
-      <div className="manageUser">
+      <div>
         <form className="form-wrapper2 cf" onSubmit={this.onSubmit}>
           <input
             className="black-text"
@@ -112,10 +113,11 @@ class ManageUsers extends React.Component {
             onChange={this.onChange} name="search"
           />
         </form>
+        <CreateUsers createUsers={this.props.createUsers} users={this.props.users} />
+        <div className="manageUser">
         <table className="z-depth-5 striped tab">
           <thead className="tableHead">
             <tr>
-              <th id="roleid">Role Id</th>
               <th id="createdTime">Time Created</th>
               <th id="updatedTime">Last Updated</th>
               <th>Email</th>
@@ -128,25 +130,30 @@ class ManageUsers extends React.Component {
           <tbody>
             {users.map(user => (
               <tr className="styleRow">
-                <td className="styleRow">{user.roleId}</td>
-                <td>{createdAt}</td>
+                <td className="styleRow">{createdAt}</td>
                 <td>{updatedAt}</td>
                 <td>{user.email}</td>
                 <td>{user.fullNames}</td>
                 <td id="searchUsername">{user.username}</td>
                 <td className="cursor">
                   <Modal
+                   id="mod3"
                     className="teal-text"
                     trigger={
                       <a>delete</a>
                        }
                   >
-                    <span id="userDeleteButton"> Are You Sure You Want To Delete Role? </span>
+                    <span id="userDeleteButton" className="delHeader"> Are You Sure You Want To Delete This User? </span>
+                    <div>
                     <button
                       onClick={() => this.deleteUser(user.id)}
-                      className="btn pink darken-4 white-text right"
+                      className="btn btn2 pink darken-4 white-text modal-action modal-close"
                       id="deleteButton"
                     >Yes</button>
+                    <button
+                    className="btn btn2 pink darken-4 white-text modal-action modal-close"
+                    >No</button>
+                    </div>
                   </Modal></td>
                 <td className="styleRow">
                   <UpdateUsers updateUsers={this.props.updateUsers} users={user} />
@@ -155,7 +162,8 @@ class ManageUsers extends React.Component {
             ))}
           </tbody>
         </table>
-        <CreateUsers createUsers={this.props.createUsers} users={this.props.users} />x
+        </div>
+        
       </div>
     );
   }

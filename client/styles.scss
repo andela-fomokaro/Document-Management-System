@@ -134,75 +134,15 @@ input[type=text]:focus {
 .search{
   height: 40px
 }
-.form-wrapper {
-    width: 450px;
-    padding: 15px;
-    position: relative;
-    left: 17%;
-    top: 15px;    
-    background: rgb(220,220,220);
-    border-radius: 10px;
-    box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgb(220,220,220);
-}
 
-
-.form-wrapper input {
-    width: 330px;
-    height: 20px;
-    padding: 10px 5px;
-    float: left;    
-    font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
-    border: 0;
-    background: #fff;
-    border-radius: 3px 0 0 3px;      
-}
-
-.form-wrapper input:-ms-input-placeholder {
-    color: #999;
-    font-weight: normal;
-    font-style: italic;
-}    
-
-.form-wrapper button {
-    float: right;
-    margin-top: -60px;
-    border: 0;
-    padding: 0;
-    cursor: pointer;
-    height: 40px;
-    width: 110px;
-    font: bold 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma';
-    color: #fff;
-    text-transform: uppercase;
-    background: #880e4f;
-    border-radius: 0 3px 3px 0;      
-    text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
-}   
-  
-.form-wrapper button:hover{		
-    background: black;
-    color: #880e4f;
-}	
-  
-.form-wrapper button:hover:before{
-    border-right-color: #e54040;
-}
-
-.form-wrapper button:focus:before,
-.form-wrapper button:active:before{
-        border-right-color: #c42f2f;
-}      
-
-.form-wrapper button::-moz-focus-inner { /* remove extra button spacing for Mozilla Firefox */
-    border: 0;
-    padding: 0;
-}
 .form-wrapper2 {
 
  width: 440px;
     padding: 10px;
     height: 60px;
+    display: inline-block;
     margin-right: 30px;
+    margin-left: 30px;
     margin-top: 10px;  
     background: rgb(220,220,220);
     border-radius: 10px;
@@ -214,7 +154,7 @@ input[type=text]:focus {
     width: 410px;
     height: 20px;
     padding: 10px 5px;
-    float: left;    
+    display: inline-block;  
     font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
     border: 0;
     background: #fff;
@@ -312,4 +252,50 @@ input[type=text]:focus {
     text-align: center;
     font-family: elephant;
     margin-top: 30px; 
+}
+.docButton{
+    margin: 10px 0px 10px 10px;
+    display: inline-block;
+}
+.selectBox{
+    position: relative;
+    left: 10px !important;
+    width: 100%;
+}
+.modal{
+    width: 80%;
+}
+.modal-content h4{
+    font-size: 40px;
+    font-weight: 2em;
+    color:#880e4f;
+    text-align: center;
+}
+.btn-flat{
+    visibility:hidden;
+}
+.btn2{
+    margin-left: 10px;
+    margin-top: 50px;
+}
+.delHeader{
+    font-size: 28px;
+    font-weight: 2em;
+    text-align: center;
+
+}
+#mod{
+    width: 40%;
+}
+#mod2{
+    width: 40%;
+}
+#mod3{
+    width: 40%;
+}
+#mod4{
+    width: 50%;
+}
+#modUpdate{
+    width: 40%;
 }

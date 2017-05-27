@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Modal } from 'react-materialize';
-
+import _ from 'underscore';
 import CreateRole from './CreateRole.jsx';
 import UpdateRole from './UpdateRole.jsx';
 import { createRole, getRoles, deleteRole, updateRole } from '../../actions/roleActions';
@@ -26,7 +26,6 @@ class ManageRole extends React.Component {
    */
   constructor(props) {
     super(props);
-    this.deleteRole = this.deleteRole.bind(this);
   }
 
   /**
@@ -47,19 +46,19 @@ class ManageRole extends React.Component {
    * @memberOf ManageRole
    */
   deleteRole(roleId) {
-    Materialize.toast('Role Deleted', 4000);
+    console.log(this.props.role);
     this.props.deleteRole(roleId);
   }
 
-  /**
-   *
-   * updateRole
-   * @return {void}
-   * @memberOf ManageRole
-   */
-  updateRole() {
-    this.props.updateRole();
-  }
+  // /**
+  //  *
+  //  * updateRole
+  //  * @return {void}
+  //  * @memberOf ManageRole
+  //  */
+  // updateRole() {
+  //   this.props.updateRole();
+  // }
 
   /**
    *
@@ -69,38 +68,13 @@ class ManageRole extends React.Component {
    * @memberOf ManageRole
    */
   render() {
+    const { role } = (this.props);
+    console.log('faith', role);
+    console.log(role);
     const roleInfo = this.props.role;
-    const createdAt = moment(roleInfo.createdAt)
-    .format('MMMM Do YYYY, h:mm:ss a');
-    const updatedAt = moment(roleInfo.updatedAt)
-    .format('MMMM Do YYYY, h:mm:ss a');
-    const allRoles = this.props.role.map(role => (
-      <tr key={role.id}>
-        <td>{role.title}</td>
-        <td>{createdAt}</td>
-        <td>{updatedAt}</td>
-        <td className="cursor">
-
-          <Modal
-            className="teal-text"
-            trigger={
-              <a>delete</a>
-                       }
-          >
-            <span id="roleDeleteWord">
-              Are You Sure You Want To Delete Role? </span>
-            <button
-              onClick={this.deleteDocument}
-              id="deleteRole"
-              className="btn pink darken-4 white-text right"
-            >Yes</button>
-          </Modal></td>
-        <td><UpdateRole updateRole={this.props.updateRole} role={role} /></td>
-      </tr>
-      ));
-
     return (
       <div className="container">
+       <CreateRole createRole={this.props.createRole} role={this.props.role} />
         <table className="z-depth-5 striped tab">
           <thead className="tableHead">
             <tr>
@@ -112,10 +86,48 @@ class ManageRole extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {allRoles}
-          </tbody>
+              {
+                role.map(rolei => (
+                    <tr key={rolei.id}>
+                      <td>{rolei.title}</td>
+                      <td>
+                          {
+                            moment(rolei.createdAt)
+                            .format('MMMM Do YYYY, h:mm:ss a')
+                            }
+                        </td>
+                      <td>
+                          {
+                            moment(rolei.updatedAt)
+                            .format('MMMM Do YYYY, h:mm:ss a')
+                            }
+                        </td>
+                      <td className="cursor">
+
+                        <Modal
+                          id="mod2"
+                          className="teal-text"
+                          trigger={ <a>delete</a> }
+                        >
+                          <span id="roleDeleteWord" className="delHeader">
+                            Are You Sure You Want To Delete Role? </span>
+                          <div>
+                          <button
+                            onClick={() => this.deleteRole(rolei.id)}
+                            id="deleteRole"
+                            className="btn btn2 pink darken-4 white-text modal-action modal-close"
+                          >Yes</button>
+                          <button
+                            className="btn btn2 pink darken-4 white-text modal-action modal-close"
+                            >No</button>
+                          </div>
+                        </Modal></td>
+                      <td><UpdateRole {...this.props} role={rolei} /></td>
+                    </tr>
+                ))
+              }
+        </tbody>
         </table>
-        <CreateRole createRole={this.props.createRole} role={this.props.role} />
       </div>
     );
   }
@@ -124,13 +136,14 @@ class ManageRole extends React.Component {
 ManageRole.propTypes = {
   createRole: PropTypes.func.isRequired,
   getRoles: PropTypes.func.isRequired,
-  role: PropTypes.arrayOf(PropTypes.object).isRequired,
+  role: PropTypes.any.isRequired,
   deleteRole: PropTypes.func.isRequired,
   updateRole: PropTypes.func.isRequired,
 
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => (
+  {
   role: state.roles
 });
 

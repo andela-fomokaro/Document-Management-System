@@ -47,6 +47,7 @@ class AllDocument extends React.Component {
    */
   deleteDocument() {
     Materialize.toast('Document Deleted', 4000);
+    console.log(his.props.document.id);
     this.props.deleteDocument(this.props.document.id);
   }
 
@@ -99,7 +100,7 @@ class AllDocument extends React.Component {
         <div className="card docCard col s4" key={document.id}>
           <div className="card-content cardContent">
             <div className="card-title cardTitle">
-              {document.title.substring(0, 20)}</div>
+              {document.title.substring(0, 10)}</div>
             <p>{document.content.substring(0, 20)}...</p>
             <Link to={singleDocUrl}>Read more</Link>
           </div>
@@ -111,19 +112,26 @@ class AllDocument extends React.Component {
             {hasDocumentPermission(document.ownerId) ? <ul>
               <li>
                 <Modal
+                  id="mod"
                   className="teal-text"
                   trigger={
                     <a className="btn-floating grey lighten-5 right">
                       <i className="material-icons red-text">delete</i></a>
                        }
                 >
-                  <span> Are You Sure You Want To Delete Document? </span>
+                  <span className="delHeader"> Are You Sure You Want To Delete This Document? </span>
+                  <div>
                   <button
                     onClick={this.deleteDocument}
-                    className="btn pink darken-4 white-text right"
+                    className="btn btn2 pink darken-4 white-text modal-action modal-close"
                   >Yes</button>
+                  <button
+                    className="btn btn2 pink darken-4 white-text modal-action modal-close"
+                  >No</button>
+                  </div>
                 </Modal>
                 <Modal
+                  header='Update Document'
                   className="teal-text"
                   fixedFooter
                   trigger={
@@ -157,7 +165,7 @@ class AllDocument extends React.Component {
                   </div>
                   <button
                     onClick={() => this.updateDocument()}
-                    className="btn pink darken-4 white-text"
+                    className="btn pink darken-4 white-text modal-action modal-close"
                   >Update</button>
                 </Modal>
               </li>

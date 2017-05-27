@@ -171,69 +171,13 @@ export default StyleSheet.create({
   'search': {
     'height': [{ 'unit': 'px', 'value': 40 }]
   },
-  'form-wrapper': {
-    'width': [{ 'unit': 'px', 'value': 450 }],
-    'padding': [{ 'unit': 'px', 'value': 15 }, { 'unit': 'px', 'value': 15 }, { 'unit': 'px', 'value': 15 }, { 'unit': 'px', 'value': 15 }],
-    'position': 'relative',
-    'left': [{ 'unit': '%H', 'value': 0.17 }],
-    'top': [{ 'unit': 'px', 'value': 15 }],
-    'background': 'gainsboro',
-    'borderRadius': '10px',
-    'boxShadow': [{ 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 1 }, { 'unit': 'px', 'value': 1 }, { 'unit': 'string', 'value': 'rgba(0, 0, 0, 0.4)' }, { 'unit': 'string', 'value': 'rgba(0, 0, 0, 0.4)' }, { 'unit': 'string', 'value': 'inset,' }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 1 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'string', 'value': 'gainsboro' }]
-  },
-  'form-wrapper input': {
-    'width': [{ 'unit': 'px', 'value': 330 }],
-    'height': [{ 'unit': 'px', 'value': 20 }],
-    'padding': [{ 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 5 }, { 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 5 }],
-    'float': 'left',
-    'font': [{ 'unit': 'string', 'value': 'bold' }, { 'unit': 'px', 'value': 15 }, { 'unit': 'string', 'value': ''lucida' }, { 'unit': 'string', 'value': 'sans',' }, { 'unit': 'string', 'value': ''trebuchet' }, { 'unit': 'string', 'value': 'MS',' }, { 'unit': 'string', 'value': ''Tahoma'' }],
-    'border': [{ 'unit': 'px', 'value': 0 }],
-    'background': '#fff',
-    'borderRadius': '3px 0 0 3px'
-  },
-  'form-wrapper input:-ms-input-placeholder': {
-    'color': '#999',
-    'fontWeight': 'normal',
-    'fontStyle': 'italic'
-  },
-  'form-wrapper button': {
-    'float': 'right',
-    'marginTop': [{ 'unit': 'px', 'value': -60 }],
-    'border': [{ 'unit': 'px', 'value': 0 }],
-    'padding': [{ 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 0 }],
-    'cursor': 'pointer',
-    'height': [{ 'unit': 'px', 'value': 40 }],
-    'width': [{ 'unit': 'px', 'value': 110 }],
-    'font': [{ 'unit': 'string', 'value': 'bold' }, { 'unit': 'px', 'value': 15 }, { 'unit': 'string', 'value': ''lucida' }, { 'unit': 'string', 'value': 'sans',' }, { 'unit': 'string', 'value': ''trebuchet' }, { 'unit': 'string', 'value': 'MS',' }, { 'unit': 'string', 'value': ''Tahoma'' }],
-    'color': '#fff',
-    'textTransform': 'uppercase',
-    'background': '#880e4f',
-    'borderRadius': '0 3px 3px 0',
-    'textShadow': [{ 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': -1 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'string', 'value': 'rgba(0, 0, 0, 0.3)' }]
-  },
-  'form-wrapper button:hover': {
-    'background': 'black',
-    'color': '#880e4f'
-  },
-  'form-wrapper button:hover:before': {
-    'borderRightColor': '#e54040'
-  },
-  'form-wrapper button:focus:before': {
-    'borderRightColor': '#c42f2f'
-  },
-  'form-wrapper button:active:before': {
-    'borderRightColor': '#c42f2f'
-  },
-  'form-wrapper button::-moz-focus-inner': {
-    // remove extra button spacing for Mozilla Firefox
-    'border': [{ 'unit': 'px', 'value': 0 }],
-    'padding': [{ 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 0 }]
-  },
   'form-wrapper2': {
     'width': [{ 'unit': 'px', 'value': 440 }],
     'padding': [{ 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 10 }],
     'height': [{ 'unit': 'px', 'value': 60 }],
+    'display': 'inline-block',
     'marginRight': [{ 'unit': 'px', 'value': 30 }],
+    'marginLeft': [{ 'unit': 'px', 'value': 30 }],
     'marginTop': [{ 'unit': 'px', 'value': 10 }],
     'background': 'gainsboro',
     'borderRadius': '10px',
@@ -243,7 +187,7 @@ export default StyleSheet.create({
     'width': [{ 'unit': 'px', 'value': 410 }],
     'height': [{ 'unit': 'px', 'value': 20 }],
     'padding': [{ 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 5 }, { 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 5 }],
-    'float': 'left',
+    'display': 'inline-block',
     'font': [{ 'unit': 'string', 'value': 'bold' }, { 'unit': 'px', 'value': 15 }, { 'unit': 'string', 'value': ''lucida' }, { 'unit': 'string', 'value': 'sans',' }, { 'unit': 'string', 'value': ''trebuchet' }, { 'unit': 'string', 'value': 'MS',' }, { 'unit': 'string', 'value': ''Tahoma'' }],
     'border': [{ 'unit': 'px', 'value': 0 }],
     'background': '#fff',
@@ -338,5 +282,50 @@ export default StyleSheet.create({
     'textAlign': 'center',
     'fontFamily': 'elephant',
     'marginTop': [{ 'unit': 'px', 'value': 30 }]
+  },
+  'docButton': {
+    'margin': [{ 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 10 }],
+    'display': 'inline-block'
+  },
+  'selectBox': {
+    'position': 'relative',
+    'left': [{ 'unit': 'px', 'value': 10 }, { 'unit': 'string', 'value': '!important' }],
+    'width': [{ 'unit': '%H', 'value': 1 }]
+  },
+  'modal': {
+    'width': [{ 'unit': '%H', 'value': 0.8 }]
+  },
+  'modal-content h4': {
+    'fontSize': [{ 'unit': 'px', 'value': 40 }],
+    'fontWeight': '2em',
+    'color': '#880e4f',
+    'textAlign': 'center'
+  },
+  'btn-flat': {
+    'visibility': 'hidden'
+  },
+  'btn2': {
+    'marginLeft': [{ 'unit': 'px', 'value': 10 }],
+    'marginTop': [{ 'unit': 'px', 'value': 50 }]
+  },
+  'delHeader': {
+    'fontSize': [{ 'unit': 'px', 'value': 28 }],
+    'fontWeight': '2em',
+    'textAlign': 'center'
+  },
+  '#mod': {
+    'width': [{ 'unit': '%H', 'value': 0.4 }]
+  },
+  '#mod2': {
+    'width': [{ 'unit': '%H', 'value': 0.4 }]
+  },
+  '#mod3': {
+    'width': [{ 'unit': '%H', 'value': 0.4 }]
+  },
+  '#mod4': {
+    'width': [{ 'unit': '%H', 'value': 0.5 }]
+  },
+  '#modUpdate': {
+    'width': [{ 'unit': '%H', 'value': 0.4 }]
   }
 });

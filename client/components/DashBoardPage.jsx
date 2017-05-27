@@ -76,7 +76,7 @@ class DashBoardPage extends React.Component {
     const { documents, pagination } = this.props.docs;
     let allDocuments;
       return (
-      <div>
+      <div> 
         <form className="form-wrapper2 cf">
           <input
             type="search" placeholder="Search for document here..."
@@ -84,10 +84,10 @@ class DashBoardPage extends React.Component {
             required
           />
         </form>
-        <DocumentForm />
+         <DocumentForm/>
         { documents.length > 0
         ?
-        <div>
+        <div className="container">
           <div className="row">
             { documents.map((doc, index) => <AllDocument
               key={index}

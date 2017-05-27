@@ -81,6 +81,8 @@ class UpdateUsers extends React.Component {
     const { fullNames, username, role, email } = this.state.users;
     return (
       <Modal
+        id="mod4"
+        header='Update User Role'
         fixedFooter
         trigger={
           <a id="updateUser"className="updateBtn">Update user</a>
@@ -127,7 +129,10 @@ class UpdateUsers extends React.Component {
               placeholder="Full Name"
             />
           </div>
-          <button id="adminUpdate"className=" btn pink darken-4">Update</button>
+          <button id="adminUpdate"className=" btn btn2 pink darken-4">Update</button>
+           <button
+            className="btn btn2 pink darken-4 white-text modal-action modal-close"
+           >Close</button>
         </form>
 
       </Modal>
