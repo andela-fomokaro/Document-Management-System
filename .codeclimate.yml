@@ -27,3 +27,4 @@ exclude_paths:
 - .sequelizerc
 - "server/config/"
 - "server/models/"
+- "server/seeders/"
