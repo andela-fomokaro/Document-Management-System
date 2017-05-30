@@ -4,10 +4,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Modal } from 'react-materialize';
-import _ from 'underscore';
 import CreateRole from './CreateRole.jsx';
 import UpdateRole from './UpdateRole.jsx';
-import { createRole, getRoles, deleteRole, updateRole } from '../../actions/roleActions';
+import { createRole, getRoles, deleteRole } from '../../actions/roleActions';
 
 /**
  *
@@ -46,19 +45,23 @@ class ManageRole extends React.Component {
    * @memberOf ManageRole
    */
   deleteRole(roleId) {
-    console.log(this.props.role);
-    this.props.deleteRole(roleId);
+    swal({
+      title: "Are you sure?", 
+      text: "Are you sure that you want to delete this role?", 
+      type: "warning",
+      showCancelButton: true,
+      closeOnConfirm: true,
+      confirmButtonText: "Yes, delete it!",
+      confirmButtonColor: "#ec6c62"
+    }, (isConfirm) => {
+      if(isConfirm) {
+         this.props.deleteRole(roleId);
+        swal('Deleted', 'role was deleted', 'success');
+      } else {
+        swal('Canceled', 'OPERATION CANCELED', 'error');
+      }
+    });
   }
-
-  // /**
-  //  *
-  //  * updateRole
-  //  * @return {void}
-  //  * @memberOf ManageRole
-  //  */
-  // updateRole() {
-  //   this.props.updateRole();
-  // }
 
   /**
    *
@@ -69,31 +72,32 @@ class ManageRole extends React.Component {
    */
   render() {
     const { role } = (this.props);
-    console.log('faith', role);
-    console.log(role);
     const roleInfo = this.props.role;
+    let serialNumber= 0;
     return (
       <div className="container">
        <CreateRole createRole={this.props.createRole} role={this.props.role} />
-        <table className="z-depth-5 striped tab">
+        <table className="z-depth-5 highlight tab">
           <thead className="tableHead">
             <tr>
-              <th id="roleTitle">Title</th>
+              <th id="roleTitle" className="roleTitle">S/N</th>
+              <th id="roleTitle" className="roleTitle">Title</th>
               <th id="timeCreated">Time Created</th>
               <th id="lastUpdated">Last Updated</th>
               <th>Delete role</th>
-              <th>Update role</th>
             </tr>
           </thead>
           <tbody>
               {
                 role.map(rolei => (
+                    serialNumber += 1,
                     <tr key={rolei.id}>
+                      <th className="roleTitle">{serialNumber}</th>
                       <td>{rolei.title}</td>
                       <td>
                           {
                             moment(rolei.createdAt)
-                            .format('MMMM Do YYYY, h:mm:ss a')
+                            .format('MMMM Do YYYY')
                             }
                         </td>
                       <td>
@@ -102,27 +106,9 @@ class ManageRole extends React.Component {
                             .format('MMMM Do YYYY, h:mm:ss a')
                             }
                         </td>
-                      <td className="cursor">
-
-                        <Modal
-                          id="mod2"
-                          className="teal-text"
-                          trigger={ <a>delete</a> }
-                        >
-                          <span id="roleDeleteWord" className="delHeader">
-                            Are You Sure You Want To Delete Role? </span>
-                          <div>
-                          <button
-                            onClick={() => this.deleteRole(rolei.id)}
-                            id="deleteRole"
-                            className="btn btn2 pink darken-4 white-text modal-action modal-close"
-                          >Yes</button>
-                          <button
-                            className="btn btn2 pink darken-4 white-text modal-action modal-close"
-                            >No</button>
-                          </div>
-                        </Modal></td>
-                      <td><UpdateRole {...this.props} role={rolei} /></td>
+                      <td className="cursor"><a
+                            onClick={(roleId) => 
+                            this.deleteRole(rolei.id)}>delete role</a></td>
                     </tr>
                 ))
               }
@@ -138,8 +124,6 @@ ManageRole.propTypes = {
   getRoles: PropTypes.func.isRequired,
   role: PropTypes.any.isRequired,
   deleteRole: PropTypes.func.isRequired,
-  updateRole: PropTypes.func.isRequired,
-
 };
 
 const mapStateToProps = state => (
@@ -151,4 +135,4 @@ const mapStateToProps = state => (
 export default connect(mapStateToProps, { createRole,
   getRoles,
   deleteRole,
-  updateRole })(ManageRole);
+})(ManageRole);
