@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import propTypes from 'prop-types';
 import { Pagination } from 'react-materialize';
-import SideNavLink from './SideNav.jsx';
 import DocumentForm from './document/DocumentForm.jsx';
 import AllDocument from './document/AllDocument.jsx';
 import
@@ -33,7 +32,10 @@ class DashBoardPage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.usersDocument();
+    if(this.props.user.userId)
+      this.props.usersDocument(0, this.props.user.userId);
+
+    console.log(localStorage.getItem('jwtToken'));
   }
 
     /**
@@ -73,8 +75,16 @@ class DashBoardPage extends React.Component {
    * @memberOf DashBoardPage
    */
   render() {
-    const { documents, pagination } = this.props.docs;
+    const { documents, pagination } = this.props;
     let allDocuments;
+     if (documents.length === 0) {
+      return (
+        <div className="container">
+          <h2 className="profileTitle">Welcome Create A Document</h2>
+          <DocumentForm/>
+        </div>
+      );
+    }
       return (
       <div> 
         <form className="form-wrapper2 cf">
@@ -108,7 +118,9 @@ class DashBoardPage extends React.Component {
     }
   }
 const mapStateToProps = state => ({
-  docs: state.documents
+  documents: state.documents.documents,
+  pagination: state.documents.pagination,
+  user: state.login.user
 });
 
 const mapDispatchToProps = dispatch => ({
