@@ -65,7 +65,7 @@ class SignupForm extends React.Component {
     if (isValid) {
       this.props.userSignupRequest(this.state).then(
         (user) => {
-          Materialize.toast('Sign up successfull', 3000);
+          Materialize.toast('Sign up successful', 3000);
           return this.context.router.push('/');
         }
     )
@@ -76,7 +76,7 @@ class SignupForm extends React.Component {
     } else if (errors.passwordConfirmation || errors.email) {
       Materialize.toast('Wrong password or email entered', 2000);
     } else {
-      Materialize.toast('Username and email mut be unique', 2000);
+      Materialize.toast('Username and email must be unique', 2000);
     }
   }
 
