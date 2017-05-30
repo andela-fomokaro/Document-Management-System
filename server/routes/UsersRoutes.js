@@ -14,8 +14,6 @@ module.exports = (app) => {
 
   app.delete('/api/users/:id', Auth.verifyToken, Auth.verifyAdmin, User.delete);
 
-  app.post('/api/users/logout', User.logOut);
-
   app.get('/api/search/users', Auth.verifyToken, User.search);
 };
 

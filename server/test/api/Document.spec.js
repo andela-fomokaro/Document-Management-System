@@ -2,28 +2,35 @@
 import supertest from 'supertest';
 import chai from 'chai';
 import app from '../../../test-server';
-import SpecHelper from '../helper/SpecHelper';
+import Helper from '../helper/HelperSpec';
 import db from '../../models';
 
 const expect = chai.expect;
 const request = supertest.agent(app);
 
-const adminUser = SpecHelper.specUser1;
-const regularUser = SpecHelper.specUser2;
-const regularUser2 = SpecHelper.specUser3;
-const invalidDocument = SpecHelper.invalidDocument;
-const roleDocument2 = SpecHelper.specDocument2;
-const roleDocument = SpecHelper.specDocument3;
-const privateDocument = SpecHelper.specDocument7;
-const publicDocument = SpecHelper.specDocument5;
+const adminUser = Helper.specUser1;
+const regularUser = Helper.specUser2;
+const regularUser2 = Helper.specUser3;
+const invalidDocument = Helper.invalidDocument;
+const roleDocument2 = Helper.specDocument2;
+const roleDocument = Helper.specDocument3;
+const privateDocument = Helper.specDocument7;
+const publicDocument = Helper.specDocument5;
 
 describe('Document API:', () => {
   let adminToken, regularToken, regular2Token;
   let roleDoc = {}, roleDoc2 = {}, privateDoc = {}, publicDoc = {};
 
-
+  const fieldsToUpdate = {
+    title: 'My God',
+    content: 'Is An Awesome God'
+  };
+  const adminUpdate = {
+    title: 'The Book Of Life',
+    content: 'Contains Everything You Need To Know'
+  };
   before((done) => {
-    db.Roles.bulkCreate([SpecHelper.adminRole, SpecHelper.regularRole])
+    db.Roles.bulkCreate([Helper.adminRole, Helper.regularRole])
       .then((roles) => {
         adminUser.roleId = roles[0].id;
         regularUser.roleId = roles[1].id;
@@ -53,18 +60,20 @@ describe('Document API:', () => {
 
   describe('Documents REQUESTS:', () => {
     describe('POST: (/api/documents) - ', () => {
-      it('should allow admin user to create document', (done) => {
+      it('should allow admin user create document', (done) => {
         request.post('/api/documents')
-        .send(SpecHelper.specDocument1)
+        .send(Helper.specDocument1)
         .set({ Authorization: adminToken })
         .end((err, res) => {
           expect(res.status).to.equal(201);
-          SpecHelper.specDocument1.id = res.body.newDocument.id;
+          expect(res.body.message).to
+            .equal('Your Document Has Been Created');
+          Helper.specDocument1.id = res.body.document.id;
           done();
         });
       });
 
-      it('should not create a document when required fields are invalid',
+      it('should not create document when required fields are invalid',
       (done) => {
         request.post('/api/documents')
           .send(invalidDocument)
@@ -77,30 +86,16 @@ describe('Document API:', () => {
           });
       });
 
-      it(`should create a document with role access when required fields
+      it(`should create document with role access when required fields
       are valid`, (done) => {
         request.post('/api/documents')
           .send(roleDocument)
           .set({ Authorization: regularToken })
           .end((error, response) => {
             roleDoc = response.body;
-            expect(roleDoc.newDocument.title).to.equal(roleDocument.title);
+            expect(roleDoc.document.title).to.equal(roleDocument.title);
             expect(response.status).to.equal(201);
-            roleDocument.id = response.body.newDocument.id;
-            done();
-          });
-      });
-
-      it(`should create a document with role access when required fields
-      are valid`, (done) => {
-        request.post('/api/documents')
-          .send(roleDocument2)
-          .set({ Authorization: adminToken })
-          .end((error, response) => {
-            roleDoc2 = response.body;
-            expect(roleDoc2.newDocument.title).to.equal(roleDocument2.title);
-            expect(response.status).to.equal(201);
-            roleDocument2.id = response.body.newDocument.id;
+            roleDocument.id = response.body.document.id;
             done();
           });
       });
@@ -112,41 +107,41 @@ describe('Document API:', () => {
           .set({ Authorization: adminToken })
           .end((error, response) => {
             privateDoc = response.body;
-            expect(privateDoc.newDocument.title).to.equal(privateDocument.title);
+            expect(privateDoc.document.title).to.equal(privateDocument.title);
             expect(response.status).to.equal(201);
-            privateDocument.id = response.body.newDocument.id;
+            privateDocument.id = response.body.document.id;
             done();
           });
       });
 
-      it(`should create a document with public access when required fields
+      it(`should create document with public access when required fields
       are valid`, (done) => {
         request.post('/api/documents')
           .send(publicDocument)
           .set({ Authorization: adminToken })
           .end((error, response) => {
             publicDoc = response.body;
-            expect(publicDoc.newDocument.title).to.equal(publicDocument.title);
+            expect(publicDoc.document.title).to.equal(publicDocument.title);
             expect(response.status).to.equal(201);
-            publicDocument.id = response.body.newDocument.id;
+            publicDocument.id = response.body.document.id;
             done();
           });
       });
 
-      it('should create a document with same title and/or content', (done) => {
+      it('should create document with same title and content', (done) => {
         request.post('/api/documents')
           .send(roleDocument)
           .set({ Authorization: adminToken })
           .end((error, response) => {
             roleDoc = response.body;
             expect(response.status).to.equal(201);
-            roleDocument.id = response.body.newDocument.id;
+            roleDocument.id = response.body.document.id;
             done();
           });
       });
 
       describe('GET: (/api/documents)', () => {
-        it('should return all documents if user is admin', (done) => {
+        it('should return all documents if user is an admin', (done) => {
           request.get('/api/documents')
           .set({ Authorization: adminToken })
           .end((error, response) => {
@@ -157,13 +152,13 @@ describe('Document API:', () => {
           });
         });
 
-        it('should return public documents if user is not admin', (done) => {
+        it('should return only public documents to a non-admin user accessing other documents', (done) => {
           request.get('/api/documents')
           .set({ Authorization: regularToken })
           .end((error, response) => {
             expect(response.status).to.equal(200);
             expect(Array.isArray(response.body.documents)).to.be.true;
-            expect(response.body.documents.length).to.be.greaterThan(0);
+            expect(response.body.documents.length).to.be.greaterThan(5);
             done();
           });
         });
@@ -179,18 +174,18 @@ describe('Document API:', () => {
             });
         });
 
-        it('should not return the document if id is invalid', (done) => {
-          request.get('/api/documents/22234')
+        it('should not return document if id does not exist', (done) => {
+          request.get('/api/documents/1000')
           .set({ Authorization: adminToken })
           .end((error, response) => {
             expect(response.status).to.equal(404);
-            expect(response.body.message).to.equal('Document Does Not Exist');
+            expect(response.body.message).to.equal('Document Not Found');
             done();
           });
         });
 
-        it('should not return the document if id is non-integer', (done) => {
-          request.get('/api/documents/aa')
+        it('should not return document if id is an alphabet', (done) => {
+          request.get('/api/documents/uvz')
           .set({ Authorization: adminToken })
           .end((error, response) => {
             expect(response.status).to.equal(400);
@@ -200,21 +195,21 @@ describe('Document API:', () => {
           });
         });
 
-        it(`should not return the document if document is private and
-         user is not the owner and not an admin`, (done) => {
+        it(`should not return document to user if document 
+        doesnt belong to user / user is not an admin`, (done) => {
           request.get(`/api/documents/${privateDocument.id}`)
           .set({ Authorization: regularToken })
           .end((error, response) => {
             expect(response.status).to.equal(403);
             expect(response.body.message).to
-            .equal('Unauthorized');
+            .equal('The Document You Are Trying To Access Is Private');
             done();
           });
         });
 
-        it(`should return the document if document is private and
-        user is the owner`, (done) => {
-          request.get(`/api/documents/${SpecHelper.specDocument1.id}`)
+        it(`should return document to user if document is private 
+        and document belongs to owner`, (done) => {
+          request.get(`/api/documents/${Helper.specDocument1.id}`)
           .set({ Authorization: adminToken })
           .end((error, response) => {
             expect(response.status).to.equal(200);
@@ -230,8 +225,8 @@ describe('Document API:', () => {
              done();
            });
          });
-        it(`should return the document if document has role access and
-            user has same role as the owner`, (done) => {
+        it(`should return the document if document has role access and current
+            user has same role`, (done) => {
           request.get(`/api/documents/${roleDocument2.id}`)
           .set({ Authorization: adminToken })
           .end((error, response) => {
@@ -242,29 +237,19 @@ describe('Document API:', () => {
       });
 
       describe('PUT: (/api/documents/:id)', () => {
-        const fieldsToUpdate = {
-          title: 'Diary',
-          content: 'Its mostly about self-learning'
-        };
-
-        const adminUpdate = {
-          title: 'Admin Diary',
-          content: 'Its mostly about self-learning'
-        };
-
         it('should not edit document if id is invalid', (done) => {
-          request.put('/api/documents/76589')
+          request.put('/api/documents/1000')
           .set({ Authorization: adminToken })
           .send(fieldsToUpdate)
           .end((error, response) => {
             expect(response.status).to.equal(404);
-            expect(response.body.message).to.equal('Document Does Not Exist');
+            expect(response.body.message).to.equal('Document Not Found');
             done();
           });
         });
 
-        it('should not edit document if id is non-integer', (done) => {
-          request.put('/api/documents/id')
+        it('should not edit document if id is an alphabet', (done) => {
+          request.put('/api/documents/life')
           .set({ Authorization: adminToken })
           .send(fieldsToUpdate)
           .end((error, response) => {
@@ -274,54 +259,46 @@ describe('Document API:', () => {
             done();
           });
         });
-        it('should not edit document if user is not the owner', (done) => {
+        it('should not edit document if document dosent belong to user', (done) => {
           request.put(`/api/documents/${privateDocument.id}`)
           .set({ Authorization: regularToken })
           .send(fieldsToUpdate)
           .end((error, response) => {
             expect(response.status).to.equal(403);
             expect(response.body.message).to
-              .equal('You are not authorized');
+              .equal('You Cannot View Document');
             done();
           });
         });
-        it('should not edit document if user is not the owner',
+        it('should not edit private document if document doesnt belong to the user',
         (done) => {
           request.put(`/api/documents/${privateDocument.id}`)
           .set({ Authorization: regularToken })
           .send(fieldsToUpdate)
           .end((error, response) => {
             expect(response.status).to.equal(403);
+            expect(response.body.message).to
+              .equal('You Cannot View Document');
             done();
           });
         });
-        it('should not edit ownerId property of document',
-      (done) => {
-        const fieldToUpdate = { ownerId: 7 };
-        request.put('/api/documents/3')
-          .set({ Authorization: regularToken })
-          .send(fieldToUpdate)
-          .end((error, response) => {
-            expect(response.status).to.equal(403);
-            expect(response.body.message).to
-            .equal('You are not authorized');
-            done();
-          });
       });
-        it('should edit document if user is the owner',
+      it('should edit document if document belongs to user',
       (done) => {
         request.put('/api/documents/2')
           .set({ Authorization: regularToken })
           .send(fieldsToUpdate)
           .end((error, response) => {
-            const updatedDocument = response.body.updatedDocument;
+            const updatedDocument = response.body.documentUpdate;
             expect(response.status).to.equal(200);
             expect(updatedDocument.title).to.equal(fieldsToUpdate.title);
             expect(updatedDocument.content).to.equal(fieldsToUpdate.content);
+            expect(response.body.message).to
+              .equal('Document Updated Successfully');
             done();
           });
       });
-        it('should edit document if user is an admin',
+      it('should edit document if user editing document is an admin',
       (done) => {
         request.put('/api/documents/2')
           .set({ Authorization: adminToken })
@@ -329,27 +306,28 @@ describe('Document API:', () => {
           .end((error, response) => {
             const updatedDocument = response.body.updatedDocument;
             expect(response.status).to.equal(200);
+            expect(response.body.message).to
+              .equal('Document Updated Successfully');
             expect(updatedDocument.title).to.equal(adminUpdate.title);
             expect(updatedDocument.content).to.equal(adminUpdate.content);
             done();
           });
       });
-      });
+    });
 
-    // DELETE Requests - Delete specific document
-      describe('DELETE: (/api/documents/:id)', () => {
-        it('should not delete document if id is invalid', (done) => {
-          request.delete('/api/documents/3773')
+    describe('DELETE: (/api/documents/:id)', () => {
+      it('should not delete document if id supplied is invalid', (done) => {
+        request.delete('/api/documents/1000')
           .set({ Authorization: adminToken })
           .end((error, response) => {
             expect(response.status).to.equal(404);
-            expect(response.body.message).to.equal('Document Does Not Exist');
+            expect(response.body.message).to.equal('Document Not Found');
             done();
           });
-        });
+      });
 
-        it('should not delete document if id is non-integer', (done) => {
-          request.delete('/api/documents/asdf')
+      it('should not delete document if id is an alphabet', (done) => {
+        request.delete('/api/documents/xyz')
           .set({ Authorization: adminToken })
           .end((error, response) => {
             expect(response.status).to.equal(400);
@@ -357,69 +335,69 @@ describe('Document API:', () => {
             .equal('An error occured');
             done();
           });
-        });
+      });
 
-        it('should not delete document if user is not the owner', (done) => {
-          request.delete(`/api/documents/${SpecHelper.specDocument1.id}`)
+      it('should not delete document if document does not belong to user', (done) => {
+        request.delete(`/api/documents/${Helper.specDocument1.id}`)
           .set({ Authorization: regular2Token })
           .end((error, response) => {
             expect(response.status).to.equal(403);
             expect(response.body.message).to
-              .equal('You are not authorized');
+              .equal('You Are Not Allowed To Delete This Document');
             done();
           });
-        });
-
-        it('Admin should be able to delete Private document', (done) => {
-          request.delete(`/api/documents/${privateDocument.id}`)
-          .set({ Authorization: adminToken })
-          .end((error, response) => {
-            expect(response.status).to.equal(200);
-            expect(response.body.message).to
-              .equal('Document deleted');
-            done();
-          });
-        });
-
-        it('Admin should be able to delete document with role based access', (done) => {
-          request.delete(`/api/documents/${roleDocument2.id}`)
-          .set({ Authorization: adminToken })
-          .end((error, response) => {
-            expect(response.status).to.equal(200);
-            expect(response.body.message).to
-              .equal('Document deleted');
-            done();
-          });
-        });
       });
 
+      it('Admin should be able to delete Private document', (done) => {
+        request.delete(`/api/documents/${privateDocument.id}`)
+          .set({ Authorization: adminToken })
+          .end((error, response) => {
+            expect(response.status).to.equal(200);
+            expect(response.body.message).to
+              .equal('Document Successfully Deleted');
+            done();
+          });
+      });
 
-      describe('GET: (/api/search/documents?search) - ', () => {
-        const search = 'Text', term = 'biggie';
-        it('should not return document(s) if search term is empty', (done) => {
-          request.get('/api/search/documents?search=')
+      it('Admin should be able to delete document with role based access', (done) => {
+        request.delete(`/api/documents/${roleDocument2.id}`)
+          .set({ Authorization: adminToken })
+          .end((error, response) => {
+            expect(response.status).to.equal(200);
+            expect(response.body.message).to
+              .equal('Document Successfully Deleted');
+            done();
+          });
+      });
+    });
+
+
+    describe('GET: (/api/search/documents?search) - ', () => {
+      const search = 'Text', term = 'gala';
+      it('should not return document if search term is empty', (done) => {
+        request.get('/api/search/documents?search=')
           .set({ Authorization: regularToken })
           .end((error, response) => {
             expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('Invalid Search Parameter!');
+            .equal('Invalid Search Parameter');
             done();
           });
-        });
+      });
 
-        it('should not return document(s) if search term doesn\'t match',
+      it('should not return document if search term does not match',
       (done) => {
         request.get(`/api/search/documents?search=${term}`)
           .set({ Authorization: adminToken })
           .end((error, response) => {
             expect(response.status).to.equal(404);
             expect(response.body.message).to
-            .equal('Search Does Not Match');
+            .equal('Search Term Not Found');
             done();
           });
       });
 
-        it('should return matching documents if search term match',
+      it('should return matching documents if search term match',
       (done) => {
         request.get(`/api/search/documents?search=${search}`)
           .set({ Authorization: adminToken })
@@ -431,8 +409,8 @@ describe('Document API:', () => {
           });
       });
 
-        it(`should search through all documents if user is admin
-      and return matching documents if search term match`,
+      it(`should search through documents if user is an admin
+      and should return matching documents`,
       (done) => {
         request.get(`/api/search/documents?search=${search}`)
           .set({ Authorization: adminToken })
@@ -444,12 +422,11 @@ describe('Document API:', () => {
           });
       });
 
-        it(`should search through documents with role access if user is owner
-      or user have the same role as owner and return matching
-      documents if search term match`,
+      it(`should search through documents with role access if document belongs to user
+      / user has same role access and should return matching documents`,
       (done) => {
-        const newSearch = 'YOYOL';
-        request.get(`/api/search/documents?search=${newSearch}`)
+        const newTerm = 'God';
+        request.get(`/api/search/documents?search=${newTerm}`)
           .set({ Authorization: regularToken })
           .end((error, response) => {
             expect(response.status).to.equal(200);
@@ -457,7 +434,6 @@ describe('Document API:', () => {
             expect(response.body.documents.length).to.be.greaterThan(0);
             done();
           });
-      });
       });
     });
   });

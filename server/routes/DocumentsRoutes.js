@@ -11,7 +11,7 @@ module.exports = (app) => {
    Document.findUsersDocuments);
 
 
-  app.put('/api/documents/:id', Auth.verifyToken, Document.updateDoc);
+  app.put('/api/documents/:id', Auth.verifyToken, Document.updateDocument);
 
 
   app.delete('/api/documents/:id', Auth.verifyToken, Document.delete);

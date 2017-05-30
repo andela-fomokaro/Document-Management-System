@@ -12,7 +12,7 @@ const Roles = {
     .then((roleExist) => {
       if (roleExist) {
         return res.status(400).send({
-          message: 'Enter unique parameters'
+          message: 'Role Title Already Exist'
         });
       }
       db.Roles.create({
@@ -43,7 +43,7 @@ const Roles = {
    * @param {Object} res - Response object
    * @return {Object} Response object
    */
-  getRolesById(req, res) { // mer
+  getRolesById(req, res) {
     db.Roles
       .findById(req.params.id)
       .then((role) => {
@@ -76,7 +76,7 @@ const Roles = {
         }
         if (role.title === 'regular' || role.title === 'admin') {
           return res.status(400).send({
-            message: 'An error occured'
+            message: 'Cannot Delete Default Roles'
           });
         }
         role
@@ -101,7 +101,7 @@ const Roles = {
     .then((roleExist) => {
       if (roleExist) {
         return res.status(400).send({
-          message: 'Validation error'
+          message: 'Cannot Edit Default Roles'
         });
       }
       db.Roles.findById(req.params.id)

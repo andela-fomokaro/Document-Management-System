@@ -12,7 +12,7 @@ export function createDocument(data) {
       .then((res) => {
         dispatch({
           type: 'CREATE_DOCUMENT',
-          payload: res.data.newDocument
+          payload: res.data.document
         });
       });
   };
@@ -111,7 +111,7 @@ export function updateDocument(document) {
     .then((res) => {
       dispatch({
         type: 'UPDATE_DOCUMENT',
-        payload: res.data.updatedDocument,
+        payload: res.data.documentUpdate,
         id: document.id
       });
     });

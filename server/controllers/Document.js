@@ -1,9 +1,8 @@
 /* eslint-disable no-dupe-keys*/
 import db from '../models';
 import Helper from '../helpers/controllerHelper';
-/**
- * DocumentsController class to create and manage documents
- */
+
+
 const Document = {
   /**
    * Create a new Document
@@ -18,10 +17,10 @@ const Document = {
       access: req.body.access,
       ownerId: req.decoded.userId,
     })
-      .then((newDocument) => {
+      .then((document) => {
         res.status(201).json({
-          message: 'Successfully',
-          newDocument
+          message: 'Your Document Has Been Created',
+          document
         });
       })
       .catch(() => res.json({ message: 'An error occured' }));
@@ -48,13 +47,13 @@ const Document = {
             if ((role.title !== 'admin') && (document.access === 'private') &&
             (document.ownerId !== req.decoded.userId)) {
               return res.status(403)
-                .send({ message: 'Unauthorized' });
+                .send({ message: 'The Document You Are Trying To Access Is Privated' });
             }
             db.Users.findById(document.ownerId).then((user) => {
               if ((role.title !== 'admin') && (document.access === 'role') &&
               (user.roleId !== req.decoded.roleId)) {
                 return res.status(403)
-                .send({ message: 'Unauthorized' });
+                .send({ message: 'The Document You Are Trying To Access Is Private' });
               }
               res.status(200).send({
                 document
@@ -82,23 +81,25 @@ const Document = {
     db.Documents.findAndCountAll(query)
     .then((documents) => {
       if (!documents) {
-        return res.status(404).send('Document does not exist');
+        return res.status(404).send('Document Not Found');
       }
       query.count = documents.count;
       const pagination = Helper.pagination(query);
-      const filteredDocuments
-      = documents.rows.map(document => Object.assign({}, {
-        title: document.title,
-        content: document.content,
-        access: document.access,
-        type: document.type,
-        ownerId: document.ownerId,
-        createdAt: document.createdAt,
-        updatedAt: document.updatedAt,
-        id: document.id
+      const documentObject
+      = documents.rows.map(doc => Object.assign({}, {
+        access: doc.access,
+        type: doc.type,
+        ownerId: doc.ownerId,
+        title: doc.title,
+        content: doc.content,
+        createdAt: doc.createdAt,
+        updatedAt: doc.updatedAt,
+        id: doc.id
       }));
-      res.status(200).send({ pagination, documents: filteredDocuments });
-    });
+      res.status(200).send({ pagination, documents: documentObject });
+    }).catch(() => res.status(400).send({
+      message: 'An error occured'
+    }));
   },
 /**
    * Update a document based on the id
@@ -106,7 +107,7 @@ const Document = {
    * @param {Object} res - Response object
    * @returns {void} Response object
    */
-  updateDoc(req, res) {
+  updateDocument(req, res) {
     db.Roles.findById(req.decoded.roleId)
       .then((role) => {
         db.Documents
@@ -114,25 +115,25 @@ const Document = {
           .then((document) => {
             if (!document) {
               return res.status(404).send({
-                message: 'Document Does Not Exist',
+                message: 'Document Not Found',
               });
             }
             if (role.title
             !== 'admin' && document.ownerId !== req.decoded.userId) {
               return res.status(403)
-                .send({ message: 'You are not authorized' });
+                .send({ message: 'You Cannot View Document' });
             }
             if (req.body.ownerId && !(role.title === 'admin')) {
               return res.status(403).send({
-                message: 'You cannot edit document'
+                message: 'You Cannot View Document'
               });
             }
             document
               .update(req.body)
-              .then((updatedDocument) => {
+              .then((documentUpdate) => {
                 res.status(200).send({
-                  message: 'Update successful!',
-                  updatedDocument,
+                  message: 'Document Updated Successfully',
+                  documentUpdate,
                   document,
                 });
               });
@@ -154,19 +155,19 @@ const Document = {
           .then((document) => {
             if (!document) {
               return res.status(404).send({
-                message: 'Document Does Not Exist',
+                message: 'Document Not Found',
               });
             }
             if ((req.decoded.roleId !== 1)
             && (document.ownerId !== req.decoded.userId)) {
               return res.status(403).send({
-                message: 'You are not authorized',
+                message: 'You Are Not Allowed To Delete This Document',
               });
             }
             document
             .destroy()
             .then(() => res.status(200).send({
-              message: 'Document deleted',
+              message: 'Document Successfully Deleted',
             }));
           })
       .catch(() => res.status(400).send({
@@ -203,14 +204,13 @@ const Document = {
                 access: { $eq: 'public' },
                 $and: {
                   access: { $eq: 'private' },
-                  ownerId: { $eq: req.decoded.userId }
+                  ownerId: { $eq: req.decoded.userId },
                 },
                 $and: {
                   access: { $eq: 'role' },
                   '$User.roleId$': { $eq: req.decoded.roleId }
                 }
               },
-              ownerId: { $eq: req.decoded.userId }
             }
           };
           query.include = [
@@ -225,20 +225,20 @@ const Document = {
               query.limit = (req.query.limit > 0) ? req.query.limit : 6;
               query.offset = (req.query.offset > 0) ? req.query.offset : 0;
               query.attributes = { exclude: ['ownerId'] };
-              const filteredDocuments
-              = documents.rows.map(document => Object.assign({}, {
-                title: document.title,
-                content: document.content,
-                access: document.access,
-                type: document.type,
-                ownerId: document.ownerId,
-                createdAt: document.createdAt,
-                updatedAt: document.updatedAt,
-                id: document.id
+              const documentObject
+              = documents.rows.map(doc => Object.assign({}, {
+                access: doc.access,
+                type: doc.type,
+                ownerId: doc.ownerId,
+                title: doc.title,
+                content: doc.content,
+                createdAt: doc.createdAt,
+                updatedAt: doc.updatedAt,
+                id: doc.id
               }));
               const pagination = Helper.pagination(query);
               res.status(200).send({
-                pagination, documents: filteredDocuments
+                pagination, documents: documentObject
               });
             });
         }
@@ -254,13 +254,12 @@ const Document = {
    * @return {Object} - Returns response object
    */
   search(req, res) {
+    const searchTerm = req.query.search;
     db.Roles.findById(req.decoded.roleId)
       .then((role) => {
-        const search = req.query.search;
-
-        if (search === '') {
+        if (searchTerm === '') {
           return res.status(400).send({
-            message: 'Invalid Search Parameter!'
+            message: 'User Search Does Not Search'
           });
         }
 
@@ -269,10 +268,10 @@ const Document = {
             $and: [{
               $or: {
                 title: {
-                  $iLike: `%${search}%`
+                  $iLike: `%${searchTerm}%`
                 },
                 content: {
-                  $iLike: `%${search}%`
+                  $iLike: `%${searchTerm}%`
                 }
               }
             }, {
@@ -293,7 +292,6 @@ const Document = {
                   '$User.roleId$': { $eq: req.decoded.roleId }
                 }
               },
-              ownerId: { $eq: req.decoded.userId }
             }
           },
           include: [
@@ -308,10 +306,10 @@ const Document = {
             where: {
               $or: {
                 title: {
-                  $iLike: `%${search}%`
+                  $iLike: `%${searchTerm}%`
                 },
                 content: {
-                  $iLike: `%${search}%`
+                  $iLike: `%${searchTerm}%`
                 }
               }
             }
@@ -321,29 +319,28 @@ const Document = {
         query.limit = (req.query.limit > 0) ? req.query.limit : 6;
         query.offset = (req.query.offset > 0) ? req.query.offset : 0;
         query.order = '"createdAt" ASC ';
-        query.attributes = { exclude: ['id'] };
         db.Documents
           .findAndCountAll(query)
           .then((documents) => {
-            const filteredDocuments
-             = documents.rows.map(document => Object.assign({}, {
-               title: document.title,
-               content: document.content,
-               access: document.access,
-               type: document.type,
-               ownerId: document.ownerId,
-               createdAt: document.createdAt,
-               updatedAt: document.updatedAt
+            const documentObject
+             = documents.rows.map(doc => Object.assign({}, {
+               access: doc.access,
+               type: doc.type,
+               ownerId: doc.ownerId,
+               title: doc.title,
+               content: doc.content,
+               createdAt: doc.createdAt,
+               updatedAt: doc.updatedAt
              }));
             query.count = documents.count;
             const pagination = Helper.pagination(query);
             if (documents.rows.length === 0) {
               return res.status(404).send({
-                message: 'Search Does Not Match'
+                message: 'Search Term Not Found'
               });
             }
             res.status(200).send({
-              pagination, documents: filteredDocuments
+              pagination, documents: documentObject
             });
           });
       });
