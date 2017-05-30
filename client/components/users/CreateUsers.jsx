@@ -1,5 +1,3 @@
-/* eslint-disable no-undef*/
-/* eslint-disable no-unused-vars*/
 import React from 'react';
 import { Modal } from 'react-materialize';
 import propTypes from 'prop-types';
@@ -46,10 +44,8 @@ class CreateUsers extends React.Component {
     e.preventDefault();
     const { errors, isValid } = validateInput(this.state);
     if (errors.passwordConfirmation || errors.email) {
-      Materialize.toast('Wrong password or email entered', 2000);
-    } else if (errors) {
-      Materialize.toast('Username and email must be unique', 2000);
-    } else {
+      Materialize.toast('Invalid Credentials Entered', 2000);
+    }else {
       this.props.createUsers(this.state);
       Materialize.toast('User Created Successfully', 2000);
     }
@@ -77,7 +73,7 @@ class CreateUsers extends React.Component {
   render() {
     return (
       <Modal
-        fixedFooter
+         header='Create New User'
         trigger={
           <a
            className="btn-floating btn-large docButton pink darken-3 tooltipped"
