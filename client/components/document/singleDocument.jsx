@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { getSingleDocument } from '../../actions/documentActions';
 
 
@@ -34,15 +35,22 @@ class singleDocument extends React.Component {
    */
   render() {
     const doc = this.props.doc;
+     const dateCreated = moment(doc.createdAt)
+    .format('MMMM Do YYYY, h:mm:ss a');
+    const lastUpdated = moment(doc.updatedAt)
+    .format('MMMM Do YYYY, h:mm:ss a');
     return (
       <div className="container">
         <div className="z-depth-5 card docCard1">
           <div className="card-content cardContent">
-            <a href="/"> Click To View Your Document</a>
             <span className="card-title cardTitle">{doc.title}</span>
             <p>{doc.content}</p>
-            <a href="/loaddocuments">Click To View All Document </a>
           </div>
+          <div className="card-action">
+            <p className="documentDate">Access Type: {doc.access}</p>
+            <p className="documentDate">Created On: {dateCreated}</p>
+            <p className="documentDate">Last Updated: {lastUpdated}</p>
+            </div>
         </div>
       </div>
     );
