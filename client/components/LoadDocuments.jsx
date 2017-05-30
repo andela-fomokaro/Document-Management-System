@@ -77,8 +77,7 @@ class DashBoard extends React.Component {
    * @memberOf DashBoard
    */
   render() {
-    const documents = this.props.docs;
-    const { pagination } = this.props.docs;
+    const  { documents, pagination }  = this.props;
     return (
       <div>
         <form className="form-wrapper2 cf" onSubmit={this.onSubmit}>
@@ -91,7 +90,7 @@ class DashBoard extends React.Component {
         <DocumentForm />
         <div className="container">
         <div className="row">
-          { documents.documents.map((doc, index) => <AllDocument
+          { documents.map((doc, index) => <AllDocument
             key={index}
             document={doc}
             deleteDocument={this.props.deleteDocument}
@@ -111,7 +110,8 @@ class DashBoard extends React.Component {
 
 
 const mapStateToProps = state => ({
-  docs: state.documents
+  documents: state.documents.documents,
+  pagination: state.documents.pagination
 });
 
 
@@ -127,7 +127,8 @@ DashBoard.propTypes = {
   deleteDocument: PropTypes.func.isRequired,
   loadDocuments: PropTypes.func.isRequired,
   searchDocument: PropTypes.func.isRequired,
-  docs: PropTypes.any.isRequired,
+  documents: PropTypes.any.isRequired,
+  pagination: PropTypes.any.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashBoard);
