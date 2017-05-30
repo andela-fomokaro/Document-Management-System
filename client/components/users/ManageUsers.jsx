@@ -1,12 +1,14 @@
 /* eslint-disable no-undef*/
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { PropTypes } from 'prop-types';
 import moment from 'moment';
+import { bindActionCreators } from 'redux';
 import { Modal, Pagination } from 'react-materialize';
-import { getUsers, createUsers, deleteUser, updateUsers, getRoles, searchUsers, userPagination } from '../../actions/usersAction';
+import { getUsers, createUsers, deleteUser, updateUser, searchUsers } from '../../actions/usersAction';
+import { getRoles } from '../../actions/roleActions';
 import CreateUsers from './CreateUsers.jsx';
-import UpdateUsers from './UpdateUsers.jsx';
+import UpdateRole from './UpdateRole.jsx';
 
 
 /**
@@ -36,8 +38,9 @@ class ManageUsers extends React.Component {
    */
   componentDidMount() {
     this.props.getUsers();
+    this.props.getRoles();
   }
-
+  
   /**
    *
    * onChange
@@ -49,7 +52,6 @@ class ManageUsers extends React.Component {
     const searchTerm = e.target.value;
     if (searchTerm.length < 1 || undefined) {
       this.props.getUsers();
-      Materialize.toast('Search does not match', 1000);
     } else {
       this.props.searchUsers(searchTerm);
     }
@@ -73,7 +75,7 @@ class ManageUsers extends React.Component {
    * @memberOf ManageUsers
    */
   updateUser() {
-    this.props.updateUsers();
+    this.props.updateUser();
   }
 
   /**
@@ -84,10 +86,38 @@ class ManageUsers extends React.Component {
    * @memberOf ManageUsers
    */
   deleteUser(userId) {
-    Materialize.toast('User Deleted', 3000);
-    this.props.deleteUser(userId);
+     swal({
+      title: "Are you sure?", 
+      text: "Are you sure that you want to delete this user?", 
+      type: "warning",
+      showCancelButton: true,
+      closeOnConfirm: true,
+      confirmButtonText: "Yes, delete it!",
+      confirmButtonColor: "#ec6c62"
+    }, (isConfirm) => {
+      if(isConfirm) {
+         this.props.deleteUser(userId);
+        swal('Deleted', 'role was deleted', 'success');
+      } else {
+        swal('Canceled', 'OPERATION CANCELED', 'error');
+      }
+    });
   }
 
+  /**
+   *
+   * onSelect
+   * @param {number} pageNo
+   *
+   * @returns {void}
+   *
+   * @memberOf DashBoard
+   */
+  onSelect(pageNo) {
+    const offset = (pageNo - 1) * 6;
+    this.props.getUsers(offset);
+  }
+ 
   /**
    *
    *
@@ -96,11 +126,14 @@ class ManageUsers extends React.Component {
    * @memberOf ManageUsers
    */
   render() {
-    const { users } = this.props;
-    console.log(users);
-    const usersInfo = this.props.users;
-    const createdAt = moment(usersInfo.createdAt).format('MMMM Do YYYY, h:mm:ss a');
-    const updatedAt = moment(usersInfo.updatedAt).format('MMMM Do YYYY, h:mm:ss a');
+    const { users, roles } = this.props;
+    let rows = [];
+    let pagination = {};
+    if (users.users) {
+      rows = users.users.rows;
+      pagination = users.pagination;
+    }
+    let serialNumber= 0;
     return (
       <div>
         <form className="form-wrapper2 cf" onSubmit={this.onSubmit}>
@@ -115,55 +148,47 @@ class ManageUsers extends React.Component {
         </form>
         <CreateUsers createUsers={this.props.createUsers} users={this.props.users} />
         <div className="manageUser">
-        <table className="z-depth-5 striped tab">
+        <table className="z-depth-5 highlight tab">
           <thead className="tableHead">
             <tr>
-              <th id="createdTime">Time Created</th>
-              <th id="updatedTime">Last Updated</th>
+              <th className="tablHead">S/N</th>
               <th>Email</th>
-              <th id="tableName">Name</th>
+              <th id="tableName">Full Name</th>
               <th>Username</th>
               <th>Delete</th>
-              <th>Update User</th>
+              <th id="updateRole">Update Role</th>
             </tr>
           </thead>
           <tbody>
-            {users.map(user => (
-              <tr className="styleRow">
-                <td className="styleRow">{createdAt}</td>
-                <td>{updatedAt}</td>
+            {rows.map((user, id)=> (
+               serialNumber += 1,
+              <tr className="styleRow" key={user.id}>
+                <td className="tablHead">{serialNumber}</td>
                 <td>{user.email}</td>
                 <td>{user.fullNames}</td>
                 <td id="searchUsername">{user.username}</td>
-                <td className="cursor">
-                  <Modal
-                   id="mod3"
-                    className="teal-text"
-                    trigger={
-                      <a>delete</a>
-                       }
-                  >
-                    <span id="userDeleteButton" className="delHeader"> Are You Sure You Want To Delete This User? </span>
-                    <div>
-                    <button
-                      onClick={() => this.deleteUser(user.id)}
-                      className="btn btn2 pink darken-4 white-text modal-action modal-close"
-                      id="deleteButton"
-                    >Yes</button>
-                    <button
-                    className="btn btn2 pink darken-4 white-text modal-action modal-close"
-                    >No</button>
-                    </div>
-                  </Modal></td>
+                <td> <a className="cursor"
+                        onClick={(userId) => {
+                        this.deleteUser(user.id)
+                        }
+                      }
+                      >
+                     <i className="material-icons userIcon">delete</i>
+               </a></td> 
                 <td className="styleRow">
-                  <UpdateUsers updateUsers={this.props.updateUsers} users={user} />
+                  <UpdateRole updateUser={this.props.updateUser} user={user} roles={roles} />
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
         </div>
-        
+         <Pagination
+            items={pagination.page_count}
+            activePage={pagination.page}
+            maxButtons={pagination.page_count}
+            onSelect={e => this.onSelect(e)}
+          />
       </div>
     );
   }
@@ -172,10 +197,11 @@ class ManageUsers extends React.Component {
 ManageUsers.propTypes = {
   getUsers: PropTypes.func.isRequired,
   createUsers: PropTypes.func.isRequired,
-  updateUsers: PropTypes.func.isRequired,
+  updateUser: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
   users: PropTypes.any.isRequired,
   searchUsers: PropTypes.func.isRequired,
+  getRoles: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -183,11 +209,12 @@ const mapStateToProps = state => ({
   roles: state.roles
 });
 
-export default connect(mapStateToProps,
-  { getUsers,
-    createUsers,
-    deleteUser,
-    updateUsers,
-    getRoles,
-    searchUsers,
-    userPagination })(ManageUsers);
+const mapDispatchToProps = dispatch => ({
+  getUsers: bindActionCreators(getUsers, dispatch),
+  createUsers: bindActionCreators(createUsers, dispatch),
+  updateUser: bindActionCreators(updateUser, dispatch),
+  deleteUser: bindActionCreators(deleteUser, dispatch),
+  searchUsers: bindActionCreators(searchUsers, dispatch),
+  getRoles: bindActionCreators(getRoles, dispatch)
+});
+export default connect(mapStateToProps, mapDispatchToProps )(ManageUsers);
