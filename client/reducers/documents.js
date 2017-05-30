@@ -1,44 +1,49 @@
+import { LOAD_DOCUMENTS, USER_DOCUMENT, CREATE_DOCUMENT, UPDATE_DOCUMENT, SET_SINGLE_DOCUMENT, DELETE_DOCUMENT, SEARCH_DOCUMENT } from '../actions/types';
+
 const initialState = {
   documents: [],
-  message: '',
   pagination: {}
 };
 export default (state = initialState, action = {}) => {
   switch (action.type) {
-    case 'LOAD_DOCUMENTS':
-      return action.payload;
+    case LOAD_DOCUMENTS:
+      return Object.assign({}, state, {
+        documents: action.payload.documents, pagination: action.payload.pagination });
 
-    case 'USER_DOCUMENT':
-      return action.payload;
+    case USER_DOCUMENT:
+      return Object.assign({}, state, {
+        documents: action.payload.documents,
+        pagination: action.payload.pagination
+      });
 
-    case 'CREATE_DOCUMENT': {
-      const stateCopy = Object.assign({}, state);
-      stateCopy.documents.push(action.payload);
-      return stateCopy;
+    case CREATE_DOCUMENT: {
+      return Object.assign({}, state, {
+        documents: [...state.documents, action.payload]
+      });
     }
 
-    case 'UPDATE_DOCUMENT':
-      {
-        const u = [];
-        state.documents.forEach((document) => {
-          if (document.id === action.payload.id) {
-            document = action.payload;
-          }
-          u.push(document);
-        });
-        return Object.assign({}, state, { documents: u });
-      }
+    case UPDATE_DOCUMENT:
+      return Object.assign({}, state, {
+        documents: [...state.documents.filter(document =>
+          document.id !== action.payload.id),
+          action.payload]
+      });
 
-    case 'SET_SINGLE_DOCUMENT':
-      return action.payload;
+    case SET_SINGLE_DOCUMENT:
+      return Object.assign({}, state, action.payload
+      );
 
-    case 'DELETE_DOCUMENT':
+    case DELETE_DOCUMENT:
       return Object.assign({}, state,
         { documents: state.documents
         .filter(document => document.id !== action.id) });
 
-    case 'SEARCH_DOCUMENT':
-      return action.payload;
-    default: return state;
+    case SEARCH_DOCUMENT:
+      return Object.assign({}, state, {
+        documents: action.payload.documents,
+        pagination: action.payload.pagination
+      });
+    default:
+      return state;
   }
 };
