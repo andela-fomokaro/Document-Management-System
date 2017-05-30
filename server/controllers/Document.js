@@ -320,7 +320,7 @@ const Document = {
 
         query.limit = (req.query.limit > 0) ? req.query.limit : 6;
         query.offset = (req.query.offset > 0) ? req.query.offset : 0;
-        query.order = '"createdAt" DESC';
+        query.order = '"createdAt" ASC ';
         query.attributes = { exclude: ['id'] };
         db.Documents
           .findAndCountAll(query)

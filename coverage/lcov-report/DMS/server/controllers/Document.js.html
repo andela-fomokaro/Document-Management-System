@@ -813,7 +813,6 @@ const Document = {
           .findById(req.params.id)
           .then((document) =&gt; {
             if (!document) {
-              // console.log('Document does not exists');
               return res.status(404).send({
                 message: 'Document Does Not Exist',
               });

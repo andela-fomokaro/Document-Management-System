@@ -1,30 +1,41 @@
-import findIndex from 'lodash/findIndex';
-import { GET_USERS, CREATE_USERS, DELETE_USER, UPDATE_USER, SET_SINGLE_USER, UPDATE_USERS, SEARCH_USERS } from '../actions/types';
+import { GET_USERS, CREATE_USERS, DELETE_USER, UPDATE_USER, SET_SINGLE_USER, SEARCH_USERS } from '../actions/types';
 
-export default (state = [], action = {}) => {
+const initialState = {
+  users: {
+    count: 0,
+    rows: []
+  },
+  user: {},
+  pagination: {
+    page_count: 0,
+    page: 0,
+    page_size: 0,
+    total_count: 0
+  }
+};
+export default (state = initialState, action = {}) => {
   switch (action.type) {
     case GET_USERS:
-      return action.payload;
+      return Object.assign({},
+      state, { users: action.payload.users, pagination: action.payload.pagination });
     case CREATE_USERS: {
-      const stateCopy = Object.assign({}, state);
-      stateCopy.users.rows.push(action.payload);
-      return stateCopy;
+      return Object.assign({}, state, { users: { rows: [...state.users.rows, action.payload] } });
     }
-    case DELETE_USER: {
-      const deletedUserIndex =
-      findIndex(state.users.rows, { id: action.id });// find more about lodash
-      const stateCopy = Object.assign({}, state);
-      stateCopy.users.rows.splice(deletedUserIndex, 1);
-      return stateCopy;
-    }
-    case UPDATE_USER: {
-      return action.payload;
-    }
-    case UPDATE_USERS: {
-      return state;
-    }
+    case DELETE_USER:
+      return Object.assign({}, state,
+      { users: { rows: state.users.rows.filter(user => user.id !== action.id) } });
+
+    case UPDATE_USER:
+      return Object.assign({}, state,
+        { users: { rows:
+        [...state.users.rows.filter(user => user.id !== action.payload.id),
+          action.payload] },
+          user: action.payload });
+
     case SET_SINGLE_USER:
-      return action.payload;
+      return Object.assign({}, state,
+        { user: action.payload });
+
     case SEARCH_USERS:
       return action.payload;
     default:

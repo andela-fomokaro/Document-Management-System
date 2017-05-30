@@ -190,11 +190,6 @@ const User = {
                 message: 'Does Not Exist',
               });
             }
-            if ((role.title !== 'admin') && req.body.roleId) {
-              return res.status(403).send({
-                message: 'You are not authorized'
-              });
-            }
             if ((role.title !== 'admin') && (req.decoded.userId !== user.id)) {
               return res.status(403).send({
                 message: 'You are not authorized'
@@ -204,11 +199,7 @@ const User = {
               .update(req.body)
               .then(user => res.status(200).send({
                 message: 'Update Successful!',
-                user: {
-                  id: user.id,
-                  name: user.fullNames,
-                  email: user.email
-                }
+                user
               }));
           })
         .catch(() => res.status(400).send({
@@ -225,15 +216,11 @@ const User = {
    */
   search(req, res) {
     const userSearch = req.query.search;
-
     if (userSearch === '') {
       return res.status(400).send({
         message: 'Search Does Not Match'
       });
     }
-    const limit = req.query.limit || 6;
-    const offset = req.query.offset || 0;
-    let condition = {};
     let pagination;
     const query = {
       where: { $or: [
@@ -248,15 +235,14 @@ const User = {
       ]
       }
     };
-    db.Users.findAndCountAll(query)
-      .then((user) => {
-        condition = {
-          count: user.count,
-          limit,
-          offset,
-        };
-        pagination = Helper.pagination(condition);
-        if (user.rows.length === 0) {
+    query.limit = (req.query.limit > 0) ? req.query.limit : 6;
+    query.offset = (req.query.offset > 0) ? req.query.offset : 0;
+    query.order = '"createdAt" ASC ';
+    return db.Users.findAndCountAll(query)
+      .then((users) => {
+        query.count = users.count;
+        pagination = Helper.pagination(query);
+        if (users.rows.length === 0) {
           return res.status(404).send({
             message: 'Does Not exist'
           });
@@ -264,12 +250,11 @@ const User = {
         res.status(200)
           .send({
             message: 'Your search was successful',
-            user,
+            users,
             pagination
           });
       });
   },
-
 };
 
 export default User;
