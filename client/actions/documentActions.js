@@ -1,7 +1,4 @@
 import axios from '../utils/index';
-import { getPayload } from '../utils/helpers';
-
-const usersid = getPayload().userId;
 /**
  *
  *
@@ -49,7 +46,7 @@ export function loadDocuments(offset = 0) {
  * @param {Number} id - document id
  * @returns {Function} returns dispatch
  */
-export function usersDocument(offset = 0, id = usersid) {
+export function usersDocument(offset = 0, id) {
   return (dispatch) => {
     axios.get(`/api/users/${id}/documents?offset=${offset}`)
       .then((res) => {
@@ -158,8 +155,6 @@ export function searchDocument(term, offset = 0) {
           type: 'SEARCH_DOCUMENT',
           payload: res.data
         });
-      }).catch((error) => {
-        Materialize.toast(error.data.message, 1000);
       });
   };
 }
