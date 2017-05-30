@@ -122,6 +122,15 @@ export default StyleSheet.create({
   'tableHead': {
     'color': '#f50057'
   },
+  '#createdTime': {
+    'paddingLeft': [{ 'unit': 'px', 'value': 30 }]
+  },
+  '#updateRole': {
+    'paddingLeft': [{ 'unit': 'px', 'value': 50 }]
+  },
+  'roleTitle': {
+    'paddingLeft': [{ 'unit': 'px', 'value': 40 }]
+  },
   'docCard': {
     'width': [{ 'unit': '%H', 'value': 0.3 }],
     'border': [{ 'unit': 'px', 'value': 2 }, { 'unit': 'string', 'value': 'solid' }],
@@ -131,7 +140,8 @@ export default StyleSheet.create({
   },
   'tab': {
     'marginTop': [{ 'unit': 'px', 'value': 40 }],
-    'height': [{ 'unit': '%V', 'value': 1 }]
+    'height': [{ 'unit': '%V', 'value': 1 }],
+    'backgroundColor': '#fff'
   },
   'docCard1': {
     'width': [{ 'unit': '%H', 'value': 1 }],
@@ -213,7 +223,7 @@ export default StyleSheet.create({
   'profileButton': {
     'position': 'relative',
     'top': [{ 'unit': 'px', 'value': -70 }],
-    'marginLeft': [{ 'unit': 'px', 'value': 190 }],
+    'marginLeft': [{ 'unit': 'px', 'value': 360 }],
     'backgroundColor': '#880e4f'
   },
   'profileIcon': {
@@ -263,11 +273,15 @@ export default StyleSheet.create({
     'color': '#880e4f'
   },
   'manageUser': {
-    'width': [{ 'unit': '%H', 'value': 0.9 }],
-    'marginLeft': [{ 'unit': 'px', 'value': 80 }]
+    'width': [{ 'unit': '%H', 'value': 0.65 }],
+    'marginLeft': [{ 'unit': 'px', 'value': 220 }],
+    'backgroundColor': '#fff'
   },
   'styleRow': {
     'padding': [{ 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 30 }]
+  },
+  'tablHead': {
+    'paddingLeft': [{ 'unit': 'px', 'value': 30 }]
   },
   'myDocument': {
     'textAlign': 'center',
@@ -288,12 +302,10 @@ export default StyleSheet.create({
     'display': 'inline-block'
   },
   'selectBox': {
-    'position': 'relative',
-    'left': [{ 'unit': 'px', 'value': 10 }, { 'unit': 'string', 'value': '!important' }],
     'width': [{ 'unit': '%H', 'value': 1 }]
   },
   'modal': {
-    'width': [{ 'unit': '%H', 'value': 0.8 }]
+    'width': [{ 'unit': '%H', 'value': 0.4 }]
   },
   'modal-content h4': {
     'fontSize': [{ 'unit': 'px', 'value': 40 }],
@@ -305,8 +317,7 @@ export default StyleSheet.create({
     'visibility': 'hidden'
   },
   'btn2': {
-    'marginLeft': [{ 'unit': 'px', 'value': 10 }],
-    'marginTop': [{ 'unit': 'px', 'value': 50 }]
+    'marginLeft': [{ 'unit': 'px', 'value': 10 }]
   },
   'delHeader': {
     'fontSize': [{ 'unit': 'px', 'value': 28 }],
@@ -327,5 +338,11 @@ export default StyleSheet.create({
   },
   '#modUpdate': {
     'width': [{ 'unit': '%H', 'value': 0.4 }]
+  },
+  '#profileUpdate': {
+    'width': [{ 'unit': '%H', 'value': 0.4 }]
+  },
+  'userIcon': {
+    'color': 'red'
   }
 });

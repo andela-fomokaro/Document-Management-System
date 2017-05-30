@@ -87,6 +87,15 @@ input[type=text]:focus {
 .tableHead{
  color: #f50057;
 }
+#createdTime{
+   padding-left: 30px;
+}
+#updateRole{
+   padding-left: 50px;
+}
+.roleTitle{
+    padding-left:   40px;
+}
 .docCard{
  width: 30%;
  border: 2px solid;
@@ -97,6 +106,7 @@ input[type=text]:focus {
 .tab{
     margin-top: 40px;
     height: 100%;
+    background-color: #fff;
 }
 .docCard1{
  width: 100%;
@@ -182,7 +192,7 @@ input[type=text]:focus {
 .profileButton {
     position: relative;
     top: -70px;
-    margin-left: 190px;
+    margin-left: 360px;
     background-color: #880e4f;
 }
 .profileIcon{
@@ -233,11 +243,15 @@ input[type=text]:focus {
     color:#880e4f;
 }
 .manageUser{
-    width: 90%;
-    margin-left: 80px;
+    width: 65%;
+    margin-left: 220px;
+    background-color: #fff;
 }
 .styleRow{
     padding: 0px 10px 0px 30px;
+}
+.tablHead{
+    padding-left: 30px;
 }
 .myDocument{
     text-align: center;
@@ -258,12 +272,10 @@ input[type=text]:focus {
     display: inline-block;
 }
 .selectBox{
-    position: relative;
-    left: 10px !important;
     width: 100%;
 }
 .modal{
-    width: 80%;
+    width: 40%;
 }
 .modal-content h4{
     font-size: 40px;
@@ -276,7 +288,6 @@ input[type=text]:focus {
 }
 .btn2{
     margin-left: 10px;
-    margin-top: 50px;
 }
 .delHeader{
     font-size: 28px;
@@ -298,4 +309,10 @@ input[type=text]:focus {
 }
 #modUpdate{
     width: 40%;
+}
+#profileUpdate{
+     width: 40%;
+}
+.userIcon{
+    color: red;
 }
