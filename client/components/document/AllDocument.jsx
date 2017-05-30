@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import moment from 'moment';
 import { updateDocument, deleteDocument } from '../../actions/documentActions';
 import { hasDocumentPermission } from '../../utils/helpers';
 
@@ -47,7 +46,6 @@ class AllDocument extends React.Component {
    */
   deleteDocument() {
     Materialize.toast('Document Deleted', 4000);
-    console.log(his.props.document.id);
     this.props.deleteDocument(this.props.document.id);
   }
 
@@ -75,7 +73,7 @@ class AllDocument extends React.Component {
    * @memberOf AllDocument
    */
   updateDocument() {
-    Materialize.toast('Update Successfull', 4000);
+    Materialize.toast('Update Successful', 4000);
     this.props.updateDocument(this.state.document);
   }
 
@@ -90,11 +88,6 @@ class AllDocument extends React.Component {
     const { document } = this.props;
     const { title, content } = this.state.document;
     const singleDocUrl = `document/${document.id}`;
-    const userInfo = this.props.document;
-    const dateCreated = moment(userInfo.createdAt)
-    .format('MMMM Do YYYY, h:mm:ss a');
-    const lastUpdated = moment(userInfo.updatedAt)
-    .format('MMMM Do YYYY, h:mm:ss a');
     return (
       <div>
         <div className="card docCard col s4" key={document.id}>
@@ -105,10 +98,6 @@ class AllDocument extends React.Component {
             <Link to={singleDocUrl}>Read more</Link>
           </div>
           <div className="card-action">
-            <p className="documentDate">Access Type: {document.access}</p>
-            <p className="documentDate">Created On: {dateCreated}</p>
-            <p className="documentDate">Last Updated: {lastUpdated}</p>
-
             {hasDocumentPermission(document.ownerId) ? <ul>
               <li>
                 <Modal
@@ -119,7 +108,7 @@ class AllDocument extends React.Component {
                       <i className="material-icons red-text">delete</i></a>
                        }
                 >
-                  <span className="delHeader"> Are You Sure You Want To Delete This Document? </span>
+                  <span className="delHeader"> Are You Sure You Want To Delete This Document ? </span>
                   <div>
                   <button
                     onClick={this.deleteDocument}
