@@ -1,21 +1,20 @@
 import axios from '../utils/index';
-import { getPayload } from '../utils/helpers';
 
-const usersid = getPayload().userId;
 
 /**
  *
  *
  * @export getUsers
+ * @param {number} [offset=0] document page difference
  * @returns {Function} returns dispatch
  */
-export function getUsers() {
+export function getUsers(offset = 0) {
   return (dispatch) => {
-    axios.get('/api/users/')
+    axios.get(`/api/users?offset=${offset}`)
       .then((res) => {
         dispatch({
           type: 'GET_USERS',
-          payload: res.data.users.rows,
+          payload: res.data,
         });
       });
   };
@@ -67,7 +66,7 @@ export function deleteUser(id) {
  *  @param {number} [id=usersid]
  * @returns {Function} returns dispatch
  */
-export function updateUser(data, id = usersid) {
+export function updateUser(data, id) {
   return (dispatch) => {
     axios.put(`/api/users/${id}`, data)
     .then((res) => {
@@ -82,30 +81,11 @@ export function updateUser(data, id = usersid) {
 /**
  *
  *
- * @export updateUsers
- * @param {object} user
- * @returns {Function} returns dispatch
- */
-export function updateUsers(user) {
-  return (dispatch) => {
-    axios.put(`/api/users/${user.id}`, user)
-    .then((res) => {
-      dispatch({
-        type: 'UPDATE_USERS',
-        updateUser: res.data,
-      });
-    });
-  };
-}
-
-/**
- *
- *
  * @export  getSingleUser
  * @param {number} [id=usersid]
  * @returns {Function} returns dispatch
  */
-export function getSingleUser(id = usersid) {
+export function getSingleUser(id) {
   return (dispatch) => {
     axios.get(`/api/users/${id}`)
     .then((res) => {
@@ -124,15 +104,16 @@ export function getSingleUser(id = usersid) {
  *
  * @export searchUsers
  * @param {string} term
+ * @param {number} [offset=0] document page difference
  * @returns {Function} returns dispatch
  */
-export function searchUsers(term) {
+export function searchUsers(term, offset = 0) {
   return (dispatch) => {
-    axios.get(`api/search/users?search=${term}`)
+    axios.get(`api/search/users?search=${term}&offset=${offset}`)
       .then((res) => {
         dispatch({
           type: 'SEARCH_USERS',
-          payload: res.data.user.rows
+          payload: res.data
         });
       });
   };
