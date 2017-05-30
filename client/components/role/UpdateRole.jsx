@@ -38,7 +38,6 @@ class UpdateRole extends React.Component {
    */
   onSubmit(e) {
     e.preventDefault();
-    console.log('john', this.props.role.id);
     this.props.updateRole(this.state);
   }
 
@@ -67,6 +66,7 @@ class UpdateRole extends React.Component {
     return this.setState({ title: newTitle, id: this.state.id });
   }
 
+
   /**
    *
    *
@@ -75,7 +75,6 @@ class UpdateRole extends React.Component {
    * @memberOf UpdateRole
    */
   render() {
-    console.log('taiwo', this.props)
     return (
       <Modal
         header='Update Role'
@@ -102,9 +101,6 @@ class UpdateRole extends React.Component {
           <button
           id="updateRoleButton"className="
           btn btn2 pink darken-4 modal-action modal-close">Update</button>
-           <button
-              className="btn btn2 pink darken-4 white-text modal-action modal-close"
-              >Close</button>
           </div>
         </form>
       </Modal>
