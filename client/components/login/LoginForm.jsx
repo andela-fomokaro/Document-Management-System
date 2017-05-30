@@ -56,7 +56,8 @@ class LoginForm extends React.Component {
       this.props.login({ email, password }).then(
         () => {
           Materialize.toast('Login successful', 3000);
-          return this.context.router.push('/');
+          document.location.href = '/';
+          //return this.context.router.push('/');
         },
     ).catch((err) => {
       Materialize.toast(err.data.message, 2000);

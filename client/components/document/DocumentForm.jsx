@@ -53,7 +53,6 @@ class DocumentForm extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     this.props.createDocument(this.state);
-    Materialize.toast('Document Created', 1000);
   }
 
   /**
@@ -93,6 +92,7 @@ class DocumentForm extends React.Component {
                 className="selectBox"
                 type="select"
                 name="access"
+                required
                 value={access} onChange={this.onChange}
                 defaultValue={document.access}
               >
@@ -109,18 +109,18 @@ class DocumentForm extends React.Component {
                 name="title"
                 value={title}
                 onChange={this.onChange}
+                required
               />
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
               <textarea
-                id="mytextarea"
+                className="materialize-textarea"
                 name="content"
                 value={content}
-                // onChange={this.onTinyMCEChange}
-                // tinymceConfig={this.props.tinymceConfig}
                 onChange={this.onChange}
+                required
               />
             </div>
           </div>
