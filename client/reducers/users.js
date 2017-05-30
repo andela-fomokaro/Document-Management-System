@@ -1,32 +1,28 @@
-import { GET_USERS, CREATE_USERS, DELETE_USER, UPDATE_USER, SET_SINGLE_USER, UPDATE_USERS, SEARCH_USERS, PAGINATION } from '../actions/types';
+import findIndex from 'lodash/findIndex';
+import { GET_USERS, CREATE_USERS, DELETE_USER, UPDATE_USER, SET_SINGLE_USER, UPDATE_USERS, SEARCH_USERS } from '../actions/types';
 
 export default (state = [], action = {}) => {
   switch (action.type) {
     case GET_USERS:
       return action.payload;
     case CREATE_USERS: {
-      const newUser = action.payload;
-      const stateCopy = [...state];
-      stateCopy.push(newUser);
+      const stateCopy = Object.assign({}, state);
+      stateCopy.users.rows.push(action.payload);
       return stateCopy;
     }
     case DELETE_USER: {
-      return [...state.filter(user => user.id !== action.id)];
+      const deletedUserIndex =
+      findIndex(state.users.rows, { id: action.id });// find more about lodash
+      const stateCopy = Object.assign({}, state);
+      stateCopy.users.rows.splice(deletedUserIndex, 1);
+      return stateCopy;
     }
     case UPDATE_USER: {
-      // console.log(state);
-      // // return Object.assign({}, state, { user: [...state, action.payload] });
-      // const newInfo = action.payload;
-      // const stateCopy = [...state];
-      // stateCopy.push(newInfo);
-      // return stateCopy;
-      return state;
+      return action.payload;
     }
     case UPDATE_USERS: {
       return state;
     }
-    case PAGINATION:
-      return action.payload;
     case SET_SINGLE_USER:
       return action.payload;
     case SEARCH_USERS:
