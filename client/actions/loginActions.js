@@ -26,16 +26,9 @@ export function setCurrentUser(user) {
  * @returns {Function} returns dispatch
  */
 export function logout() {
-  return (dispatch) => {
-    axios.post('/api/users/logout')
-      .then(() => {
-        browserHistory.push('/');
-      });
-    localStorage.removeItem('jwtToken');
+  return () => {
     setAuthorizationToken(false);
-    dispatch({
-      type: LOGOUT_USER
-    });
+    document.location.href = '/';
   };
 }
 /**
@@ -48,7 +41,6 @@ export function logout() {
 export function login(data) {
   return dispatch => axios.post('/api/users/login', data).then((res) => {
     const token = res.data.token;
-    window.localStorage.setItem('jwtToken', token);
     setAuthorizationToken(token);
     dispatch(setCurrentUser(jwt.decode(token)));
   }
