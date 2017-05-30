@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import propTypes from 'prop-types';
+import { PropTypes } from 'prop-types';
 import { logout } from '../actions/loginActions';
 import { hasAdmin } from '../utils/helpers';
 
@@ -46,6 +46,7 @@ class NavigationBar extends React.Component {
    * @memberOf NavigationBar
    */
   render() {
+    console.log("nav");
     const header = {
       margin: '20px',
       color: '#fff'
@@ -53,11 +54,12 @@ class NavigationBar extends React.Component {
     const { isAuthenticated } = this.props.auth;
     const userLinks = (
       <div>
-        <a className="right view" onClick={this.logout}>Logout</a>
-        <a className="right view" href="/loadDocuments">View All Documents</a>
-        <a className="right view" href="/myprofile">View Profile</a>
-        {hasAdmin() ? <a className="right view" id="managerole" href="/managerole">Manage Roles</a> : ''}
-        {hasAdmin() ? <a className="right view" id="manageusers" href="/manageusers">Manage Users</a> : ''}
+        <Link className="right view" to="/" onClick={this.logout}>Logout</Link>
+        <Link className="right view" to="/myprofile">Edit Profile</Link>
+        <Link className="right view" to="/loadDocuments"> View All Documents </Link>
+        <Link className="right view" to="/"> My Documents </Link>
+        {hasAdmin() ? <Link className="right view" id="managerole" to="/managerole">Manage Roles</Link> : ''}
+        {hasAdmin() ? <Link className="right view" id="manageusers" to="/manageusers">Manage Users</Link> : ''}
       </div>
     );
 
@@ -84,8 +86,8 @@ class NavigationBar extends React.Component {
 }
 
 NavigationBar.propTypes = {
-  auth: propTypes.object.isRequired,
-  logout: propTypes.func.isRequired
+  auth: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
