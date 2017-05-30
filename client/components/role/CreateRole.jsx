@@ -63,9 +63,9 @@ class CreateRole extends React.Component {
         trigger={
           <a
           id="adminCreateRole"
-          className="btn pink darken-4 white-text right right up btnUp tooltipped"
+          className="btn-floating btn-large docButton pink darken-3 tooltipped"
           data-position="left" data-delay="10" data-tooltip="Click to create new role">
-          Create Role</a>
+           <i className="material-icons">note_add</i></a>
   }
       >
         <form className="col s12" onSubmit={this.onSubmit}>
@@ -79,7 +79,7 @@ class CreateRole extends React.Component {
             />
             <label htmlFor="icon_prefix">Add Title To Create New Role.....</label>
           </div>
-          <button id="createRole" className="btn pink darken-4">Send</button>
+          <button id="createRole" className="btn pink darken-4 modal-action modal-close">Send</button>
         </form>
       </Modal>
     );
