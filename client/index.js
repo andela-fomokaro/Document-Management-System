@@ -9,6 +9,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import rootReducer from './rootReducer';
 import setAuthorizationToken from './utils/setAuthorizationToken';
 import { setCurrentUser } from './actions/loginActions';
+import '../node_modules/sweetalert/dist/sweetalert.css';
+import '../node_modules/sweetalert/dist/sweetalert.min';
 import './styles.scss';
 
 
