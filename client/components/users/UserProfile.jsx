@@ -1,11 +1,14 @@
 /* eslint-disable no-undef*/
 import React from 'react';
+import validator from 'validator';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Modal } from 'react-materialize';
 import moment from 'moment';
 import { bindActionCreators } from 'redux';
 import { getSingleUser, updateUser } from '../../actions/usersAction';
+import { getCurrentUser } from '../../utils/helpers';
+
 
 
 /**
@@ -30,6 +33,8 @@ class UserProfile extends React.Component {
         username: '',
         fullNames: '',
         email: '',
+        password: '',
+        passwordConfirmation: '',
       }
     };
     this.onChange = this.onChange.bind(this);
@@ -44,7 +49,7 @@ class UserProfile extends React.Component {
    * @memberOf UserProfile
    */
   componentDidMount() {
-    this.props.getSingleUser();
+    this.props.getSingleUser(getCurrentUser().userId);
   }
 
   /**
@@ -78,8 +83,12 @@ class UserProfile extends React.Component {
    * @memberOf UserProfile
    */
   updateUser() {
-    this.props.updateUser(this.state);
-    Materialize.toast('Update Successfull', 1000);
+    if(this.state.password === this.state.passwordConfirmation){
+       this.props.updateUser(this.state, getCurrentUser().userId)
+       Materialize.toast('Update Successful', 3000);
+    } else {
+      Materialize.toast('Update failed password must match', 3000);
+    }
   }
 
   /**
@@ -93,6 +102,7 @@ class UserProfile extends React.Component {
   render() {
     const userInfo = this.props.userInfo;
     const date = moment(userInfo.createdAt).format('MMMM Do YYYY, h:mm:ss a');
+     const updateDate = moment(userInfo.updatedAt).format('MMMM Do YYYY, h:mm:ss a');
     return (
       <div className="container">
         <div className="row">
@@ -105,12 +115,16 @@ class UserProfile extends React.Component {
                   <li className="listPadding">Email: {userInfo.email}</li>
                   <li className="listPadding">Time Created: {date
 }</li>
+                  <li className="listPadding">Last Updated: {updateDate
+}</li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
         <Modal
+          header='Update Profile'
+          id="profileUpdate"
           trigger={
             <button className="btn  profileButton pink darken-4 tooltipped"
             data-position="top" data-delay="10" data-tooltip="Click to update your profile"
@@ -135,6 +149,7 @@ class UserProfile extends React.Component {
                 name="email"
                 value={this.state.email}
                 onChange={e => this.onChange(e)}
+                disabled
                 placeholder="Email"
               />
             </div>
@@ -148,7 +163,30 @@ class UserProfile extends React.Component {
                 placeholder="Full Name"
               />
             </div>
-            <button className=" btn pink darken-4" onClick={() => this.updateUser()}>Update</button>
+            <div className="row">
+            <input
+              onChange={this.onChange}
+              value={this.state.password}
+              name="password"
+              type="password"
+              placeholder="Password"
+              className="validate"
+              required
+            />
+          </div>
+
+          <div className="row">
+            <input
+              onChange={this.onChange}
+              value={this.state.passwordConfirmation}
+              name="passwordConfirmation"
+              type="password"
+              className="validate"
+              placeholder="Verify Password"
+              required
+            />
+          </div>
+            <button onClick={() => this.updateUser(getCurrentUser().userId)} className="btn pink darken-4 modal-action modal-close">Update</button>
           </div>
 
         </Modal>
@@ -170,7 +208,7 @@ const mapDispatchToProps = dispatch => ({
 
 
 const mapStateToProps = state => ({
-  userInfo: state.users
+  userInfo: state.users.user
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
