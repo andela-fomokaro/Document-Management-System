@@ -17,9 +17,10 @@ const roleDocument = Helper.specDocument3;
 const privateDocument = Helper.specDocument7;
 const publicDocument = Helper.specDocument5;
 
+const term = 'the';
 describe('Document API:', () => {
   let adminToken, regularToken, regular2Token;
-  let roleDoc = {}, roleDoc2 = {}, privateDoc = {}, publicDoc = {};
+  const roleDoc = {}, privateDoc = {}, publicDoc = {};
 
   const fieldsToUpdate = {
     title: 'My God',
@@ -147,7 +148,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(200);
             expect(Array.isArray(response.body.documents)).to.be.true;
-            expect(response.body.documents.length).to.equal(6);
+            expect(response.body.documents.length).to.equal(5);
             done();
           });
         });
@@ -158,7 +159,7 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(200);
             expect(Array.isArray(response.body.documents)).to.be.true;
-            expect(response.body.documents.length).to.be.greaterThan(5);
+            expect(response.body.documents.length).to.equal(3);
             done();
           });
         });
@@ -179,7 +180,7 @@ describe('Document API:', () => {
           .set({ Authorization: adminToken })
           .end((error, response) => {
             expect(response.status).to.equal(404);
-            expect(response.body.message).to.equal('Document Not Found');
+            expect(response.body.message).to.equal('Document Does Not Exist');
             done();
           });
         });
@@ -304,7 +305,7 @@ describe('Document API:', () => {
           .set({ Authorization: adminToken })
           .send(adminUpdate)
           .end((error, response) => {
-            const updatedDocument = response.body.updatedDocument;
+            const updatedDocument = response.body.documentUpdate;
             expect(response.status).to.equal(200);
             expect(response.body.message).to
               .equal('Document Updated Successfully');
@@ -373,14 +374,14 @@ describe('Document API:', () => {
 
 
     describe('GET: (/api/search/documents?search) - ', () => {
-      const search = 'Text', term = 'gala';
+      const search = 'Text';
       it('should not return document if search term is empty', (done) => {
         request.get('/api/search/documents?search=')
           .set({ Authorization: regularToken })
           .end((error, response) => {
             expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('Invalid Search Parameter');
+            .equal('User Search Does Not Search');
             done();
           });
       });
@@ -399,7 +400,7 @@ describe('Document API:', () => {
 
       it('should return matching documents if search term match',
       (done) => {
-        request.get(`/api/search/documents?search=${search}`)
+        request.get(`/api/search/documents?search=${term}`)
           .set({ Authorization: adminToken })
           .end((error, response) => {
             expect(response.status).to.equal(200);
@@ -425,7 +426,7 @@ describe('Document API:', () => {
       it(`should search through documents with role access if document belongs to user
       / user has same role access and should return matching documents`,
       (done) => {
-        const newTerm = 'God';
+        const newTerm = 'is';
         request.get(`/api/search/documents?search=${newTerm}`)
           .set({ Authorization: regularToken })
           .end((error, response) => {

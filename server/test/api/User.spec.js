@@ -19,9 +19,9 @@ const fieldsToUpdate =
     title: 'Amoralene',
     content: 'Amoralene'
   };
-const faith = 'faith';
+const faith = 'gaye';
 
-describe('Document API:', () => {
+describe('USER API:', () => {
   let adminToken, regularToken;
   const user = {};
   before((done) => {
@@ -56,15 +56,6 @@ describe('Document API:', () => {
           done();
         });
       });
-      it('should create new user if user does not exist', (done) => {
-        request.post('/api/users/')
-        .send(regularUser2)
-        .end((err, res) => {
-          expect(res.status).to.equal(201);
-          expect(res.body.message).to.equal('User Has Been Successfully Created');
-          done();
-        });
-      });
     });
     it('should not create invalid user', (done) => {
       request.post('/api/users/')
@@ -77,7 +68,7 @@ describe('Document API:', () => {
     });
     it('should not re-create an existing user', (done) => {
       request.post('/api/users/')
-      .send(regularUser2)
+      .send(adminUser)
       .end((err, res) => {
         expect(res.status).to.equal(400);
         expect(res.body.message).to.equal('This User Already exist');
@@ -150,14 +141,6 @@ describe('Document API:', () => {
             done();
           });
     });
-    it('should return error message if an error was encountered', (done) => {
-      request.get('/api/users')
-          .set({ Authorization: regularToken })
-          .end((error) => {
-            expect(error.message).to.equal(401);
-            done();
-          });
-    });
   });
 
   describe('GET: (/api/users/:id) - ', () => {
@@ -214,7 +197,7 @@ describe('Document API:', () => {
           });
       });
 
-      it('should not edit user if user correct access-token', (done) => {
+      it('should not edit user if user does not have correct access-token', (done) => {
         request.put('/api/users/1')
           .set({ Authorization: regularToken })
           .send(fieldsToUpdate)
@@ -235,7 +218,7 @@ describe('Document API:', () => {
             done();
           });
       });
-      it('should not edit user is user access-token is correct', (done) => {
+      it('should edit user if user access-token is correct', (done) => {
         request.put('/api/users/1')
           .set({ Authorization: adminToken })
           .send(fieldsToUpdate)
@@ -332,9 +315,9 @@ describe('Document API:', () => {
       });
       it('should return user documents if id is valid',
       (done) => {
-        request.get('/api/users/2/documents')
+        request.get('/api/users/1/documents')
           .set({
-            Authorization: regularToken
+            Authorization: adminToken
           })
           .end((error, response) => {
             expect(response.status).to

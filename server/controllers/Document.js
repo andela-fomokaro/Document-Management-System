@@ -47,7 +47,7 @@ const Document = {
             if ((role.title !== 'admin') && (document.access === 'private') &&
             (document.ownerId !== req.decoded.userId)) {
               return res.status(403)
-                .send({ message: 'The Document You Are Trying To Access Is Privated' });
+                .send({ message: 'The Document You Are Trying To Access Is Private' });
             }
             db.Users.findById(document.ownerId).then((user) => {
               if ((role.title !== 'admin') && (document.access === 'role') &&
@@ -259,7 +259,7 @@ const Document = {
       .then((role) => {
         if (searchTerm === '') {
           return res.status(400).send({
-            message: 'User Search Does Not Search'
+            message: 'Document Search Does Not Search'
           });
         }
 

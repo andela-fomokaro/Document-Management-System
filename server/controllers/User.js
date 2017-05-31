@@ -209,7 +209,7 @@ const User = {
     const userSearch = req.query.search;
     if (userSearch === '') {
       return res.status(400).send({
-        message: 'Search Does Not Match'
+        message: 'User Search Does Not Search'
       });
     }
     let pagination;
@@ -235,7 +235,7 @@ const User = {
         pagination = Helper.pagination(query);
         if (users.rows.length === 0) {
           return res.status(404).send({
-            message: 'Does Not exist'
+            message: 'Search Term Not Found'
           });
         }
         res.status(200)

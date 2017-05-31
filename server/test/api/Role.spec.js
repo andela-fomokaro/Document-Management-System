@@ -85,6 +85,26 @@ describe('ROLE API:', () => {
             done();
           });
       });
+      it('should create role if role does not exist', (done) => {
+        const newRole = { title: 'regular' };
+        request.post('/api/roles')
+          .set({ Authorization: adminToken })
+          .send(newRole)
+          .end((error, response) => {
+            expect(response.status).to.equal(201);
+            done();
+          });
+      });
+      it('should create role if role does not exist', (done) => {
+        const newRole = { title: 'author' };
+        request.post('/api/roles')
+          .set({ Authorization: adminToken })
+          .send(newRole)
+          .end((error, response) => {
+            expect(response.status).to.equal(201);
+            done();
+          });
+      });
     });
 
     describe('GET: (/api/roles)', () => {
@@ -169,14 +189,14 @@ describe('ROLE API:', () => {
       });
 
       it('should not edit default regular role', (done) => {
-        const fieldsToUpdate = { title: 'regular' };
-        request.put('/api/roles/2')
+        const fieldsToUpdate = { title: 'admin' };
+        request.put('/api/roles/1')
           .set({ Authorization: adminToken })
           .send(fieldsToUpdate)
           .end((error, response) => {
             expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('An error occured');
+            .equal('Cannot Edit Default Roles');
             done();
           });
       });
