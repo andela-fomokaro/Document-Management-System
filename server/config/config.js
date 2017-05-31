@@ -1,7 +1,6 @@
 
 module.exports = {
   development: {
-    // use_env_variable: 'DATABASE_URL',
     username: 'andelaeveloper',
     password: null,
     database: 'dataSystem2',
@@ -9,9 +8,11 @@ module.exports = {
     dialect: 'postgres'
   },
   test: {
-    use_env_variable: 'DATABASE_TEST_URL',
-    dialect: 'postgres',
-    logging: false
+    username: 'andelaeveloper',
+    password: null,
+    database: 'testSystem',
+    host: '127.0.0.1',
+    dialect: 'postgres'
   },
   production: {
     use_env_variable: 'BACKUP_DATABASE'

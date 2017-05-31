@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">80% </span>
+        <span class="strong">74.29% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>28/35</span>
+        <span class='fraction'>26/35</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">77.78% </span>
+        <span class="strong">61.11% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>14/18</span>
+        <span class='fraction'>11/18</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">77.78% </span>
@@ -35,13 +35,13 @@
         <span class='fraction'>14/18</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">80% </span>
+        <span class="strong">74.29% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>28/35</span>
+        <span class='fraction'>26/35</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -176,10 +176,7 @@
 131
 132
 133
-134
-135
-136
-137</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+134</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -215,7 +212,6 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -279,22 +275,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
 <span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -306,9 +302,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -326,10 +320,10 @@ const Roles = {
    */
   createRole(req, res) {
     db.Roles.findOne({ where: { title: req.body.title } })
-    .then((existingRole) =&gt; {
-      if (<span class="missing-if-branch" title="else path not taken" >E</span>existingRole) {
+    .then((roleExist) =&gt; {
+      if (<span class="missing-if-branch" title="else path not taken" >E</span>roleExist) {
         return res.status(400).send({
-          message: 'Validation error. Please enter unique parameters only!'
+          message: 'Role Title Already Exist'
         });
       }
       db.<span class="cstat-no" title="statement not covered" >Roles.create({</span>
@@ -354,14 +348,13 @@ const Roles = {
       .send(roles);
     });
   },
-&nbsp;
 /**
    * Retrive a Role based on id with all users on that role
    * @param {Object} req - Request object
    * @param {Object} res - Response object
    * @return {Object} Response object
    */
-  getRolesById(req, res) { // mer
+  getRolesById(req, res) {
     db.Roles
       .findById(req.params.id)
       .then((role) =&gt; {
@@ -373,7 +366,7 @@ const Roles = {
         res.status(200).send(role);
       })
       .catch(() =&gt; res.status(400).send({
-        message: 'An error occured. Invalid parameters, try again!'
+        message: 'An error occured'
       }));
   },
 &nbsp;
@@ -394,17 +387,17 @@ const Roles = {
         }
         if (<span class="missing-if-branch" title="else path not taken" >E</span>role.title === 'regular' || role.title === 'admin') {
           return res.status(400).send({
-            message: 'An error occured. You cannot delete default roles'
+            message: 'Cannot Delete Default Roles'
           });
         }
         role
           .<span class="cstat-no" title="statement not covered" >destroy()</span>
           .then(<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >res.status(200).send({</span></span>
-            message: 'Role deleted successfully'
+            message: 'Role deleted'
           }));
       })
       .catch(() =&gt; res.status(400).send({
-        message: 'An error occured. Invalid parameters, try again!'
+        message: 'An error occured'
       }));
   },
 &nbsp;
@@ -416,22 +409,22 @@ const Roles = {
    */
   updateRole(req, res) {
     db.Roles.findOne({ where: { title: req.body.title } })
-    .then((existingRole) =&gt; {
-      if (existingRole) {
+    .then((roleExist) =&gt; {
+      if (roleExist) {
         return res.status(400).send({
-          message: 'Validation error. Please enter unique parameters only!'
+          message: 'Cannot Edit Default Roles'
         });
       }
       db.Roles.findById(req.params.id)
       .then((role) =&gt; {
-        if (!role) {
+        if (<span class="missing-if-branch" title="else path not taken" >E</span>!role) {
           return res.status(404).send({
             message: 'Role Does Not Exist',
           });
         }
-        i</span>f (<span class="missing-if-branch" title="else path not taken" >E</span>role.title === 'regular' || <span class="branch-1 cbranch-no" title="branch not covered" >role.title === 'admin') {
-          return res.status(400).send({
-            message: 'An error occured. You cannot update default roles'
+        if (<span class="cstat-no" title="statement not covered" >role.title === 'regular' || role.title === 'admin') {</span>
+          return <span class="cstat-no" title="statement not covered" >res.status(400).send({</span>
+            message: 'An error occured'
           });
         }
         role
@@ -443,13 +436,11 @@ const Roles = {
           }));
       })
       .catch(() =&gt; res.status(400).send({
-        message: 'An error occured. Invalid parameters, try again!'
+        message: 'An error occured'
       }));
     });
   },
 };
-&nbsp;
-&nbsp;
 export default Roles;
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -457,7 +448,7 @@ export default Roles;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun May 14 2017 12:36:22 GMT+0100 (WAT)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed May 31 2017 14:46:59 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

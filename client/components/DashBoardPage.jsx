@@ -9,7 +9,6 @@ import AllDocument from './document/AllDocument.jsx';
 import
 { getDocument, deleteDocument, updateDocument, searchDocument, usersDocument }
 from '../actions/documentActions';
-// import DashBoardOnboarding from '../components/document/DashboardOnboarding.jsx';
 
 /**
  *
