@@ -413,7 +413,8 @@ describe('Document API:', () => {
       it(`should search through documents if user is an admin
       and should return matching documents`,
       (done) => {
-        request.get(`/api/search/documents?search=${search}`)
+        const newTerm = 'is';
+        request.get(`/api/search/documents?search=${newTerm}`)
           .set({ Authorization: adminToken })
           .end((error, response) => {
             expect(response.status).to.equal(200);

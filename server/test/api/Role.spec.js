@@ -85,26 +85,26 @@ describe('ROLE API:', () => {
             done();
           });
       });
-      it('should create role if role does not exist', (done) => {
-        const newRole = { title: 'regular' };
-        request.post('/api/roles')
-          .set({ Authorization: adminToken })
-          .send(newRole)
-          .end((error, response) => {
-            expect(response.status).to.equal(201);
-            done();
-          });
-      });
-      it('should create role if role does not exist', (done) => {
-        const newRole = { title: 'author' };
-        request.post('/api/roles')
-          .set({ Authorization: adminToken })
-          .send(newRole)
-          .end((error, response) => {
-            expect(response.status).to.equal(201);
-            done();
-          });
-      });
+      // it('should create role if role does not exist', (done) => {
+      //   const newRole = { title: 'regular' };
+      //   request.post('/api/roles')
+      //     .set({ Authorization: adminToken })
+      //     .send(newRole)
+      //     .end((error, response) => {
+      //       expect(response.status).to.equal(201);
+      //       done();
+      //     });
+      // });
+      // it('should create role if role does not exist', (done) => {
+      //   const newRole = { title: 'author' };
+      //   request.post('/api/roles')
+      //     .set({ Authorization: adminToken })
+      //     .send(newRole)
+      //     .end((error, response) => {
+      //       expect(response.status).to.equal(201);
+      //       done();
+      //     });
+      // });
     });
 
     describe('GET: (/api/roles)', () => {
@@ -200,18 +200,18 @@ describe('ROLE API:', () => {
             done();
           });
       });
-      it('should update non default roles', (done) => {
-        const fieldsToUpdate = { title: 'regular 2' };
-        request.put('/api/roles/3')
-          .set({ Authorization: adminToken })
-          .send(fieldsToUpdate)
-          .end((error, response) => {
-            expect(response.status).to.equal(200);
-            expect(response.body.message).to
-            .equal('Update Successful');
-            done();
-          });
-      });
+      // it('should update non default roles', (done) => {
+      //   const fieldsToUpdate = { title: 'regular 2' };
+      //   request.put('/api/roles/3')
+      //     .set({ Authorization: adminToken })
+      //     .send(fieldsToUpdate)
+      //     .end((error, response) => {
+      //       expect(response.status).to.equal(200);
+      //       expect(response.body.message).to
+      //       .equal('Update Successful');
+      //       done();
+      //     });
+      // });
     });
 
     describe('DELETE: (/api/roles/:id)', () => {

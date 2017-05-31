@@ -19,7 +19,7 @@ const fieldsToUpdate =
     title: 'Amoralene',
     content: 'Amoralene'
   };
-const faith = 'gaye';
+const faith = 'omokaro';
 
 describe('USER API:', () => {
   let adminToken, regularToken;
@@ -143,6 +143,52 @@ describe('USER API:', () => {
     });
   });
 
+  describe('PUT: (/api/users/:id) - ', () => {
+    it('should not edit user if id supplied is invalid', (done) => {
+      request.put('/api/users/678')
+          .set({ Authorization: regularToken })
+          .send(fieldsToUpdate)
+          .end((error, response) => {
+            expect(response.status).to.equal(404);
+            expect(response.body.message).to.equal('User Does Not Exist');
+            done();
+          });
+    });
+
+    it('should not edit user if user does not have correct access-token', (done) => {
+      request.put('/api/users/1')
+          .set({ Authorization: regularToken })
+          .send(fieldsToUpdate)
+          .end((error, response) => {
+            expect(response.status).to.equal(401);
+            expect(response.body.message).to
+            .equal('You are not authorized to update user profile');
+            done();
+          });
+    });
+    it('should not edit the user if id is an alphabet', (done) => {
+      request.put('/api/users/gth')
+          .set({ Authorization: adminToken })
+          .end((error, response) => {
+            expect(response.status).to.equal(400);
+            expect(response.body.message).to
+            .equal('An error occured');
+            done();
+          });
+    });
+    it('should edit user if user access-token is correct', (done) => {
+      request.put('/api/users/1')
+          .set({ Authorization: adminToken })
+          .send(fieldsToUpdate)
+          .end((error, response) => {
+            expect(response.status).to.equal(200);
+            expect(response.body.message).to.equal('Update Successful!');
+            done();
+          });
+    });
+  });
+
+
   describe('GET: (/api/users/:id) - ', () => {
     it(`should not return user if user
        is not an admin / user does not have correct access-token`, (done) => {
@@ -219,52 +265,6 @@ describe('USER API:', () => {
           });
            });
     });
-
-    describe('PUT: (/api/users/:id) - ', () => {
-      it('should not edit user if id supplied is invalid', (done) => {
-        request.put('/api/users/678')
-          .set({ Authorization: regularToken })
-          .send(fieldsToUpdate)
-          .end((error, response) => {
-            expect(response.status).to.equal(404);
-            expect(response.body.message).to.equal('User Does Not Exist');
-            done();
-          });
-      });
-
-      it('should not edit user if user does not have correct access-token', (done) => {
-        request.put('/api/users/1')
-          .set({ Authorization: regularToken })
-          .send(fieldsToUpdate)
-          .end((error, response) => {
-            expect(response.status).to.equal(401);
-            expect(response.body.message).to
-            .equal('You are not authorized to update user profile');
-            done();
-          });
-      });
-      it('should not edit the user if id is an alphabet', (done) => {
-        request.put('/api/users/gth')
-          .set({ Authorization: adminToken })
-          .end((error, response) => {
-            expect(response.status).to.equal(400);
-            expect(response.body.message).to
-            .equal('An error occured');
-            done();
-          });
-      });
-      it('should edit user if user access-token is correct', (done) => {
-        request.put('/api/users/1')
-          .set({ Authorization: adminToken })
-          .send(fieldsToUpdate)
-          .end((error, response) => {
-            expect(response.status).to.equal(200);
-            expect(response.body.message).to.equal('Update Successful!');
-            done();
-          });
-      });
-    });
-
 
     describe('DELETE: (/api/users/:id) - ', () => {
       it('should not delete user if id supplied is an object', (done) => {
