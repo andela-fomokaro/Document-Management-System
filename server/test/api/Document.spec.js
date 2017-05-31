@@ -20,7 +20,7 @@ const publicDocument = Helper.specDocument5;
 const term = 'the';
 describe('Document API:', () => {
   let adminToken, regularToken, regular2Token;
-  const roleDoc = {}, privateDoc = {}, publicDoc = {};
+  let roleDoc = {}, privateDoc = {}, publicDoc = {};
 
   const fieldsToUpdate = {
     title: 'My God',
