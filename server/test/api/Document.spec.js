@@ -381,14 +381,14 @@ describe('Document API:', () => {
           .end((error, response) => {
             expect(response.status).to.equal(400);
             expect(response.body.message).to
-            .equal('User Search Does Not Search');
+            .equal('Document Search Does Not Search');
             done();
           });
       });
 
       it('should not return document if search term does not match',
       (done) => {
-        request.get(`/api/search/documents?search=${term}`)
+        request.get(`/api/search/documents?search=${search}`)
           .set({ Authorization: adminToken })
           .end((error, response) => {
             expect(response.status).to.equal(404);

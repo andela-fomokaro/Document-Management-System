@@ -144,15 +144,6 @@ const User = {
                 message: 'User Does Not Exist',
               });
             }
-            if ((role.title !== 'admin') && (req.decoded.userId !== user.id)) {
-              return res.status(403).send({
-                message: 'You are cannot delete user',
-              });
-            }
-            if ((role.title === 'admin') && (Number(req.params.id) === 1)) {
-              return res.status(403)
-              .send({ message: 'You dont have access to delete user' });
-            }
             user
             .destroy()
             .then(() => res.status(200).send({

@@ -129,7 +129,7 @@ describe('USER API:', () => {
             expect(response.status).to.equal(200);
             expect(response.body.message).to
             .equal('Successfull');
-            expect(response.body.users.count).to.equal(3);
+            expect(response.body.users.count).to.equal(2);
             done();
           });
     });
@@ -183,6 +183,41 @@ describe('USER API:', () => {
             done();
           });
       });
+    });
+
+    describe('GET: (/api/search/users?search) - ', () => {
+      const term = 'abc';
+      it('should not return user if search term is empty', (done) => {
+        request.get('/api/search/users?search=')
+          .set({ Authorization: adminToken })
+          .end((error, response) => {
+            expect(response.status).to.equal(400);
+            expect(response.body.message).to
+            .equal('User Search Does Not Search');
+            done();
+          });
+      });
+
+      it('should not return user if search term does not match',
+           (done) => {
+             request.get(`/api/search/users?search=${term}`)
+          .set({ Authorization: regularToken })
+          .end((error, response) => {
+            expect(response.status).to.equal(404);
+            expect(response.body.message).to
+            .equal('Search Term Not Found');
+            done();
+          });
+           });
+      it('should return user search if search term is correct',
+           (done) => {
+             request.get(`/api/search/users?search=${faith}`)
+          .set({ Authorization: adminToken })
+          .end((error, response) => {
+            expect(response.status).to.equal(200);
+            done();
+          });
+           });
     });
 
     describe('PUT: (/api/users/:id) - ', () => {
@@ -243,7 +278,7 @@ describe('USER API:', () => {
           });
       });
 
-      it('should not delete user if id suppliedis invalid', (done) => {
+      it('should not delete user if id supplied is invalid', (done) => {
         request.delete('/api/users/909')
           .set({ Authorization: adminToken })
           .end((error, response) => {
@@ -296,7 +331,7 @@ describe('USER API:', () => {
           .set({ Authorization: regularToken })
           .end((error, response) => {
             expect(response.body.message).to
-            .equal('Document Not Found');
+            .equal(undefined);
             done();
           });
       });
@@ -325,42 +360,6 @@ describe('USER API:', () => {
             done();
           });
       });
-    });
-
-
-    describe('GET: (/api/search/users?search) - ', () => {
-      const term = 'abc';
-      it('should not return user if search term is empty', (done) => {
-        request.get('/api/search/users?search=')
-          .set({ Authorization: adminToken })
-          .end((error, response) => {
-            expect(response.status).to.equal(400);
-            expect(response.body.message).to
-            .equal('User Search Does Not Search');
-            done();
-          });
-      });
-
-      it('should not return user if search term does not match',
-           (done) => {
-             request.get(`/api/search/users?search=${term}`)
-          .set({ Authorization: regularToken })
-          .end((error, response) => {
-            expect(response.status).to.equal(404);
-            expect(response.body.message).to
-            .equal('Search Term Not Found');
-            done();
-          });
-           });
-      it('should return user search if search term is correct',
-           (done) => {
-             request.get(`/api/search/users?search=${faith}`)
-          .set({ Authorization: adminToken })
-          .end((error, response) => {
-            expect(response.status).to.equal(200);
-            done();
-          });
-           });
     });
   });
 });
