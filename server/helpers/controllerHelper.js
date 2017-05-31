@@ -28,6 +28,38 @@ const Helper = {
       'createdAt',
     ];
   },
+  /**
+   * Get user's profile'
+   * @param {Object} data object containing user's details
+   * @returns {Object} return user's data
+   */
+  userProfile(data) {
+    return {
+      id: data.id,
+      username: data.username,
+      firstname: data.firstname,
+      lastname: data.lastname,
+      email: data.email,
+      roleId: data.roleId,
+      createAt: data.createdAt,
+      updatedAt: data.updatedAt
+    };
+  },
+  /**
+   * Get document's attributes'
+   * @returns {Array} return user's attributes
+   */
+  getDocAttribute() {
+    return [
+      'id',
+      'title',
+      'content',
+      'access',
+      'ownerId',
+      'createdAt',
+      'updatedAt'
+    ];
+  },
 };
 
 export default Helper;

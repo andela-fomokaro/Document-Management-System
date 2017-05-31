@@ -54,7 +54,7 @@ const Auth = {
            next();
          } else {
            return res.status(403)
-           .send({ message: 'Admin access is required!' });
+           .send({ message: 'You dont have access to delete user' });
          }
        });
   },

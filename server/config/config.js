@@ -1,9 +1,11 @@
-const dotenv = require('dotenv').config();
 
 module.exports = {
   development: {
-    use_env_variable: 'DATABASE_URL',
-    dialect: 'postgres',
+    username: 'andelaeveloper',
+    password: null,
+    database: 'dataSystem2',
+    host: '127.0.0.1',
+    dialect: 'postgres'
   },
   test: {
     use_env_variable: 'DATABASE_TEST_URL',
@@ -11,6 +13,6 @@ module.exports = {
     logging: false
   },
   production: {
-    use_env_variable: 'DATABASE_URL'
+    use_env_variable: 'BACKUP_DATABASE'
   }
 };

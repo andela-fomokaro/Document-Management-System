@@ -8,8 +8,9 @@ import axios from 'axios';
  */
 export default function setAuthorizationToken(token) {
   if (token) {
-    axios.defaults.headers.common['x-access-token'] = token;
+    window.localStorage.setItem('jwtToken', token);
   } else {
+    window.localStorage.removeItem('jwtToken');
     delete axios.defaults.headers.common['x-access-token'];
   }
 }

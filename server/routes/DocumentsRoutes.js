@@ -7,10 +7,11 @@ module.exports = (app) => {
 
   app.get('/api/documents/:id', Auth.verifyToken, Document.findDocument);
 
-  app.get('/api/users/:id/documents', Auth.verifyToken, Document.findUsersDocuments);// worked on still have issues
+  app.get('/api/users/:id/documents', Auth.verifyToken,
+   Document.findUsersDocuments);
 
 
-  app.put('/api/documents/:id', Auth.verifyToken, Document.updateDoc);
+  app.put('/api/documents/:id', Auth.verifyToken, Document.updateDocument);
 
 
   app.delete('/api/documents/:id', Auth.verifyToken, Document.delete);
@@ -20,6 +21,4 @@ module.exports = (app) => {
 
 
   app.get('/api/search/documents', Auth.verifyToken, Document.search);
-
-  // Work on pagination and search
 };

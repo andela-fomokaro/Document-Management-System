@@ -1,5 +1,4 @@
 import axios from '../utils/index';
-
 /**
  *
  *
@@ -13,7 +12,7 @@ export function createDocument(data) {
       .then((res) => {
         dispatch({
           type: 'CREATE_DOCUMENT',
-          payload: res.data.newDocument
+          payload: res.data.document
         });
       });
   };
@@ -38,6 +37,26 @@ export function loadDocuments(offset = 0) {
   };
 }
 
+
+/**
+ *
+ *
+ * @export usersDocument
+ * @param {number} [offset=0] document page difference
+ * @param {Number} id - document id
+ * @returns {Function} returns dispatch
+ */
+export function usersDocument(offset = 0, id) {
+  return (dispatch) => {
+    axios.get(`/api/users/${id}/documents?offset=${offset}`)
+      .then((res) => {
+        dispatch({
+          type: 'USER_DOCUMENT',
+          payload: res.data,
+        });
+      });
+  };
+}
 
 /**
  *
@@ -78,6 +97,7 @@ export function deleteDocument(id) {
   };
 }
 
+
 /**
  *
  *
@@ -91,7 +111,7 @@ export function updateDocument(document) {
     .then((res) => {
       dispatch({
         type: 'UPDATE_DOCUMENT',
-        payload: res.data.updatedDocument,
+        payload: res.data.documentUpdate,
         id: document.id
       });
     });
@@ -107,7 +127,7 @@ export function updateDocument(document) {
  */
 export function getSingleDocument(id) {
   return (dispatch) => {
-    axios.get(`api/documents/${id}`)
+    axios.get(`/api/documents/${id}`)
     .then((res) => {
       dispatch(
         {
@@ -135,8 +155,6 @@ export function searchDocument(term, offset = 0) {
           type: 'SEARCH_DOCUMENT',
           payload: res.data
         });
-      }).catch((error) => {
-        Materialize.toast(error.data.message, 1000);
       });
   };
 }

@@ -1,9 +1,8 @@
 import db from '../models';
 import Helper from '../helpers/controllerHelper';
 import Auth from '../middlewares/Auth';
-/**
- * UsersController class to create and manage users
- */
+
+
 const User = {
   /**
    * Create a user
@@ -16,7 +15,7 @@ const User = {
       .then((existingUser) => {
         if (existingUser) {
           return res.status(400).send({
-            message: 'User Already Exist!'
+            message: 'This User Already exist'
           });
         }
       });
@@ -24,7 +23,7 @@ const User = {
       .then((newUser) => {
         const token = Auth.getToken(newUser);
         res.status(201).json({
-          message: 'Successfull',
+          message: 'User Has Been Successfully Created',
           token,
           newUser
         });
@@ -47,14 +46,14 @@ const User = {
         const token = Auth.getToken(user);
         return res.status(200)
         .send({
-          message: 'Successfull',
+          message: 'You have sucessfully logged in',
           user,
           token
         });
       }
       res.status(401)
           .send({
-            message: 'Enter a valid email or password to log in'
+            message: 'Login details entered are incorrect'
           });
     });
   },
@@ -93,10 +92,12 @@ const User = {
               pagination
             });
         }
-      });
+      }).catch(() => res.status(401).send({
+        message: 'An error occured'
+      }));
   },
 /**
-   * Retrive a user's details
+   * Find User By Id
    * @param {Object} req - Request object
    * @param {Object} res - Response object
    * @return {Object} Response object
@@ -115,7 +116,7 @@ const User = {
           }
           if ((role.title !== 'admin') && (req.decoded.userId !== user.id)) {
             return res.status(403)
-            .send({ message: 'Authorized' });
+            .send({ message: 'You cannot access user profile' });
           }
           req.decoded.user = user;
           res.status(200).send(req.decoded.user);
@@ -129,7 +130,7 @@ const User = {
    * Delete a particular Document
    * @param {Object} req - Request object
    * @param {Object} res - Response object
-   * @return {Object} Response object
+   * @return {void} Response object
    */
   delete(req, res) {
     db.Roles
@@ -143,35 +144,16 @@ const User = {
                 message: 'User Does Not Exist',
               });
             }
-            if ((role.title !== 'admin') && (req.decoded.userId !== user.id)) {
-              return res.status(403).send({
-                message: 'You are not authorized',
-              });
-            }
-            if ((role.title === 'admin') && (Number(req.params.id) === 1)) {
-              return res.status(403)
-              .send({ message: 'You are not authorized' });
-            }
             user
             .destroy()
             .then(() => res.status(200).send({
-              message: 'Deleted successfully.',
+              message: 'User deleted successfully',
             }));
           })
       .catch(() => res.status(400).send({
         message: 'An error occured'
       }));
       });
-  },
-/**
-   * Logout a user
-   * @param {Object} req - Request object
-   * @param {Object} res - Response object
-   * @return {Object} Response object
-   */
-  logOut(req, res) {
-    res.status(200)
-      .send({ message: 'Successfull' });
   },
 /**
    * Update a user
@@ -187,28 +169,19 @@ const User = {
           .then((user) => {
             if (!user) {
               return res.status(404).send({
-                message: 'Does Not Exist',
-              });
-            }
-            if ((role.title !== 'admin') && req.body.roleId) {
-              return res.status(403).send({
-                message: 'You are not authorized'
+                message: 'User Does Not Exist',
               });
             }
             if ((role.title !== 'admin') && (req.decoded.userId !== user.id)) {
               return res.status(403).send({
-                message: 'You are not authorized'
+                message: 'You are not authorized to update user profile'
               });
             }
             user
               .update(req.body)
               .then(user => res.status(200).send({
                 message: 'Update Successful!',
-                user: {
-                  id: user.id,
-                  name: user.fullNames,
-                  email: user.email
-                }
+                user
               }));
           })
         .catch(() => res.status(400).send({
@@ -225,15 +198,11 @@ const User = {
    */
   search(req, res) {
     const userSearch = req.query.search;
-
     if (userSearch === '') {
       return res.status(400).send({
-        message: 'Search Does Not Match'
+        message: 'User Search Does Not Search'
       });
     }
-    const limit = req.query.limit || 6;
-    const offset = req.query.offset || 0;
-    let condition = {};
     let pagination;
     const query = {
       where: { $or: [
@@ -248,105 +217,26 @@ const User = {
       ]
       }
     };
-    db.Users.findAndCountAll(query)
-      .then((user) => {
-        condition = {
-          count: user.count,
-          limit,
-          offset,
-        };
-        pagination = Helper.pagination(condition);
-        if (user.rows.length === 0) {
+    query.limit = (req.query.limit > 0) ? req.query.limit : 6;
+    query.offset = (req.query.offset > 0) ? req.query.offset : 0;
+    query.order = '"createdAt" ASC ';
+    return db.Users.findAndCountAll(query)
+      .then((users) => {
+        query.count = users.count;
+        pagination = Helper.pagination(query);
+        if (users.rows.length === 0) {
           return res.status(404).send({
-            message: 'Does Not exist'
+            message: 'Search Term Not Found'
           });
         }
         res.status(200)
           .send({
             message: 'Your search was successful',
-            user,
+            users,
             pagination
           });
       });
   },
-
-  /**
-   * Retrieve all documents belonging to a user
-   * @param {Object} req - Request object
-   * @param {Object} res - Response object
-   * @return {Object} Response object
-   */
-  retrieveUserDocuments(req, res) {
-    db.Roles
-      .findById(req.decoded.roleId)
-      .then((role) => {
-        let query = {};
-        if (role.title === 'admin') {
-          query = {
-            where: {
-              ownerId: { $eq: req.params.id }
-            }
-          };
-        } else {
-          query = {
-            where: {
-              $and: {
-                ownerId: { $eq: req.params.id },
-                $or: {
-                  access: { $eq: 'public' },
-                  $and: {
-                    access: { $eq: 'private' },
-                    ownerId: { $eq: req.decoded.userId }
-                  },
-                  $or: {
-                    $and: {
-                      access: { $eq: 'role' },
-                      '$db.Users.roleId$': { $eq: req.decoded.roleId }
-                    }
-                  }
-                }
-              }
-            },
-            include: [
-              {
-                model: db.Users
-              }
-            ]
-          };
-        }
-
-        query.limit = (req.query.limit > 0) ? req.query.limit : 10;
-        query.offset = (req.query.offset > 0) ? req.query.offset : 0;
-        db.Documents
-          .findAndCountAll(query)
-          .then((documents) => {
-            const filteredDocuments = documents.rows.map(document => Object.assign({}, {
-              title: document.title,
-              content: document.content,
-              access: document.access,
-              type: document.type,
-              ownerId: document.ownerId,
-              createdAt: document.createdAt,
-              updatedAt: document.updatedAt
-            }));
-            const pagination = Helper.pagination(
-              query.limit, query.offset, documents.count
-            );
-            if (documents.rows.length === 0) {
-              return res.status(404).send({
-                message: 'An error occured'
-              });
-            }
-            res.status(200).send({
-              pagination, documents: filteredDocuments
-            });
-          })
-          .catch(() => res.status(400).send({
-            message: 'An error occured'
-          }));
-      });
-  }
-
 };
 
 export default User;

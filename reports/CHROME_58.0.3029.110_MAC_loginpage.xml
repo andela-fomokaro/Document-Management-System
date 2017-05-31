@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="1"
+            failures="1"
+            tests="2">
+
+  <testsuite name="loginpage"
+    errors="1" failures="1" hostname="" id="" package="loginpage" skipped="1"
+    tests="2" time="10.08" timestamp="Wed, 31 May 2017 13:50:55 GMT">
+  
+    <testcase name="Login a user" classname="loginpage" time="10.08" assertions="2">
+
+      <failure message="Testing if element &lt;p.cardTitle&gt; contains text: &quot;Quick Tips On How To Onboard Quickly&quot;. Element could not be located.">    at Object.LoginAUser [as Login a user] (/Users/andelaeveloper/Documents/DMS/client/tests/E2E/loginpage.js:13:15)
+    at _combinedTickCallback (internal/process/next_tick.js:67:7)</failure>
+
+    
+    </testcase>
+  
+  
+    
+    <testcase
+      name="Invalid login" classname="loginpage">
+      <skipped />
+    </testcase>
+    
+  
+  </testsuite>
+</testsuites>

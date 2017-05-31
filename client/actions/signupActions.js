@@ -8,7 +8,7 @@ import axios from 'axios';
  * @returns {Function} returns dispatch
  */
 export function userSignupRequest(userData) {
-  return dispatch => axios.post('/api/users/', userData);
+  return () => axios.post('/api/users/', userData);
 }
 
 /**
@@ -19,5 +19,5 @@ export function userSignupRequest(userData) {
  * @returns {Function} returns dispatch
  */
 export function isUserExists(identifier) {
-  return dispatch => axios.post(`/api/users/${identifier}`);
+  return () => axios.post(`/api/users/${identifier}`);
 }
