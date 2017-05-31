@@ -8,11 +8,9 @@ module.exports = {
     dialect: 'postgres'
   },
   test: {
-    username: 'andelaeveloper',
-    password: null,
-    database: 'testSystem',
-    host: '127.0.0.1',
-    dialect: 'postgres'
+    use_env_variable: 'DATABASE_TEST_URL',
+    dialect: 'postgres',
+    logging: false
   },
   production: {
     use_env_variable: 'BACKUP_DATABASE'
