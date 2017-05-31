@@ -34,8 +34,6 @@ class DashBoardPage extends React.Component {
   componentDidMount() {
     if(this.props.user.userId)
       this.props.usersDocument(0, this.props.user.userId);
-
-    console.log(localStorage.getItem('jwtToken'));
   }
 
     /**
@@ -61,7 +59,7 @@ class DashBoardPage extends React.Component {
   onChange(e) {
     const searchTerm = e.target.value;
     if (searchTerm.length < 1) {
-      this.props.usersDocument();
+      this.props.usersDocument(0, this.props.user.userId);
     } else {
       this.props.searchDocument(searchTerm);
     }

@@ -46,7 +46,6 @@ class NavigationBar extends React.Component {
    * @memberOf NavigationBar
    */
   render() {
-    console.log("nav");
     const header = {
       margin: '20px',
       color: '#fff'
