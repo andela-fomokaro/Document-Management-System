@@ -156,7 +156,7 @@ describe('USER API:', () => {
     });
 
     it('should not edit user if user does not have correct access-token', (done) => {
-      request.put('/api/users/1')
+      request.put(`/api/users/${user.id}`)
           .set({ Authorization: regularToken })
           .send(fieldsToUpdate)
           .end((error, response) => {
@@ -177,7 +177,7 @@ describe('USER API:', () => {
           });
     });
     it('should edit user if user access-token is correct', (done) => {
-      request.put('/api/users/1')
+      request.put(`/api/users/${user.id}`)
           .set({ Authorization: adminToken })
           .send(fieldsToUpdate)
           .end((error, response) => {
