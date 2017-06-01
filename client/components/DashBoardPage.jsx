@@ -86,6 +86,8 @@ class DashBoardPage extends React.Component {
       <div> 
         <form className="form-wrapper2 cf">
           <input
+            id="userDocSearch"
+            className="search"
             type="search" placeholder="Search for document here..."
             onChange={this.onChange} name="search"
             required

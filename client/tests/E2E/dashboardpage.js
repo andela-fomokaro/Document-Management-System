@@ -1,4 +1,3 @@
-import faker from 'faker';
 import config from './config';
 
 export default {
@@ -11,28 +10,23 @@ export default {
       .setValue('Input[name=password]', 'random password')
       .click('button')
       .pause(5000)
-      .assert.containsText('p.cardTitle',
-      'Quick Tips On How To Onboard Quickly')
+      .click('#docButton')
       .pause(5000)
-      .click('#manageusers')
-      .assert.containsText('#roleid',
-      'Role Id')
-      .assert.containsText('#createdTime',
-      'Time Created')
-      .assert.containsText('#updatedTime',
-      'Last Updated')
+      .setValue('#input2[name=title]', 'Hi This Is My Diary')
+       .click('#input1')
       .pause(2000)
-      .click('#adminCreateModal')
-      .setValue('Input[name=username]', faker.name.findName())
-      .setValue('Input[name=email]', faker.internet.email())
-      .setValue('Input[name=fullNames]', faker.name.findName())
-      .setValue('Input[name=password]', 'unique')
-      .setValue('Input[name=passwordConfirmation]', 'unique')
-      .click('#adminCreateUser')
+      .click('#public')
+      .setValue('#input3[name=content]', 'My Book Of Bible Story')
       .pause(5000)
-      .click('#deleteButton')
-      .assert.containsText('#userDeleteButton',
-      '')
+      .click('button#create')
+      .pause(5000)
+      .click('#userDocDelete')
+      .assert.containsText('#delHeader', 'Are You Sure You Want To Delete This Document ?')
+      .pause(3000)
+      .click('#cancel')
+      .pause(3000)
+      .setValue('Input#userDocSearch', 'Total')
+      .assert.containsText('#searchUsername', 'Total')
       .end(),
   'Update user': (browser) => {
     browser
@@ -43,17 +37,14 @@ export default {
       .setValue('Input[name=password]', 'random password')
       .click('button')
       .pause(2000)
-      .assert.containsText('p.cardTitle',
-      'Quick Tips On How To Onboard Quickly')
       .pause(5000)
       .click('#manageusers')
       .pause(2000)
-      .click('#updateUser')
-      .setValue('Input[name=username]', faker.name.findName())
-      .setValue('Input[name=email]', faker.internet.email())
-      .setValue('Input[name=fullNames]', faker.name.findName())
-      .setValue('Input[name=role]', 2)
-      .click('#adminUpdate')
+      .assert.containsText('#tableName',
+      'Full Name')
+      .assert.containsText('#updateRole',
+      'Update Role')
+      .pause(2000)
       .end();
   }
 };

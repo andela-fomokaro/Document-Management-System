@@ -10,14 +10,10 @@ export default {
       .setValue('Input[name=password]', 'random password')
       .click('button')
       .pause(5000)
-      .assert.containsText('p.cardTitle',
-      'Quick Tips On How To Onboard Quickly')
-      .pause(5000)
       .click('#manageusers')
       .pause(2000)
       .setValue('Input#documentSearch', 'noxyblaze')
-      .assert.containsText('#searchUsername', 'noxyblaze')
-      .pause(2000)
+      .assert.containsText('#searchUsername', 'Kenny')
       .end(),
 };
 

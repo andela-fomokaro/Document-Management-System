@@ -31,6 +31,7 @@ class AllDocument extends React.Component {
       document: {
         content: props.document.content || '',
         title: props.document.title || '',
+        access: props.document.access || '',
         id: props.document.id
       },
     };
@@ -86,7 +87,8 @@ class AllDocument extends React.Component {
    */
   render() {
     const { document } = this.props;
-    const { title, content } = this.state.document;
+    const { title, content, access } = this.state.document;
+    console.log('faith', this.props);
     const singleDocUrl = `document/${document.id}`;
     return (
       <div>
@@ -104,17 +106,18 @@ class AllDocument extends React.Component {
                   id="mod"
                   className="teal-text"
                   trigger={
-                    <a className="btn-floating grey lighten-5 right">
+                    <a id="userDocDelete" className="btn-floating grey lighten-5 right">
                       <i className="material-icons red-text">delete</i></a>
                        }
                 >
-                  <span className="delHeader"> Are You Sure You Want To Delete This Document ? </span>
+                  <span id="delHeader"className="delHeader"> Are You Sure You Want To Delete This Document ? </span>
                   <div>
                   <button
                     onClick={this.deleteDocument}
                     className="btn btn2 pink darken-4 white-text modal-action modal-close"
                   >Yes</button>
                   <button
+                    id="cancel"
                     className="btn btn2 pink darken-4 white-text modal-action modal-close"
                   >No</button>
                   </div>
@@ -147,6 +150,18 @@ class AllDocument extends React.Component {
                           className="materialize-textarea"
                           name="content"
                           value={content}
+                          onChange={e => this.updateDocumentState(e)}
+                        />
+                      </div>
+                    </form>
+                  </div>
+                  <div className="row">
+                    <form>
+                      <div className="input-field col s10">
+                        <textarea
+                          className="materialize-textarea"
+                          name="access"
+                          value={access}
                           onChange={e => this.updateDocumentState(e)}
                         />
                       </div>

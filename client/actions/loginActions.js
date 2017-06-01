@@ -1,7 +1,6 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import { browserHistory } from 'react-router';
-import { SET_CURRENT_USER, LOGOUT_USER } from '../actions/types';
+import { SET_CURRENT_USER } from '../actions/types';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 
 

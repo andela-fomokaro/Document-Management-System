@@ -10,8 +10,8 @@ export default {
       .setValue('Input[name=password]', 'random password')
       .click('button')
       .pause(5000)
-      .assert.containsText('p.cardTitle',
-      'Quick Tips On How To Onboard Quickly')
+      .assert.containsText('a.view',
+      'Logout')
       .pause(5000)
       .end(),
   'Invalid login': (browser) => {

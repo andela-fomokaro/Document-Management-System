@@ -52,18 +52,31 @@ class NavigationBar extends React.Component {
     };
     const { isAuthenticated } = this.props.auth;
     const userLinks = (
-      <div>
-        <Link className="right view" to="/" onClick={this.logout}>Logout</Link>
-        <Link className="right view" to="/myprofile">Edit Profile</Link>
-        <Link className="right view" to="/loadDocuments"> View All Documents </Link>
-        <Link className="right view" to="/"> My Documents </Link>
-        {hasAdmin() ? <Link className="right view" id="managerole" to="/managerole">Manage Roles</Link> : ''}
-        {hasAdmin() ? <Link className="right view" id="manageusers" to="/manageusers">Manage Users</Link> : ''}
-      </div>
+      <ul id="nav-mobile" className="right hide-on-med-and-down">
+        
+        <li>
+          <Link className="right view" to="/myprofile">Edit Profile</Link>
+        </li>
+
+        <li>
+          <Link className="right view" to="/loadDocuments"> View All Documents </Link>
+        </li>
+
+        <li>
+          <Link className="right view" to="/"> My Documents </Link>
+        </li>
+        
+        {hasAdmin() ? <li><Link className="right view" id="managerole" to="/managerole">Manage Roles</Link></li>: ''}
+
+        {hasAdmin() ? <li><Link className="right view" id="manageusers" to="/manageusers">Manage Users</Link></li> : ''}
+        <li>
+          <Link className="right view" to="/" onClick={this.logout}>Logout</Link>
+        </li>
+      </ul>
     );
 
     const guestLinks = (
-      <ul id="nav-mobile" className="right view">
+      <ul id="nav-mobile" className="right hide-on-med-and-down">
         <li><Link id="signup"to="/signup">Sign up</Link></li>
         <li><Link id="login"to="/login">Login</Link></li>
       </ul>
@@ -71,13 +84,11 @@ class NavigationBar extends React.Component {
 
     return (
       <nav>
-        <div className="nav-wrapper  blue-grey darken-4">
-          <Link to="/" className="brand-logo brand">docStar</Link>
-          <div className="nav-wrapper  blue-grey darken-4">
-            <h1>
-            <Link to="/" className="brand-logo brand hide-on-med-and-down">DocStar</Link></h1>
-            {isAuthenticated ? userLinks : guestLinks}
-          </div>
+        <div className="nav-wrapper blue-grey darken-4">
+          <h1>
+            <Link to="/" className="brand-logo brand">DocStar</Link>
+          </h1>
+          { isAuthenticated ? userLinks : guestLinks }
         </div>
       </nav>
     );

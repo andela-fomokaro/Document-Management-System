@@ -80,7 +80,7 @@ class ManageRole extends React.Component {
         <table className="z-depth-5 highlight tab">
           <thead className="tableHead">
             <tr>
-              <th id="roleTitle" className="roleTitle">S/N</th>
+              <th id="sn" className="roleTitle">S/N</th>
               <th id="roleTitle" className="roleTitle">Title</th>
               <th id="timeCreated">Time Created</th>
               <th id="lastUpdated">Last Updated</th>
@@ -107,6 +107,7 @@ class ManageRole extends React.Component {
                             }
                         </td>
                       <td className="cursor"><a
+                            id="deleteRole"
                             onClick={(roleId) => 
                             this.deleteRole(rolei.id)}>delete role</a></td>
                     </tr>

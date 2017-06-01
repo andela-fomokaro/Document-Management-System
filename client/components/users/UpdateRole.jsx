@@ -66,6 +66,7 @@ class UpdateRole extends React.Component {
       <form>
       <Row>
                     <Input
+                      id="options"
                       s={12}
                       type="select"
                       name="roleId"
