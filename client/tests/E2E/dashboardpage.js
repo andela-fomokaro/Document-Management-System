@@ -12,6 +12,7 @@ export default {
       .pause(5000)
       .click('#docButton')
       .pause(5000)
+      .assert.visible('#input2[name=title]')
       .setValue('#input2[name=title]', 'Hi This Is My Diary')
        .click('#input1')
       .pause(2000)

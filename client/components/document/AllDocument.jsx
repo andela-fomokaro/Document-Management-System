@@ -45,6 +45,7 @@ class AllDocument extends React.Component {
    *
    * @return {void}
    */
+   
   deleteDocument() {
     Materialize.toast('Document Deleted', 4000);
     this.props.deleteDocument(this.props.document.id);
@@ -88,7 +89,6 @@ class AllDocument extends React.Component {
   render() {
     const { document } = this.props;
     const { title, content, access } = this.state.document;
-    console.log('faith', this.props);
     const singleDocUrl = `document/${document.id}`;
     return (
       <div>

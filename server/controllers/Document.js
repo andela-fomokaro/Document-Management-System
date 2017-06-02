@@ -204,13 +204,14 @@ const Document = {
                 access: { $eq: 'public' },
                 $and: {
                   access: { $eq: 'private' },
-                  ownerId: { $eq: req.decoded.userId },
+                  ownerId: { $eq: req.decoded.userId }
                 },
                 $and: {
                   access: { $eq: 'role' },
                   '$User.roleId$': { $eq: req.decoded.roleId }
                 }
               },
+              ownerId: { $eq: req.decoded.userId }
             }
           };
           query.include = [
@@ -224,7 +225,6 @@ const Document = {
               query.count = documents.count;
               query.limit = (req.query.limit > 0) ? req.query.limit : 6;
               query.offset = (req.query.offset > 0) ? req.query.offset : 0;
-              query.attributes = { exclude: ['ownerId'] };
               const documentObject
               = documents.rows.map(doc => Object.assign({}, {
                 access: doc.access,
@@ -244,7 +244,6 @@ const Document = {
         }
       });
   },
-
 
 /**
    * Gets all public documents relevant to search term
@@ -292,6 +291,7 @@ const Document = {
                   '$User.roleId$': { $eq: req.decoded.roleId }
                 }
               },
+              ownerId: { $eq: req.decoded.userId }
             }
           },
           include: [

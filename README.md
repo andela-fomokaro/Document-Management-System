@@ -3,3 +3,5 @@
 [![Code Climate](https://codeclimate.com/github/andela-fomokaro/Document-Management-System/badges/gpa.svg)](https://codeclimate.com/github/andela-fomokaro/Document-Management-System)
 
 [API Documentation](https://docstar-docs.herokuapp.com/)
+
+
