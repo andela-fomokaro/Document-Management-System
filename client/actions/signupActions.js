@@ -5,7 +5,7 @@ import { SET_CURRENT_USER } from '../actions/types';
 
 /**
  *
- *
+ * Set Current User Action
  * @export setCurrentUser
  * @param {object} user information
  * @returns {object} return user request
@@ -19,7 +19,7 @@ export function setCurrentUser(user) {
 
 /**
  *
- *
+ * User Sign Up Request Action
  * @export userSignupRequest
  * @param {object} userData
  * @returns {Function} returns dispatch
@@ -34,7 +34,7 @@ export function userSignupRequest(userData) {
 
 /**
  *
- *
+ * Check if User Exist Action
  * @export
  * @param {object} identifier
  * @returns {Function} returns dispatch

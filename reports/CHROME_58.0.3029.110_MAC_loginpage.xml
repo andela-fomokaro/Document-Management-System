@@ -5,16 +5,16 @@
 
   <testsuite name="loginpage"
     errors="0" failures="0" hostname="" id="" package="loginpage" skipped="0"
-    tests="2" time="20.77" timestamp="Wed, 31 May 2017 20:00:58 GMT">
+    tests="2" time="22.55" timestamp="Fri, 02 Jun 2017 18:27:24 GMT">
   
-    <testcase name="Login a user" classname="loginpage" time="15.03" assertions="2">
+    <testcase name="Login a user" classname="loginpage" time="17.60" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="Invalid login" classname="loginpage" time="5.744" assertions="2">
+    <testcase name="Invalid login" classname="loginpage" time="4.950" assertions="2">
 
     
 

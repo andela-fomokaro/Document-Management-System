@@ -28,7 +28,7 @@ class UpdateRole extends React.Component {
   /**
    *
    * onChange
-   * @param {any} e - event handler for onSubmi
+   * @param {object} e - event handler for onSubmi
    * @returns {void}
    * @memberOf UpdateUsers
    */
@@ -40,7 +40,7 @@ class UpdateRole extends React.Component {
   /**
    *
    * updateUserState
-   * @param {any} event - event handler for onSubmi
+   * @param {object} event - event handler for onSubmi
    * @returns {object} - updated state of users
    *
    * @memberOf UpdateUsers

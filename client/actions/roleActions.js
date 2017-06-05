@@ -2,7 +2,7 @@ import axios from '../utils/index';
 
 /**
  *
- *
+ * Craete Role Action
  * @export createRole
  * @param {object} data role information
  * @returns {Function} returns dispatch
@@ -21,7 +21,7 @@ export function createRole(data) {
 
 /**
  *
- *
+ * Get Roles Action
  * @export getRoles
  * @returns {Function} returns dispatch
  */
@@ -39,7 +39,7 @@ export function getRoles() {
 
 /**
  *
- *
+ * Update Role Action
  * @export updateRole
  * @param {object} role
  * @returns {Function} returns dispatch
@@ -58,7 +58,7 @@ export function updateRole(role) {
 
 /**
  *
- *
+ * Delete Role Action
  * @export deleteRole
  * @param {number} id
  * @returns {Function} returns dispatch

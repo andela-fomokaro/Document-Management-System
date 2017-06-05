@@ -210,21 +210,22 @@ describe('USER API:', () => {
             expect(response.body.message).to.equal('User Does Not Exist');
             done();
           });
-      it('should not return user details if user does not correct access token', (done) => {
-        request.get('/api/users/1')
+    });
+    it('should not return user details if user does not have correct access token', (done) => {
+      request.get('/api/users/1')
           .set({ Authorization: regularToken })
           .end((error, response) => {
-            expect(response.status).to.equal(403);
-            expect(response.body.message).to.equal('You cannot access user profile');
+            expect(response.status).to.equal(404);
+            expect(response.body.message).to.equal('User Does Not Exist');
             done();
           });
-      });
     });
+  });
 
-    describe('GET: (/api/search/users?search) - ', () => {
-      const term = 'abc';
-      it('should not return user if search term is empty', (done) => {
-        request.get('/api/search/users?search=')
+  describe('GET: (/api/search/users?search) - ', () => {
+    const term = 'abc';
+    it('should not return user if search term is empty', (done) => {
+      request.get('/api/search/users?search=')
           .set({ Authorization: adminToken })
           .end((error, response) => {
             expect(response.status).to.equal(400);
@@ -232,9 +233,9 @@ describe('USER API:', () => {
             .equal('User Search Does Not Search');
             done();
           });
-      });
+    });
 
-      it('should not return user if search term does not match',
+    it('should not return user if search term does not match',
            (done) => {
              request.get(`/api/search/users?search=${term}`)
           .set({ Authorization: regularToken })
@@ -245,7 +246,7 @@ describe('USER API:', () => {
             done();
           });
            });
-      it('should return user search if search term is correct',
+    it('should return user search if search term is correct',
            (done) => {
              request.get(`/api/search/users?search=${faith}`)
           .set({ Authorization: adminToken })
@@ -254,11 +255,11 @@ describe('USER API:', () => {
             done();
           });
            });
-    });
+  });
 
-    describe('DELETE: (/api/users/:id) - ', () => {
-      it('should not delete user if id supplied is an object', (done) => {
-        request.delete('/api/users/juj')
+  describe('DELETE: (/api/users/:id) - ', () => {
+    it('should not delete user if id supplied is an alphabet', (done) => {
+      request.delete('/api/users/juj')
           .set({ Authorization: adminToken })
           .end((error, response) => {
             expect(response.status).to.equal(400);
@@ -266,44 +267,44 @@ describe('USER API:', () => {
             .equal('An error occured');
             done();
           });
-      });
+    });
 
-      it('should not delete user if id supplied is invalid', (done) => {
-        request.delete('/api/users/909')
+    it('should not delete user if id supplied is invalid', (done) => {
+      request.delete('/api/users/909')
           .set({ Authorization: adminToken })
           .end((error, response) => {
             expect(response.status).to.equal(404);
             expect(response.body.message).to.equal('User Does Not Exist');
             done();
           });
-      });
-
-      it(`should not delete user when id is valid 
-      and user does not have corect access-token`, (done) => {
-        request.delete('/api/users/3')
-          .set({ Authorization: regularToken })
-          .end((error, response) => {
-            expect(response.status).to.equal(403);
-            expect(response.body.message).to
-              .equal('You dont have access to delete user');
-            done();
-          });
-      });
-
-      it('should not delete default admin user account', (done) => {
-        request.delete('/api/users/1')
-          .set({ Authorization: regularToken })
-          .end((error, response) => {
-            expect(response.status).to.equal(403);
-            expect(response.body.message).to
-              .equal('You dont have access to delete user');
-            done();
-          });
-      });
     });
 
-    describe('GET: (/api/users/:id/documents) - ', () => {
-      it('should not return user documents if id is invalid',
+    it(`should not delete user when id is valid 
+      and user does not have corect access-token`, (done) => {
+      request.delete('/api/users/3')
+          .set({ Authorization: regularToken })
+          .end((error, response) => {
+            expect(response.status).to.equal(403);
+            expect(response.body.message).to
+              .equal('You dont have access to delete user');
+            done();
+          });
+    });
+
+    it('should not delete default admin user account', (done) => {
+      request.delete('/api/users/1')
+          .set({ Authorization: regularToken })
+          .end((error, response) => {
+            expect(response.status).to.equal(403);
+            expect(response.body.message).to
+              .equal('You dont have access to delete user');
+            done();
+          });
+    });
+  });
+
+  describe('GET: (/api/users/:id/documents) - ', () => {
+    it('should not return user documents if id is invalid',
       (done) => {
         request.get('/api/users/100/documents')
           .set({ Authorization: regularToken })
@@ -314,7 +315,7 @@ describe('USER API:', () => {
           });
       });
 
-      it('should not return user documents if id is an alphabet',
+    it('should not return user documents if id is an alphabet',
       (done) => {
         request.get('/api/users/jhy/documents')
           .set({
@@ -326,7 +327,7 @@ describe('USER API:', () => {
             done();
           });
       });
-      it('should return user documents if id is valid',
+    it('should return user documents if id is valid',
       (done) => {
         request.get('/api/users/1/documents')
           .set({
@@ -338,6 +339,5 @@ describe('USER API:', () => {
             done();
           });
       });
-    });
   });
 });

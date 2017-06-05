@@ -29,7 +29,7 @@ class NavigationBar extends React.Component {
   /**
    *
    * logout
-   * @param {any} e - event handler belonging to logout
+   * @param {object} e - event handler belonging to logout
    * @returns {void}
    * @memberOf NavigationBar
    */
@@ -54,21 +54,21 @@ class NavigationBar extends React.Component {
     const userLinks = (
       <ul id="nav-mobile" className="right hide-on-med-and-down">
         
-        <li>
-          <Link className="right view" to="/myprofile">Edit Profile</Link>
+        <li id="edit-profile">
+          <Link className="right view" to="/profile">Edit Profile</Link>
         </li>
 
-        <li>
-          <Link className="right view" to="/loadDocuments"> View All Documents </Link>
+        <li id="load-documents">
+          <Link className="right view" to="/load-documents"> View All Documents </Link>
         </li>
 
-        <li>
+        <li id="my-documents">
           <Link className="right view" to="/"> My Documents </Link>
         </li>
         
-        {hasAdmin() ? <li><Link className="right view" id="managerole" to="/managerole">Manage Roles</Link></li>: ''}
+        {hasAdmin() ? <li id="manage-role"><Link className="right view" id="managerole" to="/manage-roles">Manage Roles</Link></li>: ''}
 
-        {hasAdmin() ? <li><Link className="right view" id="manageusers" to="/manageusers">Manage Users</Link></li> : ''}
+        {hasAdmin() ? <li id="manage-users"><Link className="right view" id="manageusers" to="/manage-users">Manage Users</Link></li> : ''}
         <li>
           <Link className="right view" to="/" onClick={this.logout}>Logout</Link>
         </li>

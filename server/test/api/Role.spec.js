@@ -112,7 +112,7 @@ describe('ROLE API:', () => {
         request.get('/api/roles')
           .set({ Authorization: adminToken })
           .end((error, response) => {
-            expect(response.status).to.equal(201);
+            expect(response.status).to.equal(200);
             done();
           });
       });

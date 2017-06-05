@@ -5,10 +5,14 @@ module.exports = {
     password: null,
     database: 'dataSystem2',
     host: '127.0.0.1',
-    dialect: 'postgres'
+    dialect: 'postgres',
+    logging: false
   },
   test: {
-    use_env_variable: 'DATABASE_TEST_URL',
+    username: 'andelaeveloper',
+    password: null,
+    database: 'testSystem',
+    host: '127.0.0.1',
     dialect: 'postgres',
     logging: false
   },

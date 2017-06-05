@@ -11,7 +11,7 @@ export default {
       .click('button')
       .pause(5000)
       .assert.containsText('a.view',
-      'Logout')
+      'Edit Profile')
       .pause(5000)
       .end(),
   'Invalid login': (browser) => {

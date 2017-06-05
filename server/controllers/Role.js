@@ -33,7 +33,7 @@ const Roles = {
   getRoles(req, res) {
     db.Roles.findAll()
     .then((roles) => {
-      res.status(201)
+      res.status(200)
       .send(roles);
     });
   },

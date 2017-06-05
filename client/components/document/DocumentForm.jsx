@@ -35,7 +35,7 @@ class DocumentForm extends React.Component {
   /**
    *
    * onChange
-   * @param {any} e - event handler belonging to Onchange
+   * @param {object} e - event handler belonging to Onchange
    * @returns {void}
    * @memberOf DocumentForm
    */
@@ -46,19 +46,25 @@ class DocumentForm extends React.Component {
   /**
    *
    * onSubmit
-   * @param {any} e - event handler belonging to onSubmit
+   * @param {object} e - event handler belonging to onSubmit
    * @returns {void}
    * @memberOf DocumentForm
    */
   onSubmit(e) {
     e.preventDefault();
     this.props.createDocument(this.state);
+    Materialize.toast('Document Successfully Created', 2000);
+    this.setState({
+      title: '',
+      content: '',
+      access: '',
+    });
   }
 
   /**
    *
    * onClick
-   * @param {any} e - event handler belonging to onClick
+   * @param {object} e - event handler belonging to onClick
    * @returns {void}
    * @memberOf DocumentForm
    */
@@ -116,6 +122,7 @@ class DocumentForm extends React.Component {
           </div>
           <div className="row">
             <div className="input-field col s12">
+              <label><b>INPUT CONTENT </b></label>
               <textarea
                 id="input3"
                 className="materialize-textarea"

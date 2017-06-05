@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import supertest from 'supertest';
 import chai from 'chai';
 import app from '../../../test-server';
@@ -175,7 +174,7 @@ describe('Document API:', () => {
             });
         });
 
-        it('should not return document if id does not exist', (done) => {
+        it('should not return document if document id does not exist', (done) => {
           request.get('/api/documents/1000')
           .set({ Authorization: adminToken })
           .end((error, response) => {

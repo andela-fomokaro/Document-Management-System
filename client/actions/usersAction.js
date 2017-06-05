@@ -3,7 +3,7 @@ import axios from '../utils/index';
 
 /**
  *
- *
+ * Get User Action
  * @export getUsers
  * @param {number} [offset=0] document page difference
  * @returns {Function} returns dispatch
@@ -22,7 +22,7 @@ export function getUsers(offset = 0) {
 
 /**
  *
- *
+ * Create Users Action
  * @export createUsers
  * @param {object} data
  * @returns {Function} returns dispatch
@@ -41,7 +41,7 @@ export function createUsers(data) {
 
 /**
  *
- *
+ * Delete User Action
  * @export
  * @param {number} id
  * @returns {Function} returns dispatch
@@ -60,7 +60,7 @@ export function deleteUser(id) {
 
 /**
  *
- *
+ * Update User Action
  * @export
  * @param {object} data
  *  @param {number} [id=usersid]
@@ -80,7 +80,7 @@ export function updateUser(data, id) {
 
 /**
  *
- *
+ * Get Single User Action
  * @export  getSingleUser
  * @param {number} [id=usersid]
  * @returns {Function} returns dispatch
@@ -101,7 +101,7 @@ export function getSingleUser(id) {
 
 /**
  *
- *
+ * Search Users Action
  * @export searchUsers
  * @param {string} term
  * @param {number} [offset=0] document page difference
@@ -115,6 +115,18 @@ export function searchUsers(term, offset = 0) {
           type: 'SEARCH_USERS',
           payload: res.data
         });
-      });
+      })
+       .catch(() => {
+         dispatch({
+           type: 'SEARCH_USERS',
+           payload: {
+             pagination: 0,
+             users: {
+               count: 0,
+               rows: [],
+             }
+           }
+         });
+       });
   };
 }

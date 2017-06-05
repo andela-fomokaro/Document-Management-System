@@ -1,7 +1,7 @@
 import axios from '../utils/index';
 /**
  *
- *
+ * Create Document Action
  * @export createDocument
  * @param {object} data document content
  * @returns {Function} returns dispatch
@@ -20,7 +20,7 @@ export function createDocument(data) {
 
 /**
  *
- *
+ * Load Documents Action
  * @export loadDocuments
  * @param {number} [offset=0] document page difference
  * @returns {Function} returns dispatch
@@ -40,7 +40,7 @@ export function loadDocuments(offset = 0) {
 
 /**
  *
- *
+ * User Document Action
  * @export usersDocument
  * @param {number} [offset=0] document page difference
  * @param {Number} id - document id
@@ -60,7 +60,7 @@ export function usersDocument(offset = 0, id) {
 
 /**
  *
- *
+ * Get Document Action
  * @export getDocument
  * @param {number} id document id
  * @returns {Function} returns dispatch
@@ -80,8 +80,8 @@ export function getDocument(id) {
 
 /**
  *
- *
- * @export deleteDocumen
+ * Delete Document Action
+ * @export deleteDocument
  * @param {number} id document id
  * @returns {Function} returns dispatch
  */
@@ -100,7 +100,7 @@ export function deleteDocument(id) {
 
 /**
  *
- *
+ * Update Document Action
  * @export  updateDocument
  * @param {object} document document content
  * @returns {Function} returns dispatch
@@ -120,7 +120,7 @@ export function updateDocument(document) {
 
 /**
  *
- *
+ * Get Single Document Action
  * @export getSingleDocument
  * @param {number} id document id
  * @returns {Function} returns dispatch
@@ -141,7 +141,7 @@ export function getSingleDocument(id) {
 
 /**
  *
- *
+ * Search Document Action
  * @export searchDocument
  * @param {string} term search term
  * @param {number} [offset=0] document page difference
@@ -154,6 +154,15 @@ export function searchDocument(term, offset = 0) {
         dispatch({
           type: 'SEARCH_DOCUMENT',
           payload: res.data
+        });
+      })
+      .catch(() => {
+        dispatch({
+          type: 'SEARCH_DOCUMENT',
+          payload: {
+            pagination: 0,
+            documents: []
+          }
         });
       });
   };

@@ -15,8 +15,8 @@ export default {
       .setValue('Input[name=passwordConfirmation]', 'unique')
       .click('button')
       .pause(5000)
-      .assert.containsText('h1.card-title',
-      'Managing And Organizing Of Documents Just Got Better')
+      .assert.containsText('a.view',
+      'Edit Profile')
       .pause(5000)
       .end(),
   'Invalid login': (browser) => {

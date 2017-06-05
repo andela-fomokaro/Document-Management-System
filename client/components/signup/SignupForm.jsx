@@ -42,7 +42,7 @@ class SignupForm extends React.Component {
   /**
    *
    * onChange
-   * @param {any} e - event handler for onChange
+   * @param {object} e - event handler for onChange
    * @returns {void}
    *
    * @memberOf SignupForm
@@ -54,7 +54,7 @@ class SignupForm extends React.Component {
   /**
    *
    * onSubmit
-   * @param {any} e - event handler for onSubmit
+   * @param {object} e - event handler for onSubmit
    * @returns {void}
    *
    * @memberOf SignupForm

@@ -13,6 +13,7 @@
     "test-e2e": "nightwatch",
     "test:frontend": "jest",
     "test:client": "mocha ./client/tests/**/**/*.spec.js --compilers js:babel-register",
+    "test:clientActions": "mocha ./client/tests/actions/**/*.spec.js --compilers js:babel-register",
     "test:watch": "npm test:frontend -- --watch",
     "start:dev": "babel-watch ../server/config/app.js",
     "e2e-setup": "selenium-standalone install"

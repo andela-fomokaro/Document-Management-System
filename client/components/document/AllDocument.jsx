@@ -47,8 +47,23 @@ class AllDocument extends React.Component {
    */
    
   deleteDocument() {
-    Materialize.toast('Document Deleted', 4000);
-    this.props.deleteDocument(this.props.document.id);
+     swal({
+      title: "Are you sure?", 
+      text: "Are you sure that you want to delete this document?", 
+      type: "error",
+      showCancelButton: true,
+      closeOnConfirm: true,
+      confirmButtonText: "Delete it!",
+      confirmButtonColor:  "#ad1457"
+    }, (isConfirm) => {
+      if(isConfirm) {
+         this.props.deleteDocument(this.props.document.id);
+         swal('Deleted', 'Document was deleted', 'success');
+         Materialize.toast('Document Deleted', 1000);
+      } else {
+        swal('Canceled', 'OPERATION CANCELED', 'error');
+      }
+    });
   }
 
   /**
@@ -102,26 +117,11 @@ class AllDocument extends React.Component {
           <div className="card-action">
             {hasDocumentPermission(document.ownerId) ? <ul>
               <li>
-                <Modal
-                  id="mod"
-                  className="teal-text"
-                  trigger={
-                    <a id="userDocDelete" className="btn-floating grey lighten-5 right">
+                    <a id="userDocDelete"
+                     onClick={this.deleteDocument}
+                     className="btn-floating grey lighten-5 right"
+                     >
                       <i className="material-icons red-text">delete</i></a>
-                       }
-                >
-                  <span id="delHeader"className="delHeader"> Are You Sure You Want To Delete This Document ? </span>
-                  <div>
-                  <button
-                    onClick={this.deleteDocument}
-                    className="btn btn2 pink darken-4 white-text modal-action modal-close"
-                  >Yes</button>
-                  <button
-                    id="cancel"
-                    className="btn btn2 pink darken-4 white-text modal-action modal-close"
-                  >No</button>
-                  </div>
-                </Modal>
                 <Modal
                   header='Update Document'
                   className="teal-text"
@@ -133,7 +133,8 @@ class AllDocument extends React.Component {
                 >
                   <div className="row">
                     <form>
-                      <div className="input-field col s10">
+                     <label className="red-text">Title</label>
+                      <div className="input-field col s12">
                         <textarea
                           className="materialize-textarea"
                           name="title"
@@ -145,7 +146,8 @@ class AllDocument extends React.Component {
                   </div>
                   <div className="row">
                     <form>
-                      <div className="input-field col s10">
+                    <label className="red-text">Content</label>
+                      <div className="input-field col s12">
                         <textarea
                           className="materialize-textarea"
                           name="content"
@@ -155,9 +157,10 @@ class AllDocument extends React.Component {
                       </div>
                     </form>
                   </div>
+                   <label className="red-text">Access</label>
                   <div className="row">
                     <form>
-                      <div className="input-field col s10">
+                      <div className="input-field col s12">
                         <textarea
                           className="materialize-textarea"
                           name="access"
@@ -169,7 +172,7 @@ class AllDocument extends React.Component {
                   </div>
                   <button
                     onClick={() => this.updateDocument()}
-                    className="btn pink darken-4 white-text modal-action modal-close"
+                    className="update-btn btn pink darken-4 white-text modal-action modal-close"
                   >Update</button>
                 </Modal>
               </li>
