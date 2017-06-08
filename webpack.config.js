@@ -20,10 +20,7 @@ export default {
         exclude: [
           /node_modules/,
           /server/
-        ],
-        query: {
-          presets: ['react-hmre']
-        }
+        ]
       },
      { test: /(\.css)$/, loaders: ['style-loader', 'css-loader'] },
      { test: /\.scss$/, loaders: ['style-loader', 'css-loader', 'sass-loader'] },
