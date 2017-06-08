@@ -1,10 +1,9 @@
-const path = require('path');
-const webpack = require('webpack');
+import path from 'path';
+import webpack from 'webpack';
 
-module.exports = {
+export default {
   debug: true,
   devtool: 'source-map',
-  noInfo: false,
   target: 'web',
   entry: [
     'webpack-hot-middleware/client',
@@ -22,7 +21,10 @@ module.exports = {
         exclude: [
           /node_modules/,
           /server/
-        ]
+        ],
+        query: {
+          presets: ['react-hmre']
+        }
       },
      { test: /(\.css)$/, loaders: ['style-loader', 'css-loader'] },
      { test: /\.scss$/, loaders: ['style-loader', 'css-loader', 'sass-loader'] },
