@@ -16,25 +16,25 @@ const initialState = {
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case GET_USERS:
-      return Object.assign({},
-      state, { users: action.payload.users, pagination: action.payload.pagination });
+      return { ...state,
+        ...{ users: action.payload.users, pagination: action.payload.pagination } };
     case CREATE_USERS: {
-      return Object.assign({}, state, { users: { rows: [...state.users.rows, action.payload] } });
+      return { ...state, ...{ users: { rows: [...state.users.rows, action.payload] } } };
     }
     case DELETE_USER:
-      return Object.assign({}, state,
-      { users: { rows: state.users.rows.filter(user => user.id !== action.id) } });
+      return { ...state,
+        ...{ users: { rows: state.users.rows.filter(user => user.id !== action.id) } } };
 
     case UPDATE_USER:
-      return Object.assign({}, state,
-        { users: { rows:
+      return { ...state,
+        ...{ users: { rows:
         [...state.users.rows.filter(user => user.id !== action.payload.id),
           action.payload] },
-          user: action.payload });
+          user: action.payload } };
 
     case SET_SINGLE_USER:
-      return Object.assign({}, state,
-        { user: action.payload });
+      return { ...state,
+        ...{ user: action.payload } };
 
     case SEARCH_USERS:
       return action.payload;

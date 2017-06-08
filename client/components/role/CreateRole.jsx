@@ -36,6 +36,7 @@ class CreateRole extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     this.props.createRole(this.state);
+    Materialize.toast('Role Updated Successfully', 4000);
     this.setState({
       title: ''
     });
