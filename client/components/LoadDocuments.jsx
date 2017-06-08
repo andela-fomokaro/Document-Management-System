@@ -58,12 +58,12 @@ class DashBoard extends React.Component {
   /**
    *
    * onChange
-   * @param {any} e - event handler belonging to Onchange
+   * @param {object} e - event handler belonging to Onchange
    * @memberOf DashBoard
    */
   onChange(e) {
     const searchTerm = e.target.value;
-    if (searchTerm.length < 1) {
+    if (searchTerm < 1) {
       this.props.loadDocuments();
     } else {
       this.props.searchDocument(searchTerm);
@@ -79,8 +79,9 @@ class DashBoard extends React.Component {
   render() {
     const  { documents, pagination }  = this.props;
     return (
-      <div>
-        <form className="form-wrapper2 cf" onSubmit={this.onSubmit}>
+      <div className="container">
+        <h2 className="h2 center">All Documents</h2>
+        <form className="form-wrapper2 form-input">
           <input
             type="search" placeholder="Search for document here..."
             onChange={this.onChange} name="search"
@@ -88,22 +89,26 @@ class DashBoard extends React.Component {
           />
         </form>
         <DocumentForm />
-        <div className="container">
-        <div className="row">
-          { documents.map((doc, index) => <AllDocument
-            key={index}
-            document={doc}
-            deleteDocument={this.props.deleteDocument}
-          />)}
-        </div>
-        </div>
+        { documents.length > 0
+        ?
+        <div>
+          <div className="row">
+            { documents.map((doc, index) => <AllDocument
+              key={index}
+              document={doc}
+              deleteDocument={this.props.deleteDocument}
+            />)}
+          </div>
           <Pagination
+            className="center"
             items={pagination.page_count}
             activePage={pagination.page}
             maxButtons={pagination.page_count}
             onSelect={e => this.onSelect(e)}
           />
-       </div>
+      </div>
+       : <div className="center noresult">No document found</div>
+        } </div>
     );
   }
 }
@@ -127,8 +132,7 @@ DashBoard.propTypes = {
   deleteDocument: PropTypes.func.isRequired,
   loadDocuments: PropTypes.func.isRequired,
   searchDocument: PropTypes.func.isRequired,
-  documents: PropTypes.any.isRequired,
-  pagination: PropTypes.any.isRequired
+  documents: PropTypes.array.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashBoard);

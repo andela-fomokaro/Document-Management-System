@@ -24,7 +24,7 @@ const store = createStore(
   )
 );
 
-if (window.localStorage.jwtToken) {
+if (window.localStorage.jwtToken && typeof window !== 'undefined') {
   setAuthorizationToken(window.localStorage.jwtToken);
   store.dispatch(setCurrentUser(jwt.decode(window.localStorage.jwtToken)));
 }

@@ -36,7 +36,7 @@ class UpdateUsers extends React.Component {
   /**
    *
    * onSubmit
-   * @param {any} e - event handler for onSubmit
+   * @param {object} e - event handler for onSubmit
    * @returns {void}
    * @memberOf UpdateUsers
    */
@@ -48,7 +48,7 @@ class UpdateUsers extends React.Component {
   /**
    *
    * onChange
-   * @param {any} e - event handler for onSubmi
+   * @param {object} e - event handler for onSubmit
    * @returns {void}
    * @memberOf UpdateUsers
    */
@@ -59,7 +59,7 @@ class UpdateUsers extends React.Component {
   /**
    *
    * updateUserState
-   * @param {any} event - event handler for onSubmi
+   * @param {object} event - event handler for onSubmi
    * @returns {object} - updated state of users
    *
    * @memberOf UpdateUsers
@@ -142,7 +142,7 @@ class UpdateUsers extends React.Component {
 
 UpdateUsers.propTypes = {
   updateUsers: PropTypes.func.isRequired,
-  users: PropTypes.any.isRequired,
+  users: PropTypes.object.isRequired,
 };
 
 export default UpdateUsers;

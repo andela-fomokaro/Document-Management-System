@@ -15,8 +15,8 @@ const userRoute = require('./server/routes/UsersRoutes')(app);
 const documentRoute = require('./server/routes/DocumentsRoutes')(app);
 const RoleRoutes = require('./server/routes/RolesRoutes')(app);
 
-const testServer = app.listen(8009, () => {
-  console.log('Hi I am running at 127.0.0.1:8009');
+const testServer = app.listen(7000, () => {
+  console.log('Hi I am running at 127.0.0.1:7000');
 });
 
 module.exports = testServer;

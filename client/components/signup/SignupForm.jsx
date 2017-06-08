@@ -42,7 +42,7 @@ class SignupForm extends React.Component {
   /**
    *
    * onChange
-   * @param {any} e - event handler for onChange
+   * @param {object} e - event handler for onChange
    * @returns {void}
    *
    * @memberOf SignupForm
@@ -54,7 +54,7 @@ class SignupForm extends React.Component {
   /**
    *
    * onSubmit
-   * @param {any} e - event handler for onSubmit
+   * @param {object} e - event handler for onSubmit
    * @returns {void}
    *
    * @memberOf SignupForm
@@ -65,8 +65,8 @@ class SignupForm extends React.Component {
     if (isValid) {
       this.props.userSignupRequest(this.state).then(
         (user) => {
-          Materialize.toast('Sign up successful', 3000);
-          return this.context.router.push('/');
+          document.location.href = '/';
+           Materialize.toast('Sign up successful', 3000);
         }
     )
     .catch((err) => {
@@ -74,9 +74,12 @@ class SignupForm extends React.Component {
     }
     );
     } else if (errors.passwordConfirmation || errors.email) {
-      Materialize.toast('Wrong password or email entered', 2000);
-    } else {
-      Materialize.toast('Username and email must be unique', 2000);
+      Materialize.toast(errors.passwordConfirmation, 2000);
+    } else if (errors.password.length) {
+      Materialize.toast(errors.password, 2000);
+    }
+    else {
+      Materialize.toast('An error occured, try again later!', 2000);
     }
   }
 

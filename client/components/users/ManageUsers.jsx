@@ -44,7 +44,7 @@ class ManageUsers extends React.Component {
   /**
    *
    * onChange
-   * @param {any} e - event handler for search onChange
+   * @param {object} e - event handler for search onChange
    * @returns {string} search term
    * @memberOf ManageUsers
    */
@@ -89,15 +89,16 @@ class ManageUsers extends React.Component {
      swal({
       title: "Are you sure?", 
       text: "Are you sure that you want to delete this user?", 
-      type: "warning",
+      type: "error",
       showCancelButton: true,
       closeOnConfirm: true,
-      confirmButtonText: "Yes, delete it!",
-      confirmButtonColor: "#ec6c62"
+      confirmButtonText: "Delete it!",
+      confirmButtonColor: "#ad1457"
     }, (isConfirm) => {
       if(isConfirm) {
          this.props.deleteUser(userId);
         swal('Deleted', 'role was deleted', 'success');
+        Materialize.toast('User Deleted', 1000);
       } else {
         swal('Canceled', 'OPERATION CANCELED', 'error');
       }
@@ -135,8 +136,9 @@ class ManageUsers extends React.Component {
     }
     let serialNumber= 0;
     return (
-      <div>
-        <form className="form-wrapper2 cf" onSubmit={this.onSubmit}>
+      <div className="container">
+       <h2 className="h2 center">Manage Users</h2>
+        <form className="form-wrapper2 form-input">
           <input
             className="black-text"
             type="search"
@@ -147,6 +149,9 @@ class ManageUsers extends React.Component {
           />
         </form>
         <CreateUsers createUsers={this.props.createUsers} users={this.props.users} />
+           { users.users.rows.length > 0
+        ?
+        <div>
         <div className="manageUser">
         <table className="z-depth-5 highlight tab">
           <thead className="tableHead">
@@ -173,7 +178,7 @@ class ManageUsers extends React.Component {
                         }
                       }
                       >
-                     <i className="material-icons userIcon">delete</i>
+                     <i  className="material-icons userIcon">delete</i>
                </a></td> 
                 <td className="styleRow">
                   <UpdateRole updateUser={this.props.updateUser} user={user} roles={roles} />
@@ -184,11 +189,15 @@ class ManageUsers extends React.Component {
         </table>
         </div>
          <Pagination
+            className="center"
             items={pagination.page_count}
             activePage={pagination.page}
             maxButtons={pagination.page_count}
             onSelect={e => this.onSelect(e)}
           />
+        </div>
+        : <div className="center noresult">No User found</div>
+        }
       </div>
     );
   }
@@ -199,7 +208,7 @@ ManageUsers.propTypes = {
   createUsers: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
-  users: PropTypes.any.isRequired,
+  users: PropTypes.object.isRequired,
   searchUsers: PropTypes.func.isRequired,
   getRoles: PropTypes.func.isRequired
 };

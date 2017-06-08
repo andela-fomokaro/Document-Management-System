@@ -9,10 +9,9 @@ export default {
       .setValue('Input[name=identifier]', 'omokarofaith@gmail.com')
       .setValue('Input[name=password]', 'random password')
       .click('button')
-      .pause(5000)
-      .assert.containsText('p.cardTitle',
-      'Quick Tips On How To Onboard Quickly')
-      .pause(5000)
+      .waitForElementVisible('a.view', 3000)
+      .assert.containsText('a.view',
+      'Edit Profile')
       .end(),
   'Invalid login': (browser) => {
     browser
@@ -22,7 +21,7 @@ export default {
       .setValue('Input[name=identifier]', 'pap@test')
       .setValue('Input[name=password]', 'qwerty')
       .click('button')
-      .pause(1000)
+       .waitForElementVisible('body', 3000)
       .assert.urlContains('login')
       .end();
   }

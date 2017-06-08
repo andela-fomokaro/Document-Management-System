@@ -1,14 +1,16 @@
 import validator from 'validator';
 
 
+/**
+ *
+ * validates user inputs
+ * @param {string} data
+ * @returns {object}
+ */
 function validateInput(data) {
   const errors = {};
-
-  if (!validator.isEmail(data.email)) {
-    errors.email = 'Email is invalid';
-  }
   if (validator.isEmpty(data.password) || data.password.length < 5) {
-    errors.password = 'Password length too short';
+    errors.password = 'Password should contain more than 5 characters';
   }
 
   if (!validator.equals(data.password, data.passwordConfirmation)) {

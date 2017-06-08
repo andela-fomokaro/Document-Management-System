@@ -22,7 +22,7 @@ class UserProfile extends React.Component {
   /**
    * Creates an instance of UserProfile.
    * Constructor
-   * @param {any} props - props of the component
+   * @param {object} props - props of the component
    *
    * @memberOf UserProfile
    */
@@ -68,7 +68,7 @@ class UserProfile extends React.Component {
    /**
    *
    onChange
-   * @param {any} e - event handler belonging to Onchange
+   * @param {object} e - event handler belonging to Onchange
    * @returns {void}
    * @memberOf UserProfile
    */
@@ -107,6 +107,7 @@ class UserProfile extends React.Component {
       <div className="container">
         <div className="row">
           <div className="col s12 m12">
+           <h2 className="h2 center">My Profile</h2>
             <div className="z-depth-5 card  cardWidth darken-1">
               <div className="card-content black-text">
                 <ul className="profileTitle">
@@ -131,6 +132,7 @@ class UserProfile extends React.Component {
             >Update profile</button>
   }
         >
+         <label className="red-text">Username</label>
           <div className="col s12">
             <div className="input-field col s12">
               <input
@@ -142,6 +144,7 @@ class UserProfile extends React.Component {
                 placeholder="username"
               />
             </div>
+            <label className="red-text">Email</label>
             <div className="input-field col s12">
               <input
                 type="text"
@@ -149,10 +152,10 @@ class UserProfile extends React.Component {
                 name="email"
                 value={this.state.email}
                 onChange={e => this.onChange(e)}
-                disabled
                 placeholder="Email"
               />
             </div>
+            <label className="red-text">Full Name</label>
             <div className="input-field col s12">
               <input
                 type="text"
@@ -163,6 +166,7 @@ class UserProfile extends React.Component {
                 placeholder="Full Name"
               />
             </div>
+            <label className="red-text">Password</label>
             <div className="row">
             <input
               onChange={this.onChange}
@@ -174,7 +178,7 @@ class UserProfile extends React.Component {
               required
             />
           </div>
-
+          <label className="red-text">Password Confirmation</label>
           <div className="row">
             <input
               onChange={this.onChange}
@@ -186,7 +190,7 @@ class UserProfile extends React.Component {
               required
             />
           </div>
-            <button onClick={() => this.updateUser(getCurrentUser().userId)} className="btn pink darken-4 modal-action modal-close">Update</button>
+            <button onClick={() => this.updateUser(getCurrentUser().userId)} className="btn pink darken-4">Update</button>
           </div>
 
         </Modal>

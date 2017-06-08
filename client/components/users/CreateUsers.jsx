@@ -15,7 +15,7 @@ class CreateUsers extends React.Component {
   /**
    * Creates an instance of CreateUsers.
    * Constructor
-   * @param {any} props - props of the component
+   * @param {object} props - props of the component
    *
    * @memberOf CreateUsers
    */
@@ -36,7 +36,7 @@ class CreateUsers extends React.Component {
   /**
    *
    * onSubmit
-   * @param {any} e
+   * @param {object} e
    * @returns {void}
    * @memberOf CreateUsers
    */
@@ -48,6 +48,13 @@ class CreateUsers extends React.Component {
     }else {
       this.props.createUsers(this.state);
       Materialize.toast('User Created Successfully', 2000);
+      this.setState({
+      username: '',
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+      fullNames: ''
+    });
     }
   }
 
@@ -55,7 +62,7 @@ class CreateUsers extends React.Component {
   /**
    *
    * onChange
-   * @param {any} e - event handler belonging to onChange
+   * @param {object} e - event handler belonging to onChange
    * @returns {void}
    * @memberOf CreateUsers
    */
@@ -83,8 +90,9 @@ class CreateUsers extends React.Component {
       >
 
         <form onSubmit={this.onSubmit}>
+          <label className="red-text"><b>USERNAME</b></label>
           <TextFieldGroup
-            label="Username"
+            label=""
             onChange={this.onChange}
             type="text"
             name="username"
@@ -93,9 +101,9 @@ class CreateUsers extends React.Component {
             field="username"
             required
           />
-
+          <label className="red-text"><b>FULL NAME</b></label>
           <TextFieldGroup
-            label="Full Names"
+            label=""
             onChange={this.onChange}
             type="text"
             name="fullNames"
@@ -104,9 +112,9 @@ class CreateUsers extends React.Component {
             field="fullNames"
             required
           />
-
+          <label className="red-text"><b>EMAIL</b></label>
           <TextFieldGroup
-            label="Email"
+            label=""
             onChange={this.onChange}
             type="email"
             name="email"
@@ -115,19 +123,18 @@ class CreateUsers extends React.Component {
             field="email"
             required
           />
-
+          <label className="red-text"><b>PASSWORD</b></label>
           <div className="row">
             <input
               onChange={this.onChange}
               value={this.state.password}
               name="password"
               type="password"
-              placeholder="Password"
               className="validate"
               required
             />
           </div>
-
+          <label className="red-text"><b>PASSWORD CONFIRMATION</b></label>
           <div className="row">
             <input
               onChange={this.onChange}
@@ -135,12 +142,11 @@ class CreateUsers extends React.Component {
               name="passwordConfirmation"
               type="password"
               className="validate"
-              placeholder="Password Confirmation"
               required
             />
           </div>
           <button
-          id="adminCreateUser"className="btn btn2 pink darken-4 modal-action modal-close">Send</button>
+          id="adminCreateUser"className="btn btn2 pink darken-4">Send</button>
            <button
               className="btn btn2 pink darken-4 white-text modal-action modal-close"
               >Close</button>

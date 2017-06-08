@@ -48,15 +48,16 @@ class ManageRole extends React.Component {
     swal({
       title: "Are you sure?", 
       text: "Are you sure that you want to delete this role?", 
-      type: "warning",
+      type: "error",
       showCancelButton: true,
       closeOnConfirm: true,
-      confirmButtonText: "Yes, delete it!",
-      confirmButtonColor: "#ec6c62"
+      confirmButtonText: "delete it!",
+      confirmButtonColor: "#ad1457"
     }, (isConfirm) => {
       if(isConfirm) {
          this.props.deleteRole(roleId);
         swal('Deleted', 'role was deleted', 'success');
+        Materialize.toast('Role Deleted', 1000);
       } else {
         swal('Canceled', 'OPERATION CANCELED', 'error');
       }
@@ -76,11 +77,12 @@ class ManageRole extends React.Component {
     let serialNumber= 0;
     return (
       <div className="container">
+       <h2 className="h2 center">Manage Roles</h2>
        <CreateRole createRole={this.props.createRole} role={this.props.role} />
         <table className="z-depth-5 highlight tab">
           <thead className="tableHead">
             <tr>
-              <th id="roleTitle" className="roleTitle">S/N</th>
+              <th id="sn" className="roleTitle">S/N</th>
               <th id="roleTitle" className="roleTitle">Title</th>
               <th id="timeCreated">Time Created</th>
               <th id="lastUpdated">Last Updated</th>
@@ -107,6 +109,7 @@ class ManageRole extends React.Component {
                             }
                         </td>
                       <td className="cursor"><a
+                            id="deleteRole"
                             onClick={(roleId) => 
                             this.deleteRole(rolei.id)}>delete role</a></td>
                     </tr>
@@ -122,7 +125,7 @@ class ManageRole extends React.Component {
 ManageRole.propTypes = {
   createRole: PropTypes.func.isRequired,
   getRoles: PropTypes.func.isRequired,
-  role: PropTypes.any.isRequired,
+  role: PropTypes.array.isRequired,
   deleteRole: PropTypes.func.isRequired,
 };
 

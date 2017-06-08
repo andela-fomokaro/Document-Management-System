@@ -46,20 +46,21 @@ class DashBoardPage extends React.Component {
    */
   onSelect(pageNo) {
     const offset = (pageNo - 1) * 6;
-    this.props.usersDocument(offset);
+    this.props.usersDocument(offset, this.props.user.userId);
   }
  
    /**
    *
    * onChange
-   * @param {any} e - event handler belonging to Onchange
+   * @param {object} e - event handler belonging to Onchange
    * @memberOf DashBoard
    */
   onChange(e) {
     const searchTerm = e.target.value;
-    if (searchTerm.length < 1) {
+    if (searchTerm < 1) {
       this.props.usersDocument(0, this.props.user.userId);
-    } else {
+    }
+    else {
       this.props.searchDocument(searchTerm);
     }
   }
@@ -74,18 +75,13 @@ class DashBoardPage extends React.Component {
   render() {
     const { documents, pagination } = this.props;
     let allDocuments;
-     if (documents.length === 0) {
       return (
-        <div className="container">
-          <h2 className="profileTitle">Welcome Create A Document</h2>
-          <DocumentForm/>
-        </div>
-      );
-    }
-      return (
-      <div> 
-        <form className="form-wrapper2 cf">
+      <div className="container"> 
+        <h2 className="h2 center">My Documents</h2>
+        <form className="form-wrapper2 form-input">
           <input
+            id="userDocSearch"
+            className="search"
             type="search" placeholder="Search for document here..."
             onChange={this.onChange} name="search"
             required
@@ -94,7 +90,7 @@ class DashBoardPage extends React.Component {
          <DocumentForm/>
         { documents.length > 0
         ?
-        <div className="container">
+        <div>
           <div className="row">
             { documents.map((doc, index) => <AllDocument
               key={index}
@@ -103,13 +99,14 @@ class DashBoardPage extends React.Component {
             />)}
         </div>
             <Pagination
+              className="center"
               items={pagination.page_count}
               activePage={pagination.page}
               maxButtons={pagination.page_count}
               onSelect={e => this.onSelect(e)}
             />
         </div>
-       : ''
+       : <div className="center noresult">No document found</div>
         } </div>
     );
     }

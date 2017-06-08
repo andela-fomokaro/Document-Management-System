@@ -1,13 +1,12 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import { browserHistory } from 'react-router';
-import { SET_CURRENT_USER, LOGOUT_USER } from '../actions/types';
+import { SET_CURRENT_USER } from '../actions/types';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 
 
 /**
  *
- *
+ * Set Current User Action
  * @export setCurrentUser
  * @param {object} user information
  * @returns {object} return user request
@@ -21,7 +20,7 @@ export function setCurrentUser(user) {
 
 /**
  *
- *
+ * Logou Action
  * @export logout
  * @returns {Function} returns dispatch
  */
@@ -33,7 +32,7 @@ export function logout() {
 }
 /**
  *
- *
+ * Login Action
  * @export login
  * @param {object} data user data
  * @returns {Function} returns dispatch

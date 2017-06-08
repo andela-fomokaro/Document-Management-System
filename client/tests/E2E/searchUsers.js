@@ -9,15 +9,14 @@ export default {
       .setValue('Input[name=identifier]', 'omokarofaith@gmail.com')
       .setValue('Input[name=password]', 'random password')
       .click('button')
-      .pause(5000)
-      .assert.containsText('p.cardTitle',
-      'Quick Tips On How To Onboard Quickly')
-      .pause(5000)
+      .waitForElementVisible('#manageusers', 3000)
       .click('#manageusers')
-      .pause(2000)
-      .setValue('Input#documentSearch', 'noxyblaze')
-      .assert.containsText('#searchUsername', 'noxyblaze')
-      .pause(2000)
+      .waitForElementVisible('Input#documentSearch', 3000)
+      .setValue('Input#documentSearch', 'ijay')
+      .assert.containsText('#searchUsername', 'Ijay')
+      .pause(3000)
+      .setValue('Input#documentSearch', 'mininie')
+      .pause(3000)
       .end(),
 };
 

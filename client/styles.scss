@@ -129,16 +129,16 @@ input[type=text]:focus {
 .documentDate{
   font-size: 10px;
 }
-.cf:before, .cf:after{
+.form-input:before, .form-input:after{
     content:"";
     display:table;
 }
 
-.cf:after{
+.form-input:after{
     clear:both;
 }
 
-.cf{
+.form-input{
     zoom:1;
 }
 .search{
@@ -151,9 +151,8 @@ input[type=text]:focus {
     padding: 10px;
     height: 60px;
     display: inline-block;
-    margin-right: 30px;
-    margin-left: 30px;
-    margin-top: 10px;  
+    margin-left: 150px;
+    margin-top: 30px;  
     background: rgb(220,220,220);
     border-radius: 10px;
     box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgb(220,220,220);
@@ -243,8 +242,7 @@ input[type=text]:focus {
     color:#880e4f;
 }
 .manageUser{
-    width: 65%;
-    margin-left: 220px;
+    width: 100%;
     background-color: #fff;
 }
 .styleRow{
@@ -268,14 +266,14 @@ input[type=text]:focus {
     margin-top: 30px; 
 }
 .docButton{
-    margin: 10px 0px 10px 10px;
+    margin: 30px 0px 30px 50px;
     display: inline-block;
 }
 .selectBox{
     width: 100%;
 }
 .modal{
-    width: 40%;
+    width: 60%;
 }
 .modal-content h4{
     font-size: 40px;
@@ -311,8 +309,35 @@ input[type=text]:focus {
     width: 40%;
 }
 #profileUpdate{
-     width: 40%;
+     width: 60%;
 }
 .userIcon{
     color: red;
+}
+.noresult{
+    font-family: cursive;
+    color:#880e4f;
+    font-size: 35px;
+}
+.update-btn{
+    margin-left: 40%;
+}
+#yes{
+    margin: 20% 20%;
+}
+.list-style{
+    margin-left: 20px;
+}
+#userDocDelete{
+    margin-left:20px;
+}
+.h2{
+    font-family: cursive;
+    color:#880e4f;
+    font-size: 50px;
+    padding-bottom: 50px;
+    padding-top: 30px;
+}
+#creteRole{
+    width: 40%
 }

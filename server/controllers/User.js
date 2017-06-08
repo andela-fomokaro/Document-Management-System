@@ -135,7 +135,7 @@ const User = {
   delete(req, res) {
     db.Roles
       .findById(req.decoded.roleId)
-      .then((role) => {
+      .then(() => {
         db.Users
           .findById(req.params.id)
           .then((user) => {

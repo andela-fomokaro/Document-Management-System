@@ -164,18 +164,18 @@ export default StyleSheet.create({
   'documentDate': {
     'fontSize': [{ 'unit': 'px', 'value': 10 }]
   },
-  'cf:before': {
+  'form-input:before': {
     'content': '""',
     'display': 'table'
   },
-  'cf:after': {
+  'form-input:after': {
     'content': '""',
     'display': 'table'
   },
-  'cf:after': {
+  'form-input:after': {
     'clear': 'both'
   },
-  'cf': {
+  'form-input': {
     'zoom': '1'
   },
   'search': {
@@ -186,9 +186,8 @@ export default StyleSheet.create({
     'padding': [{ 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 10 }],
     'height': [{ 'unit': 'px', 'value': 60 }],
     'display': 'inline-block',
-    'marginRight': [{ 'unit': 'px', 'value': 30 }],
-    'marginLeft': [{ 'unit': 'px', 'value': 30 }],
-    'marginTop': [{ 'unit': 'px', 'value': 10 }],
+    'marginLeft': [{ 'unit': 'px', 'value': 150 }],
+    'marginTop': [{ 'unit': 'px', 'value': 30 }],
     'background': 'gainsboro',
     'borderRadius': '10px',
     'boxShadow': [{ 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 1 }, { 'unit': 'px', 'value': 1 }, { 'unit': 'string', 'value': 'rgba(0, 0, 0, 0.4)' }, { 'unit': 'string', 'value': 'rgba(0, 0, 0, 0.4)' }, { 'unit': 'string', 'value': 'inset,' }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 1 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'string', 'value': 'gainsboro' }]
@@ -273,8 +272,7 @@ export default StyleSheet.create({
     'color': '#880e4f'
   },
   'manageUser': {
-    'width': [{ 'unit': '%H', 'value': 0.65 }],
-    'marginLeft': [{ 'unit': 'px', 'value': 220 }],
+    'width': [{ 'unit': '%H', 'value': 1 }],
     'backgroundColor': '#fff'
   },
   'styleRow': {
@@ -298,14 +296,14 @@ export default StyleSheet.create({
     'marginTop': [{ 'unit': 'px', 'value': 30 }]
   },
   'docButton': {
-    'margin': [{ 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 10 }],
+    'margin': [{ 'unit': 'px', 'value': 30 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 30 }, { 'unit': 'px', 'value': 50 }],
     'display': 'inline-block'
   },
   'selectBox': {
     'width': [{ 'unit': '%H', 'value': 1 }]
   },
   'modal': {
-    'width': [{ 'unit': '%H', 'value': 0.4 }]
+    'width': [{ 'unit': '%H', 'value': 0.6 }]
   },
   'modal-content h4': {
     'fontSize': [{ 'unit': 'px', 'value': 40 }],
@@ -340,9 +338,36 @@ export default StyleSheet.create({
     'width': [{ 'unit': '%H', 'value': 0.4 }]
   },
   '#profileUpdate': {
-    'width': [{ 'unit': '%H', 'value': 0.4 }]
+    'width': [{ 'unit': '%H', 'value': 0.6 }]
   },
   'userIcon': {
     'color': 'red'
+  },
+  'noresult': {
+    'fontFamily': 'cursive',
+    'color': '#880e4f',
+    'fontSize': [{ 'unit': 'px', 'value': 35 }]
+  },
+  'update-btn': {
+    'marginLeft': [{ 'unit': '%H', 'value': 0.4 }]
+  },
+  '#yes': {
+    'margin': [{ 'unit': '%V', 'value': 0.2 }, { 'unit': '%H', 'value': 0.2 }, { 'unit': '%V', 'value': 0.2 }, { 'unit': '%H', 'value': 0.2 }]
+  },
+  'list-style': {
+    'marginLeft': [{ 'unit': 'px', 'value': 20 }]
+  },
+  '#userDocDelete': {
+    'marginLeft': [{ 'unit': 'px', 'value': 20 }]
+  },
+  'h2': {
+    'fontFamily': 'cursive',
+    'color': '#880e4f',
+    'fontSize': [{ 'unit': 'px', 'value': 50 }],
+    'paddingBottom': [{ 'unit': 'px', 'value': 50 }],
+    'paddingTop': [{ 'unit': 'px', 'value': 30 }]
+  },
+  '#creteRole': {
+    'width': [{ 'unit': '%H', 'value': 0.4 }]
   }
 });

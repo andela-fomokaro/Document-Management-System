@@ -3,6 +3,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper';
 import ThemeDefault from '../../theme-default';
@@ -42,7 +43,7 @@ class LoginForm extends React.Component {
    *
    *
    * onSubmit
-   * @param {any} e
+   * @param {object} e
    * @returns {void}
    *
    * @memberOf LoginForm
@@ -55,8 +56,8 @@ class LoginForm extends React.Component {
       const { password } = this.state;
       this.props.login({ email, password }).then(
         () => {
-          Materialize.toast('Login successful', 3000);
           document.location.href = '/';
+          Materialize.toast('Login successful', 3000);
           //return this.context.router.push('/');
         },
     ).catch((err) => {
@@ -70,7 +71,7 @@ class LoginForm extends React.Component {
    *
    * onChange
    *
-   * @param {any} e
+   * @param {object} e
    *
    * @return {void}
    *
@@ -140,6 +141,7 @@ class LoginForm extends React.Component {
                   />
                 </div>
                 <button className="btn  pink darken-3">Login</button>
+                <p><Link to="/signup">Dont have an account ? Signup</Link></p>
               </form>
             </Paper>
           </div>

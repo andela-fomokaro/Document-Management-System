@@ -10,7 +10,7 @@ import db from './server/models/index';
 
 require('dotenv').config();
 
-const port = process.env.PORT || 8009;
+const port = process.env.PORT || 7000;
 const app = express();
 
 const compiler = webpack(webpackConfig);
@@ -34,7 +34,7 @@ app.get('*', (req, res) => {
 
 db.sequelize.sync().done(() => {
   app.listen(port, () => {
-    console.log('Hi I am running at 127.0.0.1:8009');
+    console.log('Hi I am running at 127.0.0.1:7000');
   });
 });
 

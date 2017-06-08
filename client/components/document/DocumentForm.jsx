@@ -35,7 +35,7 @@ class DocumentForm extends React.Component {
   /**
    *
    * onChange
-   * @param {any} e - event handler belonging to Onchange
+   * @param {object} e - event handler belonging to Onchange
    * @returns {void}
    * @memberOf DocumentForm
    */
@@ -46,19 +46,25 @@ class DocumentForm extends React.Component {
   /**
    *
    * onSubmit
-   * @param {any} e - event handler belonging to onSubmit
+   * @param {object} e - event handler belonging to onSubmit
    * @returns {void}
    * @memberOf DocumentForm
    */
   onSubmit(e) {
     e.preventDefault();
     this.props.createDocument(this.state);
+    Materialize.toast('Document Successfully Created', 2000);
+    this.setState({
+      title: '',
+      content: '',
+      access: '',
+    });
   }
 
   /**
    *
    * onClick
-   * @param {any} e - event handler belonging to onClick
+   * @param {object} e - event handler belonging to onClick
    * @returns {void}
    * @memberOf DocumentForm
    */
@@ -78,6 +84,7 @@ class DocumentForm extends React.Component {
       <Modal
         header='Create Document'
         trigger={<a
+          id="docButton"
           className=
           "btn-floating btn-large docButton pink darken-3 tooltipped"
           data-position="right" data-delay="50" data-tooltip="Create New document"
@@ -88,43 +95,44 @@ class DocumentForm extends React.Component {
         <form className="col s12" onSubmit={this.onSubmit}>
           <div className="row">
             <Input
+                id="input1"
                 s={6}
                 className="selectBox"
                 type="select"
                 name="access"
-                required
                 value={access} onChange={this.onChange}
                 defaultValue={document.access}
               >
                <option value="access" disabled>CHOOSE ACCESS </option>
-                <option value="public">Public</option>
+                <option value="public" id="public">Public</option>
                 <option value="private">Private</option>
                 <option value="role">Role</option>
               </Input>
             <div className="input-field col s12">
              <label><b>INPUT TITLE </b></label>
               <input
+               id="input2"
                 type="text"
                 className="validate"
                 name="title"
                 value={title}
                 onChange={this.onChange}
-                required
               />
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
+              <label><b>INPUT CONTENT </b></label>
               <textarea
+                id="input3"
                 className="materialize-textarea"
                 name="content"
                 value={content}
                 onChange={this.onChange}
-                required
               />
             </div>
           </div>
-          <button className=" btn pink darken-4 modal-action modal-close">Send</button>
+          <button id="create" className=" btn pink darken-4 modal-action modal-close">Send</button>
         </form>
       </Modal>
     );

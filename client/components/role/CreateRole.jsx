@@ -29,19 +29,23 @@ class CreateRole extends React.Component {
   /**
    *
    * onSubmit
-   * @param {any} e - event hhandler belonging to onSubmit
+   * @param {object} e - event hhandler belonging to onSubmit
    * @returns {void}
    * @memberOf CreateRole
    */
   onSubmit(e) {
     e.preventDefault();
     this.props.createRole(this.state);
+    Materialize.toast('Role Updated Successfully', 4000);
+    this.setState({
+      title: ''
+    });
   }
 
   /**
    *
    * onChange
-   * @param {any} e - event handler belonging to change
+   * @param {object} e - event handler belonging to change
    * @returns {void}
    * @memberOf CreateRole
    */
@@ -60,6 +64,7 @@ class CreateRole extends React.Component {
     const { title } = this.state;
     return (
       <Modal
+        id="creteRole"
         trigger={
           <a
           id="adminCreateRole"
@@ -69,6 +74,7 @@ class CreateRole extends React.Component {
   }
       >
         <form className="col s12" onSubmit={this.onSubmit}>
+         <label className="red-text"><b>TITLE</b></label>
           <div className="input-field col s12">
             <input
               type="text"
@@ -77,7 +83,6 @@ class CreateRole extends React.Component {
               value={title}
               onChange={this.onChange}
             />
-            <label htmlFor="icon_prefix">Add Title To Create New Role.....</label>
           </div>
           <button id="createRole" className="btn pink darken-4 modal-action modal-close">Send</button>
         </form>

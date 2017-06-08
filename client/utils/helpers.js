@@ -4,7 +4,9 @@ let cachedToken = null;
 
 export const getToken = () => {
   if (!cachedToken) {
-    cachedToken = window.localStorage.getItem('jwtToken');
+    if (typeof window !== 'undefined') {
+      cachedToken = window.localStorage.getItem('jwtToken');
+    }
   }
   return cachedToken;
 };
@@ -21,19 +23,18 @@ export const getCurrentUser = () => {
   const authStatus = isAuthenticated();
   if (authStatus) {
     return jwtDecode(localStorage.getItem('jwtToken'));
-  } else {
-    return {
-      roleId: 0,
-      userId: 0,
-    };
   }
+  return {
+    roleId: 0,
+    userId: 0,
+  };
 };
 export const hasAdmin = () =>
   getCurrentUser().roleId === 1;
 
-export const hasDocumentPermission = (ownerId) => {
-  return hasAdmin() ? true : getCurrentUser().userId === ownerId;
-};
+export const hasDocumentPermission
+= ownerId => hasAdmin() ? true : getCurrentUser().userId === ownerId;
 
-
-window.getCurrentUser = getCurrentUser;
+if (typeof window !== 'undefined') {
+  window.getCurrentUser = getCurrentUser;
+}
