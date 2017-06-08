@@ -2,9 +2,7 @@ import path from 'path';
 import webpack from 'webpack';
 
 export default {
-  debug: true,
   devtool: 'source-map',
-  noInfo: false,
   target: 'web',
   entry: [
     'webpack-hot-middleware/client',
@@ -22,10 +20,7 @@ export default {
         exclude: [
           /node_modules/,
           /server/
-        ],
-        query: {
-          presets: ['react-hmre']
-        }
+        ]
       },
      { test: /(\.css)$/, loaders: ['style-loader', 'css-loader'] },
      { test: /\.scss$/, loaders: ['style-loader', 'css-loader', 'sass-loader'] },
