@@ -8,7 +8,7 @@ import axios from 'axios';
  * @return {void}
  */
 export default function setAuthorizationToken(token) {
-  if (token) {
+  if (token && typeof window !== 'undefined') {
     window.localStorage.setItem('jwtToken', token);
   } else {
     window.localStorage.removeItem('jwtToken');

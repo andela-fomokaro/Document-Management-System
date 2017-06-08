@@ -10,7 +10,7 @@ export default {
       .setValue('Input[name=identifier]', 'omokarofaith@gmail.com')
       .setValue('Input[name=password]', 'random password')
       .click('button')
-      .pause(5000)
+      .waitForElementVisible('#managerole', 3000)
       .click('#managerole')
       .assert.containsText('#roleTitle',
       'Title')
@@ -20,36 +20,13 @@ export default {
       'Time Created')
       .assert.containsText('#lastUpdated',
       'Last Updated')
-      .pause(2000)
+      .waitForElementVisible('#adminCreateRole', 3000)
       .click('#adminCreateRole')
       .setValue('Input[name=title]', faker.random.words())
       .click('#createRole')
-      .pause(5000)
+      .waitForElementVisible('#deleteRole', 5000)
       .click('#deleteRole')
       .pause(5000)
-      // .assert.containsText('.sa-icon h2',
-      // 'Are you sure?')
-      // .click('button.confirm')
-      // .pause(2000)
-      .end(),
-  // 'Update Role': (browser) => {
-  //   browser
-  //     .url(config.url)
-  //     .waitForElementVisible('body', 3000)
-  //     .click('#login')
-  //     .setValue('Input[name=identifier]', 'omokarofaith@gmail.com')
-  //     .setValue('Input[name=password]', 'random password')
-  //     .click('button')
-  //     .pause(2000)
-  //     .assert.containsText('p.cardTitle',
-  //     'Quick Tips On How To Onboard Quickly')
-  //     .pause(5000)
-  //     .click('#managerole')
-  //     .pause(2000)
-  //     .click('#updateRole')
-  //     .setValue('Input[name=title]', 'regular')
-  //     .click('#updateRoleButton')
-  //     .end();
-  // }
+      .end()
 };
 

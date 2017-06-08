@@ -9,20 +9,18 @@ export default {
       .setValue('Input[name=identifier]', 'omokarofaith@gmail.com')
       .setValue('Input[name=password]', 'random password')
       .click('button')
-      .pause(5000)
+      .waitForElementVisible('#docButton', 3000)
       .assert.visible('#docButton')
       .click('#docButton')
-      .pause(5000)
+      .waitForElementVisible('#docButton', 3000)
       .setValue('#input2[name=title]', 'Hi This Is My Diary')
       .click('#input1')
-      .pause(2000)
+      .waitForElementVisible('#input3[name=content]', 3000)
       .click('#public')
       .setValue('#input3[name=content]', 'My Book Of Bible Story')
-      .pause(5000)
+      .waitForElementVisible('button#create', 3000)
       .click('button#create')
-      .pause(3000)
-      .click('#cancel')
-      .pause(3000)
+      .waitForElementVisible('#userDocSearch', 3000)
       .assert.visible('#userDocSearch')
       .setValue('Input#userDocSearch', 'Total')
       .end(),
@@ -34,14 +32,13 @@ export default {
       .setValue('Input[name=identifier]', 'omokarofaith@gmail.com')
       .setValue('Input[name=password]', 'random password')
       .click('button')
-      .pause(2000)
+      .waitForElementVisible('#manageusers', 3000)
       .click('#manageusers')
-      .pause(2000)
+      .waitForElementVisible('#tableName', 3000)
       .assert.containsText('#tableName',
       'Full Name')
       .assert.containsText('#updateRole',
       'Update Role')
-      .pause(2000)
       .end();
   }
 };

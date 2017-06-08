@@ -63,7 +63,7 @@ class DashBoard extends React.Component {
    */
   onChange(e) {
     const searchTerm = e.target.value;
-    if (searchTerm.length < 1) {
+    if (searchTerm < 1) {
       this.props.loadDocuments();
     } else {
       this.props.searchDocument(searchTerm);
@@ -132,8 +132,7 @@ DashBoard.propTypes = {
   deleteDocument: PropTypes.func.isRequired,
   loadDocuments: PropTypes.func.isRequired,
   searchDocument: PropTypes.func.isRequired,
-  documents: PropTypes.array.isRequired,
-  pagination: PropTypes.object.isRequired
+  documents: PropTypes.array.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashBoard);

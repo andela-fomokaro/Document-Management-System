@@ -9,15 +9,13 @@ import axios from '../utils/index';
  * @returns {Function} returns dispatch
  */
 export function getUsers(offset = 0) {
-  return (dispatch) => {
-    axios.get(`/api/users?offset=${offset}`)
+  return dispatch => axios.get(`/api/users?offset=${offset}`)
       .then((res) => {
         dispatch({
           type: 'GET_USERS',
           payload: res.data,
         });
       });
-  };
 }
 
 /**
@@ -47,15 +45,13 @@ export function createUsers(data) {
  * @returns {Function} returns dispatch
  */
 export function deleteUser(id) {
-  return (dispatch) => {
-    axios.delete(`/api/users/${id}`)
+  return dispatch => axios.delete(`/api/users/${id}`)
       .then(() => {
         dispatch({
           type: 'DELETE_USER',
           id
         });
       });
-  };
 }
 
 /**
@@ -67,15 +63,13 @@ export function deleteUser(id) {
  * @returns {Function} returns dispatch
  */
 export function updateUser(data, id) {
-  return (dispatch) => {
-    axios.put(`/api/users/${id}`, data)
+  return dispatch => axios.put(`/api/users/${id}`, data)
     .then((res) => {
       dispatch({
         type: 'UPDATE_USER',
         payload: res.data.user,
       });
     });
-  };
 }
 
 /**
@@ -86,8 +80,7 @@ export function updateUser(data, id) {
  * @returns {Function} returns dispatch
  */
 export function getSingleUser(id) {
-  return (dispatch) => {
-    axios.get(`/api/users/${id}`)
+  return dispatch => axios.get(`/api/users/${id}`)
     .then((res) => {
       dispatch(
         {
@@ -96,7 +89,6 @@ export function getSingleUser(id) {
         }
       );
     });
-  };
 }
 
 /**
@@ -108,8 +100,7 @@ export function getSingleUser(id) {
  * @returns {Function} returns dispatch
  */
 export function searchUsers(term, offset = 0) {
-  return (dispatch) => {
-    axios.get(`api/search/users?search=${term}&offset=${offset}`)
+  return dispatch => axios.get(`api/search/users?search=${term}&offset=${offset}`)
       .then((res) => {
         dispatch({
           type: 'SEARCH_USERS',
@@ -128,5 +119,4 @@ export function searchUsers(term, offset = 0) {
            }
          });
        });
-  };
 }

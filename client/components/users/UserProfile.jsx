@@ -200,7 +200,7 @@ class UserProfile extends React.Component {
 }
 
 UserProfile.propTypes = {
-  userInfo: PropTypes.object.isRequired,
+  userInfo: PropTypes.any.isRequired,
   updateUser: PropTypes.func.isRequired,
   getSingleUser: PropTypes.func.isRequired,
 };

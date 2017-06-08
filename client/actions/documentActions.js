@@ -7,15 +7,13 @@ import axios from '../utils/index';
  * @returns {Function} returns dispatch
  */
 export function createDocument(data) {
-  return (dispatch) => {
-    axios.post('/api/documents', data)
+  return dispatch => axios.post('/api/documents', data)
       .then((res) => {
         dispatch({
           type: 'CREATE_DOCUMENT',
           payload: res.data.document
         });
       });
-  };
 }
 
 /**
@@ -26,15 +24,13 @@ export function createDocument(data) {
  * @returns {Function} returns dispatch
  */
 export function loadDocuments(offset = 0) {
-  return (dispatch) => {
-    axios.get(`/api/documents?offset=${offset}`)
+  return dispatch => axios.get(`/api/documents?offset=${offset}`)
       .then((res) => {
         dispatch({
           type: 'LOAD_DOCUMENTS',
           payload: res.data
         });
       });
-  };
 }
 
 
@@ -47,15 +43,13 @@ export function loadDocuments(offset = 0) {
  * @returns {Function} returns dispatch
  */
 export function usersDocument(offset = 0, id) {
-  return (dispatch) => {
-    axios.get(`/api/users/${id}/documents?offset=${offset}`)
+  return dispatch => axios.get(`/api/users/${id}/documents?offset=${offset}`)
       .then((res) => {
         dispatch({
           type: 'USER_DOCUMENT',
           payload: res.data,
         });
       });
-  };
 }
 
 /**
@@ -66,15 +60,13 @@ export function usersDocument(offset = 0, id) {
  * @returns {Function} returns dispatch
  */
 export function getDocument(id) {
-  return (dispatch) => {
-    axios.get(`/api/documents/${id}`)
+  return dispatch => axios.get(`/api/documents/${id}`)
       .then((res) => {
         dispatch({
           type: 'GET_SINGLE_DOCUMENT',
           payload: res.data
         });
       });
-  };
 }
 
 
@@ -86,15 +78,13 @@ export function getDocument(id) {
  * @returns {Function} returns dispatch
  */
 export function deleteDocument(id) {
-  return (dispatch) => {
-    axios.delete(`/api/documents/${id}`)
+  return dispatch => axios.delete(`/api/documents/${id}`)
       .then(() => {
         dispatch({
           type: 'DELETE_DOCUMENT',
           id
         });
       });
-  };
 }
 
 
@@ -106,8 +96,7 @@ export function deleteDocument(id) {
  * @returns {Function} returns dispatch
  */
 export function updateDocument(document) {
-  return (dispatch) => {
-    axios.put(`/api/documents/${document.id}`, document)
+  return dispatch => axios.put(`/api/documents/${document.id}`, document)
     .then((res) => {
       dispatch({
         type: 'UPDATE_DOCUMENT',
@@ -115,7 +104,6 @@ export function updateDocument(document) {
         id: document.id
       });
     });
-  };
 }
 
 /**
@@ -148,8 +136,7 @@ export function getSingleDocument(id) {
  * @returns {Function} returns dispatch
  */
 export function searchDocument(term, offset = 0) {
-  return (dispatch) => {
-    axios.get(`/api/search/documents?search=${term}&offset=${offset}`)
+  return dispatch => axios.get(`/api/search/documents?search=${term}&offset=${offset}`)
       .then((res) => {
         dispatch({
           type: 'SEARCH_DOCUMENT',
@@ -165,5 +152,4 @@ export function searchDocument(term, offset = 0) {
           }
         });
       });
-  };
 }

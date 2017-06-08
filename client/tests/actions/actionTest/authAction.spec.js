@@ -3,7 +3,6 @@ import thunk from 'redux-thunk';
 import { expect } from 'chai';
 import nock from 'nock';
 import * as actions from '../../../actions/loginActions';
-import { SET_CURRENT_USER } from '../../../actions/types';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -37,7 +36,8 @@ describe('LOGIN ACTIONS', () => {
         .reply(200, response);
 
       const expectedActions = [
-        { type: SET_CURRENT_USER },
+        { type: 'SET_CURRENT_USER',
+          user: { email: 'omokarofaith@gmail.com', password: 'random password' } }
       ];
       const store = mockStore({
         userData: {},
@@ -64,7 +64,13 @@ describe('LOGIN ACTIONS', () => {
         .reply(201, response);
 
       const expectedActions = [
-        { type: SET_CURRENT_USER },
+        { type: 'SET_CURRENT_USER',
+          user:
+          { email: 'bimba@gmail.com',
+            password: 'qwerty',
+            passwordConfirmation: 'qwerty',
+            username: 'bimba',
+            fullNames: 'Bimba Bimim' } }
       ];
       const store = mockStore({
         user: {},

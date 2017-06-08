@@ -57,7 +57,7 @@ class DashBoardPage extends React.Component {
    */
   onChange(e) {
     const searchTerm = e.target.value;
-    if (searchTerm.length < 1) {
+    if (searchTerm < 1) {
       this.props.usersDocument(0, this.props.user.userId);
     }
     else {
