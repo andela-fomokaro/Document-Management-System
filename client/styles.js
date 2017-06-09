@@ -153,6 +153,12 @@ export default StyleSheet.create({
   'cardContent': {
     'textAlign': 'center'
   },
+  'marky': {
+    'width': [{ 'unit': 'px', 'value': 200 }],
+    'overflow': 'hidden',
+    'textOverflow': 'ellipsis',
+    'whiteSpace': 'nowrap'
+  },
   'roleContent': {
     'height': [{ 'unit': 'px', 'value': 250 }]
   },

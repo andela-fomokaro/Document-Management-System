@@ -44,7 +44,7 @@ class singleDocument extends React.Component {
         <div className="z-depth-5 card docCard1">
           <div className="card-content cardContent">
             <span className="card-title cardTitle">{doc.title}</span>
-            <p>{doc.content}</p>
+            <span dangerouslySetInnerHTML={{__html: doc.content}} />
           </div>
           <div className="card-action">
             <p className="documentDate">Access Type: {doc.access}</p>

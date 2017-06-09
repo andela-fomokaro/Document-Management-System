@@ -118,6 +118,12 @@ input[type=text]:focus {
 .cardContent{
   text-align: center;
 }
+.marky{
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 .roleContent{
   height: 250px;
 }
