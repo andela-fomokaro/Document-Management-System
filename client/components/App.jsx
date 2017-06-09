@@ -6,6 +6,7 @@ import Footer from '../../client/components/Footer.jsx';
 
 const appStyle = {
   width: '1400px',
+  height: '100%'
 };
 
 /**
