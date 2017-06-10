@@ -216,7 +216,7 @@ export default StyleSheet.create({
   'form-wrapper2 input': {
     'width': [{ 'unit': 'px', 'value': 887 }],
     'height': [{ 'unit': 'px', 'value': 40 }],
-    'padding': [{ 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 5 }, { 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 5 }],
+    'padding': [{ 'unit': 'px', 'value': 15 }, { 'unit': 'px', 'value': 5 }, { 'unit': 'px', 'value': 15 }, { 'unit': 'px', 'value': 5 }],
     'marginTop': [{ 'unit': 'px', 'value': 8 }],
     'display': 'inline-block',
     'font': [{ 'unit': 'string', 'value': 'bold' }, { 'unit': 'px', 'value': 15 }, { 'unit': 'string', 'value': ''lucida' }, { 'unit': 'string', 'value': 'sans',' }, { 'unit': 'string', 'value': ''trebuchet' }, { 'unit': 'string', 'value': 'MS',' }, { 'unit': 'string', 'value': ''Tahoma'' }],

@@ -97,9 +97,9 @@ class SignupForm extends React.Component {
       loginContainer: {
         minWidth: 320,
         maxWidth: 600,
-        height: 60,
+        maxheigth: 500,
         position: 'relative',
-        top: '20%',
+        top: 10,
         left: 0,
         right: 0,
         margin: 'auto'
@@ -131,7 +131,7 @@ class SignupForm extends React.Component {
                 />
                 </div>
                 <div>
-                <i className="material-icons">supervisor_account</i>
+                <i className="material-icons">mode_edit</i>
                 <TextFieldGroup
                   label="Full Names"
                   onChange={this.onChange}

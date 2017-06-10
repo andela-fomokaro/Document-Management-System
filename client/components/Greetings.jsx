@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import DashBoardPage from './DashBoardPage.jsx';
-import Picture from './picture/as.png';
+import Picture from './picture/clear.jpg';
 
 /**
  *
@@ -65,7 +65,7 @@ class Greetings extends React.Component {
             <div className="card-image">
               <img
                 src={Picture} height="600"
-                alt="dashboard pciture"
+                alt="dashboard picture"
                 onLoad={this.handleImageLoaded}
                 onError={this.handleImageErrored}
               />
