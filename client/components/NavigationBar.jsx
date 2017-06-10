@@ -52,31 +52,46 @@ class NavigationBar extends React.Component {
     };
     const { isAuthenticated } = this.props.auth;
     const userLinks = (
-      <ul id="nav-mobile" className="right hide-on-med-and-down">
-        
+      <div>
+       <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
+       <ul id="nav-mobile" className="right hide-on-med-and-down">
         <li id="edit-profile">
           <Link className="right view" to="/profile">Edit Profile</Link>
         </li>
-
         <li id="load-documents">
           <Link className="right view" to="/load-documents"> View All Documents </Link>
         </li>
-
         <li id="my-documents">
           <Link className="right view" to="/"> My Documents </Link>
         </li>
-        
         {hasAdmin() ? <li id="manage-role"><Link className="right view" id="managerole" to="/manage-roles">Manage Roles</Link></li>: ''}
-
         {hasAdmin() ? <li id="manage-users"><Link className="right view" id="manageusers" to="/manage-users">Manage Users</Link></li> : ''}
         <li>
           <Link className="right view" to="/" onClick={this.logout}>Logout</Link>
         </li>
       </ul>
+
+      <ul className="side-nav" id="mobile-demo">
+        <li id="edit-profile">
+          <Link className="view" to="/profile">Edit Profile</Link>
+        </li>
+        <li id="load-documents">
+          <Link className="view" to="/load-documents"> View All Documents </Link>
+        </li>
+        <li id="my-documents">
+          <Link className="view" to="/"> My Documents </Link>
+        </li>
+        {hasAdmin() ? <li id="manage-role"><Link className="view" id="managerole" to="/manage-roles">Manage Roles</Link></li>: ''}
+        {hasAdmin() ? <li id="manage-users"><Link className="view" id="manageusers" to="/manage-users">Manage Users</Link></li> : ''}
+        <li>
+          <Link className="view" to="/" onClick={this.logout}>Logout</Link>
+        </li>
+      </ul>
+      </div>
     );
 
     const guestLinks = (
-      <ul id="nav-mobile" className="right hide-on-med-and-down">
+      <ul id="nav-mobile" className="right">
         <li><Link id="signup"to="/signup">Sign up</Link></li>
         <li><Link id="login"to="/login">Login</Link></li>
       </ul>
@@ -88,7 +103,9 @@ class NavigationBar extends React.Component {
           <h1>
             <Link to="/" className="brand-logo brand">DocStar</Link>
           </h1>
+          <ul>
           { isAuthenticated ? userLinks : guestLinks }
+         </ul>
         </div>
       </nav>
     );
