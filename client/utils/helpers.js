@@ -32,6 +32,9 @@ export const getCurrentUser = () => {
 export const hasAdmin = () =>
   getCurrentUser().roleId === 1;
 
+export const notAdmin = () =>
+  getCurrentUser().roleId !== 1;
+
 export const hasDocumentPermission
 = ownerId => hasAdmin() ? true : getCurrentUser().userId === ownerId;
 

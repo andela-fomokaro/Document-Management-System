@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { logout } from '../actions/loginActions';
 import { hasAdmin } from '../utils/helpers';
+import { notAdmin } from '../utils/helpers';
 
 
 /**
@@ -56,7 +57,10 @@ class NavigationBar extends React.Component {
        <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
        <ul id="nav-mobile" className="right hide-on-med-and-down">
         <li id="edit-profile">
-          <Link className="right view" to="/profile">Edit Profile</Link>
+          <Link className="right view" to="/profile">My Profile</Link>
+        </li>
+         <li>
+          {notAdmin() ? <Link className="right view" to="/users">Users</Link>: ''}
         </li>
         <li id="load-documents">
           <Link className="right view" to="/load-documents"> View All Documents </Link>
@@ -74,6 +78,9 @@ class NavigationBar extends React.Component {
       <ul className="side-nav" id="mobile-demo">
         <li id="edit-profile">
           <Link className="view" to="/profile">Edit Profile</Link>
+        </li>
+          <li>
+          {notAdmin() ? <Link className="view" to="/users">Users</Link>: ''}
         </li>
         <li id="load-documents">
           <Link className="view" to="/load-documents"> View All Documents </Link>
