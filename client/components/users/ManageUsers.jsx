@@ -96,9 +96,12 @@ class ManageUsers extends React.Component {
       confirmButtonColor: "#ad1457"
     }, (isConfirm) => {
       if(isConfirm) {
-         this.props.deleteUser(userId);
-        swal('Deleted', 'role was deleted', 'success');
-        Materialize.toast('User Deleted', 1000);
+         this.props.deleteUser(userId).then(() => {
+           Materialize.toast('User Deleted', 1000);
+         }).catch((err) => {
+           console.log(err);
+           Materialize.toast(err.data.message, 1000);
+         })
       } else {
         swal('Canceled', 'OPERATION CANCELED', 'error');
       }

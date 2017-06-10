@@ -127,7 +127,7 @@ const User = {
     });
   },
 /**
-   * Delete a particular Document
+   * Delete User
    * @param {Object} req - Request object
    * @param {Object} res - Response object
    * @return {void} Response object
@@ -142,6 +142,10 @@ const User = {
             if (!user) {
               return res.status(404).send({
                 message: 'User Does Not Exist',
+              });
+            } else if (user.id === 1) {
+              return res.status(400).send({
+                message: 'You Cannot Delete Admin User',
               });
             }
             user
