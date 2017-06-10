@@ -137,23 +137,27 @@ class ManageUsers extends React.Component {
     let serialNumber= 0;
     return (
       <div className="container">
-       <h2 className="h2 center">Manage Users</h2>
-        <form className="form-wrapper2 form-input">
+      <div className="row">
+        <div className="col s12 m6 l8"><h2 className="h2">Manage Users</h2></div>
+        <div className="document-button col s12 m6 l4 "><CreateUsers createUsers={this.props.createUsers} users={this.props.users} /></div>
+        </div>
+        <div className="row">
+        <form className="col s12 m12 form-wrapper2 form-input">
           <input
-            className="black-text"
+            className="col s12 black-text"
             type="search"
             id="documentSearch"
             placeholder="Search for users here..."
             required
             onChange={this.onChange} name="search"
           />
-        </form>
-        <CreateUsers createUsers={this.props.createUsers} users={this.props.users} />
+         </form>
+         </div>
            { users.users.rows.length > 0
         ?
         <div>
-        <div className="manageUser">
-        <table className="z-depth-5 highlight tab">
+        <div className="row">
+        <table className="col s12 m12 responsive-table z-depth-5 highlight tab">
           <thead className="tableHead">
             <tr>
               <th className="tablHead">S/N</th>

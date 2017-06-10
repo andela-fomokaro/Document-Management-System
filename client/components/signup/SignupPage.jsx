@@ -27,7 +27,6 @@ class SignupPage extends React.Component {
     return (
       <div className="row">
         <div className="col-md-4">
-        <h1 className="access">SignUp Page</h1>
           <SignupForm userSignupRequest={userSignupRequest} />
         </div>
       </div>

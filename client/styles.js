@@ -153,8 +153,24 @@ export default StyleSheet.create({
   'cardContent': {
     'textAlign': 'center'
   },
+  'cardaction': {
+    'overflow': 'hidden',
+    'paddingBottom': [{ 'unit': 'px', 'value': 5 }]
+  },
+  'login-icon': {
+    'color': '#880e4f'
+  },
+  'greeting-text': {
+    'color': '#880e4f',
+    'fontFamily': 'elephant',
+    'fontWeight': '2em'
+  },
+  'card-title': {
+    'fontSize': [{ 'unit': 'px', 'value': 34 }, { 'unit': 'string', 'value': '!important' }]
+  },
   'marky': {
-    'width': [{ 'unit': 'px', 'value': 200 }],
+    'width': [{ 'unit': 'px', 'value': 180 }],
+    'height': [{ 'unit': 'px', 'value': 20 }],
     'overflow': 'hidden',
     'textOverflow': 'ellipsis',
     'whiteSpace': 'nowrap'
@@ -192,21 +208,21 @@ export default StyleSheet.create({
     'padding': [{ 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 10 }],
     'height': [{ 'unit': 'px', 'value': 60 }],
     'display': 'inline-block',
-    'marginLeft': [{ 'unit': 'px', 'value': 150 }],
     'marginTop': [{ 'unit': 'px', 'value': 30 }],
     'background': 'gainsboro',
     'borderRadius': '10px',
     'boxShadow': [{ 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 1 }, { 'unit': 'px', 'value': 1 }, { 'unit': 'string', 'value': 'rgba(0, 0, 0, 0.4)' }, { 'unit': 'string', 'value': 'rgba(0, 0, 0, 0.4)' }, { 'unit': 'string', 'value': 'inset,' }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 1 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'string', 'value': 'gainsboro' }]
   },
   'form-wrapper2 input': {
-    'width': [{ 'unit': 'px', 'value': 410 }],
-    'height': [{ 'unit': 'px', 'value': 20 }],
+    'width': [{ 'unit': 'px', 'value': 887 }],
+    'height': [{ 'unit': 'px', 'value': 40 }],
     'padding': [{ 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 5 }, { 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 5 }],
+    'marginTop': [{ 'unit': 'px', 'value': 8 }],
     'display': 'inline-block',
     'font': [{ 'unit': 'string', 'value': 'bold' }, { 'unit': 'px', 'value': 15 }, { 'unit': 'string', 'value': ''lucida' }, { 'unit': 'string', 'value': 'sans',' }, { 'unit': 'string', 'value': ''trebuchet' }, { 'unit': 'string', 'value': 'MS',' }, { 'unit': 'string', 'value': ''Tahoma'' }],
     'border': [{ 'unit': 'px', 'value': 0 }],
     'background': '#fff',
-    'borderRadius': '3px 3px 3px 3px'
+    'borderRadius': '4px 4px 4px 4px'
   },
   'form-wrapper2 input:-ms-input-placeholder': {
     'color': '#999',
@@ -228,7 +244,7 @@ export default StyleSheet.create({
   'profileButton': {
     'position': 'relative',
     'top': [{ 'unit': 'px', 'value': -70 }],
-    'marginLeft': [{ 'unit': 'px', 'value': 360 }],
+    'marginLeft': [{ 'unit': 'px', 'value': 180 }],
     'backgroundColor': '#880e4f'
   },
   'profileIcon': {
@@ -277,10 +293,6 @@ export default StyleSheet.create({
   'tableHead': {
     'color': '#880e4f'
   },
-  'manageUser': {
-    'width': [{ 'unit': '%H', 'value': 1 }],
-    'backgroundColor': '#fff'
-  },
   'styleRow': {
     'padding': [{ 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 10 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 30 }]
   },
@@ -303,7 +315,8 @@ export default StyleSheet.create({
   },
   'docButton': {
     'margin': [{ 'unit': 'px', 'value': 30 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 30 }, { 'unit': 'px', 'value': 50 }],
-    'display': 'inline-block'
+    'display': 'inline-block',
+    'color': '#333'
   },
   'selectBox': {
     'width': [{ 'unit': '%H', 'value': 1 }]
@@ -312,9 +325,10 @@ export default StyleSheet.create({
     'width': [{ 'unit': '%H', 'value': 0.6 }]
   },
   'modal-content h4': {
-    'fontSize': [{ 'unit': 'px', 'value': 40 }],
+    'fontSize': [{ 'unit': 'px', 'value': 30 }],
     'fontWeight': '2em',
     'color': '#880e4f',
+    'paddingBottom': [{ 'unit': 'px', 'value': 20 }],
     'textAlign': 'center'
   },
   'btn-flat': {
@@ -351,7 +365,7 @@ export default StyleSheet.create({
   },
   'noresult': {
     'fontFamily': 'cursive',
-    'color': '#880e4f',
+    'color': '#333',
     'fontSize': [{ 'unit': 'px', 'value': 35 }]
   },
   'update-btn': {
@@ -368,12 +382,16 @@ export default StyleSheet.create({
   },
   'h2': {
     'fontFamily': 'cursive',
-    'color': '#880e4f',
+    'color': '#333',
     'fontSize': [{ 'unit': 'px', 'value': 50 }],
-    'paddingBottom': [{ 'unit': 'px', 'value': 50 }],
-    'paddingTop': [{ 'unit': 'px', 'value': 30 }]
+    'paddingTop': [{ 'unit': 'px', 'value': 30 }],
+    'paddingBottom': [{ 'unit': 'px', 'value': 30 }]
   },
   '#creteRole': {
     'width': [{ 'unit': '%H', 'value': 0.4 }]
+  },
+  'document-button': {
+    'textAlign': 'right',
+    'paddingRight': [{ 'unit': 'px', 'value': 0 }]
   }
 });

@@ -76,18 +76,22 @@ class DashBoardPage extends React.Component {
     const { documents, pagination } = this.props;
     let allDocuments;
       return (
-      <div className="container"> 
-        <h2 className="h2 center">My Documents</h2>
-        <form className="form-wrapper2 form-input">
+      <div className="container">
+        <div className="row">
+          <div className="col s12 m6 l8"><h2 className="h2">My Documents</h2></div>
+          <div className="document-button col s12 m6 l4 "><DocumentForm /></div>
+        </div>
+        <div className="row">
+        <form className="col s12 m12 form-wrapper2 form-input">
           <input
             id="userDocSearch"
-            className="search"
+            className="col s12 search"
             type="search" placeholder="Search for document here..."
             onChange={this.onChange} name="search"
             required
           />
         </form>
-         <DocumentForm/>
+        </div>
         { documents.length > 0
         ?
         <div>

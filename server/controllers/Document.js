@@ -283,7 +283,7 @@ const Document = {
               $or: {
                 access: { $eq: 'public' },
                 $and: {
-                  access: { $eq: 'role' },
+                  access: { $eq: 'private' },
                   ownerId: { $eq: req.decoded.userId }
                 },
                 $and: {

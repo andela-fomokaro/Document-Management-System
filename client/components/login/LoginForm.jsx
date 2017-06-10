@@ -58,7 +58,6 @@ class LoginForm extends React.Component {
         () => {
           document.location.href = '/';
           Materialize.toast('Login successful', 3000);
-          //return this.context.router.push('/');
         },
     ).catch((err) => {
       Materialize.toast(err.data.message, 2000);
@@ -94,7 +93,7 @@ class LoginForm extends React.Component {
     const styles = {
       loginContainer: {
         minWidth: 320,
-        maxWidth: 400,
+        maxWidth: 600,
         height: 'auto',
         position: 'absolute',
         top: '20%',
@@ -119,7 +118,8 @@ class LoginForm extends React.Component {
 
             <Paper style={styles.paper}>
               <form onSubmit={this.onSubmit}>
-
+              <div className="row">
+                <i className="material-icons">email</i>
                 <TextFieldGroup
                   field="identifier"
                   label="Email"
@@ -128,8 +128,9 @@ class LoginForm extends React.Component {
                   type="email"
                   required
                 />
-
+                </div>
                 <div className="row">
+                 <i className="material-icons">lock_open</i>
                   <input
                     onChange={this.onChange}
                     value={this.state.password}
@@ -140,7 +141,7 @@ class LoginForm extends React.Component {
                     required
                   />
                 </div>
-                <button className="btn  pink darken-3">Login</button>
+                <button className="btn grey lighten-5 black-text">Login</button>
                 <p><Link to="/signup">Dont have an account ? Signup</Link></p>
               </form>
             </Paper>

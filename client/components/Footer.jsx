@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () =>
  (
-   <footer className="page-footer blue-grey darken-4 footer">
+   <footer className="page-footer pink darken-4 footer">
      <div className="footer-copyright">
        <div className="container">
             © 2017 DocStar | All Rights Reserved | Document Management System

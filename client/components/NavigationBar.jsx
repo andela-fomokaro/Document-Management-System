@@ -84,7 +84,7 @@ class NavigationBar extends React.Component {
 
     return (
       <nav>
-        <div className="nav-wrapper blue-grey darken-4">
+        <div className="nav-wrapper pink darken-4">
           <h1>
             <Link to="/" className="brand-logo brand">DocStar</Link>
           </h1>

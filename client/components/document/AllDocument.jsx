@@ -117,14 +117,14 @@ class AllDocument extends React.Component {
     const { title, content, access } = document ;
     return (
       <div>
-        <div className="card docCard col s4" key={document.id}>
+        <div className="card docCard col s12 m4" key={document.id}>
           <div className="card-content cardContent">
             <div className="card-title cardTitle">
               {document.title.substring(0, 10)}</div>
             <p className="marky" dangerouslySetInnerHTML={{__html: document.content}} />
             <Link to={singleDocUrl}>Read more</Link>
           </div>
-          <div className="card-action">
+          <div className="card-action cardaction">
             {hasDocumentPermission(document.ownerId) ? <ul>
               <li>
                     <a id="userDocDelete"

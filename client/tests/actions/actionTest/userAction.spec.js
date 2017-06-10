@@ -6,11 +6,6 @@ import * as actions from '../../../actions/usersAction';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
-// const userDocument = {
-//   title: 'My Diary',
-//   content: 'This is my diary',
-//   access: 'public'
-// };
 const singleUser = {
   id: 2,
   username: 'Ijay',
@@ -82,28 +77,6 @@ describe('USERS ACTIONS', () => {
         });
     });
   });
-  // describe('Get User By Id', () => {
-  //   const response = {
-  //     user: getSingleDoc
-  //   };
-  //   const id = getSingleDoc.id;
-  //   it('should get a single document', () => {
-  //     nock('http://localhost:80/')
-  //       .get(`/api/documents/${id}`)
-  //       .reply(200, response);
-
-  //     const expectedActions = [
-  //       { type: 'GET_SINGLE_DOCUMENT'
-  //       }
-  //     ];
-  //     const store = mockStore();
-  //     store.dispatch(actions.getDocument(id))
-  //         .then(() => {
-  //           expect(store.getActions()[0].type)
-  //       .to.eql(expectedActions[0].type);
-  //         });
-  //   });
-  // });
   describe('Delete User By Id', () => {
     const id = singleUser.id;
     it('should delete document by id', () => {
