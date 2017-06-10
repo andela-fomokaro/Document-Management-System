@@ -133,11 +133,11 @@ describe('USER API:', () => {
             done();
           });
     });
-    it('should  not return list of users if user is not an admin', (done) => {
+    it('should return list of users if user is not an admin', (done) => {
       request.get('/api/users')
           .set({ Authorization: regularToken })
           .end((error, response) => {
-            expect(response.status).to.equal(403);
+            expect(response.status).to.equal(200);
             done();
           });
     });
