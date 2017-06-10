@@ -96,9 +96,9 @@ class SignupForm extends React.Component {
     const styles = {
       loginContainer: {
         minWidth: 320,
-        maxWidth: 400,
-        height: 'auto',
-        position: 'absolute',
+        maxWidth: 600,
+        height: 60,
+        position: 'relative',
         top: '20%',
         left: 0,
         right: 0,
@@ -117,6 +117,8 @@ class SignupForm extends React.Component {
 
             <Paper style={styles.paper}>
               <form onSubmit={this.onSubmit}>
+              <div>
+               <i className="material-icons">assignment_ind</i>
                 <TextFieldGroup
                   label="Username"
                   type="text"
@@ -127,7 +129,9 @@ class SignupForm extends React.Component {
                   field="username"
                   required
                 />
-
+                </div>
+                <div>
+                <i className="material-icons">supervisor_account</i>
                 <TextFieldGroup
                   label="Full Names"
                   onChange={this.onChange}
@@ -138,7 +142,9 @@ class SignupForm extends React.Component {
                   field="fullNames"
                   required
                 />
-
+                </div>
+                <div>
+                <i className="material-icons">email</i>
                 <TextFieldGroup
                   label="Email"
                   type="email"
@@ -148,8 +154,9 @@ class SignupForm extends React.Component {
                   field="email"
                   required
                 />
-
+                </div>
                 <div className="row">
+                 <i className="material-icons">lock</i>
                   <input
                     onChange={this.onChange}
                     value={this.state.password}
@@ -160,8 +167,8 @@ class SignupForm extends React.Component {
                     required
                   />
                 </div>
-
                 <div className="row">
+                 <i className="material-icons">lock</i>
                   <input
                     onChange={this.onChange}
                     value={this.state.passwordConfirmation}
@@ -172,7 +179,7 @@ class SignupForm extends React.Component {
                     required
                   />
                 </div>
-                <button className="btn  pink darken-4">Sign Up</button>
+                <button className="btn grey lighten-5 black-text">Sign Up</button>
               </form>
             </Paper>
           </div>

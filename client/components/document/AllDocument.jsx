@@ -3,6 +3,8 @@ import React from 'react';
 import { Modal } from 'react-materialize';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import ReactDOM from 'react-dom';
+import TinyMCE from 'react-tinymce';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { updateDocument, deleteDocument } from '../../actions/documentActions';
@@ -27,13 +29,13 @@ class AllDocument extends React.Component {
   constructor(props) {
     super(props);
     this.deleteDocument = this.deleteDocument.bind(this);
+    this.handleEditorChange = this.handleEditorChange.bind(this);
+    this.updateDocumentState = this.updateDocumentState.bind(this);
     this.state = {
-      document: {
-        content: props.document.content || '',
-        title: props.document.title || '',
-        access: props.document.access || '',
-        id: props.document.id
-      },
+      title: this.props.document.title,
+      content: this.props.document.content,
+      access: this.props.document.access,
+      id: this.props.document.id
     };
   }
 
@@ -77,10 +79,15 @@ class AllDocument extends React.Component {
    * @memberOf AllDocument
    */
   updateDocumentState(event) {
-    const field = event.target.name;
-    const document = this.state.document;
-    document[field] = event.target.value;
-    return this.setState({ document });
+    return this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+
+  handleEditorChange(event) {
+    return this.setState({
+      content: event.target.getContent()
+    });
   }
 
   /**
@@ -91,8 +98,10 @@ class AllDocument extends React.Component {
    */
   updateDocument() {
     Materialize.toast('Update Successful', 4000);
-    this.props.updateDocument(this.state.document);
+    console.log(this.state);
+    this.props.updateDocument(this.state);
   }
+
 
   /**
    *
@@ -103,18 +112,19 @@ class AllDocument extends React.Component {
    */
   render() {
     const { document } = this.props;
-    const { title, content, access } = this.state.document;
-    const singleDocUrl = `document/${document.id}`;
+    const {id } = this.state;
+    const singleDocUrl = `document/${id}`;
+    const { title, content, access } = document ;
     return (
       <div>
-        <div className="card docCard col s4" key={document.id}>
+        <div className="card docCard col s12 m4" key={document.id}>
           <div className="card-content cardContent">
             <div className="card-title cardTitle">
               {document.title.substring(0, 10)}</div>
-            <p>{document.content.substring(0, 20)}...</p>
+            <p className="marky" dangerouslySetInnerHTML={{__html: document.content}} />
             <Link to={singleDocUrl}>Read more</Link>
           </div>
-          <div className="card-action">
+          <div className="card-action cardaction">
             {hasDocumentPermission(document.ownerId) ? <ul>
               <li>
                     <a id="userDocDelete"
@@ -138,8 +148,8 @@ class AllDocument extends React.Component {
                         <textarea
                           className="materialize-textarea"
                           name="title"
-                          value={title}
-                          onChange={e => this.updateDocumentState(e)}
+                          defaultValue={title}
+                          onChange={this.updateDocumentState}
                         />
                       </div>
                     </form>
@@ -148,12 +158,15 @@ class AllDocument extends React.Component {
                     <form>
                     <label className="red-text">Content</label>
                       <div className="input-field col s12">
-                        <textarea
-                          className="materialize-textarea"
-                          name="content"
-                          value={content}
-                          onChange={e => this.updateDocumentState(e)}
-                        />
+                         <TinyMCE
+                        content={content}
+                        name="content"
+                        config={{
+                        plugins: 'autolink link image lists code print preview',
+                        toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+                       }}
+                       onChange={this.handleEditorChange}
+                      />
                       </div>
                     </form>
                   </div>
@@ -165,7 +178,7 @@ class AllDocument extends React.Component {
                           className="materialize-textarea"
                           name="access"
                           value={access}
-                          onChange={e => this.updateDocumentState(e)}
+                          onChange={this.updateDocumentState}
                         />
                       </div>
                     </form>

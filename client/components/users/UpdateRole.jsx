@@ -61,7 +61,7 @@ class UpdateRole extends React.Component {
   render() {
     const { role } = this.state;
 
-    const rolesOptions = this.props.roles.map((role, index) => { return <option key={index} value={role.id}>{role.title}</option> });
+    const rolesOptions = this.props.roles.map((role, index) => { return <option id="updaterole" key={index} value={role.id}>{role.title}</option> });
     return (
       <form>
       <Row>

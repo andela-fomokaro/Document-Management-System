@@ -107,8 +107,8 @@ class UserProfile extends React.Component {
       <div className="container">
         <div className="row">
           <div className="col s12 m12">
-           <h2 className="h2 center">My Profile</h2>
-            <div className="z-depth-5 card  cardWidth darken-1">
+           <h2 className="h2">My Profile</h2>
+            <div className="col s12 m12 l8 z-depth-5 card cardWidth darken-1">
               <div className="card-content black-text">
                 <ul className="profileTitle">
                   <li className="listPadding">Full Name: {userInfo.fullNames}</li>
@@ -124,10 +124,11 @@ class UserProfile extends React.Component {
           </div>
         </div>
         <Modal
+          className="col s12 m6"
           header='Update Profile'
           id="profileUpdate"
           trigger={
-            <button className="btn  profileButton pink darken-4 tooltipped"
+            <button className=" col s12 m12 l2 btn profileButton pink darken-4 tooltipped"
             data-position="top" data-delay="10" data-tooltip="Click to update your profile"
             >Update profile</button>
   }

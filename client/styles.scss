@@ -118,6 +118,28 @@ input[type=text]:focus {
 .cardContent{
   text-align: center;
 }
+.cardaction{
+    overflow: hidden;
+    padding-bottom: 5px;
+}
+.login-icon{
+    color: #880e4f;
+}
+.greeting-text{
+    color: #333;
+    font-family: elephant;
+    font-weight: 2em;
+}
+.card-title{
+    font-size: 34px !important;
+}
+.marky{
+    width: 180px;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 .roleContent{
   height: 250px;
 }
@@ -151,7 +173,6 @@ input[type=text]:focus {
     padding: 10px;
     height: 60px;
     display: inline-block;
-    margin-left: 150px;
     margin-top: 30px;  
     background: rgb(220,220,220);
     border-radius: 10px;
@@ -160,14 +181,15 @@ input[type=text]:focus {
 
 
 .form-wrapper2 input {
-    width: 410px;
-    height: 20px;
+    width: 887px;
+    height: 40px;
     padding: 10px 5px;
+    margin-top: 8px;
     display: inline-block;  
     font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
     border: 0;
     background: #fff;
-    border-radius: 3px 3px 3px 3px;      
+    border-radius: 4px 4px 4px 4px;      
 }
 
 .form-wrapper2 input:-ms-input-placeholder {
@@ -191,7 +213,7 @@ input[type=text]:focus {
 .profileButton {
     position: relative;
     top: -70px;
-    margin-left: 360px;
+    margin-left: 180px;
     background-color: #880e4f;
 }
 .profileIcon{
@@ -241,10 +263,7 @@ input[type=text]:focus {
 .tableHead{
     color:#880e4f;
 }
-.manageUser{
-    width: 100%;
-    background-color: #fff;
-}
+
 .styleRow{
     padding: 0px 10px 0px 30px;
 }
@@ -268,6 +287,7 @@ input[type=text]:focus {
 .docButton{
     margin: 30px 0px 30px 50px;
     display: inline-block;
+    color: #333;
 }
 .selectBox{
     width: 100%;
@@ -276,9 +296,10 @@ input[type=text]:focus {
     width: 60%;
 }
 .modal-content h4{
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 2em;
     color:#880e4f;
+    padding-bottom: 20px;
     text-align: center;
 }
 .btn-flat{
@@ -316,7 +337,7 @@ input[type=text]:focus {
 }
 .noresult{
     font-family: cursive;
-    color:#880e4f;
+    color: #333;
     font-size: 35px;
 }
 .update-btn{
@@ -333,11 +354,15 @@ input[type=text]:focus {
 }
 .h2{
     font-family: cursive;
-    color:#880e4f;
+    color: #333;
     font-size: 50px;
-    padding-bottom: 50px;
     padding-top: 30px;
+    padding-bottom: 30px;
 }
 #creteRole{
     width: 40%
+}
+.document-button{
+    text-align: right;
+    padding-right: 0px;
 }

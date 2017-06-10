@@ -71,7 +71,7 @@ class Greetings extends React.Component {
               />
             </div>
             <div className="card-content">
-              <h1 className="card-title black-text">
+              <h1 className="card-title greeting-text">
                 Managing And Organizing Of Documents Just Got Better</h1>
             </div>
             {this.state.imageStatus}

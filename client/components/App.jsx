@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import NavigationBar from './NavigationBar.jsx';
 import Footer from '../../client/components/Footer.jsx';
 
-const appStyle = {
-  width: '1400px',
-};
+
 
 /**
  * React component for
@@ -24,7 +22,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div className="container body-wrapper" style={appStyle}>
+        <div className="body-wrapper">
           <NavigationBar />
           {this.props.children}
         </div>

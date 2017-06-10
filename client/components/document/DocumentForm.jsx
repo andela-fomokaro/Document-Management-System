@@ -1,6 +1,8 @@
 import React from 'react';
 import { Modal, Input } from 'react-materialize';
 import { connect } from 'react-redux';
+import ReactDOM from 'react-dom';
+import TinyMCE from 'react-tinymce';
 import PropTypes from 'prop-types';
 import { createDocument } from '../../actions/documentActions';
 
@@ -30,6 +32,7 @@ class DocumentForm extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.handleEditorChange = this.handleEditorChange.bind(this);
   }
 
   /**
@@ -42,7 +45,9 @@ class DocumentForm extends React.Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-
+   handleEditorChange(e) {
+   this.setState({ content: e.target.getContent() });
+  }
   /**
    *
    * onSubmit
@@ -60,7 +65,6 @@ class DocumentForm extends React.Component {
       access: '',
     });
   }
-
   /**
    *
    * onClick
@@ -122,13 +126,16 @@ class DocumentForm extends React.Component {
           </div>
           <div className="row">
             <div className="input-field col s12">
-              <label><b>INPUT CONTENT </b></label>
-              <textarea
+              <TinyMCE
+                content="<i>clear to input content here....</i>"
                 id="input3"
-                className="materialize-textarea"
                 name="content"
                 value={content}
-                onChange={this.onChange}
+                config={{
+                plugins: 'autolink link image lists code print preview',
+                toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+                }}
+                onChange={this.handleEditorChange}
               />
             </div>
           </div>
