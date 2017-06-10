@@ -161,7 +161,7 @@ export default StyleSheet.create({
     'color': '#880e4f'
   },
   'greeting-text': {
-    'color': '#880e4f',
+    'color': '#333',
     'fontFamily': 'elephant',
     'fontWeight': '2em'
   },
