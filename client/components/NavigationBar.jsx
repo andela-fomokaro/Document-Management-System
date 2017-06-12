@@ -57,7 +57,7 @@ class NavigationBar extends React.Component {
        <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
        <ul id="nav-mobile" className="right hide-on-med-and-down">
          <li id="my-documents">
-          <Link className="right view tooltipped" to="/" data-position="bottom" data-delay="5" data-tooltip="View & Manage My Documents"><i className="material-icons">assignment</i></Link>
+          <Link activeClassName="active" onlyActiveOnIndex className="right view tooltipped" to="/" data-position="bottom" data-delay="5" data-tooltip="View & Manage My Documents"><i className="material-icons">assignment</i></Link>
         </li>
         <li id="edit-profile">
           <Link activeClassName="active" className="right view tooltipped" to="/profile" data-position="bottom" data-delay="5" data-tooltip="View & Manage My Profile"><i className="material-icons">perm_identity</i></Link>
