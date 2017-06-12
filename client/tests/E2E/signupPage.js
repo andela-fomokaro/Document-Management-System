@@ -14,10 +14,9 @@ export default {
       .setValue('Input[name=password]', 'unique')
       .setValue('Input[name=passwordConfirmation]', 'unique')
       .click('button')
-      .pause(5000)
+      .waitForElementVisible('a.view', 5000)
       .assert.containsText('a.view',
       'Edit Profile')
-      .pause(5000)
       .end(),
   'Invalid login': (browser) => {
     browser
@@ -30,7 +29,7 @@ export default {
       .setValue('Input[name=password]', 'qwerty')
       .setValue('Input[name=passwordConfirmation]', 'Andela')
       .click('button')
-      .pause(1000)
+      .waitForElementVisible('body', 3000)
       .assert.urlContains('signup')
       .end();
   }

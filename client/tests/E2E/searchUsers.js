@@ -14,9 +14,8 @@ export default {
       .waitForElementVisible('Input#documentSearch', 3000)
       .setValue('Input#documentSearch', 'ijay')
       .assert.containsText('#searchUsername', 'Ijay')
-      .pause(3000)
+      .waitForElementVisible('body', 3000)
       .setValue('Input#documentSearch', 'mininie')
-      .pause(3000)
       .end(),
 };
 

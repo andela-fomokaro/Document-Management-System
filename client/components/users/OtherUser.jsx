@@ -75,7 +75,6 @@ class OtherUsers extends React.Component {
    */
   render() {
     const { users } = this.props;
-    console.log(this.props, 'hifghjkl');
     let rows = [];
     let pagination = {};
     if (users.users) {
