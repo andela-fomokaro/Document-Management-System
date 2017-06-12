@@ -99,8 +99,8 @@ class NavigationBar extends React.Component {
 
     const guestLinks = (
       <ul id="nav-mobile" className="right">
-        <li><Link id="signup"to="/signup">Sign up</Link></li>
-        <li><Link id="login"to="/login">Login</Link></li>
+        <li><Link activeClassName="active" id="signup"to="/signup">Sign up</Link></li>
+        <li><Link activeClassName="active" id="login"to="/login">Login</Link></li>
       </ul>
     );
 
