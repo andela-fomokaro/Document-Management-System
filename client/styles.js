@@ -393,5 +393,8 @@ export default StyleSheet.create({
   'document-button': {
     'textAlign': 'right',
     'paddingRight': [{ 'unit': 'px', 'value': 0 }]
+  },
+  'active': {
+    'color': '#000'
   }
 });

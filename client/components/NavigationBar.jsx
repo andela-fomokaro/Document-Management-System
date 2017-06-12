@@ -56,20 +56,20 @@ class NavigationBar extends React.Component {
       <div>
        <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
        <ul id="nav-mobile" className="right hide-on-med-and-down">
-        <li id="edit-profile">
-          <Link className="right view tooltipped" to="/profile" data-position="bottom" data-delay="5" data-tooltip="View & Manage My Profile"><i className="material-icons">perm_identity</i></Link>
-        </li>
-         <li>
-          {notAdmin() ? <Link className="right view tooltipped" to="/users" data-position="bottom" data-delay="5" data-tooltip="View Other Users Profile"><i className="material-icons">supervisor_account</i></Link>: ''}
-        </li>
-        <li id="load-documents">
-          <Link className="right view tooltipped" to="/load-documents" data-position="bottom" data-delay="5" data-tooltip="All Documents"><i className="material-icons">library_books</i></Link>
-        </li>
-        <li id="my-documents">
+         <li id="my-documents">
           <Link className="right view tooltipped" to="/" data-position="bottom" data-delay="5" data-tooltip="View & Manage My Documents"><i className="material-icons">assignment</i></Link>
         </li>
-        {hasAdmin() ? <li id="manage-role"><Link className="right view tooltipped" data-position="bottom" data-delay="5" data-tooltip="Manage Roles" id="managerole" to="/manage-roles"><i className="material-icons">games</i></Link></li>: ''}
-        {hasAdmin() ? <li id="manage-users"><Link className="right view tooltipped" data-delay="5" data-tooltip="Manage Users" id="manageusers" to="/manage-users"><i className="material-icons">supervisor_account</i></Link></li> : ''}
+        <li id="edit-profile">
+          <Link activeClassName="active" className="right view tooltipped" to="/profile" data-position="bottom" data-delay="5" data-tooltip="View & Manage My Profile"><i className="material-icons">perm_identity</i></Link>
+        </li>
+         <li>
+          {notAdmin() ? <Link activeClassName="active" className="right view tooltipped" to="/users" data-position="bottom" data-delay="5" data-tooltip="View Other Users Profile"><i className="material-icons">supervisor_account</i></Link>: ''}
+        </li>
+        <li id="load-documents">
+          <Link activeClassName="active" className="right view tooltipped" to="/load-documents" data-position="bottom" data-delay="5" data-tooltip="All Documents"><i className="material-icons">library_books</i></Link>
+        </li>
+        {hasAdmin() ? <li id="manage-role"><Link activeClassName="active" className="right view tooltipped" data-position="bottom" data-delay="5" data-tooltip="Manage Roles" id="managerole" to="/manage-roles"><i className="material-icons">games</i></Link></li>: ''}
+        {hasAdmin() ? <li id="manage-users"><Link activeClassName="active" className="right view tooltipped" data-delay="5" data-tooltip="Manage Users" id="manageusers" to="/manage-users"><i className="material-icons">supervisor_account</i></Link></li> : ''}
         <li>
           <Link className="right view" to="/" onClick={this.logout}>Logout</Link>
         </li>
