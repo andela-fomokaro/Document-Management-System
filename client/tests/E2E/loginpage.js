@@ -21,7 +21,7 @@ export default {
       .setValue('Input[name=identifier]', 'pap@test')
       .setValue('Input[name=password]', 'qwerty')
       .click('button')
-       .waitForElementVisible('body', 3000)
+      .waitForElementVisible('body', 3000)
       .assert.urlContains('login')
       .end();
   }

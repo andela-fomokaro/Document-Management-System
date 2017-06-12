@@ -26,7 +26,6 @@ export default {
       .click('#createRole')
       .waitForElementVisible('#deleteRole', 5000)
       .click('#deleteRole')
-      .pause(5000)
       .end()
 };
 
