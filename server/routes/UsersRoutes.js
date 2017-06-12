@@ -8,7 +8,7 @@ module.exports = (app) => {
 
   app.get('/api/users/:id', Auth.verifyToken, User.findUser);
 
-  app.get('/api/users/', Auth.verifyToken, Auth.verifyAdmin, User.allUsers);
+  app.get('/api/users/', Auth.verifyToken, User.allUsers);
 
   app.put('/api/users/:id', Auth.verifyToken, User.updateUsers);
 

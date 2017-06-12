@@ -13,6 +13,7 @@ import singleDocument from './components/document/singleDocument';
 import manageRole from './components/role/ManageRoles';
 import manageUsers from './components/users/ManageUsers';
 import UserProfile from './components/users/UserProfile';
+import OtherUser from './components/users/OtherUser';
 
 
 export default (
@@ -26,5 +27,6 @@ export default (
     <Route component={protectRoute(manageRole)} path="manage-roles" />
     <Route component={protectRoute(manageUsers)} path="manage-users" />
     <Route component={protectRoute(UserProfile)} path="profile" />
+    <Route component={protectRoute(OtherUser)} path="users" />
   </Route>
 );
