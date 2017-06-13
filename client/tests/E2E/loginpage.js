@@ -24,5 +24,5 @@ export default {
       .waitForElementVisible('body', 3000)
       .assert.urlContains('login')
       .end();
-  }
+  },
 };
