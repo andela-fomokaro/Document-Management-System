@@ -191,7 +191,10 @@ class UserProfile extends React.Component {
               required
             />
           </div>
-            <button onClick={() => this.updateUser(getCurrentUser().userId)} className="btn pink darken-4">Update</button>
+            <button onClick={() => this.updateUser(getCurrentUser().userId)} className="btn pink darken-4 center">Update</button>
+            <button
+              className="btn btn2 pink darken-4 white-text modal-action modal-close"
+            >Close</button>
           </div>
 
         </Modal>

@@ -178,11 +178,11 @@ class AllDocument extends React.Component {
                     <label className="red-text">Content : </label>
                       <div className="input-field col s12">
                          <TinyMCE
-                        content={content}
-                        name="content"
-                        config={{
-                        plugins: 'autolink link image lists code print preview',
-                        toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+                          content={content}
+                          name="content"
+                          config={{
+                          plugins: 'autolink link image lists code print preview',
+                          toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
                        }}
                        onChange={this.handleEditorChange}
                       />
@@ -208,8 +208,11 @@ class AllDocument extends React.Component {
                   </div>
                   <button
                     onClick={() => this.updateDocument()}
-                    className="update-btn btn pink darken-4 white-text"
+                    className="update-btn btn pink darken-4 white-text center"
                   >Update</button>
+                  <button
+                    className="btn btn2 pink darken-4 white-text modal-action modal-close"
+                  >Close</button>
                 </Modal>
               </li>
             </ul> : ''}

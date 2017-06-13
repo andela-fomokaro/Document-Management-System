@@ -84,7 +84,10 @@ class CreateRole extends React.Component {
               onChange={this.onChange}
             />
           </div>
-          <button id="createRole" className="btn pink darken-4 modal-action modal-close">Send</button>
+          <button id="createRole" className="btn pink darken-4 center">Send</button>
+          <button
+              className="btn btn2 pink darken-4 white-text modal-action modal-close"
+          >Close</button>
         </form>
       </Modal>
     );

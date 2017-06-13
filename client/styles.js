@@ -322,7 +322,7 @@ export default StyleSheet.create({
     'width': [{ 'unit': '%H', 'value': 1 }]
   },
   'modal': {
-    'width': [{ 'unit': '%H', 'value': 0.6 }]
+    'width': [{ 'unit': '%H', 'value': 0.9 }]
   },
   'modal-content h4': {
     'fontSize': [{ 'unit': 'px', 'value': 30 }],
@@ -341,24 +341,6 @@ export default StyleSheet.create({
     'fontSize': [{ 'unit': 'px', 'value': 28 }],
     'fontWeight': '2em',
     'textAlign': 'center'
-  },
-  '#mod': {
-    'width': [{ 'unit': '%H', 'value': 0.4 }]
-  },
-  '#mod2': {
-    'width': [{ 'unit': '%H', 'value': 0.4 }]
-  },
-  '#mod3': {
-    'width': [{ 'unit': '%H', 'value': 0.4 }]
-  },
-  '#mod4': {
-    'width': [{ 'unit': '%H', 'value': 0.5 }]
-  },
-  '#modUpdate': {
-    'width': [{ 'unit': '%H', 'value': 0.4 }]
-  },
-  '#profileUpdate': {
-    'width': [{ 'unit': '%H', 'value': 0.6 }]
   },
   'userIcon': {
     'color': 'red'

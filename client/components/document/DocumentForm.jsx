@@ -45,6 +45,7 @@ class DocumentForm extends React.Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+
   /**
    * handleEditorChange -  This method gets the content of the document type
    *
@@ -56,6 +57,7 @@ class DocumentForm extends React.Component {
    handleEditorChange(e) {
    this.setState({ content: e.target.getContent() });
   }
+  
   /**
    * onSubmit This method creates the users document
    *
@@ -79,6 +81,7 @@ class DocumentForm extends React.Component {
     });
     }
   }
+
   /**
    *
    * @returns {object} react componenents to render
@@ -103,7 +106,7 @@ class DocumentForm extends React.Component {
           <div className="row">
             <Input
                 id="input1"
-                s={6}
+                s={12}
                 className="selectBox"
                 type="select"
                 name="access"
@@ -129,11 +132,10 @@ class DocumentForm extends React.Component {
             </div>
           </div>
           <div className="row">
+           <form>
             <div className="input-field col s12">
               <TinyMCE
                 content=""
-                required
-                id="input3"
                 name="content"
                 value={content}
                 config={{
@@ -143,8 +145,12 @@ class DocumentForm extends React.Component {
                 onChange={this.handleEditorChange}
               />
             </div>
+            </form>
           </div>
-          <button id="create" className=" btn pink darken-4">Send</button>
+          <button id="create" className="btn pink darken-4 center">Send</button>
+          <button
+              className="btn btn2 pink darken-4 white-text modal-action modal-close"
+          >Close</button>
         </form>
       </Modal>
     );
