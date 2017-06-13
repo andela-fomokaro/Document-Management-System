@@ -58,6 +58,7 @@ class DashBoard extends React.Component {
   /**
    *
    * onChange
+   *
    * @param {object} e - event handler belonging to Onchange
    * @memberOf DashBoard
    */

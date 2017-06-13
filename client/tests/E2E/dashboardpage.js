@@ -39,6 +39,6 @@ export default {
       .assert.containsText('#updateRole',
       'Update Role')
       .end();
-  }
+  },
 };
 

@@ -1,7 +1,6 @@
 import faker from 'faker';
 import config from './config';
 
-
 export default {
   'SignUp A User': browser =>
     browser

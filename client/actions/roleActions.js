@@ -2,7 +2,8 @@ import axios from '../utils/index';
 
 /**
  *
- * Craete Role Action
+ * Create Role Action
+ *
  * @export createRole
  * @param {object} data role information
  * @returns {function} returns dispatch

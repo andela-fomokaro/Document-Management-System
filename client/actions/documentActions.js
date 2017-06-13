@@ -130,13 +130,15 @@ export function getSingleDocument(id) {
 /**
  *
  * Search Document Action
+ *
  * @export searchDocument
  * @param {string} term search term
  * @param {number} [offset=0] document page difference
  * @returns {Function} returns dispatch
  */
 export function searchDocument(term, offset = 0) {
-  return dispatch => axios.get(`/api/search/documents?search=${term}&offset=${offset}`)
+  return dispatch =>
+   axios.get(`/api/search/documents?search=${term}&offset=${offset}`)
       .then((res) => {
         dispatch({
           type: 'SEARCH_DOCUMENT',
