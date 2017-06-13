@@ -122,8 +122,6 @@ class AllDocument extends React.Component {
 
 
   /**
-   *
-   *
    * @returns {object} react componenents to render
    *
    * @memberOf AllDocument

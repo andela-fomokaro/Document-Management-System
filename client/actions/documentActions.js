@@ -164,7 +164,8 @@ export function searchDocument(term, offset = 0) {
  * @returns {function} returns dispatch
  */
 export function searchUsersDocument(term, offset = 0) {
-  return dispatch => axios.get(`/api/documentsearch/documents?search=${term}&offset=${offset}`)
+  return dispatch =>
+  axios.get(`/api/documentsearch/documents?search=${term}&offset=${offset}`)
       .then((res) => {
         dispatch({
           type: 'SEARCH_MY_DOCUMENT',

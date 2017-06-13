@@ -11,8 +11,8 @@ from '../actions/documentActions';
 
 
 /**
- *
  * React component for
+ *
  * @class DashBoard
  * @extends {React.Component}
  */

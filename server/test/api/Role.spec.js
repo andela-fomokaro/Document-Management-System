@@ -1,4 +1,3 @@
-
 import supertest from 'supertest';
 import chai from 'chai';
 import app from '../../../test-server';
@@ -19,7 +18,8 @@ let authorToken;
 
 describe('ROLE API:', () => {
   before((done) => {
-    db.Roles.bulkCreate([Helper.adminRole, Helper.regularRole, Helper.contributorRole])
+    db.Roles.bulkCreate([Helper.adminRole,
+      Helper.regularRole, Helper.contributorRole])
       .then((roles) => {
         admin.roleId = roles[0].id;
         regularUser.roleId = roles[1].id;
@@ -50,7 +50,6 @@ describe('ROLE API:', () => {
 
   describe('Role API:', () => {
     const roles = {};
-
     before((done) => {
       request.post('/api/users/login')
       .send(admin)
@@ -195,7 +194,7 @@ describe('ROLE API:', () => {
       it('should not delete roleid if roleid does not exist', (done) => {
         request.delete('/api/roles/100')
           .set({
-            Authorization: adminToken
+            Authorization: adminToken,
           })
           .end((error, response) => {
             expect(response.status).to.equal(404);
@@ -207,7 +206,7 @@ describe('ROLE API:', () => {
       it('should not delete role if id is an alphabet', (done) => {
         request.delete('/api/roles/abc')
           .set({
-            Authorization: adminToken
+            Authorization: adminToken,
           })
           .end((error, response) => {
             expect(response.status).to.equal(400);

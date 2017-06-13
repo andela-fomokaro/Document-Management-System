@@ -2,7 +2,7 @@ import { SEARCH_MY_DOCUMENT, LOAD_DOCUMENTS, USER_DOCUMENT, CREATE_DOCUMENT, UPD
 
 const initialState = {
   documents: [],
-  pagination: {}
+  pagination: {},
 };
 
 /**
@@ -23,13 +23,13 @@ export default (state = initialState, action = {}) => {
       return { ...state,
         ...{
           documents: action.payload.documents,
-          pagination: action.payload.pagination
+          pagination: action.payload.pagination,
         } };
 
     case CREATE_DOCUMENT: {
       return { ...state,
         ...{
-          documents: [...state.documents, action.payload]
+          documents: [...state.documents, action.payload],
         } };
     }
 
@@ -38,11 +38,11 @@ export default (state = initialState, action = {}) => {
         ...{
           documents: [...state.documents.filter(document =>
           document.id !== action.payload.id),
-            action.payload]
+            action.payload],
         } };
 
     case SET_SINGLE_DOCUMENT:
-      return { ...state, ...action.payload
+      return { ...state, ...action.payload,
       };
 
     case DELETE_DOCUMENT:
@@ -54,13 +54,13 @@ export default (state = initialState, action = {}) => {
       return { ...state,
         ...{
           documents: action.payload.documents,
-          pagination: action.payload.pagination
+          pagination: action.payload.pagination,
         } };
     case SEARCH_MY_DOCUMENT:
       return { ...state,
         ...{
           documents: action.payload.documents,
-          pagination: action.payload.pagination
+          pagination: action.payload.pagination,
         } };
     default:
       return state;

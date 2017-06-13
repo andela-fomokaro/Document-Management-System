@@ -10,7 +10,7 @@ export default {
   output: {
     path: __dirname,
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: '/',
   },
   module: {
     loaders: [
@@ -19,8 +19,8 @@ export default {
         loaders: ['babel-loader'],
         exclude: [
           /node_modules/,
-          /server/
-        ]
+          /server/,
+        ],
       },
      { test: /(\.css)$/, loaders: ['style-loader', 'css-loader'] },
      { test: /\.scss$/, loaders: ['style-loader', 'css-loader', 'sass-loader'] },
@@ -32,23 +32,23 @@ export default {
         loader: 'url-loader',
         options: {
           limit: 25000,
-        }
+        },
       },
       {
         test: /\.json$/,
-        loader: 'json-loader'
+        loader: 'json-loader',
       },
-    ]
+    ],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
   ],
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
   },
   node: {
     net: 'empty',
-    dns: 'empty'
-  }
+    dns: 'empty',
+  },
 };

@@ -7,21 +7,21 @@ import * as actions from '../../../actions/roleActions';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const createRole = {
-  title: 'Printer'
+  title: 'Printer',
 };
 const role = {
   id: 3,
-  title: 'Printer'
+  title: 'Printer',
 };
 const roleInfo = [
   {
     id: 1,
-    title: 'admin'
+    title: 'admin',
   },
   {
     id: 2,
-    title: 'regular'
-  }
+    title: 'regular',
+  },
 ];
 describe('ROLE ACTIONS', () => {
   after(() => {
@@ -29,7 +29,7 @@ describe('ROLE ACTIONS', () => {
   });
   describe('Create Document', () => {
     const response = {
-      title: createRole.title
+      title: createRole.title,
     };
     it('should create a document', () => {
       nock('http://localhost:80/')
@@ -37,8 +37,8 @@ describe('ROLE ACTIONS', () => {
         .reply(201, response);
 
       const expectedActions = [
-        { type: 'CREATE_ROLE'
-        }
+        { type: 'CREATE_ROLE',
+        },
       ];
       const store = mockStore({
         document: {},
@@ -52,7 +52,7 @@ describe('ROLE ACTIONS', () => {
   });
   describe('Load Roles', () => {
     const response = {
-      roles: roleInfo
+      roles: roleInfo,
     };
     it('should get all roles', () => {
       nock('http://localhost:80/')
@@ -60,8 +60,8 @@ describe('ROLE ACTIONS', () => {
         .reply(200, response);
 
       const expectedActions = [
-        { type: 'GET_ROLES'
-        }
+        { type: 'GET_ROLES',
+        },
       ];
       const store = mockStore();
       store.dispatch(actions.getRoles())
@@ -73,7 +73,7 @@ describe('ROLE ACTIONS', () => {
   });
   describe('Delete Role By Id', () => {
     const response = {
-      roles: role
+      roles: role,
     };
     const id = role.id;
     it('should delete role', () => {
@@ -82,8 +82,8 @@ describe('ROLE ACTIONS', () => {
         .reply(200, response);
 
       const expectedActions = [
-        { type: 'DELETE_ROLES'
-        }
+        { type: 'DELETE_ROLES',
+        },
       ];
       const store = mockStore();
       store.dispatch(actions.deleteRole(id))
@@ -95,12 +95,12 @@ describe('ROLE ACTIONS', () => {
   });
   describe('Update Roles By Id ', () => {
     const response = {
-      roles: role
+      roles: role,
     };
     const id = role.id;
     const updateRole = {
       id: 3,
-      title: 'Publisher'
+      title: 'Publisher',
     };
     it('should update role', () => {
       nock('http://localhost:80/')
@@ -108,8 +108,8 @@ describe('ROLE ACTIONS', () => {
         .reply(200, response);
 
       const expectedActions = [
-        { type: 'UPDATE_ROLES'
-        }
+        { type: 'UPDATE_ROLES',
+        },
       ];
       const store = mockStore();
       store.dispatch(actions.updateRole(updateRole, id))

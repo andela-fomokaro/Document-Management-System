@@ -1,4 +1,5 @@
-import { FETCH_TYPES_SUCCESS, CREATE_TYPES_SUCCESS, DELETE_TYPES_SUCCESS } from '../actions/types';
+import { FETCH_TYPES_SUCCESS,
+  CREATE_TYPES_SUCCESS, DELETE_TYPES_SUCCESS } from '../actions/types';
 
 
 /**

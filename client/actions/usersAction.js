@@ -99,7 +99,8 @@ export function getSingleUser(id) {
  * @returns {function} returns dispatch
  */
 export function searchUsers(term, offset = 0) {
-  return dispatch => axios.get(`api/search/users?search=${term}&offset=${offset}`)
+  return dispatch =>
+  axios.get(`api/search/users?search=${term}&offset=${offset}`)
       .then((res) => {
         dispatch({
           type: 'SEARCH_USERS',

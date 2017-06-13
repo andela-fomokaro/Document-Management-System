@@ -6,15 +6,15 @@ const themeDefault = getMuiTheme({
   },
   appBar: {
     height: 57,
-    color: blue600
+    color: blue600,
   },
   drawer: {
     width: 230,
-    color: grey900
+    color: grey900,
   },
   raisedButton: {
     primaryColor: blue600,
-  }
+  },
 });
 
 

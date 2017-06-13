@@ -3,90 +3,90 @@ import faker from 'faker';
 const fakeHelper = {
   adminRole: {
     id: 1,
-    title: 'admin'
+    title: 'admin',
   },
   regularRole: {
     id: 2,
-    title: 'regular'
+    title: 'regular',
   },
   guestRole: {
     id: 3,
-    title: 'guestI'
+    title: 'guestI',
   },
   guestRole2: {
     id: 4,
-    title: 'guestII'
+    title: 'guestII',
   },
   guestRole3: {
     id: 5,
-    title: 'guestIII'
+    title: 'guestIII',
   },
   guestRole4: {
     id: 6,
-    title: 'guestIV'
+    title: 'guestIV',
   },
   testUser1: {
     fullNames: 'Paul Solomon',
     email: 'solomonpaul@gmail.com',
     password: 'IamPaul',
     roleId: 1,
-    username: 'paulo'
+    username: 'paulo',
   },
   testUser2: {
     fullNames: 'Solomon Blessing',
     email: 'solomonblessing@gmail.com',
     password: 'IambLESSING',
     roleId: 1,
-    username: 'bleco'
+    username: 'bleco',
   },
   adminUser: {
     username: faker.internet.userName(),
     password: faker.internet.password(),
     email: faker.internet.email(),
-    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`
+    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`,
   },
   adminUserII: {
     username: faker.internet.userName(),
     password: faker.internet.password(),
     email: faker.internet.email(),
-    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`
+    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`,
   },
   regularUserI: {
     username: faker.internet.userName(),
     password: faker.internet.password(),
     email: faker.internet.email(),
     fullNames: `${faker.name.firstName()} ${faker.name.lastName}`,
-    id: 3
+    id: 3,
   },
   regularUserII: {
     username: faker.internet.userName(),
     password: faker.internet.password(),
     email: faker.internet.email(),
-    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`
+    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`,
   },
   regularUserIII: {
     username: faker.internet.userName(),
     password: faker.internet.password(),
     email: faker.internet.email(),
-    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`
+    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`,
   },
   guestUserI: {
     username: faker.internet.userName(),
     password: faker.internet.password(),
     email: faker.internet.email(),
-    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`
+    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`,
   },
   guestUserII: {
     username: faker.internet.userName(),
     password: faker.internet.password(),
     email: faker.internet.email(),
-    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`
+    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`,
   },
   guestUserIII: {
     username: faker.internet.userName(),
     password: faker.internet.password(),
     email: faker.internet.email(),
-    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`
+    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`,
   },
   usersArray() {
     const users = [];
@@ -96,7 +96,7 @@ const fakeHelper = {
         username: faker.internet.userName(),
         password: faker.internet.password(),
         email: faker.internet.email(),
-        fullNames: `${faker.name.firstName()} ${faker.name.lastName}`
+        fullNames: `${faker.name.firstName()} ${faker.name.lastName}`,
       });
     }
     return users;
@@ -105,33 +105,33 @@ const fakeHelper = {
     username: faker.internet.userName(),
     password: faker.internet.password(),
     email: 'email',
-    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`
+    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`,
   },
   invalidPasswordUser: {
     username: faker.internet.userName(),
     password: 'password',
     email: faker.internet.email(),
-    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`
+    fullNames: `${faker.name.firstName()} ${faker.name.lastName}`,
   },
   invalidUser: {
     username: null,
     password: null,
     email: null,
-    fullNames: null
+    fullNames: null,
   },
   publicDocument: {
     title: faker.company.catchPhrase(),
     content: faker.lorem.paragraph(),
-    access: 'public'
+    access: 'public',
   },
   privateDocument: {
     title: faker.company.catchPhrase(),
     content: faker.lorem.paragraph(),
-    access: 'private'
+    access: 'private',
   },
   testDocument: {
     title: faker.company.catchPhrase(),
-    content: faker.lorem.paragraph()
-  }
+    content: faker.lorem.paragraph(),
+  },
 };
 export default fakeHelper;

@@ -17,12 +17,13 @@ const invalidUser = SpecHelper.invalidUser;
 const fieldsToUpdate =
   {
     title: 'Amoralene',
-    content: 'Amoralene'
+    content: 'Amoralene',
   };
 const faith = 'omokaro';
 
 describe('USER API:', () => {
-  let adminToken, regularToken;
+  let adminToken;
+  let regularToken;
   const user = {};
   before((done) => {
     db.Roles.bulkCreate([SpecHelper.adminRole, SpecHelper.regularRole])
@@ -319,7 +320,7 @@ describe('USER API:', () => {
       (done) => {
         request.get('/api/users/jhy/documents')
           .set({
-            Authorization: adminToken
+            Authorization: adminToken,
           })
           .end((error, response) => {
             expect(response.body.message).to
@@ -331,7 +332,7 @@ describe('USER API:', () => {
       (done) => {
         request.get('/api/users/1/documents')
           .set({
-            Authorization: adminToken
+            Authorization: adminToken,
           })
           .end((error, response) => {
             expect(response.status).to

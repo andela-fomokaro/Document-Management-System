@@ -13,9 +13,9 @@ const Auth = {
   getToken(user) { // research on jwt tokens
     const userToken = jwt.sign({
       userId: user.id,
-      roleId: user.roleId
+      roleId: user.roleId,
     },
-      secret, { expiresIn: '7d' }
+      secret, { expiresIn: '7d' },
     );
     return userToken;
   },
@@ -45,7 +45,7 @@ const Auth = {
    * @param {object} req request Object
    * @param {object} res response Object
    * @param {callback} next callback to the next middleware or function
-   * @returns {Object | void} status response  | void
+   * @returns {void}
    */
   verifyAdmin(req, res, next) {
     db.Roles.findById(req.decoded.roleId)

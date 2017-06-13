@@ -1,5 +1,11 @@
 import React from 'react';
 
+/**
+ * React component for Footer
+ *
+ * @param {null}
+ * 
+ */
 const Footer = () =>
  (
    <footer className="page-footer pink darken-4 footer">

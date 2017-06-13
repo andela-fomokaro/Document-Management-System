@@ -15,13 +15,13 @@ const port = process.env.PORT || 7000;
 const app = express();
 
 const compiler = webpack(webpackConfig);
-app.use(webpackMiddleware(compiler)
+app.use(webpackMiddleware(compiler),
 );
 app.use(webpackHotMiddleware(compiler));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: true,
 }));
 
 app.set('port', port);

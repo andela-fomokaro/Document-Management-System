@@ -1,6 +1,4 @@
 import validator from 'validator';
-
-
 /**
  *
  * validates user inputs

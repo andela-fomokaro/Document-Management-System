@@ -12,7 +12,7 @@ module.exports = {
       access: 'public',
       ownerId: 1,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       title: faker.company.catchPhrase(),
@@ -20,7 +20,7 @@ module.exports = {
       access: 'private',
       ownerId: 1,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       title: faker.company.catchPhrase(),
@@ -28,7 +28,7 @@ module.exports = {
       access: 'public',
       ownerId: 2,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       title: faker.company.catchPhrase(),
@@ -36,7 +36,7 @@ module.exports = {
       access: 'private',
       ownerId: 2,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       title: faker.company.catchPhrase(),
@@ -44,39 +44,7 @@ module.exports = {
       access: 'public',
       ownerId: 2,
       createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      title: faker.company.catchPhrase(),
-      content: faker.lorem.paragraph(),
-      access: 'private',
-      ownerId: 1,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      title: faker.company.catchPhrase(),
-      content: faker.lorem.paragraph(),
-      access: 'public',
-      ownerId: 2,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      title: faker.company.catchPhrase(),
-      content: faker.lorem.paragraph(),
-      access: 'private',
-      ownerId: 2,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      title: faker.company.catchPhrase(),
-      content: faker.lorem.paragraph(),
-      access: 'public',
-      ownerId: 2,
-      createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       title: faker.company.catchPhrase(),
@@ -84,7 +52,7 @@ module.exports = {
       access: 'private',
       ownerId: 1,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       title: faker.company.catchPhrase(),
@@ -92,7 +60,7 @@ module.exports = {
       access: 'public',
       ownerId: 2,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       title: faker.company.catchPhrase(),
@@ -100,7 +68,7 @@ module.exports = {
       access: 'private',
       ownerId: 2,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       title: faker.company.catchPhrase(),
@@ -108,31 +76,7 @@ module.exports = {
       access: 'public',
       ownerId: 2,
       createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      title: faker.company.catchPhrase(),
-      content: faker.lorem.paragraph(),
-      access: 'private',
-      ownerId: 1,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      title: faker.company.catchPhrase(),
-      content: faker.lorem.paragraph(),
-      access: 'public',
-      ownerId: 2,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      title: faker.company.catchPhrase(),
-      content: faker.lorem.paragraph(),
-      access: 'private',
-      ownerId: 2,
-      createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       title: faker.company.catchPhrase(),
@@ -140,7 +84,7 @@ module.exports = {
       access: 'private',
       ownerId: 1,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       title: faker.company.catchPhrase(),
@@ -148,7 +92,7 @@ module.exports = {
       access: 'public',
       ownerId: 2,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       title: faker.company.catchPhrase(),
@@ -156,7 +100,7 @@ module.exports = {
       access: 'private',
       ownerId: 2,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       title: faker.company.catchPhrase(),
@@ -164,39 +108,7 @@ module.exports = {
       access: 'public',
       ownerId: 2,
       createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      title: faker.company.catchPhrase(),
-      content: faker.lorem.paragraph(),
-      access: 'private',
-      ownerId: 1,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      title: faker.company.catchPhrase(),
-      content: faker.lorem.paragraph(),
-      access: 'public',
-      ownerId: 2,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      title: faker.company.catchPhrase(),
-      content: faker.lorem.paragraph(),
-      access: 'private',
-      ownerId: 2,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      title: faker.company.catchPhrase(),
-      content: faker.lorem.paragraph(),
-      access: 'public',
-      ownerId: 2,
-      createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       title: faker.company.catchPhrase(),
@@ -204,7 +116,7 @@ module.exports = {
       access: 'private',
       ownerId: 1,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       title: faker.company.catchPhrase(),
@@ -212,23 +124,15 @@ module.exports = {
       access: 'public',
       ownerId: 2,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       title: faker.company.catchPhrase(),
       content: faker.lorem.paragraph(),
-      access: 'public',
+      access: 'private',
       ownerId: 2,
       createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      title: faker.company.catchPhrase(),
-      content: faker.lorem.paragraph(),
-      access: 'public',
-      ownerId: 2,
-      createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       title: faker.company.catchPhrase(),
@@ -236,7 +140,7 @@ module.exports = {
       access: 'private',
       ownerId: 1,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       title: faker.company.catchPhrase(),
@@ -244,7 +148,7 @@ module.exports = {
       access: 'public',
       ownerId: 2,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       title: faker.company.catchPhrase(),
@@ -252,7 +156,7 @@ module.exports = {
       access: 'private',
       ownerId: 2,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
     {
       title: faker.company.catchPhrase(),
@@ -260,9 +164,105 @@ module.exports = {
       access: 'public',
       ownerId: 2,
       createdAt: new Date(),
-      updatedAt: new Date()
-    }
+      updatedAt: new Date(),
+    },
+    {
+      title: faker.company.catchPhrase(),
+      content: faker.lorem.paragraph(),
+      access: 'private',
+      ownerId: 1,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      title: faker.company.catchPhrase(),
+      content: faker.lorem.paragraph(),
+      access: 'public',
+      ownerId: 2,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      title: faker.company.catchPhrase(),
+      content: faker.lorem.paragraph(),
+      access: 'private',
+      ownerId: 2,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      title: faker.company.catchPhrase(),
+      content: faker.lorem.paragraph(),
+      access: 'public',
+      ownerId: 2,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      title: faker.company.catchPhrase(),
+      content: faker.lorem.paragraph(),
+      access: 'private',
+      ownerId: 1,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      title: faker.company.catchPhrase(),
+      content: faker.lorem.paragraph(),
+      access: 'public',
+      ownerId: 2,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      title: faker.company.catchPhrase(),
+      content: faker.lorem.paragraph(),
+      access: 'public',
+      ownerId: 2,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      title: faker.company.catchPhrase(),
+      content: faker.lorem.paragraph(),
+      access: 'public',
+      ownerId: 2,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      title: faker.company.catchPhrase(),
+      content: faker.lorem.paragraph(),
+      access: 'private',
+      ownerId: 1,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      title: faker.company.catchPhrase(),
+      content: faker.lorem.paragraph(),
+      access: 'public',
+      ownerId: 2,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      title: faker.company.catchPhrase(),
+      content: faker.lorem.paragraph(),
+      access: 'private',
+      ownerId: 2,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      title: faker.company.catchPhrase(),
+      content: faker.lorem.paragraph(),
+      access: 'public',
+      ownerId: 2,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
   ], { returning: true }),
   down: queryInterface => queryInterface.bulkDelete('Person',
-  null, {})
+  null, {}),
 };
