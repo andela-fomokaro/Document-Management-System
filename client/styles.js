@@ -322,7 +322,7 @@ export default StyleSheet.create({
     'width': [{ 'unit': '%H', 'value': 1 }]
   },
   'modal': {
-    'width': [{ 'unit': '%H', 'value': 0.6 }]
+    'width': [{ 'unit': '%H', 'value': 0.9 }]
   },
   'modal-content h4': {
     'fontSize': [{ 'unit': 'px', 'value': 30 }],
@@ -341,24 +341,6 @@ export default StyleSheet.create({
     'fontSize': [{ 'unit': 'px', 'value': 28 }],
     'fontWeight': '2em',
     'textAlign': 'center'
-  },
-  '#mod': {
-    'width': [{ 'unit': '%H', 'value': 0.4 }]
-  },
-  '#mod2': {
-    'width': [{ 'unit': '%H', 'value': 0.4 }]
-  },
-  '#mod3': {
-    'width': [{ 'unit': '%H', 'value': 0.4 }]
-  },
-  '#mod4': {
-    'width': [{ 'unit': '%H', 'value': 0.5 }]
-  },
-  '#modUpdate': {
-    'width': [{ 'unit': '%H', 'value': 0.4 }]
-  },
-  '#profileUpdate': {
-    'width': [{ 'unit': '%H', 'value': 0.6 }]
   },
   'userIcon': {
     'color': 'red'
@@ -396,5 +378,21 @@ export default StyleSheet.create({
   },
   'active': {
     'color': '#000'
+  },
+  'greetings-header': {
+    'color': '#333',
+    'fontFamily': 'elephant',
+    'fontWeight': '2em'
+  },
+  'greetings-paragraph': {
+    'color': 'red',
+    'fontFamily': 'elephant',
+    'fontWeight': '2em',
+    'fontSize': [{ 'unit': 'px', 'value': 20 }]
+  },
+  'greeting-paragraph': {
+    'fontFamily': 'Georgia, 'Times New Roman', Times, serif',
+    'fontWeight': '10em',
+    'fontSize': [{ 'unit': 'px', 'value': 15 }]
   }
 });

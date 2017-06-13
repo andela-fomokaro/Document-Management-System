@@ -12,8 +12,8 @@ import validateInput from '../../../shared/validate/signUp';
 
 
 /**
- *
  * React component for
+ *
  * @class SignupForm
  * @extends {React.Component}
  */
@@ -21,6 +21,7 @@ class SignupForm extends React.Component {
 
   /**
    * Creates an instance of SignupForm.
+   *
    * Constructor
    * @param {object} props
    *
@@ -40,8 +41,8 @@ class SignupForm extends React.Component {
   }
 
   /**
-   *
    * onChange
+   *
    * @param {object} e - event handler for onChange
    * @returns {void}
    *
@@ -52,8 +53,8 @@ class SignupForm extends React.Component {
   }
 
   /**
-   *
    * onSubmit
+   *
    * @param {object} e - event handler for onSubmit
    * @returns {void}
    *

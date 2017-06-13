@@ -8,14 +8,14 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const userData = {
   email: 'omokarofaith@gmail.com',
-  password: 'random password'
+  password: 'random password',
 };
 const signupData = {
   email: 'bimba@gmail.com',
   password: 'qwerty',
   passwordConfirmation: 'qwerty',
   username: 'bimba',
-  fullNames: 'Bimba Bimim'
+  fullNames: 'Bimba Bimim',
 };
 
 describe('LOGIN ACTIONS', () => {
@@ -37,7 +37,8 @@ describe('LOGIN ACTIONS', () => {
 
       const expectedActions = [
         { type: 'SET_CURRENT_USER',
-          user: { email: 'omokarofaith@gmail.com', password: 'random password' } }
+          user: { email: 'omokarofaith@gmail.com',
+            password: 'random password' } },
       ];
       const store = mockStore({
         userData: {},
@@ -70,7 +71,7 @@ describe('LOGIN ACTIONS', () => {
             password: 'qwerty',
             passwordConfirmation: 'qwerty',
             username: 'bimba',
-            fullNames: 'Bimba Bimim' } }
+            fullNames: 'Bimba Bimim' } },
       ];
       const store = mockStore({
         user: {},

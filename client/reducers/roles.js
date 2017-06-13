@@ -1,5 +1,13 @@
-import { CREATE_ROLE, GET_ROLES, DELETE_ROLES, UPDATE_ROLES } from '../actions/types';
+import { CREATE_ROLE, GET_ROLES, DELETE_ROLES } from '../actions/types';
 
+/**
+* Roles reducer
+*
+* @export
+* @param {array} [state=initialState] initial state
+* @param {object} action action
+* @returns {object} reduced or initial state
+*/
 export default (state = [], action = {}) => {
   switch (action.type) {
     case CREATE_ROLE:
@@ -11,10 +19,6 @@ export default (state = [], action = {}) => {
     case DELETE_ROLES: {
       return [...state.filter(role => role.id !== action.id)];
     }
-
-    case UPDATE_ROLES:
-      Materialize.toast('Role Updated Successfully', 4000);
-      return [...state.filter(role => role.id !== action.payload), action.payload];
     default:
       return state;
   }

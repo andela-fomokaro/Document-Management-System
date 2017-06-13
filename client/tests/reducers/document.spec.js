@@ -367,7 +367,6 @@ describe('Document Reducers', () => {
   });
 
   it('should load all roles when passed USER_DOCUMENTS', () => {
-    // arrange
     const state = [];
     const allDocuments = {
       pagination: {

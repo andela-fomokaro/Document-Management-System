@@ -13,15 +13,16 @@ import validateInput from '../../../shared/validate/login';
 
 
 /**
- *
  * React component for
+ *
  * @class LoginForm
  * @extends {React.Component}
  */
 class LoginForm extends React.Component {
 
   /**
-   * Creates an instance of LoginForm.
+   * Creates an instance of LoginForm
+   *
    * Constructor
    * @param {object} props - props of the component
    *
@@ -40,9 +41,8 @@ class LoginForm extends React.Component {
   }
 
   /**
+   * onSubmit - This method creates a user
    *
-   *
-   * onSubmit
    * @param {object} e
    * @returns {void}
    *
@@ -67,10 +67,9 @@ class LoginForm extends React.Component {
   }
 
   /**
+   * onChange - This method logs a user inside the application
    *
-   * onChange
-   *
-   * @param {object} e
+   * @param {object} event
    *
    * @return {void}
    *
@@ -81,8 +80,6 @@ class LoginForm extends React.Component {
   }
 
   /**
-   *
-   *
    * @returns {object} react component to render
    *
    * @memberOf LoginForm

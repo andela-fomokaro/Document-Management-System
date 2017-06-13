@@ -18,16 +18,20 @@ const publicDocument = Helper.specDocument5;
 
 const term = 'the';
 describe('Document API:', () => {
-  let adminToken, regularToken, regular2Token;
-  let roleDoc = {}, privateDoc = {}, publicDoc = {};
+  let adminToken;
+  let regularToken;
+  let regular2Token;
+  let roleDoc = {};
+  let privateDoc = {};
+  let publicDoc = {};
 
   const fieldsToUpdate = {
     title: 'My God',
-    content: 'Is An Awesome God'
+    content: 'Is An Awesome God',
   };
   const adminUpdate = {
     title: 'The Book Of Life',
-    content: 'Contains Everything You Need To Know'
+    content: 'Contains Everything You Need To Know',
   };
   before((done) => {
     db.Roles.bulkCreate([Helper.adminRole, Helper.regularRole])

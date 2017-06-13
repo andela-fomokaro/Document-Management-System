@@ -293,7 +293,7 @@ input[type=text]:focus {
     width: 100%;
 }
 .modal{
-    width: 60%;
+    width: 90%;
 }
 .modal-content h4{
     font-size: 30px;
@@ -313,24 +313,6 @@ input[type=text]:focus {
     font-weight: 2em;
     text-align: center;
 
-}
-#mod{
-    width: 40%;
-}
-#mod2{
-    width: 40%;
-}
-#mod3{
-    width: 40%;
-}
-#mod4{
-    width: 50%;
-}
-#modUpdate{
-    width: 40%;
-}
-#profileUpdate{
-     width: 60%;
 }
 .userIcon{
     color: red;
@@ -368,4 +350,20 @@ input[type=text]:focus {
 }
  .active {
   color: #000;
+}
+.greetings-header{
+    color: #333;
+    font-family: elephant;
+    font-weight: 2em;
+}
+.greetings-paragraph{
+    color: red;
+    font-family: elephant;
+    font-weight: 2em; 
+    font-size: 20px;
+}
+.greeting-paragraph{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 10em; 
+    font-size: 15px;
 }

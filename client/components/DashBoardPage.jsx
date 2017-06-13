@@ -7,7 +7,7 @@ import { Pagination } from 'react-materialize';
 import DocumentForm from './document/DocumentForm.jsx';
 import AllDocument from './document/AllDocument.jsx';
 import
-{ getDocument, deleteDocument, updateDocument, searchDocument, usersDocument }
+{ getDocument, deleteDocument, updateDocument, searchUsersDocument, usersDocument }
 from '../actions/documentActions';
 
 /**
@@ -56,12 +56,13 @@ class DashBoardPage extends React.Component {
    * @memberOf DashBoard
    */
   onChange(e) {
+    e.preventDefault();
     const searchTerm = e.target.value;
     if (searchTerm < 1) {
       this.props.usersDocument(0, this.props.user.userId);
     }
     else {
-      this.props.searchDocument(searchTerm);
+      this.props.searchUsersDocument(searchTerm);
     }
   }
 
@@ -74,7 +75,6 @@ class DashBoardPage extends React.Component {
    */
   render() {
     const { documents, pagination } = this.props;
-    let allDocuments;
       return (
       <div className="container">
         <div className="row">
@@ -115,18 +115,29 @@ class DashBoardPage extends React.Component {
     );
     }
   }
+
+/**
+ * This method map state to props
+ * 
+ * @returns {function} dispatch
+ */
 const mapStateToProps = state => ({
   documents: state.documents.documents,
   pagination: state.documents.pagination,
   user: state.login.user
 });
 
+/**
+ * This method map dispatches to props
+ * 
+ * @returns {function} dispatch
+ */
 const mapDispatchToProps = dispatch => ({
   usersDocument: bindActionCreators(usersDocument, dispatch),
   getDocument: bindActionCreators(getDocument, dispatch),
   deleteDocument: bindActionCreators(deleteDocument, dispatch),
   updateDocument: bindActionCreators(updateDocument, dispatch),
-  searchDocument: bindActionCreators(searchDocument, dispatch),
+  searchUsersDocument: bindActionCreators(searchUsersDocument, dispatch),
 });
 
 DashBoardPage.propTypes = {

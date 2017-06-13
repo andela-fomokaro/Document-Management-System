@@ -3,17 +3,17 @@ import faker from 'faker';
 const SpecHelper = {
   adminRole: {
     id: 1,
-    title: 'admin'
+    title: 'admin',
   },
 
   regularRole: {
     id: 2,
-    title: 'regular'
+    title: 'regular',
   },
 
   authorRole: {
     id: 3,
-    title: 'author'
+    title: 'author',
   },
 
   contributorRole: {
@@ -26,7 +26,7 @@ const SpecHelper = {
     username: 'faith',
     email: 'faith.omokaro@andela.com',
     password: 'faith',
-    roleId: 1
+    roleId: 1,
   },
 
   specUser2: {
@@ -34,7 +34,7 @@ const SpecHelper = {
     username: 'paul',
     email: 'paul.solomon@gmail.com',
     password: 'paul',
-    roleId: 2
+    roleId: 2,
   },
 
   invalidUser: {
@@ -51,7 +51,7 @@ const SpecHelper = {
   },
 
   invalidUser3: {
-    Email: 'ifiok@test.com'
+    Email: 'ifiok@test.com',
   },
 
   specUser3: {
@@ -115,7 +115,7 @@ const SpecHelper = {
     content: 'Andela is a place to be',
     access: 'public',
     ownerId: 1,
-    id: 1
+    id: 1,
 
   },
 
@@ -130,7 +130,7 @@ const SpecHelper = {
     + ' communication of, and access to information.',
     access: 'role',
     ownerId: 2,
-    id: 5
+    id: 5,
 
   },
 

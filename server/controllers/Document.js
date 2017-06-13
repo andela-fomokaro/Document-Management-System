@@ -20,7 +20,7 @@ const Document = {
       .then((document) => {
         res.status(201).json({
           message: 'Your Document Has Been Created',
-          document
+          document,
         });
       })
       .catch(() => res.json({ message: 'An error occured' }));
@@ -56,12 +56,12 @@ const Document = {
                 .send({ message: 'The Document You Are Trying To Access Is Private' });
               }
               res.status(200).send({
-                document
+                document,
               });
             });
           })
           .catch(() => res.status(400).send({
-            message: 'An error occured'
+            message: 'An error occured',
           }));
       });
   },
@@ -94,11 +94,11 @@ const Document = {
         content: doc.content,
         createdAt: doc.createdAt,
         updatedAt: doc.updatedAt,
-        id: doc.id
+        id: doc.id,
       }));
       res.status(200).send({ pagination, documents: documentObject });
     }).catch(() => res.status(400).send({
-      message: 'An error occured'
+      message: 'An error occured',
     }));
   },
 /**
@@ -125,7 +125,7 @@ const Document = {
             }
             if (req.body.ownerId && !(role.title === 'admin')) {
               return res.status(403).send({
-                message: 'You Cannot View Document'
+                message: 'You Cannot View Document',
               });
             }
             document
@@ -139,7 +139,7 @@ const Document = {
               });
           })
         .catch(() => res.status(400).send({
-          message: 'An error occured'
+          message: 'An error occured',
         }));
       });
   },
@@ -171,7 +171,7 @@ const Document = {
             }));
           })
       .catch(() => res.status(400).send({
-        message: 'An error occured'
+        message: 'An error occured',
       }));
   },
 /**
@@ -194,7 +194,7 @@ const Document = {
               query.count = documents.count;
               const pagination = Helper.pagination(query);
               return res.status(200).send({
-                pagination, documents: documents.rows
+                pagination, documents: documents.rows,
               });
             });
         } else {
@@ -204,20 +204,20 @@ const Document = {
                 access: { $eq: 'public' },
                 $and: {
                   access: { $eq: 'private' },
-                  ownerId: { $eq: req.decoded.userId }
+                  ownerId: { $eq: req.decoded.userId },
                 },
                 $and: {
                   access: { $eq: 'role' },
-                  '$User.roleId$': { $eq: req.decoded.roleId }
-                }
+                  '$User.roleId$': { $eq: req.decoded.roleId },
+                },
               },
-              ownerId: { $eq: req.decoded.userId }
-            }
+              ownerId: { $eq: req.decoded.userId },
+            },
           };
           query.include = [
             {
-              model: db.Users
-            }
+              model: db.Users,
+            },
           ];
           db.Documents
             .findAndCountAll(query)
@@ -234,11 +234,11 @@ const Document = {
                 content: doc.content,
                 createdAt: doc.createdAt,
                 updatedAt: doc.updatedAt,
-                id: doc.id
+                id: doc.id,
               }));
               const pagination = Helper.pagination(query);
               res.status(200).send({
-                pagination, documents: documentObject
+                pagination, documents: documentObject,
               });
             });
         }
@@ -258,7 +258,7 @@ const Document = {
       .then((role) => {
         if (searchTerm === '') {
           return res.status(400).send({
-            message: 'Document Search Does Not Search'
+            message: 'Document Search Does Not Search',
           });
         }
 
@@ -267,38 +267,38 @@ const Document = {
             $and: [{
               $or: {
                 title: {
-                  $iLike: `%${searchTerm}%`
+                  $iLike: `%${searchTerm}%`,
                 },
                 content: {
-                  $iLike: `%${searchTerm}%`
-                }
-              }
+                  $iLike: `%${searchTerm}%`,
+                },
+              },
             }, {
               $or: {
                 access: { $ne: 'private' },
-                ownerId: { $eq: req.decoded.userId }
-              }
+                ownerId: { $eq: req.decoded.userId },
+              },
             }],
             $or: {
               $or: {
                 access: { $eq: 'public' },
                 $and: {
                   access: { $eq: 'private' },
-                  ownerId: { $eq: req.decoded.userId }
+                  ownerId: { $eq: req.decoded.userId },
                 },
                 $and: {
                   access: { $eq: 'role' },
-                  '$User.roleId$': { $eq: req.decoded.roleId }
-                }
+                  '$User.roleId$': { $eq: req.decoded.roleId },
+                },
               },
-              ownerId: { $eq: req.decoded.userId }
-            }
+              ownerId: { $eq: req.decoded.userId },
+            },
           },
           include: [
             {
-              model: db.Users
-            }
-          ]
+              model: db.Users,
+            },
+          ],
         };
 
         if (role.title === 'admin') {
@@ -306,13 +306,13 @@ const Document = {
             where: {
               $or: {
                 title: {
-                  $iLike: `%${searchTerm}%`
+                  $iLike: `%${searchTerm}%`,
                 },
                 content: {
-                  $iLike: `%${searchTerm}%`
-                }
-              }
-            }
+                  $iLike: `%${searchTerm}%`,
+                },
+              },
+            },
           };
         }
 
@@ -330,21 +330,102 @@ const Document = {
                title: doc.title,
                content: doc.content,
                createdAt: doc.createdAt,
-               updatedAt: doc.updatedAt
+               updatedAt: doc.updatedAt,
              }));
             query.count = documents.count;
             const pagination = Helper.pagination(query);
             if (documents.rows.length === 0) {
               return res.status(404).send({
-                message: 'Search Term Not Found'
+                message: 'Search Term Not Found',
               });
             }
             res.status(200).send({
-              pagination, documents: documentObject
+              pagination, documents: documentObject,
             });
           });
       });
-  }
+  },
+  /**
+   * Gets all documents relevant to search term
+   * and documents with role access for priviledged a particular user
+   * @param {Object} req Request object
+   * @param {Object} res Response object
+   * @return {Object} - Returns response object
+   */
+  searchMyDocument(req, res) {
+    const searchTerm = req.query.search;
+    db.Roles.findById(req.decoded.roleId)
+      .then(() => {
+        if (searchTerm === '') {
+          return res.status(400).send({
+            message: 'Document Search Does Not Search',
+          });
+        }
+
+        const query = {
+          where: {
+            $and: [{
+              $or: {
+                title: {
+                  $iLike: `%${searchTerm}%`,
+                },
+                content: {
+                  $iLike: `%${searchTerm}%`,
+                },
+              },
+            }],
+            $or: {
+              $and: {
+                access: { $eq: 'public' },
+                ownerId: { $eq: req.decoded.userId },
+                $and: {
+                  access: { $eq: 'private' },
+                  ownerId: { $eq: req.decoded.userId },
+                },
+                $and: {
+                  access: { $eq: 'role' },
+                  ownerId: { $eq: req.decoded.userId },
+                },
+              },
+              ownerId: { $eq: req.decoded.userId },
+            },
+          },
+          include: [
+            {
+              model: db.Users,
+            },
+          ],
+        };
+        query.limit = (req.query.limit > 0) ? req.query.limit : 6;
+        query.offset = (req.query.offset > 0) ? req.query.offset : 0;
+        query.order = '"createdAt" ASC ';
+        db.Documents
+          .findAndCountAll(query)
+          .then((documents) => {
+            const documentObject
+             = documents.rows.map(doc => Object.assign({}, {
+               access: doc.access,
+               type: doc.type,
+               ownerId: doc.ownerId,
+               title: doc.title,
+               content: doc.content,
+               createdAt: doc.createdAt,
+               updatedAt: doc.updatedAt,
+             }));
+            query.count = documents.count;
+            const pagination = Helper.pagination(query);
+            if (documents.rows.length === 0) {
+              return res.status(404).send({
+                message: 'Search Term Not Found',
+              });
+            }
+            res.status(200).send({
+              pagination, documents: documentObject,
+            });
+          });
+      });
+  },
 };
+
 
 export default Document;

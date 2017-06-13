@@ -9,7 +9,7 @@ const mockStore = configureMockStore(middlewares);
 const userDocument = {
   title: 'My Diary',
   content: 'This is my diary',
-  access: 'public'
+  access: 'public',
 };
 const getSingleDoc = {
   id: 1,
@@ -17,7 +17,7 @@ const getSingleDoc = {
   content: 'Doloremque consequuntur similique. Nihil eum sunt ut reiciendis quam dignissimos ex quia quos. Ut ea voluptate quas quia voluptates culpa doloribus. Reprehenderit ad et beatae eligendi maiores at aliquam qui asperiores. Voluptatem quos harum necessitatibus officiis vitae ratione asperiores architecto voluptate. Dolores odio reiciendis dignissimos nam et ut a.',
   access: 'public',
   createdAt: '2017-05-23T09:24:47.457Z',
-  updatedAt: '2017-05-23T09:24'
+  updatedAt: '2017-05-23T09:24',
 };
 const documentInfo = {
   documents: [
@@ -27,7 +27,7 @@ const documentInfo = {
       content: 'Doloremque consequuntur similique. Nihil eum sunt ut reiciendis quam dignissimos ex quia quos. Ut ea voluptate quas quia voluptates culpa doloribus. Reprehenderit ad et beatae eligendi maiores at aliquam qui asperiores. Voluptatem quos harum necessitatibus officiis vitae ratione asperiores architecto voluptate. Dolores odio reiciendis dignissimos nam et ut a.',
       access: 'public',
       createdAt: '2017-05-23T09:24:47.457Z',
-      updatedAt: '2017-05-23T09:24'
+      updatedAt: '2017-05-23T09:24',
     },
     {
       id: 2,
@@ -35,7 +35,7 @@ const documentInfo = {
       content: 'Doloremque consequuntur similique. Nihil eum sunt ut reiciendis quam dignissimos ex quia quos. Ut ea voluptate quas quia voluptates culpa doloribus. Reprehenderit ad et beatae eligendi maiores at aliquam qui asperiores. Voluptatem quos harum necessitatibus officiis vitae ratione asperiores architecto voluptate. Dolores odio reiciendis dignissimos nam et ut a.',
       access: 'public',
       createdAt: '2017-05-23T09:24:47.457Z',
-      updatedAt: '2017-05-23T09:24'
+      updatedAt: '2017-05-23T09:24',
     },
     {
       id: 3,
@@ -43,15 +43,15 @@ const documentInfo = {
       content: 'Doloremque consequuntur similique. Nihil eum sunt ut reiciendis quam dignissimos ex quia quos. Ut ea voluptate quas quia voluptates culpa doloribus. Reprehenderit ad et beatae eligendi maiores at aliquam qui asperiores. Voluptatem quos harum necessitatibus officiis vitae ratione asperiores architecto voluptate. Dolores odio reiciendis dignissimos nam et ut a.',
       access: 'public',
       createdAt: '2017-05-23T09:24:47.457Z',
-      updatedAt: '2017-05-23T09:24'
-    }
+      updatedAt: '2017-05-23T09:24',
+    },
   ],
   pagination: {
     page: 1,
     page_count: 1,
     page_size: 1,
-    total_count: 3
-  }
+    total_count: 3,
+  },
 };
 describe('DOCUMENT ACTIONS', () => {
   after(() => {
@@ -61,7 +61,7 @@ describe('DOCUMENT ACTIONS', () => {
     const response = {
       title: userDocument.title,
       content: userDocument.content,
-      access: userDocument.access
+      access: userDocument.access,
     };
     it('should create a document', () => {
       nock('http://localhost:80/')
@@ -72,8 +72,8 @@ describe('DOCUMENT ACTIONS', () => {
         { type: 'CREATE_DOCUMENT',
           document: { title: 'My Diary',
             content: 'This is my diary',
-            access: 'public' }
-        }
+            access: 'public' },
+        },
       ];
       const store = mockStore({
         document: {},
@@ -88,7 +88,7 @@ describe('DOCUMENT ACTIONS', () => {
   describe('Load Documents', () => {
     const response = {
       documents: documentInfo.documents,
-      pagination: documentInfo.pagination
+      pagination: documentInfo.pagination,
     };
     it('should load all document', () => {
       nock('http://localhost:80/')
@@ -96,8 +96,8 @@ describe('DOCUMENT ACTIONS', () => {
         .reply(200, response);
 
       const expectedActions = [
-        { type: 'LOAD_DOCUMENTS'
-        }
+        { type: 'LOAD_DOCUMENTS',
+        },
       ];
       const store = mockStore();
       store.dispatch(actions.loadDocuments())
@@ -109,7 +109,7 @@ describe('DOCUMENT ACTIONS', () => {
   });
   describe('Get Document By Id', () => {
     const response = {
-      documents: getSingleDoc
+      documents: getSingleDoc,
     };
     const id = getSingleDoc.id;
     it('should get a single document', () => {
@@ -118,8 +118,8 @@ describe('DOCUMENT ACTIONS', () => {
         .reply(200, response);
 
       const expectedActions = [
-        { type: 'GET_SINGLE_DOCUMENT'
-        }
+        { type: 'GET_SINGLE_DOCUMENT',
+        },
       ];
       const store = mockStore();
       store.dispatch(actions.getDocument(id))
@@ -131,7 +131,7 @@ describe('DOCUMENT ACTIONS', () => {
   });
   describe('Delete Document By Id', () => {
     const response = {
-      documents: getSingleDoc
+      documents: getSingleDoc,
     };
     const id = getSingleDoc.id;
     it('should delete document by id', () => {
@@ -140,8 +140,8 @@ describe('DOCUMENT ACTIONS', () => {
         .reply(200, response);
 
       const expectedActions = [
-        { type: 'DELETE_DOCUMENT'
-        }
+        { type: 'DELETE_DOCUMENT',
+        },
       ];
       const store = mockStore();
       store.dispatch(actions.deleteDocument(id))
@@ -153,7 +153,7 @@ describe('DOCUMENT ACTIONS', () => {
   });
   describe('Get Users Document By Id', () => {
     const response = {
-      documents: getSingleDoc
+      documents: getSingleDoc,
     };
     const id = getSingleDoc.id;
     const offset = 0;
@@ -163,8 +163,8 @@ describe('DOCUMENT ACTIONS', () => {
         .reply(200, response);
 
       const expectedActions = [
-        { type: 'USER_DOCUMENT'
-        }
+        { type: 'USER_DOCUMENT',
+        },
       ];
       const store = mockStore();
       store.dispatch(actions.usersDocument(offset, id))
@@ -176,7 +176,7 @@ describe('DOCUMENT ACTIONS', () => {
   });
   describe('Update Users Document By Id ', () => {
     const response = {
-      documents: getSingleDoc
+      documents: getSingleDoc,
     };
     const id = getSingleDoc.id;
     const updateDoc = {
@@ -185,7 +185,7 @@ describe('DOCUMENT ACTIONS', () => {
       content: 'Doloremque consequuntur similique. Nihil eum sunt ut reiciendis quam dignissimos ex quia quos. Ut ea voluptate quas quia voluptates culpa doloribus. Reprehenderit ad et beatae eligendi maiores at aliquam qui asperiores. Voluptatem quos harum necessitatibus officiis vitae ratione asperiores architecto voluptate. Dolores odio reiciendis dignissimos nam et ut a.',
       access: 'public',
       createdAt: '2017-05-23T09:24:47.457Z',
-      updatedAt: '2017-05-23T09:24'
+      updatedAt: '2017-05-23T09:24',
     };
     it('should update user document', () => {
       nock('http://localhost:80/')
@@ -193,8 +193,8 @@ describe('DOCUMENT ACTIONS', () => {
         .reply(200, response);
 
       const expectedActions = [
-        { type: 'UPDATE_DOCUMENT'
-        }
+        { type: 'UPDATE_DOCUMENT',
+        },
       ];
       const store = mockStore();
       store.dispatch(actions.updateDocument(updateDoc, id))
@@ -206,7 +206,7 @@ describe('DOCUMENT ACTIONS', () => {
   });
   describe('Search Users Document ', () => {
     const response = {
-      documents: getSingleDoc
+      documents: getSingleDoc,
     };
     const searchDoc = {
       id: 1,
@@ -214,7 +214,7 @@ describe('DOCUMENT ACTIONS', () => {
       content: 'Doloremque consequuntur similique. Nihil eum sunt ut reiciendis quam dignissimos ex quia quos. Ut ea voluptate quas quia voluptates culpa doloribus. Reprehenderit ad et beatae eligendi maiores at aliquam qui asperiores. Voluptatem quos harum necessitatibus officiis vitae ratione asperiores architecto voluptate. Dolores odio reiciendis dignissimos nam et ut a.',
       access: 'public',
       createdAt: '2017-05-23T09:24:47.457Z',
-      updatedAt: '2017-05-23T09:24'
+      updatedAt: '2017-05-23T09:24',
     };
     it('should search documents', () => {
       nock('http://localhost:80/')
@@ -222,8 +222,8 @@ describe('DOCUMENT ACTIONS', () => {
         .reply(200, response);
 
       const expectedActions = [
-        { type: 'SEARCH_DOCUMENT'
-        }
+        { type: 'SEARCH_DOCUMENT',
+        },
       ];
       const store = mockStore();
       store.dispatch(actions.searchDocument(searchDoc))

@@ -3,8 +3,8 @@ import { Modal } from 'react-materialize';
 import PropTypes from 'prop-types';
 
 /**
- *
  * React component for
+ *
  * @class UpdateRole
  * @extends {React.Component}
  */
@@ -12,6 +12,7 @@ class UpdateRole extends React.Component {
 
   /**
    * Creates an instance of UpdateRole.
+   *
    * Constructor
    * @param {object} props
    *
@@ -29,8 +30,8 @@ class UpdateRole extends React.Component {
   }
 
   /**
-   *
    * onSubmit
+   *
    * @param {object} e - event handler for onSubmit
    * @returns {void}
    *
@@ -42,8 +43,8 @@ class UpdateRole extends React.Component {
   }
 
   /**
-   *
    * onChange
+   *
    * @param {object} e - event handler for onChange
    * @returns {void}
    * @memberOf UpdateRole
@@ -53,7 +54,6 @@ class UpdateRole extends React.Component {
   }
 
   /**
-   *
    *
    * @param {object} event - event handler for update role state
    * @returns {object}  role - update role state
@@ -68,7 +68,6 @@ class UpdateRole extends React.Component {
 
 
   /**
-   *
    *
    * @returns {object} react components to render
    *

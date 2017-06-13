@@ -5,9 +5,9 @@
 
   <testsuite name="loginpage"
     errors="0" failures="0" hostname="" id="" package="loginpage" skipped="0"
-    tests="2" time="9.971" timestamp="Fri, 09 Jun 2017 23:44:16 GMT">
+    tests="2" time="11.88" timestamp="Tue, 13 Jun 2017 08:11:40 GMT">
   
-    <testcase name="Login a user" classname="loginpage" time="5.790" assertions="3">
+    <testcase name="Login a user" classname="loginpage" time="6.999" assertions="3">
 
     
 
@@ -16,7 +16,7 @@
     
     </testcase>
   
-    <testcase name="Invalid login" classname="loginpage" time="4.181" assertions="3">
+    <testcase name="Invalid login" classname="loginpage" time="4.878" assertions="3">
 
     
 

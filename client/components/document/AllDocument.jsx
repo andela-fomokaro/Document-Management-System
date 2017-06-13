@@ -1,4 +1,3 @@
-/* eslint-disable no-undef*/
 import React from 'react';
 import { Modal } from 'react-materialize';
 import { connect } from 'react-redux';
@@ -12,16 +11,18 @@ import { hasDocumentPermission } from '../../utils/helpers';
 
 
 /**
- *
  * React component for
  * @class AllDocument
+ *
  * @extends {React.Component}
  */
 class AllDocument extends React.Component {
 
   /**
    * Creates an instance of AllDocument.
+   *
    * Constructor
+   *
    * @param {object} props - props of the component
    *
    * @memberOf AllDocument
@@ -40,18 +41,17 @@ class AllDocument extends React.Component {
   }
 
   /**
-   *
-   * deleteDocument
+   * deleteDocument - This method deletes a users document
    *
    * @memberOf AllDocument
    *
    * @return {void}
    */
-   
+
   deleteDocument() {
      swal({
-      title: "Are you sure?", 
-      text: "Are you sure that you want to delete this document?", 
+      title: "Are you sure?",
+      text: "Are you sure that you want to delete this document?",
       type: "error",
       showCancelButton: true,
       closeOnConfirm: true,
@@ -69,14 +69,13 @@ class AllDocument extends React.Component {
   }
 
   /**
-   *
+   * updateDocumentState - This method updates the state
    *
    * @param {object} event - event properties
    * belonging to updated document state
    *
    * @returns {object} document - updated document state
    *
-   * @memberOf AllDocument
    */
   updateDocumentState(event) {
     return this.setState({
@@ -84,6 +83,14 @@ class AllDocument extends React.Component {
     });
   }
 
+ /**
+   * handleEditorChange - This method updates the state
+   *
+   * @param {object} event - event properties
+   * belonging to updated document state
+   *
+   * @returns {object} document - updated content state
+   */
   handleEditorChange(event) {
     return this.setState({
       content: event.target.getContent()
@@ -91,21 +98,30 @@ class AllDocument extends React.Component {
   }
 
   /**
+   * updateDocument - This method updates a users document
    *
    * @returns {void}
    *
    * @memberOf AllDocument
    */
   updateDocument() {
-    Materialize.toast('Update Successful', 4000);
-    console.log(this.state);
-    this.props.updateDocument(this.state);
+     if(this.state.content.length < 2 || this.state.title.length < 2){
+        Materialize.toast('Field Cannot Be Empty', 2000);
+      }else if(!['public', 'role', 'private'].includes(this.state.access)){
+        Materialize.toast('Incorrect Access Type Entered', 2000);
+      }
+      else{
+        this.props.updateDocument(this.state).then( () => {
+        Materialize.toast('Document Successfully Updated', 2000);
+    })
+    .catch( (err) => {
+       Materialize.toast(err, 2000);
+    });
+    }
   }
 
 
   /**
-   *
-   *
    * @returns {object} react componenents to render
    *
    * @memberOf AllDocument
@@ -143,41 +159,46 @@ class AllDocument extends React.Component {
                 >
                   <div className="row">
                     <form>
-                     <label className="red-text">Title</label>
+                     <label className="red-text">Title : </label>
                       <div className="input-field col s12">
                         <textarea
                           className="materialize-textarea"
                           name="title"
                           defaultValue={title}
                           onChange={this.updateDocumentState}
+                          required
                         />
                       </div>
                     </form>
                   </div>
                   <div className="row">
                     <form>
-                    <label className="red-text">Content</label>
+                    <label className="red-text">Content : </label>
                       <div className="input-field col s12">
                          <TinyMCE
-                        content={content}
-                        name="content"
-                        config={{
-                        plugins: 'autolink link image lists code print preview',
-                        toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+                          content={content}
+                          name="content"
+                          config={{
+                          plugins: 'autolink link image lists code print preview',
+                          toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
                        }}
                        onChange={this.handleEditorChange}
                       />
                       </div>
                     </form>
                   </div>
-                   <label className="red-text">Access</label>
-                  <div className="row">
+                   <label className="red-text">Access : </label>
+                   <h2>Choose From The Options Below To Update Access Type : </h2>
+                   <p className="red-text">* public</p>
+                   <p className="red-text">** private</p>
+                   <p className="red-text">*** role</p>
+                   <div className="row">
                     <form>
                       <div className="input-field col s12">
                         <textarea
                           className="materialize-textarea"
                           name="access"
-                          value={access}
+                          defaultValue={access}
                           onChange={this.updateDocumentState}
                         />
                       </div>
@@ -185,8 +206,11 @@ class AllDocument extends React.Component {
                   </div>
                   <button
                     onClick={() => this.updateDocument()}
-                    className="update-btn btn pink darken-4 white-text modal-action modal-close"
+                    className="update-btn btn pink darken-4 white-text center"
                   >Update</button>
+                  <button
+                    className="btn btn2 pink darken-4 white-text modal-action modal-close"
+                  >Close</button>
                 </Modal>
               </li>
             </ul> : ''}
@@ -203,6 +227,11 @@ AllDocument.propTypes = {
   document: PropTypes.object.isRequired,
 };
 
+/**
+ * This method map dispatches to props
+ *
+ * @returns {function} dispatch
+ */
 const mapDispatchToProps = dispatch => ({
   deleteDocument: bindActionCreators(deleteDocument, dispatch),
   updateDocument: bindActionCreators(updateDocument, dispatch)

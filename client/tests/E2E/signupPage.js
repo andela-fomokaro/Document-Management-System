@@ -1,7 +1,6 @@
 import faker from 'faker';
 import config from './config';
 
-
 export default {
   'SignUp A User': browser =>
     browser
@@ -16,7 +15,7 @@ export default {
       .click('button')
       .waitForElementVisible('a.view', 5000)
       .assert.containsText('a.view',
-      'Edit Profile')
+      'assignment')
       .end(),
   'Invalid login': (browser) => {
     browser
@@ -32,5 +31,5 @@ export default {
       .waitForElementVisible('body', 3000)
       .assert.urlContains('signup')
       .end();
-  }
+  },
 };

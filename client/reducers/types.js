@@ -1,5 +1,15 @@
-import { FETCH_TYPES_SUCCESS, CREATE_TYPES_SUCCESS, DELETE_TYPES_SUCCESS } from '../actions/types';
+import { FETCH_TYPES_SUCCESS,
+  CREATE_TYPES_SUCCESS, DELETE_TYPES_SUCCESS } from '../actions/types';
 
+
+/**
+* Types reducer
+*
+* @export
+* @param {array} [state=initialState] initial state
+* @param {object} action action
+* @returns {object} reduced or initial state
+*/
 export default (state = [], action = {}) => {
   switch (action.type) {
     case FETCH_TYPES_SUCCESS:

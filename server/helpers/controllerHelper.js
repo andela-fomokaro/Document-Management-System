@@ -14,7 +14,7 @@ const Helper = {
       page_count: next,
       page: currentPage,
       page_size: Number(pageSize),
-      total_count: condition.count
+      total_count: condition.count,
     };
   },
 
@@ -42,7 +42,7 @@ const Helper = {
       email: data.email,
       roleId: data.roleId,
       createAt: data.createdAt,
-      updatedAt: data.updatedAt
+      updatedAt: data.updatedAt,
     };
   },
   /**
@@ -57,7 +57,7 @@ const Helper = {
       'access',
       'ownerId',
       'createdAt',
-      'updatedAt'
+      'updatedAt',
     ];
   },
 };

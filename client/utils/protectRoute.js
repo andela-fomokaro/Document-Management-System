@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
 /**
- * anonymous function - description
+ * anonymous function - Checks whether a user has access to a route or not
  *
- * @param  {type} ComponentRequiresAuth description
- * @return {type}                       description
+ * @param  {function} ComponentRequiresAuth
+ * @return {void}
  */
 export default function (ComponentRequiresAuth) {
   /**
@@ -15,9 +15,9 @@ export default function (ComponentRequiresAuth) {
   class RequiresAuthentication extends React.Component {
 
     /**
-     * componentWillMount - description
+     * componentWillMount
      *
-     * @return {type}  description
+     * @return {void}
      */
     componentWillMount() {
       if (!this.props.isAuthenticated) {
@@ -27,9 +27,9 @@ export default function (ComponentRequiresAuth) {
     }
 
     /**
-     * render - description
+     * render - renders the component ComponentRequiresAuth
      *
-     * @return {type}  description
+     * @return {void} null
      */
     render() {
       return (
@@ -39,19 +39,19 @@ export default function (ComponentRequiresAuth) {
   }
 
   RequiresAuthentication.propTypes = {
-    isAuthenticated: React.PropTypes.bool.isRequired
+    isAuthenticated: React.PropTypes.bool.isRequired,
   };
 
 
-  /**
-   * mapStateToProps - description
-   *
-   * @param  {type} state description
-   * @return {type}       description
-   */
+ /**
+ * This method map state to props
+ *
+ * @param {object} state
+ * @returns {function} dispatch
+ */
   function mapStateToProps(state) {
     return {
-      isAuthenticated: state.login.isAuthenticated
+      isAuthenticated: state.login.isAuthenticated,
     };
   }
 

@@ -8,21 +8,21 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: 'public',
       validate: {
-        isIn: [['private', 'public', 'role']]
+        isIn: [['private', 'public', 'role']],
       } },
     ownerId: {
       allowNull: false,
-      type: DataTypes.INTEGER
-    }
+      type: DataTypes.INTEGER,
+    },
   }, {
     classMethods: {
       associate(models) {
         Documents.belongsTo(models.Users, {
           onDelete: 'CASCADE',
-          foreignKey: 'ownerId'
+          foreignKey: 'ownerId',
         });
-      }
-    }
+      },
+    },
   });
   return Documents;
 };

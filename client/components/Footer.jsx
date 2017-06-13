@@ -1,13 +1,19 @@
 import React from 'react';
 
+/**
+ * React component for Footer
+ *
+ * @param {null}
+ * 
+ */
 const Footer = () =>
  (
    <footer className="page-footer pink darken-4 footer">
      <div className="footer-copyright">
        <div className="container">
             © 2017 DocStar | All Rights Reserved | Document Management System
-            <p className="grey-text text-lighten-4" href="#!">H
-              elp Line (+234-672391083, +299-031452)</p>
+              | Help Line (+234-672391083)
+              <b className="container left">Developed By Omokaro Faith | Github @andela-fomokaro | twitter @noxy3001</b>
        </div>
      </div>
    </footer>

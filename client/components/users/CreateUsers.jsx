@@ -146,7 +146,7 @@ class CreateUsers extends React.Component {
             />
           </div>
           <button
-          id="adminCreateUser"className="btn btn2 pink darken-4">Send</button>
+          id="adminCreateUser"className="btn btn2 pink darken-4 center">Send</button>
            <button
               className="btn btn2 pink darken-4 white-text modal-action modal-close"
               >Close</button>

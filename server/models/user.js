@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
     username: {
       allowNull: false,
@@ -15,38 +15,38 @@ module.exports = (sequelize, DataTypes) => {
     },
     fullNames: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     email: {
       allowNull: false,
       type: DataTypes.STRING,
       validate: { isEmail: true },
       unique: {
-        args: true
-      }
+        args: true,
+      },
     },
     roleId: {
       allowNull: false,
       type: DataTypes.INTEGER,
-      defaultValue: 2
+      defaultValue: 2,
     },
     password: {
       allowNull: false,
-      type: DataTypes.STRING
-    }
+      type: DataTypes.STRING,
+    },
   }, {
     classMethods: {
       associate: (models) => {
         Users.belongsTo(models.Roles, {
           onDelete: 'CASCADE',
-          foreignKey: 'roleId'
+          foreignKey: 'roleId',
         });
         Users.hasMany(models.Documents, {
           foreignKey: 'ownerId',
           as: 'Documents',
-          onDelete: 'CASCADE'
+          onDelete: 'CASCADE',
         });
-      }
+      },
     },
     instanceMethods: {
       validPassword(password) {
@@ -54,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       hashPassword() {
         this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10));
-      }
+      },
     },
     hooks: {
       beforeCreate(user) {
@@ -64,8 +64,8 @@ module.exports = (sequelize, DataTypes) => {
         if (user._changed.password) {
           user.hashPassword();
         }
-      }
-    }
+      },
+    },
   });
   return Users;
 };

@@ -5,22 +5,22 @@ const Roles = {
    * Create a new Role
    * @param {Object} req - Request object
    * @param {Object} res - Response object
-   * @return {Object} Response object
+   * @return {void}
    */
   createRole(req, res) {
     db.Roles.findOne({ where: { title: req.body.title } })
     .then((roleExist) => {
       if (roleExist) {
         return res.status(400).send({
-          message: 'Role Title Already Exist'
+          message: 'Role Title Already Exist',
         });
       }
       db.Roles.create({
-        title: req.body.title
+        title: req.body.title,
       })
       .then(role => res.status(201).send(role))
       .catch(err => res.status(400).send({
-        message: err
+        message: err,
       }));
     });
   },
@@ -28,7 +28,7 @@ const Roles = {
    * List all Roles
    * @param {Object} req - Request object
    * @param {Object} res - Response object
-   * @return {Object} Response object
+   * @return {void}
    */
   getRoles(req, res) {
     db.Roles.findAll()
@@ -38,10 +38,10 @@ const Roles = {
     });
   },
 /**
-   * Retrive a Role based on id with all users on that role
+   * Retrieve a Role based on id with all users on that role
    * @param {Object} req - Request object
    * @param {Object} res - Response object
-   * @return {Object} Response object
+   * @return {void}
    */
   getRolesById(req, res) {
     db.Roles
@@ -55,7 +55,7 @@ const Roles = {
         res.status(200).send(role);
       })
       .catch(() => res.status(400).send({
-        message: 'An error occured'
+        message: 'An error occured',
       }));
   },
 
@@ -63,7 +63,7 @@ const Roles = {
    * Delete a Role based on id
    * @param {Object} req - Request object
    * @param {Object} res - Response object
-   * @return {Object} Response object
+   * @return {void}
    */
   deleteRole(req, res) {
     db.Roles
@@ -76,17 +76,17 @@ const Roles = {
         }
         if (role.title === 'regular' || role.title === 'admin') {
           return res.status(400).send({
-            message: 'Cannot Delete Default Roles'
+            message: 'Cannot Delete Default Roles',
           });
         }
         role
           .destroy()
           .then(() => res.status(200).send({
-            message: 'Role deleted'
+            message: 'Role deleted',
           }));
       })
       .catch(() => res.status(400).send({
-        message: 'An error occured'
+        message: 'An error occured',
       }));
   },
 
@@ -94,14 +94,14 @@ const Roles = {
    * Update a Role based on id
    * @param {Object} req - Request object
    * @param {Object} res - Response object
-   * @return {Object} Response object
+   * @return {void}
    */
   updateRole(req, res) {
     db.Roles.findOne({ where: { title: req.body.title } })
     .then((roleExist) => {
       if (roleExist) {
         return res.status(400).send({
-          message: 'Cannot Edit Default Roles'
+          message: 'Cannot Edit Default Roles',
         });
       }
       db.Roles.findById(req.params.id)
@@ -113,19 +113,19 @@ const Roles = {
         }
         if (role.title === 'regular' || role.title === 'admin') {
           return res.status(400).send({
-            message: 'An error occured'
+            message: 'An error occured',
           });
         }
         role
           .update(req.body, {
-            fields: Object.keys(req.body)
+            fields: Object.keys(req.body),
           })
           .then(updatedRole => res.status(200).send({
-            message: 'Update Successful', updatedRole
+            message: 'Update Successful', updatedRole,
           }));
       })
       .catch(() => res.status(400).send({
-        message: 'An error occured'
+        message: 'An error occured',
       }));
     });
   },

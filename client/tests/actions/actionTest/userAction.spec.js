@@ -14,7 +14,7 @@ const singleUser = {
   roleId: 2,
   password: '$2a$10$zGMPA9UyromK20//JcWXYeb4ALQR0kIlDagHBr0grpVX60vRhepIu',
   createdAt: '2017-06-06T15:13:10.666Z',
-  updatedAt: '2017-06-06T15:13:10.666Z'
+  updatedAt: '2017-06-06T15:13:10.666Z',
 };
 const userInfo = {
   message: 'Successfull',
@@ -29,7 +29,7 @@ const userInfo = {
         roleId: 2,
         password: '$2a$10$zGMPA9UyromK20//JcWXYeb4ALQR0kIlDagHBr0grpVX60vRhepIu',
         createdAt: '2017-06-06T15:13:10.666Z',
-        updatedAt: '2017-06-06T15:13:10.666Z'
+        updatedAt: '2017-06-06T15:13:10.666Z',
       },
       {
         id: 3,
@@ -39,16 +39,16 @@ const userInfo = {
         roleId: 2,
         password: '$2a$10$uwQjfyn8PfZ22CXvXJTzcu9vh9F/5acGtG.3ow.qpqS3bE3z6Ds92',
         createdAt: '2017-05-31T20:30:32.106Z',
-        updatedAt: '2017-05-31T20:30:32.106Z'
+        updatedAt: '2017-05-31T20:30:32.106Z',
       },
-    ]
+    ],
   },
   pagination: {
     page_count: 1,
     page: 1,
     page_size: 1,
-    total_count: 2
-  }
+    total_count: 2,
+  },
 };
 describe('USERS ACTIONS', () => {
   after(() => {
@@ -56,7 +56,7 @@ describe('USERS ACTIONS', () => {
   });
   describe('Get Users', () => {
     const response = {
-      userInfo
+      userInfo,
     };
     it('should load users', () => {
       nock('http://localhost:80/')
@@ -64,8 +64,8 @@ describe('USERS ACTIONS', () => {
         .reply(200, response);
 
       const expectedActions = [
-        { type: 'GET_USERS'
-        }
+        { type: 'GET_USERS',
+        },
       ];
       const store = mockStore({
         userInfo: {},
@@ -85,8 +85,8 @@ describe('USERS ACTIONS', () => {
         .reply(200);
 
       const expectedActions = [
-        { type: 'DELETE_USER'
-        }
+        { type: 'DELETE_USER',
+        },
       ];
       const store = mockStore();
       store.dispatch(actions.deleteUser(id))
@@ -98,7 +98,7 @@ describe('USERS ACTIONS', () => {
   });
   describe('Get Users By Id', () => {
     const response = {
-      singleUser
+      singleUser,
     };
     const id = singleUser.id;
     it('should get a single user', () => {
@@ -107,8 +107,8 @@ describe('USERS ACTIONS', () => {
         .reply(200, response);
 
       const expectedActions = [
-        { type: 'SET_SINGLE_USER'
-        }
+        { type: 'SET_SINGLE_USER',
+        },
       ];
       const store = mockStore();
       store.dispatch(actions.getSingleUser(id))
@@ -120,7 +120,7 @@ describe('USERS ACTIONS', () => {
   });
   describe('Update Users By Id ', () => {
     const response = {
-      singleUser
+      singleUser,
     };
     const id = singleUser.id;
     const updateUser = {
@@ -131,7 +131,7 @@ describe('USERS ACTIONS', () => {
       roleId: 2,
       password: '$2a$10$zGMPA9UyromK20//JcWXYeb4ALQR0kIlDagHBr0grpVX60vRhepIu',
       createdAt: '2017-06-06T15:13:10.666Z',
-      updatedAt: '2017-06-06T15:13:10.666Z'
+      updatedAt: '2017-06-06T15:13:10.666Z',
     };
     it('should update user document', () => {
       nock('http://localhost:80/')
@@ -139,8 +139,8 @@ describe('USERS ACTIONS', () => {
         .reply(200, response);
 
       const expectedActions = [
-        { type: 'UPDATE_USER'
-        }
+        { type: 'UPDATE_USER',
+        },
       ];
       const store = mockStore();
       store.dispatch(actions.updateUser(updateUser, id))
@@ -152,7 +152,7 @@ describe('USERS ACTIONS', () => {
   });
   describe('Search Through Users', () => {
     const response = {
-      singleUser
+      singleUser,
     };
     const searchUsers = {
       id: 3,
@@ -162,7 +162,7 @@ describe('USERS ACTIONS', () => {
       roleId: 2,
       password: '$2a$10$uwQjfyn8PfZ22CXvXJTzcu9vh9F/5acGtG.3ow.qpqS3bE3z6Ds92',
       createdAt: '2017-05-31T20:30:32.106Z',
-      updatedAt: '2017-05-31T20:30:32.106Z'
+      updatedAt: '2017-05-31T20:30:32.106Z',
     };
     it('should search through users', () => {
       nock('http://localhost:80/')
@@ -170,8 +170,8 @@ describe('USERS ACTIONS', () => {
         .reply(200, response);
 
       const expectedActions = [
-        { type: 'SEARCH_USERS'
-        }
+        { type: 'SEARCH_USERS',
+        },
       ];
       const store = mockStore();
       store.dispatch(actions.searchUsers(searchUsers))

@@ -12,6 +12,7 @@ class CreateRole extends React.Component {
 
   /**
    * Creates an instance of CreateRole.
+   *
    * @param {object} props
    *
    * @memberOf CreateRole
@@ -27,8 +28,8 @@ class CreateRole extends React.Component {
   }
 
   /**
-   *
    * onSubmit
+   *
    * @param {object} e - event hhandler belonging to onSubmit
    * @returns {void}
    * @memberOf CreateRole
@@ -43,8 +44,8 @@ class CreateRole extends React.Component {
   }
 
   /**
-   *
    * onChange
+   *
    * @param {object} e - event handler belonging to change
    * @returns {void}
    * @memberOf CreateRole
@@ -54,7 +55,6 @@ class CreateRole extends React.Component {
   }
 
   /**
-   *
    *
    * @returns {object} react component to render
    *
@@ -84,7 +84,10 @@ class CreateRole extends React.Component {
               onChange={this.onChange}
             />
           </div>
-          <button id="createRole" className="btn pink darken-4 modal-action modal-close">Send</button>
+          <button id="createRole" className="btn pink darken-4 center">Send</button>
+          <button
+              className="btn btn2 pink darken-4 white-text modal-action modal-close"
+          >Close</button>
         </form>
       </Modal>
     );
