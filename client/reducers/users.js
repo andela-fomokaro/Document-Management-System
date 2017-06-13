@@ -1,5 +1,14 @@
 import { GET_USERS, CREATE_USERS, DELETE_USER, UPDATE_USER, SET_SINGLE_USER, SEARCH_USERS } from '../actions/types';
 
+
+/**
+* Users reducer
+*
+* @export
+* @param {object} [state=initialState] initial state
+* @param {object} action action
+* @returns {object} reduced or initial state
+*/
 const initialState = {
   users: {
     count: 0,

@@ -1,9 +1,18 @@
-import { LOAD_DOCUMENTS, USER_DOCUMENT, CREATE_DOCUMENT, UPDATE_DOCUMENT, SET_SINGLE_DOCUMENT, DELETE_DOCUMENT, SEARCH_DOCUMENT } from '../actions/types';
+import { SEARCH_MY_DOCUMENT, LOAD_DOCUMENTS, USER_DOCUMENT, CREATE_DOCUMENT, UPDATE_DOCUMENT, SET_SINGLE_DOCUMENT, DELETE_DOCUMENT, SEARCH_DOCUMENT } from '../actions/types';
 
 const initialState = {
   documents: [],
   pagination: {}
 };
+
+/**
+* Documents reducer
+*
+* @export
+* @param {object} [state=initialState] initial state
+* @param {object} action action
+* @returns {object} reduced or initial state
+*/
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case LOAD_DOCUMENTS:
@@ -42,6 +51,12 @@ export default (state = initialState, action = {}) => {
         .filter(document => document.id !== action.id) } };
 
     case SEARCH_DOCUMENT:
+      return { ...state,
+        ...{
+          documents: action.payload.documents,
+          pagination: action.payload.pagination
+        } };
+    case SEARCH_MY_DOCUMENT:
       return { ...state,
         ...{
           documents: action.payload.documents,

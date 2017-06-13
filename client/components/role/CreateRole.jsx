@@ -12,6 +12,7 @@ class CreateRole extends React.Component {
 
   /**
    * Creates an instance of CreateRole.
+   *
    * @param {object} props
    *
    * @memberOf CreateRole
@@ -27,8 +28,8 @@ class CreateRole extends React.Component {
   }
 
   /**
-   *
    * onSubmit
+   *
    * @param {object} e - event hhandler belonging to onSubmit
    * @returns {void}
    * @memberOf CreateRole
@@ -43,8 +44,8 @@ class CreateRole extends React.Component {
   }
 
   /**
-   *
    * onChange
+   *
    * @param {object} e - event handler belonging to change
    * @returns {void}
    * @memberOf CreateRole
@@ -54,7 +55,6 @@ class CreateRole extends React.Component {
   }
 
   /**
-   *
    *
    * @returns {object} react component to render
    *

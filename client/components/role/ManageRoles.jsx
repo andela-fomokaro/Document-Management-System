@@ -9,8 +9,8 @@ import UpdateRole from './UpdateRole.jsx';
 import { createRole, getRoles, deleteRole } from '../../actions/roleActions';
 
 /**
- *
  * React component for
+ *
  * @class ManageRole
  * @extends {React.Component}
  */
@@ -18,6 +18,7 @@ class ManageRole extends React.Component {
 
   /**
    * Creates an instance of ManageRole.
+   *
    * Constructor
    * @param {object} props - props of the component
    *
@@ -28,8 +29,8 @@ class ManageRole extends React.Component {
   }
 
   /**
-   *
    * componentDidMount
+   *
    * @return {void}
    * @memberOf ManageRole
    */
@@ -38,8 +39,8 @@ class ManageRole extends React.Component {
   }
 
   /**
-   *
    * deleteRole
+   *
    * @param {number} roleId - role id belonging to role
    * @return {void}
    * @memberOf ManageRole
@@ -65,7 +66,6 @@ class ManageRole extends React.Component {
   }
 
   /**
-   *
    *
    * @returns {object} reacty components to render
    *
@@ -133,6 +133,11 @@ ManageRole.propTypes = {
   deleteRole: PropTypes.func.isRequired,
 };
 
+/**
+ * This method map state to props
+ * 
+ * @returns {function} dispatch
+ */
 const mapStateToProps = state => (
   {
   role: state.roles

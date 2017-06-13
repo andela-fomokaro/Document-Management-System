@@ -1,12 +1,11 @@
 import axios from '../utils/index';
 
-
 /**
- *
  * Get User Action
+ *
  * @export getUsers
  * @param {number} [offset=0] document page difference
- * @returns {Function} returns dispatch
+ * @returns {function} returns dispatch
  */
 export function getUsers(offset = 0) {
   return dispatch => axios.get(`/api/users?offset=${offset}`)
@@ -19,11 +18,11 @@ export function getUsers(offset = 0) {
 }
 
 /**
- *
  * Create Users Action
+ *
  * @export createUsers
  * @param {object} data
- * @returns {Function} returns dispatch
+ * @returns {function} returns dispatch
  */
 export function createUsers(data) {
   return (dispatch) => {
@@ -31,36 +30,36 @@ export function createUsers(data) {
       .then((res) => {
         dispatch({
           type: 'CREATE_USERS',
-          payload: res.data.newUser
+          payload: res.data.newUser,
         });
       });
   };
 }
 
 /**
- *
  * Delete User Action
+ *
  * @export
  * @param {number} id
- * @returns {Function} returns dispatch
+ * @returns {function} returns dispatch
  */
 export function deleteUser(id) {
   return dispatch => axios.delete(`/api/users/${id}`)
       .then(() => {
         dispatch({
           type: 'DELETE_USER',
-          id
+          id,
         });
       });
 }
 
 /**
- *
  * Update User Action
+ *
  * @export
  * @param {object} data
  *  @param {number} [id=usersid]
- * @returns {Function} returns dispatch
+ * @returns {function} returns dispatch
  */
 export function updateUser(data, id) {
   return dispatch => axios.put(`/api/users/${id}`, data)
@@ -73,11 +72,11 @@ export function updateUser(data, id) {
 }
 
 /**
- *
  * Get Single User Action
+ *
  * @export  getSingleUser
  * @param {number} [id=usersid]
- * @returns {Function} returns dispatch
+ * @returns {function} returns dispatch
  */
 export function getSingleUser(id) {
   return dispatch => axios.get(`/api/users/${id}`)
@@ -85,26 +84,26 @@ export function getSingleUser(id) {
       dispatch(
         {
           type: 'SET_SINGLE_USER',
-          payload: res.data
-        }
+          payload: res.data,
+        },
       );
     });
 }
 
 /**
- *
  * Search Users Action
+ *
  * @export searchUsers
  * @param {string} term
  * @param {number} [offset=0] document page difference
- * @returns {Function} returns dispatch
+ * @returns {function} returns dispatch
  */
 export function searchUsers(term, offset = 0) {
   return dispatch => axios.get(`api/search/users?search=${term}&offset=${offset}`)
       .then((res) => {
         dispatch({
           type: 'SEARCH_USERS',
-          payload: res.data
+          payload: res.data,
         });
       })
        .catch(() => {
@@ -115,8 +114,8 @@ export function searchUsers(term, offset = 0) {
              users: {
                count: 0,
                rows: [],
-             }
-           }
+             },
+           },
          });
        });
 }

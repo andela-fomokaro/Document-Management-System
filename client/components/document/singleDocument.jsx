@@ -8,16 +8,16 @@ import { getSingleDocument } from '../../actions/documentActions';
 
 
 /**
- *
  * React component for
+ *
  * @class singleDocument
  * @extends {React.Component}
  */
 class singleDocument extends React.Component {
 
   /**
+   * componentDidMount - This method mounts the single document function
    *
-   * componentDidMount
    * @return {void}
    * @memberOf singleDocument
    */
@@ -27,7 +27,6 @@ class singleDocument extends React.Component {
   }
 
   /**
-   *
    *
    * @returns {object} react components to render
    *
@@ -62,10 +61,20 @@ singleDocument.propTypes = {
   doc: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
 };
+/**
+ * This method map dispatches to props
+ * 
+ * @returns {function} dispatch
+ */
 const mapDispatchToProps = dispatch => ({
   getSingleDocument: bindActionCreators(getSingleDocument, dispatch)
 });
 
+/**
+ * This method map state to props
+ * 
+ * @returns {function} dispatch
+ */
 const mapStateToProps = state => ({
   doc: state.documents,
 });

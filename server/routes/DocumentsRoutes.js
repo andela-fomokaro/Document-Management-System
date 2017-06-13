@@ -21,4 +21,8 @@ module.exports = (app) => {
 
 
   app.get('/api/search/documents', Auth.verifyToken, Document.search);
+
+  app.get('/api/documentsearch/documents', Auth.verifyToken,
+  Document.searchMyDocument);
 };
+

@@ -5,8 +5,8 @@ import setAuthorizationToken from '../utils/setAuthorizationToken';
 
 
 /**
- *
  * Set Current User Action
+ *
  * @export setCurrentUser
  * @param {object} user information
  * @returns {object} return user request
@@ -14,15 +14,16 @@ import setAuthorizationToken from '../utils/setAuthorizationToken';
 export function setCurrentUser(user) {
   return {
     type: SET_CURRENT_USER,
-    user
+    user,
   };
 }
 
 /**
  *
- * Logou Action
+ * Logout Action
+ *
  * @export logout
- * @returns {Function} returns dispatch
+ * @returns {function} returns dispatch
  */
 export function logout() {
   return () => {
@@ -31,17 +32,17 @@ export function logout() {
   };
 }
 /**
- *
  * Login Action
+ *
  * @export login
  * @param {object} data user data
- * @returns {Function} returns dispatch
+ * @returns {function} returns dispatch
  */
 export function login(data) {
   return dispatch => axios.post('/api/users/login', data).then((res) => {
     const token = res.data.token;
     setAuthorizationToken(token);
     dispatch(setCurrentUser(jwt.decode(token)));
-  }
+  },
   );
 }

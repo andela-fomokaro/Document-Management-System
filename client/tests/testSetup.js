@@ -7,9 +7,9 @@
 // 5. Sets up global vars that mimic a browser.
 // Configure JSDOM and set global variables
 // to simulate a browser environment for tests.
-var jsdom = require('jsdom').jsdom;
+let jsdom = require('jsdom').jsdom;
 
-var exposedProperties = ['window', 'navigator', 'document'];
+let exposedProperties = ['window', 'navigator', 'document'];
 /* eslint-disable no-var*/
 
 /* This setting assures the .babelrc dev config (which includes

@@ -1,6 +1,16 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
+/**
+ * React component for TextFieldGroup
+ *
+ * @param {string} field - holds the name of the input
+ * @param {string} label - name of the element
+ * @param {string} value - takes in the value of the input
+ * @param {string} onChange - takes in an onchange event
+ * @param {object} checkUserExists - checks if a user exist or not
+ * 
+ */
 const TextFieldGroup = ({ field, label, value, type, onChange, checkUserExists }) => (
   <div className="row">
     <div className="active validate">

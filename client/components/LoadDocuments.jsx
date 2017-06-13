@@ -118,13 +118,21 @@ class DashBoard extends React.Component {
   }
 }
 
-
+/**
+ * This method map state to props
+ * 
+ * @returns {function} dispatch
+ */
 const mapStateToProps = state => ({
   documents: state.documents.documents,
   pagination: state.documents.pagination
 });
 
-
+/**
+ * This method map dispatches to props
+ * 
+ * @returns {function} dispatch
+ */
 const mapDispatchToProps = dispatch => ({
   loadDocuments: bindActionCreators(loadDocuments, dispatch),
   getDocument: bindActionCreators(getDocument, dispatch),

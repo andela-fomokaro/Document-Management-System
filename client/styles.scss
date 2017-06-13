@@ -369,3 +369,19 @@ input[type=text]:focus {
  .active {
   color: #000;
 }
+.greetings-header{
+    color: #333;
+    font-family: elephant;
+    font-weight: 2em;
+}
+.greetings-paragraph{
+    color: red;
+    font-family: elephant;
+    font-weight: 2em; 
+    font-size: 20px;
+}
+.greeting-paragraph{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 10em; 
+    font-size: 15px;
+}

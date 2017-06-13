@@ -396,5 +396,21 @@ export default StyleSheet.create({
   },
   'active': {
     'color': '#000'
+  },
+  'greetings-header': {
+    'color': '#333',
+    'fontFamily': 'elephant',
+    'fontWeight': '2em'
+  },
+  'greetings-paragraph': {
+    'color': 'red',
+    'fontFamily': 'elephant',
+    'fontWeight': '2em',
+    'fontSize': [{ 'unit': 'px', 'value': 20 }]
+  },
+  'greeting-paragraph': {
+    'fontFamily': 'Georgia, 'Times New Roman', Times, serif',
+    'fontWeight': '10em',
+    'fontSize': [{ 'unit': 'px', 'value': 15 }]
   }
 });

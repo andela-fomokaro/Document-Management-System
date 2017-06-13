@@ -99,7 +99,6 @@ class ManageUsers extends React.Component {
          this.props.deleteUser(userId).then(() => {
            Materialize.toast('User Deleted', 1000);
          }).catch((err) => {
-           console.log(err);
            Materialize.toast(err.data.message, 1000);
          })
       } else {

@@ -20,8 +20,8 @@ const store = createStore(
   rootReducer,
   compose(
     applyMiddleware(thunk),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
-  )
+    window.devToolsExtension ? window.devToolsExtension() : f => f,
+  ),
 );
 
 if (window.localStorage.jwtToken && typeof window !== 'undefined') {
@@ -29,6 +29,11 @@ if (window.localStorage.jwtToken && typeof window !== 'undefined') {
   store.dispatch(setCurrentUser(jwt.decode(window.localStorage.jwtToken)));
 }
 injectTapEventPlugin();
+  /**
+   *
+   * @returns {object} react componenents to render
+   *
+   */
 render(
   <Provider store={store}>
     <Router history={browserHistory} routes={routes} />

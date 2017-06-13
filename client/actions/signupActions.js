@@ -4,8 +4,8 @@ import setAuthorizationToken from '../utils/setAuthorizationToken';
 import { SET_CURRENT_USER } from '../actions/types';
 
 /**
- *
  * Set Current User Action
+ *
  * @export setCurrentUser
  * @param {object} user information
  * @returns {object} return user request
@@ -13,16 +13,16 @@ import { SET_CURRENT_USER } from '../actions/types';
 export function setCurrentUser(user) {
   return {
     type: SET_CURRENT_USER,
-    user
+    user,
   };
 }
 
 /**
- *
  * User Sign Up Request Action
+ *
  * @export userSignupRequest
  * @param {object} userData
- * @returns {Function} returns dispatch
+ * @returns {function} returns dispatch
  */
 export function userSignupRequest(userData) {
   return dispatch => axios.post('/api/users/', userData).then((res) => {
@@ -33,11 +33,11 @@ export function userSignupRequest(userData) {
 }
 
 /**
- *
  * Check if User Exist Action
+ *
  * @export
  * @param {object} identifier
- * @returns {Function} returns dispatch
+ * @returns {function} returns dispatch
  */
 export function isUserExists(identifier) {
   return () => axios.post(`/api/users/${identifier}`);

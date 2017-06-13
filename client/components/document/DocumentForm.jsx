@@ -8,8 +8,8 @@ import { createDocument } from '../../actions/documentActions';
 
 
 /**
- *
  * React component for
+ *
  * @class DocumentForm
  * @extends {React.Component}
  */
@@ -17,6 +17,7 @@ class DocumentForm extends React.Component {
 
   /**
    * Creates an instance of DocumentForm.
+   *
    * Constructor
    * @param {object} props - props of the component
    *
@@ -27,17 +28,16 @@ class DocumentForm extends React.Component {
     this.state = {
       title: '',
       content: '',
-      access: 'access',
+      access: 'public',
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.onClick = this.onClick.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
   }
 
   /**
+   * onChange -  This method handles the onchange event for creating document
    *
-   * onChange
    * @param {object} e - event handler belonging to Onchange
    * @returns {void}
    * @memberOf DocumentForm
@@ -45,38 +45,41 @@ class DocumentForm extends React.Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+  /**
+   * handleEditorChange -  This method gets the content of the document type
+   *
+   * @param {object} event - event properties
+   * belonging to updated document state
+   *
+   * @returns {object} document - updated content state
+   */
    handleEditorChange(e) {
    this.setState({ content: e.target.getContent() });
   }
   /**
+   * onSubmit This method creates the users document
    *
-   * onSubmit
    * @param {object} e - event handler belonging to onSubmit
    * @returns {void}
    * @memberOf DocumentForm
    */
   onSubmit(e) {
     e.preventDefault();
-    this.props.createDocument(this.state);
-    Materialize.toast('Document Successfully Created', 2000);
-    this.setState({
-      title: '',
-      content: '',
-      access: '',
+    if(this.state.content === ''){
+        Materialize.toast('Content Field Cannot Be Empty', 2000);
+      }else{
+          this.props.createDocument(this.state).then( () => {
+          this.setState({
+             title: '',
+             content: ''
+          });
+          Materialize.toast('Document Successfully Created', 2000);
+    }).catch( (err) => {
+      Materialize.toast('Please Choose Access Type', 2000);
     });
+    }
   }
   /**
-   *
-   * onClick
-   * @param {object} e - event handler belonging to onClick
-   * @returns {void}
-   * @memberOf DocumentForm
-   */
-  onClick(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-  /**
-   *
    *
    * @returns {object} react componenents to render
    *
@@ -105,12 +108,12 @@ class DocumentForm extends React.Component {
                 type="select"
                 name="access"
                 value={access} onChange={this.onChange}
-                defaultValue={document.access}
+                defaultValue={document.public}
+                required
               >
-               <option value="access" disabled>CHOOSE ACCESS </option>
-                <option value="public" id="public">Public</option>
-                <option value="private">Private</option>
-                <option value="role">Role</option>
+                <option value="public" id="public">public</option>
+                <option value="private">private</option>
+                <option value="role">role</option>
               </Input>
             <div className="input-field col s12">
              <label><b>INPUT TITLE </b></label>
@@ -121,13 +124,15 @@ class DocumentForm extends React.Component {
                 name="title"
                 value={title}
                 onChange={this.onChange}
+                required
               />
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
               <TinyMCE
-                content="<i>clear to input content here....</i>"
+                content=""
+                required
                 id="input3"
                 name="content"
                 value={content}
@@ -139,7 +144,7 @@ class DocumentForm extends React.Component {
               />
             </div>
           </div>
-          <button id="create" className=" btn pink darken-4 modal-action modal-close">Send</button>
+          <button id="create" className=" btn pink darken-4">Send</button>
         </form>
       </Modal>
     );
@@ -150,7 +155,11 @@ DocumentForm.propTypes = {
   createDocument: PropTypes.func.isRequired
 };
 
-
+/**
+ * This method map dispatches to props
+ * 
+ * @returns {function} dispatch
+ */
 const mapStateToProps = state => ({
   userInfo: state.users
 });
