@@ -112,7 +112,7 @@ class AllDocument extends React.Component {
       }
       else{
         this.props.updateDocument(this.state).then( () => {
-        Materialize.toast('Document Successfully Created', 2000);
+        Materialize.toast('Document Successfully Updated', 2000);
     })
     .catch( (err) => {
        Materialize.toast(err, 2000);
