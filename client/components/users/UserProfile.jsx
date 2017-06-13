@@ -86,6 +86,10 @@ class UserProfile extends React.Component {
     if(this.state.password === this.state.passwordConfirmation){
        this.props.updateUser(this.state, getCurrentUser().userId)
        Materialize.toast('Update Successful', 3000);
+       this.setState({
+               password: '',
+               passwordConfirmation: '',
+          });
     } else {
       Materialize.toast('Update failed password must match', 3000);
     }
