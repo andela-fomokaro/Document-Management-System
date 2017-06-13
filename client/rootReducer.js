@@ -19,7 +19,7 @@ const appReducer = combineReducers({
 });
 
 /**
-* App reducer
+* Root reducer
 *
 * @export
 * @param {state} state state
