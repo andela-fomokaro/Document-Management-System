@@ -16,7 +16,7 @@ export default {
       .click('button')
       .waitForElementVisible('a.view', 5000)
       .assert.containsText('a.view',
-      'Edit Profile')
+      'assignment')
       .end(),
   'Invalid login': (browser) => {
     browser
