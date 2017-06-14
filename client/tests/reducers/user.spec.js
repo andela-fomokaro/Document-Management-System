@@ -15,7 +15,7 @@ describe('Document Reducers', () => {
         page_count: 1,
         page: 1,
         page_size: 1,
-        total_count: 1
+        total_count: 1,
       },
       message: 'Successfull',
       users: {
@@ -29,7 +29,7 @@ describe('Document Reducers', () => {
             roleId: 2,
             password: '$2a$10$zGMPA9UyromK20//JcWXYeb4ALQR0kIlDagHBr0grpVX60vRhepIu',
             createdAt: '2017-06-06T15:13:10.666Z',
-            updatedAt: '2017-06-06T15:13:10.666Z'
+            updatedAt: '2017-06-06T15:13:10.666Z',
           },
           {
             id: 26,
@@ -39,7 +39,7 @@ describe('Document Reducers', () => {
             roleId: 2,
             password: '$2a$10$uwQjfyn8PfZ22CXvXJTzcu9vh9F/5acGtG.3ow.qpqS3bE3z6Ds92',
             createdAt: '2017-05-31T20:30:32.106Z',
-            updatedAt: '2017-05-31T20:30:32.106Z'
+            updatedAt: '2017-05-31T20:30:32.106Z',
           },
         ] } };
     const expectedState =
@@ -48,7 +48,7 @@ describe('Document Reducers', () => {
           page_count: 1,
           page: 1,
           page_size: 1,
-          total_count: 1
+          total_count: 1,
         },
         users: {
           count: 2,
@@ -61,7 +61,7 @@ describe('Document Reducers', () => {
               roleId: 2,
               password: '$2a$10$zGMPA9UyromK20//JcWXYeb4ALQR0kIlDagHBr0grpVX60vRhepIu',
               createdAt: '2017-06-06T15:13:10.666Z',
-              updatedAt: '2017-06-06T15:13:10.666Z'
+              updatedAt: '2017-06-06T15:13:10.666Z',
             },
             {
               id: 26,
@@ -71,7 +71,7 @@ describe('Document Reducers', () => {
               roleId: 2,
               password: '$2a$10$uwQjfyn8PfZ22CXvXJTzcu9vh9F/5acGtG.3ow.qpqS3bE3z6Ds92',
               createdAt: '2017-05-31T20:30:32.106Z',
-              updatedAt: '2017-05-31T20:30:32.106Z'
+              updatedAt: '2017-05-31T20:30:32.106Z',
             },
           ] } };
     const action = { type: GET_USERS, payload: allUsers };
@@ -86,15 +86,15 @@ describe('Document Reducers', () => {
     const initialState = {
       users: {
         count: 0,
-        rows: []
+        rows: [],
       },
       user: {},
       pagination: {
         page_count: 0,
         page: 0,
         page_size: 0,
-        total_count: 1
-      }
+        total_count: 1,
+      },
     };
 
     const newUser = { username: 'Girlie',
@@ -102,7 +102,7 @@ describe('Document Reducers', () => {
       email: 'girlie@gmail.com',
       password: '$2a$10$zGMPA9UyromK20//JcWXYeb4ALQR0kIlDagHBr0grpVX60vRhepIu',
       createdAt: '2017-06-06T15:13:10.666Z',
-      updatedAt: '2017-06-06T15:13:10.666Z'
+      updatedAt: '2017-06-06T15:13:10.666Z',
     };
 
     const expectedState =
@@ -111,7 +111,7 @@ describe('Document Reducers', () => {
           page_count: 0,
           page: 0,
           page_size: 0,
-          total_count: 1
+          total_count: 1,
         },
         user: {},
         users: {
@@ -122,8 +122,8 @@ describe('Document Reducers', () => {
               fullNames: 'Girlie role',
               password: '$2a$10$zGMPA9UyromK20//JcWXYeb4ALQR0kIlDagHBr0grpVX60vRhepIu',
               createdAt: '2017-06-06T15:13:10.666Z',
-              updatedAt: '2017-06-06T15:13:10.666Z'
-            }
+              updatedAt: '2017-06-06T15:13:10.666Z',
+            },
           ] } };
     const action = { type: CREATE_USERS, payload: newUser };
           // act
@@ -140,7 +140,7 @@ describe('Document Reducers', () => {
         page_count: 1,
         page: 1,
         page_size: 1,
-        total_count: 1
+        total_count: 1,
       },
       message: 'Successfull',
       users: {
@@ -154,7 +154,7 @@ describe('Document Reducers', () => {
             roleId: 2,
             password: '$2a$10$zGMPA9UyromK20//JcWXYeb4ALQR0kIlDagHBr0grpVX60vRhepIu',
             createdAt: '2017-06-06T15:13:10.666Z',
-            updatedAt: '2017-06-06T15:13:10.666Z'
+            updatedAt: '2017-06-06T15:13:10.666Z',
           },
         ] } };
     const expectedState =
@@ -164,7 +164,7 @@ describe('Document Reducers', () => {
           page_count: 1,
           page: 1,
           page_size: 1,
-          total_count: 1
+          total_count: 1,
         },
         users: {
           count: 1,
@@ -177,9 +177,9 @@ describe('Document Reducers', () => {
               roleId: 2,
               password: '$2a$10$zGMPA9UyromK20//JcWXYeb4ALQR0kIlDagHBr0grpVX60vRhepIu',
               createdAt: '2017-06-06T15:13:10.666Z',
-              updatedAt: '2017-06-06T15:13:10.666Z'
-            }
-          ] } }
+              updatedAt: '2017-06-06T15:13:10.666Z',
+            },
+          ] } },
       };
     const action = { type: SET_SINGLE_USER, payload: allUsers };
 
@@ -197,7 +197,7 @@ describe('Document Reducers', () => {
         page_count: 1,
         page: 1,
         page_size: 1,
-        total_count: 1
+        total_count: 1,
       },
       message: 'Successfull',
       users: {
@@ -211,7 +211,7 @@ describe('Document Reducers', () => {
             roleId: 2,
             password: '$2a$10$zGMPA9UyromK20//JcWXYeb4ALQR0kIlDagHBr0grpVX60vRhepIu',
             createdAt: '2017-06-06T15:13:10.666Z',
-            updatedAt: '2017-06-06T15:13:10.666Z'
+            updatedAt: '2017-06-06T15:13:10.666Z',
           },
           {
             id: 26,
@@ -221,7 +221,7 @@ describe('Document Reducers', () => {
             roleId: 2,
             password: '$2a$10$uwQjfyn8PfZ22CXvXJTzcu9vh9F/5acGtG.3ow.qpqS3bE3z6Ds92',
             createdAt: '2017-05-31T20:30:32.106Z',
-            updatedAt: '2017-05-31T20:30:32.106Z'
+            updatedAt: '2017-05-31T20:30:32.106Z',
           },
         ] } };
     const id = 26;
@@ -233,7 +233,7 @@ describe('Document Reducers', () => {
           page_count: 1,
           page: 1,
           page_size: 1,
-          total_count: 1
+          total_count: 1,
         },
         message: 'Successfull',
         users: {
@@ -246,7 +246,7 @@ describe('Document Reducers', () => {
             roleId: 2,
             password: '$2a$10$zGMPA9UyromK20//JcWXYeb4ALQR0kIlDagHBr0grpVX60vRhepIu',
             createdAt: '2017-06-06T15:13:10.666Z',
-            updatedAt: '2017-06-06T15:13:10.666Z'
+            updatedAt: '2017-06-06T15:13:10.666Z',
           }],
         } };
 

@@ -20,7 +20,7 @@ export default {
       .waitForElementVisible('body', 3000)
       .setValue('Input#documentSearch', 'mininie')
       .end(),
-  'Update user': (browser) => {
+  'Update User Role': (browser) => {
     browser
       .url(config.url)
       .waitForElementVisible('body', 3000)
