@@ -83,8 +83,9 @@ class CreateUsers extends React.Component {
          header='Create New User'
         trigger={
           <a
+           id="createuser"
            className="btn-floating btn-large docButton pink darken-3 tooltipped"
-          data-position="right" data-delay="50" data-tooltip="Create New User"
+           data-position="right" data-delay="50" data-tooltip="Create New User"
           > <i className="material-icons">note_add</i></a>
   }
       >

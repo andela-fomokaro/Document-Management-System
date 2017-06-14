@@ -334,7 +334,7 @@ const Document = {
              }));
             query.count = documents.count;
             const pagination = Helper.pagination(query);
-            if (documents.rows.length === 0) {
+            if (documents.rows.length === '') {
               return res.status(404).send({
                 message: 'Search Term Not Found',
               });
@@ -414,8 +414,8 @@ const Document = {
              }));
             query.count = documents.count;
             const pagination = Helper.pagination(query);
-            if (documents.rows.length === 0) {
-              return res.status(404).send({
+            if (documents.rows.length === '') {
+              return res.status(400).send({
                 message: 'Search Term Not Found',
               });
             }

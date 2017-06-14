@@ -108,7 +108,7 @@ class UserProfile extends React.Component {
       <div className="container">
         <div className="row">
           <div className="col s12 m12">
-           <h2 className="h2">My Profile</h2>
+           <h2 id="profileheader"className="h2">My Profile</h2>
             <div className="col s12 m12 l8 z-depth-5 card cardWidth darken-1">
               <div className="card-content black-text">
                 <ul className="profileTitle">
@@ -192,7 +192,7 @@ class UserProfile extends React.Component {
               required
             />
           </div>
-            <button onClick={() => this.updateUser(getCurrentUser().userId)} className="btn pink darken-4 center">Update</button>
+            <button id="updateprofilebutton"onClick={() => this.updateUser(getCurrentUser().userId)} className="btn pink darken-4 center">Update</button>
             <button
               className="btn btn2 pink darken-4 white-text modal-action modal-close"
             >Close</button>
