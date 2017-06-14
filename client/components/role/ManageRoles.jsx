@@ -56,9 +56,11 @@ class ManageRole extends React.Component {
       confirmButtonColor: "#ad1457"
     }, (isConfirm) => {
       if(isConfirm) {
-         this.props.deleteRole(roleId);
-        swal('Deleted', 'role was deleted', 'success');
-        Materialize.toast('Role Deleted', 1000);
+         this.props.deleteRole(roleId).then( () => {
+            swal('Deleted', 'role was deleted', 'success');
+         }).catch((err) => {
+            Materialize.toast(err.data.message, 3000);
+         })
       } else {
         swal('Canceled', 'OPERATION CANCELED', 'error');
       }

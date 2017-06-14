@@ -86,6 +86,7 @@ class ManageUsers extends React.Component {
    * @memberOf ManageUsers
    */
   deleteUser(userId) {
+     console.log(userId);
      swal({
       title: "Are you sure?", 
       text: "Are you sure that you want to delete this user?", 
@@ -97,6 +98,8 @@ class ManageUsers extends React.Component {
     }, (isConfirm) => {
       if(isConfirm) {
          this.props.deleteUser(userId).then(() => {
+          //  if(userId === 20)
+          // console.log(userId);
            Materialize.toast('User Deleted', 1000);
          }).catch((err) => {
            Materialize.toast(err.data.message, 1000);

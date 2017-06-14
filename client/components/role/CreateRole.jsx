@@ -36,10 +36,13 @@ class CreateRole extends React.Component {
    */
   onSubmit(e) {
     e.preventDefault();
-    this.props.createRole(this.state);
-    Materialize.toast('Role Updated Successfully', 4000);
-    this.setState({
-      title: ''
+    this.props.createRole(this.state).then( () => {
+      Materialize.toast('Role Created Successfully', 4000);
+        this.setState({
+           title: ''
+        });
+    }).catch ( (err) => {
+        Materialize.toast(err.data.message, 2000);
     });
   }
 
@@ -78,6 +81,7 @@ class CreateRole extends React.Component {
           <div className="input-field col s12">
             <input
               type="text"
+              required
               className="validate"
               name="title"
               value={title}
@@ -85,9 +89,6 @@ class CreateRole extends React.Component {
             />
           </div>
           <button id="createRole" className="btn pink darken-4 center">Send</button>
-          <button
-              className="btn btn2 pink darken-4 white-text modal-action modal-close"
-          >Close</button>
         </form>
       </Modal>
     );

@@ -135,7 +135,7 @@ const User = {
   delete(req, res) {
     db.Roles
       .findById(req.decoded.roleId)
-      .then((role) => {
+      .then(() => {
         db.Users
           .findById(req.params.id)
           .then((user) => {
@@ -143,7 +143,7 @@ const User = {
               return res.status(404).send({
                 message: 'User Does Not Exist',
               });
-            } else if (user.id === 1 || role.title === 'admin') {
+            } else if (user.id === 1) {
               return res.status(400).send({
                 message: 'You Cannot Delete Admin User',
               });
