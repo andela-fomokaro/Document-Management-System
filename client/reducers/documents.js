@@ -1,4 +1,8 @@
-import { SEARCH_MY_DOCUMENT, LOAD_DOCUMENTS, USER_DOCUMENT, CREATE_DOCUMENT, UPDATE_DOCUMENT, SET_SINGLE_DOCUMENT, DELETE_DOCUMENT, SEARCH_DOCUMENT } from '../actions/types';
+import { SEARCH_MY_DOCUMENT,
+  LOAD_DOCUMENTS,
+  USER_DOCUMENT, CREATE_DOCUMENT,
+  UPDATE_DOCUMENT, SET_SINGLE_DOCUMENT,
+  DELETE_DOCUMENT, SEARCH_DOCUMENT } from '../actions/types';
 
 const initialState = {
   documents: [],
@@ -17,7 +21,8 @@ export default (state = initialState, action = {}) => {
   switch (action.type) {
     case LOAD_DOCUMENTS:
       return { ...state,
-        ...{ documents: action.payload.documents, pagination: action.payload.pagination } };
+        ...{ documents: action.payload.documents,
+          pagination: action.payload.pagination } };
 
     case USER_DOCUMENT:
       return { ...state,
