@@ -78,7 +78,7 @@ class DashBoardPage extends React.Component {
       return (
       <div className="container">
         <div className="row">
-          <div className="col s12 m6 l8"><h2 className="h2">My Documents</h2></div>
+          <div className="col s12 m6 l8"><h2 id="title-header" className="h2">My Documents</h2></div>
           <div className="document-button col s12 m6 l4 "><DocumentForm /></div>
         </div>
         <div className="row">

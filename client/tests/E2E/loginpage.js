@@ -5,9 +5,11 @@ export default {
     browser
       .url(config.url)
       .waitForElementVisible('body', 3000)
+      .assert.containsText('#greetings',
+      'Managing And Organizing Of Documents Just Got Better')
       .click('#login')
       .setValue('Input[name=identifier]', 'omokarofaith@gmail.com')
-      .setValue('Input[name=password]', 'random password')
+      .setValue('Input[name=password]', 'Ekhorowa')
       .click('button')
       .waitForElementVisible('a.view', 3000)
       .assert.containsText('a.view',

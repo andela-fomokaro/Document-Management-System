@@ -2,13 +2,15 @@ import faker from 'faker';
 import config from './config';
 
 export default {
-  'Manage Roles': browser =>
+  'Create Role': browser =>
     browser
       .url(config.url)
       .waitForElementVisible('body', 3000)
+      .assert.containsText('#greetings',
+      'Managing And Organizing Of Documents Just Got Better')
       .click('#login')
       .setValue('Input[name=identifier]', 'omokarofaith@gmail.com')
-      .setValue('Input[name=password]', 'random password')
+      .setValue('Input[name=password]', 'Ekhorowa')
       .click('button')
       .waitForElementVisible('#managerole', 3000)
       .click('#managerole')
@@ -24,8 +26,28 @@ export default {
       .click('#adminCreateRole')
       .setValue('Input[name=title]', faker.random.words())
       .click('#createRole')
-      .waitForElementVisible('#deleteRole', 5000)
-      .click('#deleteRole')
       .end(),
+  'Delete Role': (browser) => {
+    browser
+      .url(config.url)
+      .waitForElementVisible('body', 3000)
+      .assert.containsText('#greetings',
+      'Managing And Organizing Of Documents Just Got Better')
+      .click('#login')
+      .setValue('Input[name=identifier]', 'omokarofaith@gmail.com')
+      .setValue('Input[name=password]', 'Ekhorowa')
+      .click('button')
+      .waitForElementVisible('#managerole', 3000)
+      .click('#managerole')
+      .assert.containsText('#roleTitle',
+      'Title')
+      .assert.containsText('#sn',
+      'S/N')
+      .click('#deleteRole')
+      .click('button')
+      .assert.containsText('#roleheader',
+      'Manage Roles')
+      .end();
+  },
 };
 

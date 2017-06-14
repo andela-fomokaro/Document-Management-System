@@ -134,7 +134,7 @@ class AllDocument extends React.Component {
     return (
       <div>
         <div className="card docCard col s12 m4" key={document.id}>
-          <div className="card-content cardContent">
+          <div id="cardTitle" className="card-content cardContent">
             <div className="card-title cardTitle">
               {document.title.substring(0, 10)}</div>
             <p className="marky" dangerouslySetInnerHTML={{__html: document.content}} />
@@ -153,7 +153,7 @@ class AllDocument extends React.Component {
                   className="teal-text"
                   fixedFooter
                   trigger={
-                    <a className="btn-floating pink darken-4 right">
+                    <a id="updatedocumentfield" className="btn-floating pink darken-4 right">
                       <i className="material-icons">mode_edit</i></a>
   }
                 >
@@ -205,6 +205,7 @@ class AllDocument extends React.Component {
                     </form>
                   </div>
                   <button
+                    id="updated"
                     onClick={() => this.updateDocument()}
                     className="update-btn btn pink darken-4 white-text center"
                   >Update</button>

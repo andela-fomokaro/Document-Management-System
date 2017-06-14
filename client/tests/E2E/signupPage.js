@@ -6,6 +6,8 @@ export default {
     browser
       .url(config.url)
       .waitForElementVisible('body', 3000)
+      .assert.containsText('#greetings',
+      'Managing And Organizing Of Documents Just Got Better')
       .click('#signup')
       .setValue('Input[name=username]', faker.name.findName())
       .setValue('Input[name=email]', faker.internet.email())
@@ -17,7 +19,7 @@ export default {
       .assert.containsText('a.view',
       'assignment')
       .end(),
-  'Invalid login': (browser) => {
+  'Invalid Sign Up': (browser) => {
     browser
       .url(config.url)
       .waitForElementVisible('body', 3000)

@@ -70,7 +70,7 @@ class NavigationBar extends React.Component {
           className="right view tooltipped"
           to="/profile" data-position="bottom"
           data-delay="5" data-tooltip="View & Manage My Profile">
-          <i className="material-icons">perm_identity</i></Link>
+          <i id ="myprofile" className="material-icons">perm_identity</i></Link>
         </li>
          <li>
           {notAdmin() ? <Link activeClassName="active"
@@ -100,7 +100,7 @@ class NavigationBar extends React.Component {
          <i className="material-icons">supervisor_account</i>
          </Link></li> : ''}
         <li>
-          <Link className="right view" to="/" onClick={this.logout}>Logout</Link>
+          <Link id="logoutuser" className="right view" to="/" onClick={this.logout}>Logout</Link>
         </li>
       </ul>
 
@@ -109,7 +109,7 @@ class NavigationBar extends React.Component {
           <Link className="view tooltipped"
           to="/profile" data-position="bottom"
           data-delay="5" data-tooltip="My Profile">
-          <i className="material-icons">perm_identity</i></Link>
+          <i id ="myprofile" className="material-icons">perm_identity</i></Link>
         </li>
          <li>
           {notAdmin() ? <Link className="view tooltipped"

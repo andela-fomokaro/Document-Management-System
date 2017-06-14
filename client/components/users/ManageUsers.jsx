@@ -188,7 +188,7 @@ class ManageUsers extends React.Component {
                         }
                       }
                       >
-                     <i  className="material-icons userIcon">delete</i>
+                     <i  id ="deleteusericon"className="material-icons userIcon">delete</i>
                </a></td> 
                 <td className="styleRow">
                   <UpdateRole updateUser={this.props.updateUser} user={user} roles={roles} />
