@@ -75,7 +75,7 @@ export default {
       .waitForElementVisible('#title-header', 2000)
       .waitForElementVisible('#docButton', 2000)
       .click('#updatedocumentfield')
-      .setValue('#input2[name=title]', 'Hi This Is My Diary')
+      .setValue('#input2[name=title]', 'Update Document')
       .click('#updated')
       .waitForElementVisible('#userDocSearch', 3000)
       .assert.visible('#userDocSearch')
