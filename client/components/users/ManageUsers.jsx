@@ -86,7 +86,6 @@ class ManageUsers extends React.Component {
    * @memberOf ManageUsers
    */
   deleteUser(userId) {
-     console.log(userId);
      swal({
       title: "Are you sure?", 
       text: "Are you sure that you want to delete this user?", 
