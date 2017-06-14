@@ -415,7 +415,7 @@ const Document = {
             query.count = documents.count;
             const pagination = Helper.pagination(query);
             if (documents.rows.length === '') {
-              return res.status(400).send({
+              return res.status(404).send({
                 message: 'Search Term Not Found',
               });
             }
