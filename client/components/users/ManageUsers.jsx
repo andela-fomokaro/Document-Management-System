@@ -97,9 +97,10 @@ class ManageUsers extends React.Component {
       confirmButtonColor: "#ad1457"
     }, (isConfirm) => {
       if(isConfirm) {
-         this.props.deleteUser(userId).then(() => {
-          //  if(userId === 20)
-          // console.log(userId);
+          if (userId === 82){
+            Materialize.toast('You cannot delete admin user', 2000);
+          }
+           this.props.deleteUser(userId).then(() => {
            Materialize.toast('User Deleted', 1000);
          }).catch((err) => {
            Materialize.toast(err.data.message, 1000);
