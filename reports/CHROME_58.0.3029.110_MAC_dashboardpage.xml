@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="2">
+
+  <testsuite name="dashboardpage"
+    errors="0" failures="0" hostname="" id="" package="dashboardpage" skipped="0"
+    tests="2" time="19.15" timestamp="Tue, 13 Jun 2017 08:11:20 GMT">
+  
+    <testcase name="User Dashboard" classname="dashboardpage" time="12.03" assertions="8">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Update user" classname="dashboardpage" time="7.124" assertions="5">
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+  
+  </testsuite>
+</testsuites>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="2"
+            failures="0"
+            tests="2">
+
+  <testsuite name="mangeRole"
+    errors="2" failures="0" hostname="" id="" package="mangeRole" skipped="0"
+    tests="2" time="37.91" timestamp="Wed, 24 May 2017 18:01:09 GMT">
+  
+    <testcase name="Manage Roles" classname="mangeRole" time="23.10" assertions="6">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Update Role" classname="mangeRole" time="14.80" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+  
+  </testsuite>
+</testsuites>
