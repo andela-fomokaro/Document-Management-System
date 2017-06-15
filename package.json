@@ -11,7 +11,7 @@
     "migrate:test": "NODE_ENV=test sequelize db:migrate",
     "start": "babel-node server.js",
     "test-e2e": "nightwatch",
-    "test:frontend": "jest",
+    "client:test": "npm run test-e2e && npm run test:components && npm run test:clientActions && npm run test:reducers",
     "test:client": "mocha ./client/tests/**/**/*.spec.js --compilers js:babel-register",
     "test:components": "NODE_ENV=development mocha ./client/tests/components/**/**/**/*.spec.js --compilers js:babel-register",
     "test:clientActions": "mocha ./client/tests/actions/**/*.spec.js --compilers js:babel-register",
