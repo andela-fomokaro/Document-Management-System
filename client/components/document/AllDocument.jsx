@@ -16,7 +16,7 @@ import { hasDocumentPermission } from '../../utils/helpers';
  *
  * @extends {React.Component}
  */
-class AllDocument extends React.Component {
+export class AllDocument extends React.Component {
 
   /**
    * Creates an instance of AllDocument.
@@ -222,7 +222,7 @@ class AllDocument extends React.Component {
   }
 }
 
-AllDocument.propTypes = {
+AllDocument.PropTypes = {
   deleteDocument: PropTypes.func.isRequired,
   updateDocument: PropTypes.func.isRequired,
   document: PropTypes.object.isRequired,

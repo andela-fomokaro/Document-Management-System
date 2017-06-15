@@ -13,7 +13,7 @@ import { createDocument } from '../../actions/documentActions';
  * @class DocumentForm
  * @extends {React.Component}
  */
-class DocumentForm extends React.Component {
+export class DocumentForm extends React.Component {
 
   /**
    * Creates an instance of DocumentForm.
@@ -132,7 +132,6 @@ class DocumentForm extends React.Component {
             </div>
           </div>
           <div className="row">
-           <form>
             <div className="input-field col s12">
               <TinyMCE
                 content=""
@@ -145,7 +144,6 @@ class DocumentForm extends React.Component {
                 onChange={this.handleEditorChange}
               />
             </div>
-            </form>
           </div>
           <button id="create" className="btn pink darken-4 center">Send</button>
           <button

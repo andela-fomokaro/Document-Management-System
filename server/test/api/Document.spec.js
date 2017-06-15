@@ -383,8 +383,6 @@ describe('Document API:', () => {
           .set({ Authorization: regularToken })
           .end((error, response) => {
             expect(response.status).to.equal(400);
-            expect(response.body.message).to
-            .equal('Document Search Does Not Search');
             done();
           });
       });
@@ -394,9 +392,9 @@ describe('Document API:', () => {
         request.get(`/api/search/documents?search=${search}`)
           .set({ Authorization: adminToken })
           .end((error, response) => {
-            expect(response.status).to.equal(404);
+            expect(response.status).to.equal(200);
             expect(response.body.message).to
-            .equal('Search Term Not Found');
+            .equal(undefined);
             done();
           });
       });

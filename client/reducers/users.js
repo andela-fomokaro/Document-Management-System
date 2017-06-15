@@ -31,16 +31,22 @@ export default (state = initialState, action = {}) => {
         ...{ users: action.payload.users,
           pagination: action.payload.pagination } };
     case CREATE_USERS: {
-      return { ...state, ...{ users: { rows: [...state.users.rows, action.payload] } } };
+      return { ...state,
+        ...{ users:
+        { rows: [...state.users.rows, action.payload] } } };
     }
     case DELETE_USER:
       return { ...state,
-        ...{ users: { rows: state.users.rows.filter(user => user.id !== action.id) } } };
+        ...{ users:
+        { rows:
+            state.users.rows.filter(user =>
+            user.id !== action.id) } } };
 
     case UPDATE_USER:
       return { ...state,
         ...{ users: { rows:
-        [...state.users.rows.filter(user => user.id !== action.payload.id),
+        [...state.users.rows.filter(user =>
+        user.id !== action.payload.id),
           action.payload] },
           user: action.payload } };
 

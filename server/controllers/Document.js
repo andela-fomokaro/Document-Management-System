@@ -334,9 +334,9 @@ const Document = {
              }));
             query.count = documents.count;
             const pagination = Helper.pagination(query);
-            if (documents.rows.length === 0) {
-              return res.status(404).send({
-                message: 'Search Term Not Found',
+            if (documents.rows.length === '') {
+              return res.status(200).send({
+                message: [],
               });
             }
             res.status(200).send({
@@ -414,9 +414,9 @@ const Document = {
              }));
             query.count = documents.count;
             const pagination = Helper.pagination(query);
-            if (documents.rows.length === 0) {
-              return res.status(404).send({
-                message: 'Search Term Not Found',
+            if (documents.rows.length === '') {
+              return res.status(200).send({
+                message: [],
               });
             }
             res.status(200).send({
