@@ -99,7 +99,7 @@ class ManageRole extends React.Component {
                     serialNumber += 1,
                     <tr key={rolei.id}>
                       <th className="roleTitle">{serialNumber}</th>
-                      <td>{rolei.title}</td>
+                      <td id="uniquerole">{rolei.title}</td>
                       <td>
                           {
                             moment(rolei.createdAt)

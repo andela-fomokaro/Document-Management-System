@@ -17,11 +17,15 @@ export default {
       .assert.containsText('#profileheader',
       'My Profile')
       .click('button')
-      .setValue('Input[name=username]', 'Ekhorowa1993')
-      .setValue('Input[name=fullNames]', 'Omokaro Ekhorowa')
+      .clearValue('Input[name=username]')
+      .setValue('Input[name=username]', 'Ekhorowa')
+      .clearValue('Input[name=username]')
+      .setValue('Input[name=fullNames]', 'Omokaro Faith')
       .click('#updateprofilebutton')
-      .assert.containsText('#profileheader',
-      'My Profile')
+      .assert.containsText('#fullNames',
+      'Omokaro Faith')
+      .assert.containsText('#username',
+      'Ekhorowa')
       .end();
   },
 };

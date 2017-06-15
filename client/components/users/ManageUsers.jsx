@@ -169,7 +169,7 @@ class ManageUsers extends React.Component {
               <th className="tablHead">S/N</th>
               <th>Email</th>
               <th id="tableName">Full Name</th>
-              <th>Username</th>
+              <th id="user-name">Username</th>
               <th>Delete</th>
               <th id="updateRole">Update Role</th>
             </tr>
@@ -180,8 +180,8 @@ class ManageUsers extends React.Component {
               <tr className="styleRow" key={user.id}>
                 <td className="tablHead">{serialNumber}</td>
                 <td>{user.email}</td>
-                <td>{user.fullNames}</td>
-                <td id="searchUsername">{user.username}</td>
+                <td id="fulname-col">{user.fullNames}</td>
+                <td id="username-col">{user.username}</td>
                 <td> <a className="cursor"
                         onClick={(userId) => {
                         this.deleteUser(user.id)

@@ -112,8 +112,8 @@ class UserProfile extends React.Component {
             <div className="col s12 m12 l8 z-depth-5 card cardWidth darken-1">
               <div className="card-content black-text">
                 <ul className="profileTitle">
-                  <li className="listPadding">Full Name: {userInfo.fullNames}</li>
-                  <li className="listPadding">Username: {userInfo.username}</li>
+                  <li className="listPadding" id="fullNames">Full Name: {userInfo.fullNames}</li>
+                  <li className="listPadding" id="username">Username: {userInfo.username}</li>
                   <li className="listPadding">Email: {userInfo.email}</li>
                   <li className="listPadding">Time Created: {date
 }</li>

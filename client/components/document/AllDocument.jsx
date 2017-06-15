@@ -162,6 +162,7 @@ export class AllDocument extends React.Component {
                      <label className="red-text">Title : </label>
                       <div className="input-field col s12">
                         <textarea
+                          id="textarea"
                           className="materialize-textarea"
                           name="title"
                           defaultValue={title}
