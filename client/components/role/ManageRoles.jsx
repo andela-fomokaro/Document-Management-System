@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Modal } from 'react-materialize';
 import CreateRole from './CreateRole.jsx';
-import UpdateRole from './UpdateRole.jsx';
 import { createRole, getRoles, deleteRole } from '../../actions/roleActions';
 
 /**

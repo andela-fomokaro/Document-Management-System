@@ -197,7 +197,6 @@ class UserProfile extends React.Component {
               className="btn btn2 pink darken-4 white-text modal-action modal-close"
             >Close</button>
           </div>
-
         </Modal>
       </div>
     );

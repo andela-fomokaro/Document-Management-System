@@ -13,7 +13,7 @@ import { getSingleDocument } from '../../actions/documentActions';
  * @class singleDocument
  * @extends {React.Component}
  */
-class singleDocument extends React.Component {
+export class singleDocument extends React.Component {
 
   /**
    * componentDidMount - This method mounts the single document function

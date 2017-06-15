@@ -47,4 +47,14 @@ global.navigator = {
 };
 global.window = {};
 
+global.localStorage = {
+  setItem: () => {},
+  removeItem: () => {},
+};
+
+window.localStorage = {
+  setItem: () => {},
+  removeItem: () => {},
+};
+
 documentRef = document;  // eslint-disable-line no-undef

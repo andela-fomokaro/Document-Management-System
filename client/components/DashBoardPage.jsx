@@ -16,7 +16,7 @@ from '../actions/documentActions';
  * @class DashBoardPage
  * @extends {React.Component}
  */
-class DashBoardPage extends React.Component {
+export class DashBoardPage extends React.Component {
   /**
    * Creates an instance of DashBoard.
    * Constructor
