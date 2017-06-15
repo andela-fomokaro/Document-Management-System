@@ -28,4 +28,4 @@ exclude_paths:
 - "server/config/"
 - "server/models/"
 - "server/seeders/"
-- "./client"
+- "./client/"
