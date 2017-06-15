@@ -15,7 +15,7 @@ export default {
       .waitForElementVisible('#docButton', 2000)
       .click('#docButton')
       .waitForElementVisible('#docButton', 3000)
-      .waitForElementVisible('button#create', 3000)
+      .waitForElementVisible('#create', 3000)
       .waitForElementVisible('#cardTitle', 3000)
       .assert.containsText('#title-header',
       'My Documents')

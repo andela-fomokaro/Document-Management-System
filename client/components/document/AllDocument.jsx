@@ -222,7 +222,7 @@ export class AllDocument extends React.Component {
   }
 }
 
-AllDocument.PropTypes = {
+AllDocument.propTypes = {
   deleteDocument: PropTypes.func.isRequired,
   updateDocument: PropTypes.func.isRequired,
   document: PropTypes.object.isRequired,
