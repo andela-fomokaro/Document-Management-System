@@ -62,6 +62,8 @@ export default {
       .waitForElementVisible('#cardTitle', 3000)
       .assert.containsText('#cardTitle',
       'Hi This Is My Diary')
+      .assert.containsText('#cardContent',
+      'This is a tiny mce content')
       .end();
   },
   'Update Document': (browser) => {
