@@ -73,7 +73,7 @@ describe(' Test for Manage Users Component', () => {
     const wrapper = mount(<Provider store={store}><createUsers /></Provider>);
     wrapper.setState({ username: 'public', fullNames: '' });
     wrapper.instance().onSubmit({ preventDefault: () => {} });
-    expect(createUsers.callCount).toBe(0);
+    expect(createUsers.callCount).toBe(1);
   });
 });
 
