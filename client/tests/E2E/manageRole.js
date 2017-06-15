@@ -26,6 +26,9 @@ export default {
       .click('#adminCreateRole')
       .setValue('Input[name=title]', faker.random.words())
       .click('#createRole')
+      .waitForElementVisible('#adminCreateRole', 3000)
+      .assert.containsText('#uniquerole',
+      'admin')
       .end(),
   'Delete Role': (browser) => {
     browser

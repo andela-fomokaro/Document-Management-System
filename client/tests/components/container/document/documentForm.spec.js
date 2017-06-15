@@ -33,7 +33,7 @@ describe('AllDocument', () => {
   it('should render a modal', () => {
     expect(wrapper.find('Modal').length).toEqual(1);
   });
-  it('should render a modal', () => {
+  it('should render an input', () => {
     expect(wrapper.find('Input').length).toEqual(1);
   });
 });

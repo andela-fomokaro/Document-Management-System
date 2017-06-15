@@ -13,12 +13,4 @@ describe(' Test for App Component', () => {
     const footer = <Footer />;
     expect(wrapper.contains(footer)).toEqual(1);
   });
-  it('renders Footer Content', () => {
-    const wrapper = shallow(
-        <Footer />,
-    );
-    expect(wrapper.find('.container').text())
-      .toBe('© 2017 DocStar | All Rights Reserved | Document Management System| Help Line (+234-672391083)',
-              'Developed By Omokaro Faith | Github @andela-fomokaro | twitter @noxy3001');
-  });
 });

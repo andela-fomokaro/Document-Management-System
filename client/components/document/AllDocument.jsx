@@ -162,6 +162,7 @@ export class AllDocument extends React.Component {
                      <label className="red-text">Title : </label>
                       <div className="input-field col s12">
                         <textarea
+                          id="textarea"
                           className="materialize-textarea"
                           name="title"
                           defaultValue={title}
@@ -222,7 +223,7 @@ export class AllDocument extends React.Component {
   }
 }
 
-AllDocument.PropTypes = {
+AllDocument.propTypes = {
   deleteDocument: PropTypes.func.isRequired,
   updateDocument: PropTypes.func.isRequired,
   document: PropTypes.object.isRequired,

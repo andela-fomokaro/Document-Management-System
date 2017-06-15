@@ -49,15 +49,15 @@ describe(' Test for Load Document Page Component', () => {
     const wrapper = mount(<Provider store={store}><CreateRole {...props} /></Provider>);
     expect((wrapper).length).toBe(1);
   });
-  it('should return the length of create role form as 1', () => {
+  it('should return the length of the roles table as 1', () => {
     const wrapper = mount(<Provider store={store}><ManageRole {...props} /></Provider>);
     expect(wrapper.find('table').length).toBe(1);
   });
-  it('should return the length of create role form as 1', () => {
+  it('should return the length of div  1', () => {
     const wrapper = mount(<Provider store={store}><ManageRole {...props} /></Provider>);
     expect(wrapper.find('div').length).toBe(5);
   });
-  it('should return the length of create role form as 1', () => {
+  it('should return the length of container as 1', () => {
     const wrapper = mount(<Provider store={store}><ManageRole {...props} /></Provider>);
     expect(wrapper.find('.container').length).toBe(1);
   });

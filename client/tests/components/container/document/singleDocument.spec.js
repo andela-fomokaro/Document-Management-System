@@ -28,13 +28,13 @@ const props = {
 };
 
 
-describe(' Test for Manage Users Component', () => {
+describe(' Test For Manage Single Document Component', () => {
   it('renders the Manage users component', () => {
     expect(<Provider store={store}><singleDocument /></Provider>);
   });
   it('renders Manage Users Table', () => {
     expect(<Provider store={store}><singleDocument {...props} /></Provider>);
     const wrapper = shallow(<singleDocument {...props} />);
-    expect(wrapper.find('div').length).toEqual(true);
+    expect(wrapper.find('div').length).toEqual(0);
   });
 });
