@@ -1,0 +1,369 @@
+html {
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+  font-size: 15px;
+  margin: 0;
+  line-height: 24px;
+}
+
+body {
+  margin: 0;
+  background-color: #efefef;
+}
+
+body, html, #app, #app > div{
+  height: 100%;
+}
+
+.body-wrapper {
+  min-height: 100vh;
+}
+a {
+  color: #ff4081;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.m-b-15 {
+  margin-bottom: 15px
+}
+
+.input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+input[type=text]:focus {
+    width: 50%;
+}
+.icons{
+  color: #880e4f ;
+}
+.document{
+  color:  #880e4f ;
+  font-size:32px;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-weight: bold !important;
+  opacity: 0.8;
+}
+.role{
+  font-size:40px;
+  color:  #880e4f ;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center
+}
+.tableStyle{
+  width: 80%;
+  margin-left: 50px;
+  margin-top: 40px;
+}
+.header{
+  text-align: center;
+  font-size: 30px;
+  margin-top: 40px;
+}
+.brand{
+  font-family: cursive;
+  margin-top: 20px;
+  margin-left: 40px;
+}
+.tableHead{
+ color: #f50057;
+}
+#createdTime{
+   padding-left: 30px;
+}
+#updateRole{
+   padding-left: 50px;
+}
+.roleTitle{
+    padding-left:   40px;
+}
+.docCard{
+ width: 30%;
+ border: 2px solid;
+ opacity: 0.7;
+ max-height: 308px;
+ margin-top: 40px;
+}
+.tab{
+    margin-top: 40px;
+    height: 100%;
+    background-color: #fff;
+}
+.docCard1{
+ width: 100%;
+ border: 2px solid;
+ opacity: 0.7;
+ margin-top: 50px;
+ margin-bottom: 30px;
+}
+.cardContent{
+  text-align: center;
+}
+.cardaction{
+    overflow: hidden;
+    padding-bottom: 5px;
+}
+.login-icon{
+    color: #880e4f;
+}
+.greeting-text{
+    color: #333;
+    font-family: elephant;
+    font-weight: 2em;
+}
+.card-title{
+    font-size: 34px !important;
+}
+.marky{
+    width: 180px;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.roleContent{
+  height: 250px;
+}
+.cardTitle {
+  color: #333;
+  font-size: 20px !important;
+  font-weight: bold !important;
+}
+.documentDate{
+  font-size: 10px;
+}
+.form-input:before, .form-input:after{
+    content:"";
+    display:table;
+}
+
+.form-input:after{
+    clear:both;
+}
+
+.form-input{
+    zoom:1;
+}
+.search{
+  height: 40px
+}
+
+.form-wrapper2 {
+
+ width: 440px;
+    padding: 10px;
+    height: 60px;
+    display: inline-block;
+    margin-top: 30px;  
+    background: rgb(220,220,220);
+    border-radius: 10px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgb(220,220,220);
+}
+
+
+.form-wrapper2 input {
+    width: 887px;
+    height: 40px;
+    padding: 15px 5px;
+    margin-top: 8px;
+    display: inline-block;  
+    font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+    border: 0;
+    background: #fff;
+    border-radius: 4px 4px 4px 4px;      
+}
+
+.form-wrapper2 input:-ms-input-placeholder {
+    color: #999;
+    font-weight: normal;
+    font-style: italic;
+}    
+.btnUp{
+    position: relative;
+    top: -20px;
+}
+
+.cursor{
+    cursor: pointer;
+}
+.updateBtn{
+    color: #880e4f ;
+    font-size: 14px;
+    cursor: pointer;
+}
+.profileButton {
+    position: relative;
+    top: -70px;
+    margin-left: 180px;
+    background-color: #880e4f;
+}
+.profileIcon{
+    color:  #880e4f;
+    font-weight: 4px;
+}
+.cardWidth{
+ width: 60%;
+ border: 2px solid;
+ opacity: 0.7;
+ margin-top: 50px;
+ margin-left: 190px
+}
+.profileTitle {
+  color: #333;
+  font-size: 20px !important;
+  font-weight: bold !important;
+  padding-bottom: 10px; 
+}
+.listPadding{
+    padding-bottom: 30px;
+    text-align: left;
+}
+.header{
+    text-align: center;
+    color: #880e4f;
+    font-family: "Lucida Console";
+    font-weight: 4em;
+}
+.onboardingCard{
+ width: 40%;
+ border: 2px solid;
+ opacity: 0.7;
+ height: 640px;
+}
+.selectWidth{
+    position: relative;
+    right: 10px;
+    
+}
+.iconText{
+    color: #880e4f;
+}
+.view{
+    margin-left: 20px;
+}
+.tableHead{
+    color:#880e4f;
+}
+
+.styleRow{
+    padding: 0px 10px 0px 30px;
+}
+.tablHead{
+    padding-left: 30px;
+}
+.myDocument{
+    text-align: center;
+    font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    color: #333;
+}
+.access{
+    font-size: 3em;
+    color:#880e4f;
+    text-align: center;
+    font-family: elephant;
+    margin-top: 30px; 
+}
+.docButton{
+    margin: 30px 0px 30px 50px;
+    display: inline-block;
+    color: #333;
+}
+.selectBox{
+    width: 100%;
+}
+.modal{
+    width: 90%;
+}
+.modal-content h4{
+    font-size: 30px;
+    font-weight: 2em;
+    color:#880e4f;
+    padding-bottom: 20px;
+    text-align: center;
+}
+.btn-flat{
+    visibility:hidden;
+}
+.btn2{
+    margin-left: 10px;
+}
+.delHeader{
+    font-size: 28px;
+    font-weight: 2em;
+    text-align: center;
+
+}
+.userIcon{
+    color: red;
+}
+.noresult{
+    font-family: cursive;
+    color: #333;
+    font-size: 35px;
+}
+.update-btn{
+    margin-left: 40%;
+}
+#yes{
+    margin: 20% 20%;
+}
+.list-style{
+    margin-left: 20px;
+}
+#userDocDelete{
+    margin-left:20px;
+}
+.h2{
+    font-family: cursive;
+    color: #333;
+    font-size: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+#creteRole{
+    width: 40%
+}
+.document-button{
+    text-align: right;
+    padding-right: 0px;
+}
+ .active {
+  color: #000;
+}
+.greetings-header{
+    color: #333;
+    font-family: elephant;
+    font-weight: 2em;
+}
+.greetings-paragraph{
+    color: red;
+    font-family: elephant;
+    font-weight: 2em; 
+    font-size: 20px;
+}
+.greeting-paragraph{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 10em; 
+    font-size: 15px;
+}
