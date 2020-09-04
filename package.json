@@ -131,7 +131,7 @@
     "redux-thunk": "^2.2.0",
     "request": "^2.81.0",
     "sass-loader": "^6.0.3",
-    "sequelize": "^3.30.4",
+    "sequelize": "^6.3.5",
     "sequelize-cli": "^2.7.0",
     "simplemde": "^1.11.2",
     "sinon": "^2.3.2",
